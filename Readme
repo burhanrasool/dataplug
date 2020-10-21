@@ -1,0 +1,11 @@
+
+Please follow the steps for configuration of web site
+
+
+Step 1: Execute this query
+INSERT INTO `users_group` (`id`, `department_id`, `type`) VALUES (NULL, '0', 'Super Admin');
+
+Step 2: Execute this query
+INSERT INTO `users` (`id`, `parent_id`, `department_id`, `first_name`, `last_name`, `email`, `username`, `password`, `group_id`, `is_deleted`, `status`, `verification_code`, `forgot_password`, `default_url`, `created_datetime`, `district`) VALUES
+(1, 0, 0, 'Super', 'Admin', 'super', 'super', '21232f297a57a5a743894a0e4a801fc3', 1, 0, '1', NULL, NULL, NULL, '2016-12-14 13:50:37', NULL);
+

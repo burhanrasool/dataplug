@@ -1,0 +1,72 @@
+/*
+	Coin Slider jQuery plugin CSS styles
+	http://workshop.rs/projects/coin-slider
+*/
+
+
+.coin-slider {
+	overflow: hidden;
+	zoom: 1;
+	position: relative;
+	width:1280px;
+	height: 419px;
+	margin:-100px auto 0 auto;
+}
+.coin-slider a {
+	text-decoration: none;
+	outline: none;
+	border: none;
+}
+.cs-buttons {
+	font-size: 0px;
+	padding: 10px;
+	float: left;
+}
+.cs-buttons a {
+	margin-left: 5px;
+	height: 10px;
+	width: 10px;
+	float: left;
+	border: 1px solid #B8C4CF;
+	color: #B8C4CF;
+	text-indent: -1000px;
+}
+.cs-active {
+	background-color: #B8C4CF;
+	color: #FFFFFF;
+}
+.cs-title {
+	width: 545px;
+	padding: 10px;
+	background-color: #000000;
+	color: #FFFFFF;
+}
+.cs-prev, .cs-next {
+	background-color: #000000;
+	color: #FFFFFF;
+	padding: 0px 10px;
+}
+
+
+/*Fash data classes*/
+.flashdiv-success, .flashdiv-error, .flashdiv-warning {
+    line-height: 28px;
+    margin: 0;
+    position: relative;
+    width: 100%;
+}
+.flashdiv-success{
+    background-color: #D8F0FF;
+}
+.flashdiv-error {
+    background-color: #FC5F5F;
+}
+.flashdiv-warning {
+    background-color: #f6a828;
+}
+.flash-nav-container {
+    margin: 0 0 0 188px;
+    text-align: left;
+    width: 980px;
+}
+

@@ -1,0 +1,1 @@
+var baseurl=$("#base_url").val();$("#downloadcode").click(function(){$.colorbox({innerWidth:485,innerHeight:300,href:baseurl+"site/register"})});$("#login-home").click(function(){$.colorbox({innerWidth:485,innerHeight:370,href:baseurl+"site/login_popup"})});

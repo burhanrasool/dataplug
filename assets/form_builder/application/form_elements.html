@@ -1,0 +1,480 @@
+<script id="form-elements-tmpl" type="text/x-jquery-tmpl">
+    
+    {{if fieldType == 'tab-field'}}
+    <div id="tabs-header" class="form-tab field ${fieldWidth}">
+        <ul class='tabs'>
+            <li id="${id}" class="tabli">
+            {{tmpl "#field-actions-tmpl"}}
+            <a href='#${tabid}' class='active' id='title-${id}' rel='${tabid}'>${title}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="tabdiv" id='${tabid}'></div>
+    {{/if}}
+            
+    {{if fieldType == 'page-field'}}
+    <div id="pages-header" class="form-page field ${fieldWidth}">
+        <ul class='pages'>
+            <li id="${id}" class="pageli">
+            {{tmpl "#field-actions-tmpl"}}
+            <a href='#${pageid}' class='active' id='title-${id}' rel='${pageid}'>${title}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="pagediv" id='${pageid}' rel="${id}">
+        <div class="page-btn-div-class">
+            <div  class="page-previous form-group" page_id="" style="display:none;"><a>Previous</a></div>
+            <div class="page-skip form-group" skip="" style="display:none;"><a>Skip</a></div>
+            <div class="page-next form-group" page_id="" style="display:none;"><a>Next</a></div>
+        </div>
+    </div>
+    {{/if}}
+    
+    {{if fieldType =='form-icon-field'}}
+    <div id="${id}-container" class="landing_form_icon field ${fieldWidth}">
+        {{tmpl "#field-actions-delete-tmpl"}}
+        <a class="forweb" href="#"><img  alt="${formtitle}" title="" width="100px" height="100px" src="${iconurl}"></a>
+        <a class="formobile" href="${formurl}"><img  alt="${formtitle}" title="" width="50" height="50" src="${iconurl}" src_mobile="${icon}" src_web="${iconurl}"></a>
+    </div>
+    {{/if}}
+
+    {{if fieldType =='text-field'}}
+    <div id="${id}-container" class="field ${fieldWidth} text-field-widget edit-field-sep form-group">
+        <label  for="${id}">Text Field</label>
+        <input type="text" name="${name}" id="${id}" field_setting="main" required="required" value="" class="form-control" placeholder="Enter here" dependon_id="" dependon_value="" parent_id="" subtable_id="${subtable_id}"/>
+    </div>
+    {{/if}}
+    
+    {{if fieldType =='hidden-field'}}
+    <div id="${id}-container" class="forweb field ${fieldWidth}  hidden-field-widget edit-field-sep form-group">
+        <label for="${id}">Hidden Field</label>
+        <input type="text" name="${name}" id="${id}" field_setting="main" class="form-control" required="required" dependon_id="" dependon_value="" parent_id="" subtable_id="${subtable_id}"/>
+    </div>
+    {{/if}}
+
+    {{if fieldType =='email-field'}}
+    <div id="${id}-container" class="field ${fieldWidth}">
+        {{tmpl "#field-actions-tmpl"}}
+        <label for="${id}">Email Address</label>
+        <input type="email" name="${name}" id="${id}" field_setting="main" required="required"/>
+    </div>
+    {{/if}}
+
+    {{if fieldType =='number-field'}}
+    <div id="${id}-container" class="field ${fieldWidth} number-field-widget  edit-field-sep form-group">
+        <label for="${id}">Number</label>
+        <input type="number" name="${name}" id="${id}" field_setting="main" required="required" class="form-control" dependon_id="" dependon_value="" parent_id=""  subtable_id="${subtable_id}"/>
+    </div>
+    {{/if}}
+
+    {{if fieldType =='password-field'}}
+    <div id="${id}-container" class="field ${fieldWidth}">
+        {{tmpl "#field-actions-tmpl"}}
+        <label for="${id}">Password</label>
+        <input type="password" name="${name}" id="${id}" field_setting="main" required="required"/>
+    </div>
+    {{/if}}
+
+    {{if fieldType =='url-field'}}
+    <div id="${id}-container" class="field ${fieldWidth}">
+        {{tmpl "#field-actions-tmpl"}}
+        <label for="${id}">Url</label>
+        <input type="url" name="${name}" id="${id}" field_setting="main" required="required"/>
+    </div>
+    {{/if}}
+
+    {{if fieldType =='date-field'}}
+    <div id="${id}-container" class="field f_100 date-field-widget  edit-field-sep form-group">
+        <label for="${id}">Date</label>
+        <input class="ttw-date date form-control" type="date" name="${name}" id="${id}" field_setting="main" required="required" dependon_id="" dependon_value="" parent_id=""  subtable_id="${subtable_id}"/>
+    </div>
+    {{/if}}
+
+    {{if fieldType =='time-field'}}
+    <div id="${id}-container" class="field f_100 time-field-widget  edit-field-sep form-group">
+        <label for="${id}">Time</label>
+        <input class="time form-control" type="text" name="${name}" id="${id}" field_setting="main" required="required" dependon_id="" dependon_value="" parent_id=""  subtable_id="${subtable_id}" time_validation=""/>
+    </div>
+    {{/if}}
+
+    {{if fieldType =='range-field'}}
+    <div id="${id}-container" class="field ${fieldWidth} form-group">
+        {{tmpl "#field-actions-tmpl"}}
+        <label for="${id}">Range</label>
+        <input class="ttw-range" type="range" name="${name}" id="${id}" field_setting="main" required="required" disabled="disabled"/>
+    </div>
+    {{/if}}
+
+    {{if fieldType =='file-field'}}
+    <div id="${id}-container" class="field ${fieldWidth} form-group">
+        {{tmpl "#field-actions-tmpl"}}
+        <label for="${id}">File</label>
+        <input type="file" name="${name}" id="${id}" field_setting="main" required="required"/>
+    </div>
+    {{/if}}
+            
+            
+            
+     {{if fieldType =='lat-lang-field'}}
+    <div id="${id}-container" class="field ${fieldWidth} latlangclass edit-field-sep form-group form-btns">
+        <a class="btn btn-danger" onClick="take_latlong('${id}');" ><i class="glyphicon glyphicon-screenshot pull-right"></i>Take Location</a>
+        <input type="hidden" name="Location" id="${id}" rel="skip" value="" android_field="yes" field_setting="main" required="required" dependon_id="" dependon_value="" parent_id=""/>
+    </div>
+    {{/if}}
+    
+    {{if fieldType =='camera-field'}}
+    
+    <div id="${id}-container" class="field cameraclass edit-field-sep form-group">
+        <a class="btn btn-danger" onClick="take_picture('picselect-${id}');" style="margin-bottom: 5px;"><i class="glyphicon glyphicon-camera pull-right"></i>Take Photos</a>
+        <div class="form-group">
+          <div class="form-control fake-dropdown" style="display:none">
+            <select id='linked_field-${id}' class="link-field" rel="skip" onChange="linkfield('${id}')"></select>
+          </div>
+        </div>
+
+        <div id="div_caption-${id}" class="form-group" style="display:none">
+            <input type="text" name="caption-${id}" class="form-control"  rel="norepeat" placeholder="Enter image title here"/>
+        </div>
+
+        <div class="form-group"> 
+            <input type="hidden" name="Image" id="${id}" rel="skip" value="" android_field="yes" field_setting="main" required="required" dependon_id="" dependon_value="" parent_id=""/>
+            <a  class="btn btn-primary btn-lg">
+                <i class="glyphicon">
+                <img class="formobile" name="${name}" id="picselect-${id}" onClick="take_picture('picselect-${id}');" src="takepicture.png" value="Take Picture" style="width:39px"/>
+                <img class="forweb" onClick="" src="${iconurl}" />
+                </i>
+            </a> 
+        </div>
+        <div id="add_photo_${id}" onclick="add_photo('${id}');" class="addPhotoClass" ><i class="glyphicon glyphicon-camera pull-center"></i>  Add More Photos</div>
+    </div>
+    
+    
+    {{/if}}
+
+    {{if fieldType =='textarea-field'}}
+    <div id="${id}-container" class="field ${fieldWidth} textarea-field-widget  edit-field-sep form-group">
+        <label for="${id}">Text Area</label>
+        <textarea rows="" cols="" name="${name}" id="${id}" field_setting="main" required="required" style="width:100%;height:128px;" dependon_id="" dependon_value="" parent_id="" subtable_id="${subtable_id}"></textarea>
+    </div>
+    {{/if}}
+
+    {{if fieldType =='select-field'}}
+    <div id="${id}-container" class="field select_widget ${fieldWidth}  edit-field-sep form-group">
+        <label for="${id}">Dropdown</label>
+        <div class="form-control fake-dropdown selector">
+            <span>Option 1</span>
+            <select name="${name}" id="${id}" field_setting="main" required="required" api_url="" dependon_id="" dependon_value="" parent_id=""  subtable_id="${subtable_id}">
+                <option id="${id}-1" value="Option 1" display_value="Option 1" parent_value="" >Option 1</option>
+                <option id="${id}-2" value="Option 2" display_value="Option 2" parent_value="" >Option 2</option>
+                <option id="${id}-3" value="Option 3" display_value="Option 3" parent_value="" >Option 3</option>
+            </select>
+        </div>
+    </div>
+    {{/if}}
+    {{if fieldType =='multiselect-field'}}
+    <div id="${id}-container" class="field select_widget ${fieldWidth}  edit-field-sep form-group">
+        <label for="${id}">Dropdown Multi Select</label>
+        <div class="form-control fake-dropdown selector">
+            <span>Option 1</span>
+            <select name="${name}" id="${id}" field_setting="main" required="required" multiple="multiple" api_url=""  dependon_id="" dependon_value="" parent_id="" subtable_id="${subtable_id}">
+                <option id="${id}-1" value="Option 1" display_value="Option 1" parent_value="" >Option 1</option>
+                <option id="${id}-2" value="Option 2" display_value="Option 2" parent_value="" >Option 2</option>
+                <option id="${id}-3" value="Option 3" display_value="Option 3" parent_value="" >Option 3</option>
+            </select>
+        </div>
+    </div>
+    {{/if}}
+    {{if fieldType =='select-api'}}
+    <div id="${id}-container" class="selector1 field select_widget ${fieldWidth}  edit-field-sep form-group">
+        <label for="${id}">Dropdown Auto-Fill</label>
+        <div class="form-control fake-dropdown selector">
+        <span>Option 1</span>
+            <select name="${name}" id="${id}" field_setting="main" required="required" autofocus="autofocus" autocorrect="off" autocomplete="off" class="select_autocomplete" api_url=""  dependon_id="" dependon_value="" parent_id=""  subtable_id="${subtable_id}">
+                <option id="${id}-1" value="Option 1" display_value="Option 1" parent_value="" >Option 1</option>
+                <option id="${id}-2" value="Option 2" display_value="Option 2" parent_value="" >Option 2</option>
+                <option id="${id}-3" value="Option 3" display_value="Option 3" parent_value="" >Option 3</option>
+            </select>
+        </div>
+    </div>
+    {{/if}}
+
+    {{if fieldType =='radio-field'}}
+    <div id="${id}-container" class="field ${fieldWidth} radio-group required  edit-field-sep form-group">
+        <label for="${id}-1">Radio Buttons</label>
+
+        <div class="radio option"><input type="radio" name="${name}" id="${id}-1" value="Option 1" field_setting="main" class="css-checkbox" dependon_id="" dependon_value="" parent_id=""  subtable_id="${subtable_id}"/><label for="${id}-1" class="css-label radGroup1">Option 1</label></div>
+        <div class="radio option"><input type="radio" name="${name}" id="${id}-2" value="Option 2" field_setting="main" class="css-checkbox" dependon_id="" dependon_value="" parent_id=""  subtable_id="${subtable_id}"/><label for="${id}-2" class="css-label radGroup1">Option 2</label></div>
+        <div class="radio option"><input type="radio" name="${name}" id="${id}-3" value="Option 3" field_setting="main" class="css-checkbox" dependon_id="" dependon_value="" parent_id=""  subtable_id="${subtable_id}"/><label for="${id}-3" class="css-label radGroup1">Option 3</label></div>
+    </div>
+    {{/if}}
+
+    {{if fieldType =='checkbox-field'}}
+    <div id="${id}-container" class="field ${fieldWidth} checkbox-group required  edit-field-sep form-group">
+        <label for="${id}-1">Checkboxes</label>
+
+        <div class="checkbox option"><input type="checkbox" name="${name}[]" id="${id}-1" value="Option 1" field_setting="main" class="css-checkbox" dependon_id="" dependon_value="" parent_id=""   subtable_id="${subtable_id}"/><label for="${id}-1" class="css-label">Option 1</label></div>
+        <div class="checkbox option"><input type="checkbox" name="${name}[]" id="${id}-2" value="Option 2" field_setting="main" class="css-checkbox" dependon_id="" dependon_value="" parent_id=""   subtable_id="${subtable_id}"/><label for="${id}-2" class="css-label">Option 2</label></div>
+        <div class="checkbox option"><input type="checkbox" name="${name}[]" id="${id}-3" value="Option 3" field_setting="main" class="css-checkbox" dependon_id="" dependon_value="" parent_id=""   subtable_id="${subtable_id}"/><label for="${id}-3" class="css-label">Option 3</label></div>
+    </div>
+    {{/if}}
+
+    {{if fieldType == 'radio-option'}}
+    <div class="radio option"><input type="${type}" name="${name}" id="${id}" value="${option}" field_setting="main" class="css-checkbox" dependon_id="" dependon_value="" parent_id=""  subtable_id="${subtable_id}"/><label for="${id}" class="css-label">${option}</label>
+    </div>
+    {{/if}}
+            
+    {{if fieldType =='checkbox-option'}}
+    <div class="checkbox option"><input type="${type}" name="${name}" id="${id}" value="${option}" field_setting="main" class="css-checkbox" dependon_id="" dependon_value="" parent_id=""  subtable_id="${subtable_id}"/><label for="${id}" class="css-label">${option}</label>
+    </div>
+    {{/if}}
+
+    {{if fieldType =='select-option'}}
+    <option id="${id}" parent_value="" display_value="${option}" value="${option}" dependon_id="" dependon_value="" parent_id=""><span class="option-title">${option}</span></option>
+    {{/if}}
+
+    {{if fieldType == 'title-field'}}
+
+    <nav class="navbar navbar-inverse" role="navigation" id="${id}">
+	  <img class="img-icon formobile" src="${icon_web}" src_mobile="${icon_device}" src_web="${icon_web}">
+	  <img class="img-icon forweb" src="${icon_web}">
+      <div class="container-fluid">
+        <div class="navbar-header  edit-title-sep">
+        
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <div class="" id="icon_notify">
+                <div class="" id="icon_notify_counter">0</div>
+            </div><span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" >${title}</a>
+        </div>
+         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li class=""><a onClick="refreshData();"><i class="glyphicon glyphicon-refresh"></i> Refresh</a></li>
+            <li><a onClick="unsentData();"><i class="glyphicon glyphicon-lock"></i> Unsent</a></li>
+            <li><a onClick="aboutApp();"><i class="glyphicon glyphicon-info-sign"></i> About</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    {{/if}}
+
+    {{if fieldType == 'submit-field'}}
+    <div id="${id}" class="field f_100 submit edit-submit-sep form-group form-btns">
+        <a class="pull-right btn btn-success" onclick="$('#form_operation').val('formsubmit');$('#form-preview').submit();"><i class="glyphicon glyphicon-send pull-right"></i><span>Submit</span></a>
+    </div>
+    {{/if}}
+    {{if fieldType == 'save-field'}}
+    <div id="${id}" class="field f_100 clearfix save edit-save-sep form-group form-btns">
+        <a class="pull-right btn btn-success" onclick="$('#form_operation').val('formsave');$('#form-preview').submit();"><i class="glyphicon glyphicon-floppy-disk pull-right"></i><span>Save</span></a>
+    </div>
+    <div id="form-submitedit" class="field f_100 clearfix submitedit edit-editsubmit-sep  form-group form-btns">
+        <a class="pull-right btn btn-success" onclick="$('#form_operation').val('formeditsubmit');$('#form-preview').submit();"><i class="glyphicon glyphicon-send pull-right"></i><span>Submit</span></a>
+    </div>
+    {{/if}}
+
+            
+    {{if fieldType =='take-time'}}
+    <div id="${id}-container" class="field ${fieldWidth} taketimeclass  edit-field-sep" style="position:relative">
+        <a class="pull-right btn btn-success" onClick="take_time('${id}');"><i class="glyphicon glyphicon-time pull-right"></i><label>Take Time</label></a>
+        <input type="text" style="display:none;" name="${name}" id="${id}" field_setting="main" required="required" value="" dependon_id="" dependon_value="" parent_id="" action_before=""  subtable_id="${subtable_id}"/>
+        <input type="text" style="display:none;" name="${name}_location" id="${id}_location" value="" dependon_id="" dependon_value="" parent_id="" action_before=""  subtable_id="${subtable_id}"/>
+        <input type="text" style="display:none;" name="${name}_source" id="${id}_source" value="" dependon_id="" dependon_value="" parent_id="" action_before=""  subtable_id="${subtable_id}"/>
+    </div>
+    {{/if}}
+    {{if fieldType =='random-field'}}
+    <div id="${id}-container" class="field ${fieldWidth} randomfield  edit-field-sep" style="position:relative">
+        <a class="pull-right btn btn-success" onClick="generate_random_key('${id}');"><i class="glyphicon glyphicon-time pull-right"></i><label>Generate Random key</label></a>
+        <input type="text" readonly="readonly" name="${name}" id="${id}" field_setting="main" required="required" value="" dependon_id="" dependon_value="" parent_id="" action_before=""  subtable_id="${subtable_id}"/>
+    </div>
+    {{/if}}
+            
+    {{if fieldType =='scan-cnic'}}
+    <div id="${id}-container" class="field ${fieldWidth} latlangclass">
+        <input type="button" name="${name}" id="${id}" onClick="scan_cnic();" value="Scan CNIC" rel="skip"/>
+    </div>
+    {{/if}}
+
+    {{if fieldType =='cnic-IDno'}}
+    <div id="${id}-container" class="field form-group">
+        <label for="${id}">ID Number</label>
+        <input type="text" name="IDno" id="IDno" value="" readonly class="form-control"/>
+    </div>
+    {{/if}}
+
+    {{if fieldType =='cnic-name'}}
+    <div id="${id}-container" class="field form-group">
+        <label for="${id}">Name</label>
+        <input type="text" name="Name" id="Name" value="" readonly class="form-control"/>
+    </div>
+    {{/if}}
+            
+    {{if fieldType =='cnic-father-name'}}
+    <div id="${id}-container" class="field form-group">
+        <label for="${id}">Father Name</label>
+        <input type="text" name="Father_Name" id="Father_Name" value="" readonly class="form-control"/>
+    </div>
+    {{/if}}
+            
+    {{if fieldType =='cnic-family-no'}}
+    <div id="${id}-container" class="field form-group">
+        <label for="${id}">Family No</label>
+        <input type="text" name="Family_No" id="Family_No" value="" readonly class="form-control"/>
+    </div>
+    {{/if}}
+            
+    {{if fieldType =='cnic-date-of-birth'}}
+    <div id="${id}-container" class="field form-group">
+        <label for="${id}">Date Of Birth</label>
+        <input type="text" name="Date_Of_Birth" id="Date_Of_Birth" value="" readonly class="form-control"/>
+    </div>
+    {{/if}}
+            
+    {{if fieldType =='cnic-address'}}
+    <div id="${id}-container" class="field form-group">
+        <label for="${id}">Address</label>
+        <input type="text" name="Address" id="Address" value="" readonly class="form-control"/>
+    </div>
+    {{/if}}
+            
+    {{if fieldType =='cnic-district'}}
+    <div id="${id}-container" class="field form-group">
+        <label for="${id}">District</label>
+        <input type="text" name="District" id="District" value="" readonly class="form-control"/>
+    </div>
+    {{/if}}
+            
+    {{if fieldType =='cnic-city'}}
+    <div id="${id}-container" class="field form-group">
+        <label for="${id}">City</label>
+        <input type="text" name="City" id="City" value="" readonly class="form-control"/>
+    </div>
+    {{/if}}
+ 
+ 
+ 
+  {{if fieldType =='table-widget-2'}}
+          <table class="tbl_widget" id='${id}' cellspacing="0">
+          <tr><td table_id='${id}' class='delete-table-widget'></td><td class="edit-col">Col-1</td><td class="edit-col">Col-2</td></tr>
+          <tr><td class="edit-row">Row-1</td><td class="${id}-etd tbl-td"></td><td class="${id}-etd tbl-td"></td></tr>
+          <tr><td class="edit-row">Row-2</td><td class="${id}-etd tbl-td"></td><td class="${id}-etd tbl-td"></td></tr>
+          <tr class="add-row2 forweb" table_id='${id}' last_row_id='3'><td colspan="3" style="text-align:center;">Add more rows</td></tr>
+          </table>
+  {{/if}}
+          
+  {{if fieldType =='table-widget-3'}}
+          <table class="tbl_widget" id='${id}' cellspacing="0">
+          <tr><td table_id='${id}' class='delete-table-widget'></td><td class="edit-col">Col-1</td><td class="edit-col">Col-2</td><td class="edit-col">Col-3</td></tr>
+          <tr><td class="edit-row">Row-1</td><td class="${id}-etd tbl-td"></td><td class="${id}-etd tbl-td"></td><td class="${id}-etd tbl-td"></td></tr>
+          <tr><td class="edit-row">Row-2</td><td class="${id}-etd tbl-td"></td><td class="${id}-etd tbl-td"></td><td class="${id}-etd tbl-td"></td></tr>
+          <tr class="add-row3 forweb" table_id='${id}' last_row_id='3'><td colspan="4" style="text-align:center;">Add more rows</td></tr>
+          </table>
+  {{/if}}
+          
+    {{if fieldType =='table-row2-adding'}}
+    <tr count="" table_id='${table_id}' last_row_id='${last_row_id}'><td class="edit-row">Row-${row_id}</td><td class="${table_id}-etd tbl-td"></td><td class="${table_id}-etd tbl-td"></td></tr>
+    {{/if}}
+    {{if fieldType =='table-row3-adding'}}
+    <tr count="" table_id='${table_id}' last_row_id='${last_row_id}'><td class="edit-row">Row-${row_id}</td><td class="${table_id}-etd tbl-td"></td><td class="${table_id}-etd tbl-td"></td><td class="${table_id}-etd tbl-td"></td></tr>
+    {{/if}}
+
+
+    {{if fieldType =='loop-widget'}}
+		
+		<div class="loop-widget-main" id="loop-${id}" style="" loop_id="${id}">
+			<div style="position:relative" class="field f_100  edit-field-loop" id="addmoreloop-${id}"  loop_id="${id}">
+         		<a onclick="" class="pull-right btn btn-success"><label>Add More</label></a> 
+        		<input type="text" parent_id="" dependon_value="" dependon_id="" value="" field_setting="main" id="addloop${id}" name="addloop${id}" style="display:none;" subtable="true" loop_id="${id}">     
+			</div>
+    		<div class="popuploop" id="popup-${id}" loop_id="${id}" >
+				<div class="loop-btn-cls">
+					<button id="save-${id}" class="save-cls" loop_id="${id}" type="button">Save</button>
+					<button id="cancel-${id}" class="cancel-cls" loop_id="${id}" type="button">Cancel</button>
+					<button id="delete-${id}" class="delete-cls" loop_id="${id}" type="button">Delete</button>
+				</div>
+			</div>
+			<div id="loop-list-${id}" popup_id="popup-${id}" loop_id="${id}" class="loop-list-main"></div>
+		</div>
+		
+    {{/if}}
+</script>
+
+<script id="field-actions-tmpl" type="text/x-jquery-tmpl">
+    <div class="field-actions">
+    <span id="edit-${id}" class="edit-${actionsType}">&nbsp;</span>
+    <span id="delete-${id}" class="delete-${actionsType}">&nbsp;</span>
+    </div>
+</script>
+<script id="page-actions-edit-tmpl" type="text/x-jquery-tmpl">
+    <div class="field-single-actions">
+    <span id="screen-edit-${id}" class="screen-edit-${actionsType}">&nbsp;</span>
+    </div>
+</script>
+<script id="field-actions-edit-tmpl" type="text/x-jquery-tmpl">
+    <div class="field-single-actions">
+    <span id="edit-${id}" class="edit-${actionsType}">&nbsp;</span>
+    </div>
+</script>
+<script id="field-actions-delete-tmpl" type="text/x-jquery-tmpl">
+    <div class="field-single-actions">
+    <span id="delete-${id}" class="delete-${actionsType}">&nbsp;</span>
+    </div>
+</script>
+<script id="tab-actions-tmpl" type="text/x-jquery-tmpl">
+    <div class="tab-actions">
+    <span id="edit-${id}" class="edit-${actionsType}">&nbsp;</span>
+    <span id="delete-${id}" class="delete-${actionsType}">&nbsp;</span>
+    </div>
+</script>
+<script id="field-tab-tmpl" type="text/x-jquery-tmpl">
+            
+
+    <li id="${id}" class="tabli">
+    {{tmpl "#field-actions-tmpl"}}
+    <a href='#${tabid}' id='title-${id}' rel='${tabid}'>${title}</a>
+    </li>                                                                                                                                                                                 
+
+</script>
+<script id="field-tab-area-tmpl" type="text/x-jquery-tmpl">
+<div class="tabdiv" id='${tabid}'></div>                                                                                                                                                                                
+</script>
+
+<script id="page-actions-tmpl" type="text/x-jquery-tmpl">
+    <div class="page-actions">
+    <span id="edit-${id}" class="edit-${actionsType}">&nbsp;</span>
+    <span id="delete-${id}" class="delete-${actionsType}">&nbsp;</span>
+    </div>
+</script>
+<script id="field-page-tmpl" type="text/x-jquery-tmpl">
+            
+
+    <li id="${id}" class="pageli">
+    {{tmpl "#field-actions-tmpl"}}
+    <a href='#${pageid}' id='title-${id}' rel='${pageid}'>${title}</a>
+    </li>                                                                                                                                                                                 
+
+</script>
+
+<script id="field-page-area-tmpl" type="text/x-jquery-tmpl">
+<div class="pagediv" id='${pageid}' rel="${id}">
+        <div class="page-btn-div-class">
+            <div  class="page-previous form-group" page_id="" style="display:none;"><a>Previous</a></div>
+            <div class="page-skip form-group" skip="" style="display:none;"><a>Skip</a></div>
+            <div class="page-next form-group" page_id="" style="display:none;"><a>Next</a></div>
+        </div>
+</div>                                                                                                                                                                                
+</script>
+
+<script id="validation-setting-tmpl" type="text/x-jquery-tmpl">
+    {{if validationType == 'required'}}
+    <div>
+    <input type="checkbox" id="val-required">required
+    </div>
+    {{/if}}
+    {{if validationType == 'filter'}}
+    <div>
+    <input type="checkbox" id="val-filter">filter
+    </div>
+    {{/if}}
+</script>

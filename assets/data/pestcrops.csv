@@ -1,0 +1,172 @@
+crop_type,crop_name,pest
+Kharif,Chilies,Painted bug
+Kharif,Chilies, Jassid
+Kharif,Chilies, Aphid
+Kharif,Chilies, Saw fly
+Kharif,Chilies, White fly
+Kharif,Chilies, hairy caterpillar
+Kharif,Chilies, others
+Kharif,Cotton,Jassid
+Kharif,Cotton, Aphid
+Kharif,Cotton, White fly
+Kharif,Cotton, Thrips
+Kharif,Cotton, Dusky cotton bug
+Kharif,Cotton, cotton mites
+Kharif,Cotton, cotton mealybug
+Kharif,Cotton, spotted boll worm
+Kharif,Cotton, American boll worm
+Kharif,Cotton, Army worm
+Kharif,Cotton, Other
+Kharif,Fodders Maize,Shoot fly
+Kharif,Fodders Maize, other
+Kharif,Maize,Cutworm
+Kharif,Maize, Termite
+Kharif,Maize, Maize stem borer
+Kharif,Maize, Helicoverpa
+Kharif,Maize, Maize Shoot fly
+Kharif,Maize, Maize Aphid
+Kharif,Maize, Pyrilla
+Kharif,Maize, Other 
+Kharif,Mash,Jassid
+Kharif,Mash, Aphid
+Kharif,Mash, Army worm
+Kharif,Mash, White fly
+Kharif,Mash, other
+Kharif,Mong,Jassid
+Kharif,Mong, Aphid
+Kharif,Mong, Army worm
+Kharif,Mong, White fly
+Kharif,Mong, other
+Kharif,Bringle Egg plant,Bringle fruit borer
+Kharif,Bringle Egg plant, Bringle shoot borer
+Kharif,Bringle Egg plant, Bringle lace bug
+Kharif,Bringle Egg plant, Hudda Beetle
+Kharif,Bringle Egg plant, Jassid
+Kharif,Bringle Egg plant, Other
+Kharif,Pearl Millet,Other
+Kharif,Rice,White stem borer
+Kharif,Rice, Yellow stem borer
+Kharif,Rice, pink stem borer
+Kharif,Rice, rice leaf folder
+Kharif,Rice, green leaf hopper
+Kharif,Rice, white bagged plant hopper
+Kharif,Rice, brown leaf hopper
+Kharif,Rice, grass hopper
+Kharif,Rice, rice hispa
+Kharif,Rice, other
+Kharif,Sugercane,Top borer
+Kharif,Sugercane, stem borer
+Kharif,Sugercane, root borer
+Kharif,Sugercane, gurdaspur borer
+Kharif,Sugercane, termite
+Kharif,Sugercane, perilla
+Kharif,Sugercane, black bug
+Kharif,Sugercane, mites
+Kharif,Sugercane, mealybug
+Kharif,Sugercane, grass hopper
+Kharif,Sugercane, other
+Kharif,Sorgham,Shoot fly
+Kharif,Sorgham, other
+Kharif,Tomato,White fly
+Kharif,Tomato, jassid
+Kharif,Tomato, aphid
+Kharif,Tomato, fruit borer
+Kharif,Tomato, other
+Kharif,Cucurbits,White fly
+Kharif,Cucurbits, jassid
+Kharif,Cucurbits, aphid
+Kharif,Cucurbits, thrips
+Kharif,Cucurbits, red pumpkin bettle
+Kharif,Cucurbits, other
+Kharif,Guava,Fruit fly
+Kharif,Guava, mealybug
+Kharif,Guava, other
+Kharif,Pomegranate,Butterfly
+Kharif,Pomegranate, scales
+Kharif,Pomegranate, fruit fly
+Kharif,Pomegranate, other 
+Rabi,Canola,Painted bug
+Rabi,Canola, jassid
+Rabi,Canola, saw fly
+Rabi,Canola, aphid
+Rabi,Canola, white fly
+Rabi,Canola, hairy caterpillar
+Rabi,Canola, others  
+Rabi,Berseem,Thrips
+Rabi,Berseem, Army worm
+Rabi,Berseem, Helicoverpa
+Rabi,Berseem, Other
+Rabi,Oat,Other
+Rabi,Gram,Pod borer
+Rabi,Gram, cut worm
+Rabi,Gram, army worm
+Rabi,Gram, termite
+Rabi,Gram, other
+Rabi,Lentil,Aphid
+Rabi,Lentil, cut worm
+Rabi,Lentil, other
+Rabi,Oil Seeds,Painted bug
+Rabi,Oil Seeds, Jassid
+Rabi,Oil Seeds, aphids
+Rabi,Oil Seeds, saw fly
+Rabi,Oil Seeds, white fly
+Rabi,Oil Seeds, hairy caterpillar
+Rabi,Oil Seeds, other
+Rabi,Onion,Thrips
+Rabi,Onion, other
+Rabi,Potato,Cut worm
+Rabi,Potato, helicoverpa
+Rabi,Potato, jassid
+Rabi,Potato, aphid
+Rabi,Potato, white fly
+Rabi,Potato, other
+Rabi,Wheat,Aphid
+Rabi,Wheat, termite
+Rabi,Wheat, army worm
+Rabi,Wheat, other
+Rabi,Citrus,Leaf Miner
+Rabi,Citrus, White fly
+Rabi,Citrus, psylla
+Rabi,Citrus, other
+Rabi,Mango,Mealybug
+Rabi,Mango, hopper
+Rabi,Mango, scales
+Rabi,Mango, fruit fly
+Rabi,Mango, other
+Rabi,Sun Flower,Termite
+Rabi,Sun Flower, toka
+Rabi,Sun Flower, jassid
+Rabi,Sun Flower, thrips
+Rabi,Sun Flower, aphid
+Rabi,Sun Flower, white fly
+Rabi,Sun Flower, mites
+Rabi,Sun Flower, cut worm
+Rabi,Sun Flower, army worm
+Rabi,Sun Flower, helicoverpa
+Rabi,Sun Flower, hairy caterpillar
+Rabi,Sun Flower, mealybug
+Rabi,Sun Flower, other
+Rabi,Soya bean,Termite
+Rabi,Soya bean, toka
+Rabi,Soya bean, jassid
+Rabi,Soya bean, thrips
+Rabi,Soya bean, aphid
+Rabi,Soya bean, white fly
+Rabi,Soya bean, stem fly
+Rabi,Soya bean, mites
+Rabi,Soya bean, other
+Rabi,Tobacco,Toka
+Rabi,Tobacco, cut worm
+Rabi,Tobacco, termite
+Rabi,Tobacco, other
+Rabi,Peas,Cut worm
+Rabi,Peas, caterpillar
+Rabi,Peas, stem fly
+Rabi,Peas, pod borer
+Rabi,Peas, other 
+Rabi,Redish,Painted bug
+Rabi,Redish, other
+Rabi,Cauliflower,Butterfly
+Rabi,Cauliflower, semi looper
+Rabi,Cauliflower, diamond backed moth
+Rabi,Cauliflower, other 

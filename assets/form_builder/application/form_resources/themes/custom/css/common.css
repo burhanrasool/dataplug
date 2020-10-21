@@ -1,0 +1,421 @@
+/* Space out content a bit */
+body {
+    padding: 0px;
+    margin: 0px;
+}
+.header, .marketing, .footer {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+/* Custom page header */
+.header {
+    background: none repeat scroll 0 0 #d53735;
+    margin-bottom: 20px;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+    color: #fff;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 22px 0 22px 15px;
+}
+.nav > li > a { }
+/* Custom page form */
+.form-hd .form-control {
+    border-radius: 0px;
+    background-color: #f1f2f2;
+    border: 1px solid #a7a9ac;
+    height: 40px;
+    padding: 6px;
+    position: relative;
+}
+/*=======================SELECT-DROPDOWN*/
+.form-hd .form-control .fake-dropdown {
+    background: url("../images/dropdown.png") no-repeat scroll right center #f1f2f2;
+    overflow: hidden;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+}
+.form-hd .fake-dropdown {
+    background: url("../images/dropdown.png") no-repeat scroll right center #f1f2f2;
+    overflow: hidden;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+}
+.form-hd .form-control.fake-dropdown select {
+    background-color: transparent;
+    border: 0 none;
+    padding: 0;
+    width: 100%;
+}
+.form-hd h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 10px 0;
+    padding: 0;
+}
+.form-hd .radio + .radio, .form-hd .checkbox + .checkbox { margin-top: 10px; }
+.form-hd .btn {
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: bold;
+    height: 36px;
+    width: 100%;
+    margin-bottom: 5%;
+}
+.btn-danger { background-color: #d53735; }
+.btn-success { background-color: #39b54a; }
+.form-hd .btn-lg {
+    background: none repeat scroll 0 0 #25225e;
+    font-size: 30px;
+    font-weight: 700;
+    height: 100px;
+    line-height: 52px;
+    padding-bottom: 25px;
+    padding-top: 25px;
+}
+/* Custom page footer */
+.footer {
+    padding-top: 19px;
+    color: #777;
+    border-top: 1px solid #e5e5e5;
+}
+
+/* Customize container */
+@media (min-width: 768px) {
+}
+@media (max-width:767px) {
+    .header h3 {
+        font-size: 25px;
+        padding: 7px;
+    }
+    .header { min-height: 46px; }
+}
+.container-narrow > hr { margin: 30px 0; }
+/* Main marketing message and sign up button */
+/* Supporting marketing content */
+.marketing { margin: 40px 0; }
+.marketing p + h4 { margin-top: 28px; }
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    /* Remove the padding we set earlier */
+    .header, .marketing, .footer {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+.container {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.radio label, .checkbox label { display: block; }
+/*=====================================================CHECKBOX-INPUT*/
+input[type=checkbox].css-checkbox, input[type=radio].css-checkbox {
+    position: absolute;
+    z-index: -1000;
+    left: -1000px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+input[type=checkbox].css-checkbox + label.css-label, input[type=radio].css-checkbox + label.css-label {
+    padding-left: 23px;
+    height: 18px;
+    display: inline-block;
+    line-height: 18px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    min-height: inherit;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.checkbox input[type=checkbox].css-checkbox:checked + label.css-label { background-position: 0 -18px; }
+.checkbox label.css-label {
+    background-image: url(../images/csscheckbox.png);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/*======================================RADIO-BUTTON*/
+.radio input[type=radio].css-checkbox:checked + label.css-label { background-position: 0 -19px; }
+.radio label.css-label {
+    background-image: url(../images/cssradio.png);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.radio input[type=radio].css-checkbox + label.css-label {
+    padding-left: 25px;
+    height: 19px;
+    line-height: 19px;
+}
+.navbar-inverse {
+    background-color: #d53735;
+    border-color: #d53735;
+    border-radius: 0;
+}
+.navbar-inverse .navbar-brand {
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+}
+.navbar-inverse .navbar-nav > li > a { color: #fff; }
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+    background-color: #ae1e1c;
+}
+@media (max-width:767px) {
+    
+    
+    .form-group.form-btns{ 
+        bottom: 0;
+        left: 0;
+        margin: 0;
+        width: 100%;
+    }
+    .form-hd .btn {
+        width: 100%;
+    }
+}
+.form-group.last{ margin-bottom:100px;}
+
+
+div.selector span {
+    display: block;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+div.selector span {
+    color: #798e94;
+    width: 90%;
+    cursor: pointer;
+}
+div.selector select {
+    height: 38px;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+}
+
+/*=====================================================TAB*/
+.tabs{
+    padding-left: 0px;
+}
+.tabs li {
+    display: inline;
+    list-style: none outside none;
+    position: relative;
+}
+.tabli a {
+    padding:5px !important;
+}
+.tabs a {
+    background: none repeat scroll 0 0 #ffffff;
+    color: #000000;
+    display: inline-block;
+    padding: 5px;
+    text-decoration: none;
+    margin-right: 2px;
+    border: 1px solid;
+    min-width: 40px;
+    text-align: center;
+}
+.tabs a.active {
+    background: none repeat scroll 0 0 #5F5FD1;
+    color: #ffffff;
+}
+
+.tabdiv {
+    padding: 10px;
+
+}
+
+/*=====================================================PAGES*/
+.pages{
+    padding-left: 0px;
+}
+.pages li {
+    display: inline;
+    list-style: none outside none;
+    position: relative;
+}
+.pageli a {
+    padding:5px !important;
+}
+.pages a {
+    background: none repeat scroll 0 0 #ffffff;
+    color: #000000;
+    display: inline-block;
+    padding: 5px;
+    text-decoration: none;
+    margin-right: 2px;
+    border: 1px solid;
+    min-width: 40px;
+    text-align: center;
+}
+.pages a.active {
+    background: none repeat scroll 0 0 #5F5FD1;
+    color: #ffffff;
+}
+
+.pagediv {
+    width: 100%;
+
+}
+.page-btn-div-class{
+    width:100%;
+}
+.page-btn-div-class .page-previous{
+    float: left;
+}
+.page-btn-div-class .page-skip{
+    float: right;
+    margin-right: 4px; 
+    width: 25%;
+}
+.page-btn-div-class .page-next{
+    float: right;
+}
+
+.page-btn-div-class a {
+    border-radius: 0;
+    font-size: 100%;
+    height: 36px;
+     margin-bottom: 5%;
+     padding: 6px 12px;
+     text-align: center;
+     border-radius:4px;
+     background-color: #277f38;
+     color: #fff;
+     border-color:#4cae4c;
+     text-decoration:none;
+     
+}
+.page-btn-div-class a:hover {
+     background-color: #449d44;
+}
+
+
+/*Class just for web*/
+
+.pagediv{
+    border:1px solid #dbdbd6;
+    min-height: 200px;
+}
+.page-btn-div-class{
+    margin-top: 20px
+}
+/*CSS from form builder imported*/
+
+
+#form-builder {
+    min-height: 265px;
+    margin: 36px;
+}
+
+#form-preview {
+    position: relative;
+    width: 100%;
+    min-height: 287px;
+}
+#form-title:hover {
+    cursor: default;
+}
+@media (max-width: 1600px) {
+    
+    #form-builder button, #form-builder input, #form-builder optgroup, #form-builder select, #form-builder textarea {
+  color: inherit;
+  font: inherit;
+  margin: 10px 0 0 0;
+}
+    .navbar-header {
+        float: none;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin: 7.5px -15px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+@media (max-width:468px) { 
+    .navbar-inverse .navbar-brand {
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+}
+    
+}
+
+.navbar-inverse .img-icon{
+	float: left;
+	padding: 10px;
+	width: 14%;
+}
+
+
+/* Shared CSS with android platform */
+
+.popuploop{
+	display:none;
+	min-height:100px;
+	border:1px solid gray;
+	position:absolute;
+	z-index:9;
+	background-color:royalblue;
+	left:10%;
+	width:80%;
+	padding:10px;
+	top:40px
+}
+
+.loop-widget-main{
+	margin-bottom : 50px;
+}
+
+.loop-listing {
+    background-color: mediumspringgreen;
+    border: 1px solid rgb(211, 211, 211);
+    float: left;
+    height: 29px;
+    overflow: hidden;
+    padding: 5px;
+    width: 100%;
+}
+
+.taketimeclass{
+    margin-bottom: 40px;
+}

@@ -1,0 +1,28 @@
+# Protect the htaccess file
+<files .htaccess>
+order allow,deny
+deny from all
+</files>
+RewriteEngine on
+		
+#Rules to block unneeded HTTP methods
+#RewriteCond %{REQUEST_METHOD} ^(HEAD|TRACE|DELETE|TRACK) [NC]
+#RewriteRule ^(.*)$ - [F]
+
+RewriteCond $1 !^(index\.php|assets|robots\.txt)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+FileETag None
+<FilesMatch "\.(flv|ico|pdf|avi|mov|ppt|doc|mp3|wmv|wav)$">
+Header set Cache-Control "max-age=31536000, public"
+</FilesMatch>
+# 1 WEEK
+
+<FilesMatch "\.(txt|xml|js|css)$">
+Header set Cache-Control "max-age=31536000, public"
+</FilesMatch>
+
+<FilesMatch "\.(php|cgi|pl|png)$">
+Header set Cache-Control "max-age=0, private, no-store, no-cache, must-revalidate"
+</FilesMatch>

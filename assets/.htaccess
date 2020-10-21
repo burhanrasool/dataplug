@@ -1,0 +1,13 @@
+# Don't listing directory
+Options -Indexes
+ErrorDocument 403 http://www.monitoring.punjab.gov.pk
+# Follow symbolic links
+Options +FollowSymLinks
+
+# Default handler
+DirectoryIndex index.php
+
+#SetHandler Security_Do_Not_Remove
+#Options None
+#Options +FollowSymLinks
+

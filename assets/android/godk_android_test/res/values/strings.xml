@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Dataplug</string>
+    <string name="app_id">8</string>
+    <string name="CHECK_UPDATE_VERSION_URL">http://monitoring.punjab.gov.pk/api/syncdevice</string>
+    <string name="FORM_SUBMIT_URL">http://monitoring.punjab.gov.pk/api/saverecords</string>
+    <string name="FORM_UPDATE_URL">http://monitoring.punjab.gov.pk/api/updateforms</string>
+    <string name="TRACKING_URL">http://monitoring.punjab.gov.pk/tracking/savetracking</string>
+    <string name="TRACKING_URLBulk">http://monitoring.punjab.gov.pk/tracking/savetrackingbulk</string>
+    <string name="IS_SECURE_APP">no</string>
+    <string name="showHighResOption">YES</string>
+    <string name="PersistImagesOnDevice">NO</string> 
+    <string name="BackgroundUpdate">YES</string> 
+    <string name="ForceUpdate">NO</string>
+    <string name="EnableAutoTime">YES</string>
+    <string name="TrackingStatus">NO</string>
+    <string name="TrackingInterval">5</string>
+    <string name="TrackingDistance">100</string>
+    <string name="DebugTracking">NO</string>
+    <string name="hasGeoFencing">YES</string>
+    <string name="DebugGeoFencing">YES</string>
+    <string name="action_settings">Refresh Forms</string>
+    <string name="info">Info</string>
+    <string name="error">Error</string>
+    
+    <string name="data_edit_msg">Do you want to Edit form data?</string> 
+    <string name="edit">Edit</string>
+    <string name="cancel">Cancel</string>
+    
+   
+    <string name="yes">Submit</string>
+    <string name="delete">Delete</string>
+    <string name="no">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="data_upload_msg">Do you want to upload data on server?</string> 
+    <string name="internet_error_msg">Internet is not available, try later.</string>
+	<string name="button_cancel">Cancel</string>
+    <string name="button_ok">OK</string>
+    <string name="button_open_mobi">Decoder</string>
+    <string name="button_open_license">Code License</string>
+    <string name="menu_ip">Set Server IP</string>
+    <string name="mobi_url"/>
+    <string name="msg_default_contents">Contents</string>
+    <string name="msg_default_format">Format</string>
+    <string name="msg_default_status">Place a barcode inside the viewfinder  to scan it.</string>
+    <string name="msg_about">Decoder based on mobiScans Native Barcode Decoders for Android. To purchase a decoder SDK for application integration, or to have us develop your app, visit www.manateeworks.com.\n</string>
+    <string name="msg_buggy">This device has known bugs that cause barcode scanning problems.</string>
+    <string name="msg_camera_framework_bug">Sorry, the Android camera encountered a problem. You may need to restart the device.</string>
+    <string name="msg_default_type"/>
+    <string name="title_about">Dataplug</string>
+    <string name="view_description">Camera View description</string>
+    <string name="license_url">http://www.apache.org/licenses/LICENSE-2.0</string>
+    <string name="title_activity_main">VVIP SECURITY</string>
+    
+</resources>

@@ -1,0 +1,622 @@
+/* Space out content a bit */
+body {
+    padding: 0px;
+    margin: 0px;
+}
+.header, .marketing, .footer {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+/* Custom page header */
+.header {
+    background: none repeat scroll 0 0 #d53735;
+    margin-bottom: 20px;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+    color: #fff;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding: 22px 0 22px 15px;
+}
+.nav > li > a { }
+/* Custom page form */
+.form-hd .form-control {
+    border-radius: 0px;
+    background-color: #f1f2f2;
+    border: 1px solid #a7a9ac;
+    height: 40px;
+    padding: 6px;
+    position: relative;
+}
+/*=======================SELECT-DROPDOWN*/
+.form-hd .fake-dropdown {
+    background: url("dropdown.png") no-repeat scroll right center #f1f2f2;
+    overflow: hidden;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+}
+.form-hd .form-control .fake-dropdown {
+    background: url("dropdown.png") no-repeat scroll right center #f1f2f2;
+    overflow: hidden;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+}
+.form-hd .form-control.fake-dropdown select {
+    background-color: transparent;
+    border: 0 none;
+    padding: 0;
+    width: 100%;
+}
+.form-hd h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 10px 0;
+    padding: 0;
+}
+.form-hd .radio + .radio, .form-hd .checkbox + .checkbox { margin-top: 20px; }
+.form-hd .btn {
+    border-radius: 0;
+    font-size: 16px;
+    font-weight: bold;
+    height: 36px;
+    width: 100%;
+    margin-bottom: 2%;
+}
+.btn-danger { background-color: #d53735; }
+.btn-success { background-color: #39b54a; }
+.form-hd .btn-lg {
+    background: none repeat scroll 0 0 #25225e;
+    font-size: 30px;
+    font-weight: 700;
+    height: 100px;
+    line-height: 52px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+/* Custom page footer */
+.footer {
+    padding-top: 19px;
+    color: #777;
+    border-top: 1px solid #e5e5e5;
+}
+
+/* Customize container */
+@media (min-width: 320px) {
+	.navbar-inverse .img-icon{
+
+		float: left;
+		padding: 5px;
+		width: 12%;
+	}
+}
+@media (min-width: 768px) {
+	.navbar-inverse .img-icon {
+    float: left;
+    padding: 5px;
+    width: 6%;
+}
+}
+@media (max-width:767px) {
+    .header h3 {
+        font-size: 25px;
+        padding: 7px;
+    }
+    .header { min-height: 46px; }
+}
+.container-narrow > hr { margin: 30px 0; }
+/* Main marketing message and sign up button */
+/* Supporting marketing content */
+.marketing { margin: 40px 0; }
+.marketing p + h4 { margin-top: 28px; }
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+    /* Remove the padding we set earlier */
+    .header, .marketing, .footer {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+.container {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.radio label, .checkbox label { display: block; }
+/*=====================================================CHECKBOX-INPUT*/
+input[type=checkbox].css-checkbox, input[type=radio].css-checkbox {
+    position: absolute;
+    z-index: -1000;
+    left: -1000px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+input[type=checkbox].css-checkbox + label.css-label, input[type=radio].css-checkbox + label.css-label {
+    padding-left: 23px;
+    height: 18px;
+    display: inline-block;
+    line-height: 18px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    min-height: inherit;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.checkbox input[type=checkbox].css-checkbox:checked + label.css-label { background-position: 0 -18px; }
+.checkbox label.css-label {
+    background-image: url(csscheckbox.png);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+/*======================================RADIO-BUTTON*/
+.radio input[type=radio].css-checkbox:checked + label.css-label { background-position: 0 -19px; }
+.radio label.css-label {
+    background-image: url(cssradio.png);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.radio input[type=radio].css-checkbox + label.css-label {
+    padding-left: 25px;
+    height: 19px;
+    line-height: 19px;
+}
+.navbar-inverse {
+    background-color: #d53735;
+    border-color: #d53735;
+    border-radius: 0;
+}
+.navbar-inverse .navbar-brand {
+    color: #fff;
+    font-size: 25px;
+    font-weight: bold;
+}
+.navbar-inverse .navbar-nav > li > a { color: #fff; }
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+    background-color: #ae1e1c;
+}
+@media (max-width:767px) {
+    .form-group.form-btns{ 
+        bottom: 0;
+        left: 0;
+        margin-bottom:20px;
+        /*	position: fixed;*/
+        width: 100%;
+    }
+    .form-hd .btn {
+        width: 100%;
+    }
+}
+.form-group.last{ margin-bottom:100px;}
+
+.forweb {
+    display: none !important;
+}
+#pages-header {
+    display: none !important;
+}
+
+
+div.selector span {
+    display: block;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+div.selector span {
+    color: #798e94;
+    width: 90%;
+    cursor: pointer;
+}
+div.selector select {
+    height: 38px;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+}
+
+
+/*Tab setting css*/
+.tabs{
+    display:inline;
+}
+.tabs li {
+    display: inline;
+    list-style: none outside none;
+    position: relative;
+    float: left;
+}
+.tabs a {
+    background: none repeat scroll 0 0 #f1f2f2;
+    color: #000000;
+    display: inline-block;
+    padding: 5px 10px;
+    text-decoration: none;
+    margin-right: 2px;
+}
+.tabs a.active {
+    background: none repeat scroll 0 0 #d53735;
+    color: #ffffff;
+}
+
+.tabdiv {
+    background: none;
+    padding: 10px;
+    clear: both
+
+}
+
+#tabs-header{
+    margin-bottom: 20px;
+    margin-top: -16px;
+    clear: both;
+}
+
+.navbar {
+  margin-bottom: 0px !important;
+}
+
+/*=====================================================PAGES*/
+.pages{
+    padding-left: 0px;
+}
+.pages li {
+    display: inline;
+    list-style: none outside none;
+    position: relative;
+}
+.pageli a {
+    padding:5px !important;
+}
+.pages a {
+    background: none repeat scroll 0 0 #ffffff;
+    color: #000000;
+    display: inline-block;
+    padding: 5px;
+    text-decoration: none;
+    margin-right: 2px;
+    border: 1px solid;
+    min-width: 40px;
+    text-align: center;
+}
+.pages a.active {
+    background: none repeat scroll 0 0 #5F5FD1;
+    color: #ffffff;
+}
+
+.pagediv {
+    width: 100%;
+
+}
+.page-btn-div-class{
+    width:100%;
+}
+.page-btn-div-class .page-previous{
+    float: left;
+    width: 33%;
+}
+.page-btn-div-class .page-skip{
+    float: left;
+    text-align: center;
+    width: 33%;
+    
+}
+.page-btn-div-class .page-next{
+    float: left;
+    text-align: right;
+    width: 33%;
+}
+
+.page-btn-div-class a {
+    background-color: #277f38;
+    border-color: #4cae4c;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 110%;
+    font-weight: bold;
+    height: 36px;
+    margin-bottom: 5%;
+    padding: 4%;
+    text-align: center;
+    text-decoration: none;
+
+}
+.page-btn-div-class a:hover {
+    background-color: #449d44;
+}
+
+.field{
+    padding:5px 0;
+}
+
+
+@media (min-width:320px) {
+	.navbar-brand {
+	    width: 62% !important;
+	    padding:15px 0 15px 5px !important;
+	}
+	.navbar-inverse .img-icon {
+	
+	  width: 17%;
+	}
+}
+
+@media (max-width:319px) {
+	.navbar-brand {
+	    width: 62% !important;
+	    padding:15px 0 15px 5px !important;
+	}
+	.navbar-inverse .img-icon {
+	
+	  width: 15%;
+	}
+}
+
+@media (min-width:480px) {
+	.navbar-brand {
+	    width: 62% !important;
+	    padding:15px 0 15px 5px !important;
+	}
+	.navbar-inverse .img-icon{
+
+		width: 12%;
+	}
+}
+@media (min-width:768px) {
+	.navbar-brand {
+	    width: 62% !important;
+	    padding:15px 0 15px 18px !important;
+	}
+	.navbar-inverse .img-icon{
+		width: 8%;
+	}
+}
+@media (min-width:992px) {
+	.navbar-brand {
+	    width: 62% !important;
+	    padding:15px 0 15px 18px !important;
+	}
+	.navbar-inverse .img-icon{
+		width: 6%;
+	}
+}
+.navbar-inverse .img-icon {
+  float: left;
+  margin: -1px 0 0 -1px;
+  padding:0px;
+}
+.navbar-brand {
+	float: left;
+	min-height: 50px;
+	padding: 15px 15px;
+	font-size: 18px;
+	line-height: 23px;
+    width: 70%;
+}
+
+.formobile img {
+    height: auto;
+    width: 80%;
+}
+
+/* Table widget CSS  */
+.tbl_widget {
+    width: 100%;
+    margin-top: 30px;
+}
+.tbl_widget .form-group {
+    margin: 0 5px;
+}
+.tbl_widget .form-group .form-control {
+    height:auto;
+    padding:3px;
+    text-align: center;
+}
+.tbl_widget .form-group label {
+  display:inline;
+}
+.tbl_widget .edit-row {
+	 text-align: left;
+}
+.tbl_widget .edit-col {
+
+    margin-left:5px;
+    text-align: center;
+}
+.tbl_widget td {
+    border: 1px solid papayawhip;
+}
+
+
+
+/* Shared CSS with android platform */
+
+.popuploop{
+	display:none;
+	min-height:100px;
+	border:3px solid #000;
+	position:fixed;
+	z-index:9;
+	background-color:royalblue;
+	width:90%;
+	padding:5%;
+	border-radius: 10px;
+	top:7%;
+	overflow-y:scroll;
+	max-height:90%;
+}
+
+.loop-widget-main {
+    padding: 40px 0;
+    width: 100%;
+}
+
+.loop-listing {
+    background-color: mediumspringgreen;
+    border: 1px solid rgb(211, 211, 211);
+    float: left;
+    height: 29px;
+    overflow: hidden;
+    padding: 5px;
+    width: 100%;
+}
+.edit-field-loop{
+	float:left;
+	margin:0px;
+	padding:5px 0;
+	width:100%;
+}
+.edit-field-loop a{
+	margin-bottom:10px !important;
+}
+
+.loop-btn-cls button {
+    background: yellow none repeat scroll 0 0;
+    border: 3px solid #000;
+    border-radius: 20px;
+    color: #000;
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: 20px;
+    padding: 7px;
+    text-decoration: none;
+    width: 25%;
+}
+
+.loop-btn-cls button:first-child {
+    margin-left: 0;
+}
+
+
+.btn-lg .glyphicon .formobile{
+	width: 80% !important; 
+	height: 86px;
+}
+.btn-lg .glyphicon {
+	width: 100% !important; 
+}
+
+.selector1 .selector{
+    background: #f1f2f2 no-repeat scroll right center;
+    overflow: hidden;
+    padding: 0px;
+    position: relative;
+    width: 100%;
+}
+.selector1 .selector input{
+    position: absolute;
+    width: 100%;
+    height: 100%
+}
+.selector1 .selector span{
+    width: 0px;
+}
+
+#icon_notify {
+    height: 40px;
+    position: absolute;
+    width: 30px;
+    display:none;
+}
+
+#icon_notify_counter {
+    background: green none repeat scroll 0 0;
+    border-radius: 10px;
+    font-size: xx-small;
+    left: -15px;
+    padding: 4px;
+    position: absolute;
+    top: 17px;
+}
+.removePhotoClass {
+    font-size: 98%;
+    background-color: gray;
+    float: right;
+    margin-top: -25px;
+    text-align: center;
+    width: 46%;
+    padding: 2%;
+}
+.addPhotoClass {
+    font-size: 98%;
+    background-color: gray;
+    float: left;
+    margin-top: -25px;
+    text-align: center;
+    width: 46%;
+    padding: 2%;
+}
+
+
+.page-btn-div-class
+{
+    padding-top: 0px !important;
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    width:100%;
+    background: #fff;
+}
+
+.page-btn-div-class .page-previous, .page-btn-div-class .page-next{
+    margin: 0px;
+    width: 49%;
+}
+.page-btn-div-class .page-next{
+    float: right;
+    margin-bottom: 5px;
+}
+
+.page-btn-div-class .page-previous{
+    float: left;
+    margin-bottom: 5px;
+}
+
+.page-btn-div-class .page-skip{
+    margin: 0px;
+    width: 100%;
+    clear: both;
+    margin-bottom: 5px;
+}
+.page-btn-div-class .form-group a{
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 0px;
+}
+
+.pagediv,form{
+    padding-bottom: 120px;
+}
+
+.page-btn-div-class .page-draft{
+    margin: 0px;
+    width: 100%;
+    clear: both;
+}
+.navbar{
+    z-index: 20;
+}
+
+

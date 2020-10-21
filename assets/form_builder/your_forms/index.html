@@ -1,0 +1,288 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <!-- Style sheets -->
+    <link href="application/css/basic.css" media="screen" rel="stylesheet" type="text/css"/>
+    <link href="application/css/jquery-ui.css" media="screen" rel="stylesheet" type="text/css"/>
+    <link href="application/css/style.css" media="screen" rel="stylesheet" type="text/css"/>
+    <link id="style-uniform" href="application/form_resources/themes/elegant/css/uniform.elegant.css" media="screen" rel="stylesheet"
+          type="text/css"/>
+    <link id="style" href="application/form_resources/themes/elegant/css/style.css" media="screen" rel="stylesheet"
+          type="text/css"/>
+
+    <!-- Javascript Files -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.js"></script>
+    <script type="text/javascript" src="application/js/jquery-ui-1.8.9.custom.min.js"></script>
+    <script type="text/javascript" src="application/js/jquery.tmpl.min.js"></script>
+    <script type="text/javascript" src="application/js/jquery.textchange.js"></script>
+    <script type="text/javascript" src="application/js/jquery.html5type.js"></script>
+    <script type="text/javascript" src="application/form_resources/js/jquery.tools.js"></script>
+    <script type="text/javascript" src="application/form_resources/js/jquery.uniform.min.js"></script>
+    <script type="text/javascript" src="plugins/einars-js-beautify/beautify-html.js"></script>
+
+    <!-- Syntax Highligher Resources -->
+    <script type="text/javascript" src="plugins/syntaxhighlighter_3.0.83/scripts/shCore.js"></script>
+    <script type="text/javascript" src="plugins/syntaxhighlighter_3.0.83/scripts/shBrushXml.js"></script>
+    <script type="text/javascript" src="plugins/syntaxhighlighter_3.0.83/scripts/shBrushCss.js"></script>
+    <script type="text/javascript" src="plugins/syntaxhighlighter_3.0.83/scripts/shBrushJScript.js"></script>
+    <script type="text/javascript" src="plugins/syntaxhighlighter_3.0.83/scripts/shBrushPhp.js"></script>
+    <link type="text/css" rel="stylesheet" href="plugins/syntaxhighlighter_3.0.83/styles/shCoreDefault.css">
+
+
+    <script type="text/javascript" src="application/js/ttw.formbuilder.js"></script>
+    <title>Form Builder</title>
+</head>
+
+
+<body>
+
+<div id="header">
+
+    <div class="wrapper clearfix">
+
+        <div id="logo">
+            <img src="application/images/logo.png" alt="Visual Form Builder" class="logo"/>
+        </div>
+
+        <div id="menu">
+            <a id="help" href="#">?</a>
+            <a id="download" href="#"><span>Download</span></a>
+            <a id="clear" href="#"><span>Clear Form</span></a>
+            <a id="preview" class="no-preview" href="#"><span>Preview</span></a>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<div id="content" class="wrapper">
+
+
+    <div id="controls">
+        <ul id="form-fields">
+            <li id="text-field"><span></span>Text Field</li>
+            <li id="textarea-field"><span></span>Text Area</li>
+            <li id="select-field"><span></span>Select</li>
+            <li id="radio-field"><span></span>Radio Button</li>
+            <li id="checkbox-field"><span></span>Checkboxes</li>
+            <li id="password-field"><span></span>Password</li>
+            <li id="file-field"><span></span>File Upload</li>
+        </ul>
+        <ul id="add-form-submit">
+             <li id="submit-field"><span></span>Submit Button</li>
+        </ul>
+        <ul id="add-form-title">
+            <li id="title-field"><span></span>Form Title</li>
+        </ul>
+
+        <div class="title">HTML5 Fields</div>
+        <ul id="html5-fields">
+            <li id="email-field"><span></span>Email Field</li>
+            <li id="number-field"><span></span>Number Field</li>
+            <li id="url-field"><span></span>URL Field</li>
+            <li id="date-field"><span></span>Date Field</li>
+            <li id="range-field"><span></span>Range Field</li>
+        </ul>
+
+        <div class="title">Form Settings</div>
+        <ul class="form-settings">
+            <li id="form-theme"> Theme</li>
+            <li id="form-width"> Width</li>
+        </ul>
+    </div>
+
+
+    <div id="work-area">
+        <div id="form-builder" class="clearfix">
+            <form id="form-preview" action="process_form.php" class="TTWForm" method="post" novalidate><span
+                    id="javascript-warning">This application requires javascript</span>
+            </form>
+        </div>
+
+        <div id="notification"></div>
+        <div id="form-output"></div>
+    </div>
+
+    <div class="clear"></div>
+
+</div>
+
+
+<!-- Application Dialogs -->
+<div id="form-builder-dialog" class="modal-box">
+
+    <div id="confirm-action" title="Confirm">
+        <p class="warning message"></p>
+
+        <p>Are you sure?</p>
+    </div>
+
+    <div id="set-form-width" title="Form Width">
+        <p class="warning">This will erase the form!</p>
+
+        <div>New Width: <input name="form_width" type="text"></div>
+    </div>
+
+    <div id="set-form-theme" title="Form Width">
+        <div>Theme:
+            <select name="form_theme">
+                <option value="default">Default</option>
+                <option value="elegant">Elegant</option>
+                <option value="aristo">Aristo</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="set-form-title" title="Form Title">
+        <div>Title: <input name="form_width" type="text"></div>
+    </div>
+
+    <div id="set-form-submit" title="Form Submit">
+        <div>Value: <input name="form_submit" type="text"></div>
+    </div>
+
+</div>
+
+<!-- When the user chooses to get code, it is temporarily stored here-->
+<div id="form-code"></div>
+
+<!-- Download form, choose type dialog -->
+<div id="get-form">
+    <div id="get-code" class="form-format">
+        <img src="application/images/code.png" alt="Get Code">
+        <span>Get the code</span>
+    </div>
+    <div id="get-zip" class="form-format">
+        <img src="application/images/zip.png" alt="Get Code">
+        <span>Download Zip</span>
+    </div>
+</div>
+
+<!-- Instructions dialog box -->
+<div id="instructions">
+    <div class="about">
+        Create fully degradable HTML5 forms in minutes. Each form has client-side and server-side (php) validation logic
+        built in.
+    </div>
+
+    <div>
+        <span class="image"><img src="application/images/instructions/controls.png" alt="Controls"/></span>
+        <span>Use the buttons on the left to add fields to your form</span>
+    </div>
+
+    <div>
+        <span class="image"><img src="application/images/instructions/settings.png" alt="Field Settings"/></span>
+        <span>Clicking the edit icon (while hovering over a field) will bring up the field settings dialog. Use this dialog to set all the field properties, including label, name, and validation rules</span>
+    </div>
+
+    <div>
+        <span class="image"><img src="application/images/instructions/preview.png" alt="Preview Mode"/></span>
+        <span>This will enable "preview mode" so you can test the validation rules for your form</span>
+    </div>
+
+    <div>
+        <span class="image"><img src="application/images/instructions/download.png" alt="Download Form"/></span>
+        <span>Click to download your form. You can choose to view the resulting code or download a zip</span>
+    </div>
+
+    <div>
+        <span class="image"><img src="application/images/instructions/clear.png" alt="Clear Form"/></span>
+        <span>The clear button will remove all existing fields from the form</span>
+    </div>
+</div>
+
+<!-- Field settings dialog -->
+<div id="field-settings" class="clearfix">
+
+    <div id="settings-pointer">&nbsp;</div>
+    <span id="close-field-settings">X</span>
+    <ul id="field-settings-tabs">
+        <li><a href="#main-settings">Main</a></li>
+        <li><a href="#validation-settings">Validation</a></li>
+    </ul>
+
+    <div id="main-settings">
+        <span id="current-field"></span>
+
+        <div class="setting label clearfix">
+            <label>Label</label>
+            <input type="text" name="field-label-setting" id="field-label-setting"/>
+        </div>
+
+        <div class="setting clearfix">
+            <label>Name</label>
+            <input type="text" name="field-name-setting" id="field-name-setting"/>
+        </div>
+
+        <div id="input-settings-container">
+            <span id="settings-loading">loading</span>
+
+            <div id="input-settings">&nbsp;</div>
+        </div>
+
+    </div>
+    <div id="validation-settings">
+
+        <div class="val-settings-section">
+            <div id="val-required"><input type="checkbox" checked="checked"/> Required</div>
+        </div>
+
+        <div class="val-settings-section">
+            <div id="val-email"><input type="checkbox" name="val-type"/><span class="option-title"> Email</span>
+            </div>
+            <div id="val-number"><input type="checkbox" name="val-type"/><span class="option-title"> Number</span>
+            </div>
+        </div>
+
+        <div class="val-settings-section">
+            <div id="val-min" class="clearfix">Min: <input class="option setting" type="text"/></div>
+            <div id="val-max" class="clearfix">Max: <input class="option setting" type="text"/></div>
+            <div id="val-pattern" class="clearfix">Pattern: <input type="text" class="option setting"/></div>
+        </div>
+    </div>
+
+</div>
+
+<!-- jQuery Templates -->
+<div id="form-elements"></div>
+
+<div id="input-settings-template">
+    <script id="input-settings-tmpl" type="text/x-jquery-tmpl">
+        <div id="${id}" class="option clearfix">
+            <span class="add-option">&nbsp;</span>
+            <span class="remove-option">&nbsp;</span>
+
+            <div class="option setting">
+                <input type="text" name="option-title" class="option-title"/>
+            </div>
+        </div>
+    </script>
+</div>
+
+<div id="get-code-template">
+    <script id="get-code-tmpl" type="text/x-jquery-tmpl">
+        <ul id="code-tabs">
+            <li><a href="#html-code">HTML</a></li>
+            <li><a href="#css-code">CSS</a></li>
+            <li><a href="#js-code">JavaScript</a></li>
+            <li><a href="#php-code">PHP</a></li>
+        </ul>
+        <div id="html-code">
+            <pre class="brush: xml">${html}</pre>
+        </div>
+        <div id="css-code">
+            <pre class="brush: css">${css}</pre>
+        </div>
+        <div id="js-code">
+            <pre class="brush: js">${js}</pre>
+        </div>
+        <div id="php-code">
+            <pre class="brush: php">${php}</pre>
+        </div>
+    </script>
+</div>
+</body>
+</html>

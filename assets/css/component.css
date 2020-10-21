@@ -1,0 +1,184 @@
+/* Iconfont made with icomoon.com */
+@font-face {
+	font-family: 'cbp-tmicons';
+	src:url('../fonts/tmicons/cbp-tmicons.eot');
+	src:url('../fonts/tmicons/cbp-tmicons.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/tmicons/cbp-tmicons.woff') format('woff'),
+		url('../fonts/tmicons/cbp-tmicons.ttf') format('truetype'),
+		url('../fonts/tmicons/cbp-tmicons.svg#cbp-tmicons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* reset  list style */
+.cbp-tm-menu,
+.cbp-tm-menu ul {
+	list-style: none;
+}
+
+/* set menu position; change here to set to relative or float, etc. */
+.cbp-tm-menu {
+  display: block;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 0;
+  text-align: right;
+  text-transform: capitalize;
+  top: 36px;
+  z-index: 1000;
+}
+/* first level menu items */
+.cbp-tm-menu > li {
+	display: inline-block;
+	margin: 0;
+	position: relative;
+}
+
+.cbp-tm-menu > li > a {
+	line-height: 4em;
+	padding: 0 0.3em;
+	font-size: 1.2em;
+	display: block;
+	color: #fff;
+}
+
+.no-touch .cbp-tm-menu > li > a:hover,
+.no-touch .cbp-tm-menu > li > a:active {
+	color: #02639d;
+}
+
+/* sumbenu with transitions */
+.cbp-tm-submenu {
+	position: absolute;
+	display: block;
+	visibility: hidden;
+	opacity: 0;
+	padding: 0;
+	text-align: left;
+	pointer-events: none;
+	-webkit-transition: visibility 0s, opacity 0s;
+	-moz-transition: visibility 0s, opacity 0s;
+	transition: visibility 0s, opacity 0s;
+}
+
+.cbp-tm-show .cbp-tm-submenu {
+	width: 16em;
+	left: 50%;
+	margin: 0 0 0 -8em;
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
+	-webkit-transition: visibility 0s, opacity 0.3s;
+	-moz-transition: visibility 0s, opacity 0.3s;
+	transition: visibility 0s, opacity 0.3s;
+}
+
+.cbp-tm-show-above .cbp-tm-submenu {
+	bottom: 100%;
+	padding-bottom: 10px;
+}
+
+.cbp-tm-show-below .cbp-tm-submenu {
+	top: 100%;
+	padding-top: 10px;
+}
+
+/* extreme cases: not enough space on the sides */
+.cbp-tm-nospace-right .cbp-tm-submenu {
+	right: 0;
+	left: auto;
+}
+
+.cbp-tm-nospace-left .cbp-tm-submenu {
+	left: 0;
+}
+
+/* last menu item has to fit on the screen */
+.cbp-tm-menu > li:last-child .cbp-tm-submenu {
+	right: 0;
+}
+
+/* 	
+arrow: depending on where the menu will be shown, we set 
+the right position for the arrow
+*/
+
+.cbp-tm-submenu:after {
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.cbp-tm-show-above .cbp-tm-submenu:after {
+	top: 100%;
+	margin-top: -10px;
+}
+
+.cbp-tm-show-below .cbp-tm-submenu:after {
+	bottom: 100%;
+	margin-bottom: -10px;
+}
+
+.cbp-tm-submenu:after {
+	border-color: transparent;
+	border-width: 16px;
+	margin-left: -16px;
+	left: 50%;
+}
+
+.cbp-tm-show-above .cbp-tm-submenu:after {
+	border-top-color: #fff;
+}
+
+.cbp-tm-show-below .cbp-tm-submenu:after {
+	border-bottom-color: #fff;
+}
+
+.cbp-tm-submenu > li {
+  background: url("../images/overlay.png") repeat-x scroll left top #777777;
+  display: block;
+  padding: 2px 0;
+}
+
+.cbp-tm-submenu > li > a {
+  border-bottom: 1px solid #FFFFFF;
+  color: #FFFFFF;
+  display: block;
+  font-size: 1em;
+  padding: 3px 2.3em 3px 0.6em;
+  position: relative;
+  transition: all 0.2s ease 0s;
+}
+.no-touch .cbp-tm-submenu > li > a:hover,
+.no-touch .cbp-tm-submenu > li > a:active {
+	color: #fff;
+	background: #0E76BD;
+}
+
+/* the icons (main level menu icon and sublevel icons) */
+.cbp-tm-submenu li a:before,
+.cbp-tm-menu > li > a:before {
+	font-family: 'cbp-tmicons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	vertical-align: middle;
+	margin-right: 0.6em;
+	-webkit-font-smoothing: antialiased;
+}
+
+.cbp-tm-submenu li a:before {
+	position: absolute;
+	top: 50%;
+	margin-top: -0.5em;
+	right: 0.5em;
+}
+
+

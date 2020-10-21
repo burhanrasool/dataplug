@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DataPlug</title>
+
+<link href="bootstrap.min.css" rel="stylesheet">
+<link href="common.css" rel="stylesheet">
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn\'t work if you view the page via file:// -->
+<!--[if lt IE 9]>
+                                  <script src="html5shiv.min.js"></script>
+                                  <script src="respond.min.js"></script>
+                                <![endif]-->
+<script src="jquery.min.js"></script>
+<script src="bootstrap.min.js"></script>
+<script src="bootstrap.js"></script>
+<script src="jquery-2.0.2.min.js"></script>
+<script src="jquery.js"></script>
+<script src="jquery-ui-autocomplete.js"></script>
+<script src="jquery.select-to-autocomplete.min.js"></script>
+<script src="jquery-ui.min.js"></script>
+<script src="common.js"></script>
+<style type="text/css" media="screen">
+body {
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 13px;
+}
+
+.ui-autocomplete {
+	padding: 0;
+	list-style: none;
+	background-color: #fff;
+	width: 218px;
+	border: 1px solid #B0BECA;
+	max-height: 350px;
+	overflow-y: scroll;
+}
+
+.ui-autocomplete .ui-menu-item a {
+	border-top: 1px solid #B0BECA;
+	display: block;
+	padding: 4px 6px;
+	color: #353D44;
+	cursor: pointer;
+}
+
+.ui-autocomplete .ui-menu-item:first-child a {
+	border-top: none;
+}
+
+.ui-autocomplete .ui-menu-item a.ui-state-hover {
+	background-color: #D5E5F4;
+	color: #161A1C;
+}
+
+.ui-autocomplete-input {
+	opacity: 1 !important;
+}
+</style>
+</head>
+<body>
+
+	<div class="container" id="form-builder" style="">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<nav id="form-title" role="navigation" class="navbar navbar-inverse">
+			<img src="formicon_373.png" class="img-icon formobile"> <img
+				src="http://local.dataplug.itu.edu.pk/assets/images/data/form-data/../form_icons/3122/formicon_373.png"
+				class="img-icon forweb">
+			<div class="container-fluid">
+				<div class="navbar-header  edit-title-sep">
+					<button data-target="#bs-example-navbar-collapse-1"
+						data-toggle="collapse" class="navbar-toggle collapsed"
+						type="button">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand">aaa</a>
+				</div>
+				<div id="bs-example-navbar-collapse-1"
+					class="collapse navbar-collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li class=""><a onclick="refreshData();"><i
+								class="glyphicon glyphicon-refresh"></i> Refresh</a></li>
+						<li><a onclick="unsentData();"><i
+								class="glyphicon glyphicon-lock"></i> Unsent</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+
+
+
+
+
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="form-hd">
+					<form onsubmit="return submitform(this)" novalidate=""
+						method="post"
+						class="TTWForm ui-tabs ui-widget ui-widget-content ui-corner-all ui-sortable"
+						action="" id="form-preview">
+						<input type="hidden" value="373" id="form_id" name="form_id"
+							style=""> <input type="hidden" value="formsubmit"
+							id="form_operation" style=""> <input type="hidden"
+							value="n9WqhEYLzO" id="security_key" name="security_key" style="">
+						<div
+							class="field f_100 number-field-widget  edit-field-sep form-group ui-sortable"
+							id="field2-container">
+							<label for="field2">Number</label> <input type="number"
+								subtable_id="" parent_id="" dependon_value="" dependon_id=""
+								class="form-control" required="required" field_setting="main"
+								id="field2" name="ggg">
+						</div>
+						
+
+						<div loop_id="1" style="position: relative; left: 0px; top: 0px;"
+							id="loop-1" class="loop-widget-main">
+							<div loop_id="1" id="addmoreloop-1"
+								class="field f_100  edit-field-loop ui-sortable form-group"
+								style="position: relative">
+								<a class="pull-right btn btn-success" onclick=""><label>Add
+										Family</label></a> <input type="text" loop_id="1" subtable="true"
+									style="display: none;" name="add_family" id="addloop1"
+									field_setting="main" value="" dependon_id="" dependon_value=""
+									parent_id="" class="form-control">
+							</div>
+							<div loop_id="1" id="popup-1" class="popuploop"
+								style="display: none;">
+								<div
+									class="field f_100 date-field-widget  edit-field-sep form-group ui-sortable"
+									id="field1-container">
+									<label for="field1">Name</label> <input type="date"
+										subtable_id="addloop1" parent_id="" dependon_value=""
+										dependon_id="" required="required" field_setting="main"
+										id="field1" name="Full_Name"
+										class="ttw-date date form-control">
+								</div>
+								<table cellspacing="0" id="table2" class="tbl_widget">
+									<tbody>
+										<tr>
+											<td class="delete-table-widget" table_id="table2"></td>
+											<td class="edit-col">Col-1</td>
+											<td class="edit-col">Col-2</td>
+											<td class="edit-col">Col-3</td>
+										</tr>
+										<tr>
+											<td class="edit-row">Row-1</td>
+											<td class="table2-etd tbl-td"><div
+													class="field f_100 number-field-widget  edit-field-sep form-group ui-sortable"
+													id="field6-container">
+													<label for="field6">Age</label> <input type="number"
+														subtable_id="addloop1" parent_id="" dependon_value=""
+														dependon_id="" class="form-control" required="required"
+														field_setting="main" id="field6" name="Age">
+												</div></td>
+											<td class="table2-etd tbl-td"><div
+													class="field f_100 text-field-widget edit-field-sep form-group ui-sortable"
+													id="field7-container">
+													<label for="field7">Father Name</label> <input type="text"
+														subtable_id="addloop1" parent_id="" dependon_value=""
+														dependon_id="" placeholder="Enter here"
+														class="form-control" value="" required="required"
+														field_setting="main" id="field7" name="Father_Name">
+												</div></td>
+											<td class="table2-etd tbl-td"><div
+													class="field select_widget f_100  edit-field-sep form-group ui-sortable"
+													id="field8-container">
+													<label for="field8">Gender</label>
+													<div class="form-control fake-dropdown selector">
+														<span>Please Select</span> <select subtable_id="addloop1"
+															parent_id="" dependon_value="" dependon_id="" api_url=""
+															required="required" field_setting="main" id="field8"
+															name="Gender" style="">
+															<option field_setting="main" parent_value=""
+																display_value="Please Select" value="" id="field8-1"
+																dependon_value="">Please Select</option>
+															<option field_setting="main" parent_value=""
+																display_value="Male" value="Male" id="field8-2"
+																dependon_value="">Male</option>
+															<option field_setting="main" parent_value=""
+																display_value="Female" value="Female" id="field8-3"
+																dependon_value="">Female</option>
+														</select>
+													</div>
+												</div></td>
+										</tr>
+										<tr>
+											<td class="edit-row">Row-2</td>
+											<td class="table2-etd tbl-td"><div
+													style="position: relative"
+													class="field f_100 taketimeclass  edit-field-sep ui-sortable form-group"
+													id="field12-container">
+													<a onclick="take_time('field12');"
+														class="pull-right btn btn-success"><label>Start
+															Time</label></a> <input type="text" subtable_id="addloop1"
+														action_before="" parent_id="" dependon_value=""
+														dependon_id="" value="" required="required"
+														field_setting="main" id="field12" name="Start_Time"
+														style="display: none;" class="form-control">
+												</div></td>
+											<td class="table2-etd tbl-td"></td>
+											<td class="table2-etd tbl-td"><div
+													style="position: relative"
+													class="field f_100 taketimeclass  edit-field-sep ui-sortable form-group"
+													id="field13-container">
+													<a onclick="take_time('field13');"
+														class="pull-right btn btn-success"><label>End
+															Time</label></a> <input type="text" subtable_id="addloop1"
+														action_before="" parent_id="" dependon_value=""
+														dependon_id="" value="" required="required"
+														field_setting="main" id="field13" name="End_Time"
+														style="display: none;" class="form-control">
+												</div></td>
+										</tr>
+										<tr last_row_id="3" table_id="table2" class="add-row3 forweb">
+											<td style="text-align: center;" colspan="4">Add more
+												rows</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="loop-btn-cls">
+									<button loop_id="1" class="save-cls" id="save-1" type="button">Save</button>
+									<button loop_id="1" class="cancel-cls" id="cancel-1"
+										type="button">Cancel</button>
+									<button loop_id="1" class="delete-cls" id="delete-1"
+										type="button">Delete</button>
+								</div>
+							</div>
+							<div loop_id="1" popup_id="popup-1" id="loop-list-1"></div>
+						</div>
+						
+						<div loop_id="2" style="position: relative;" id="loop-2"
+							class="loop-widget-main">
+							<div loop_id="2" id="addmoreloop-2"
+								class="field f_100  edit-field-loop ui-sortable form-group"
+								style="position: relative">
+								<a class="pull-right btn btn-success" onclick=""><label>Add
+										More</label></a> <input type="text" loop_id="2" subtable="true"
+									style="display: none;" name="Add_Family_old" id="addloop2"
+									field_setting="main" value="" dependon_id="" dependon_value=""
+									parent_id="" class="form-control">
+							</div>
+							<div loop_id="2" id="popup-2" class="popuploop"
+								style="display: none;">
+								<div
+									class="field f_100 date-field-widget  edit-field-sep form-group ui-sortable"
+									id="field9-container">
+									<label for="field9">Date</label> <input type="date"
+										subtable_id="addloop2" parent_id="" dependon_value=""
+										dependon_id="" required="required" field_setting="main"
+										id="field9" name="Date_of_birth"
+										class="ttw-date date form-control">
+								</div>
+								<div
+									class="field f_100 text-field-widget edit-field-sep form-group ui-sortable"
+									id="field10-container">
+									<label for="field10">Full_Name</label> <input type="text"
+										subtable_id="" parent_id="" dependon_value="" dependon_id=""
+										placeholder="Enter here" class="form-control" value=""
+										required="required" field_setting="main" id="field10"
+										name="Full_Name">
+								</div>
+								<div
+									class="field f_100 number-field-widget  edit-field-sep form-group ui-sortable"
+									id="field11-container">
+									<label for="field11">Mobile Number</label> <input type="number"
+										subtable_id="addloop2" parent_id="" dependon_value=""
+										dependon_id="" class="form-control" required="required"
+										field_setting="main" id="field11" name="Mobile_Number">
+								</div>
+								<div class="loop-btn-cls">
+									<button loop_id="2" class="save-cls" id="save-2" type="button">Save</button>
+									<button loop_id="2" class="cancel-cls" id="cancel-2"
+										type="button">Cancel</button>
+									<button loop_id="2" class="delete-cls" id="delete-2"
+										type="button">Delete</button>
+								</div>
+							</div>
+							<div loop_id="2" popup_id="popup-2" id="loop-list-2"></div>
+						</div>
+						<div
+							class="field f_100 submit edit-submit-sep form-group form-btns"
+							id="form-submit">
+							<a
+								onclick="$('#form_operation').val('formsubmit');$('#form-preview').submit();"
+								class="pull-right btn btn-success">Submit</a>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
