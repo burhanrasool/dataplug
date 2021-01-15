@@ -341,7 +341,9 @@ class Customreports extends CI_Controller {
 
         if ($this->session->userdata('logged_in')) {
             if (!$this->acl->hasPermission('form', 'view')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $this->session->set_flashdata('validate', 
+                array('message' => "You don't have enough permissions to do this task.",
+                'type' => 'warning'));
                 redirect(base_url() . 'apps');
             }
             $session_data = $this->session->userdata('logged_in');
@@ -352,7 +354,8 @@ class Customreports extends CI_Controller {
              * multiple form handling system statrs
              */
             $forms_list = array();
-            $all_forms = $this->form_model->get_form_by_app($slug);
+            $all_forms = $this->form_model
+            ->get_form_by_app($slug);
             foreach ($all_forms as $forms) {
                 $forms_list[] = array('form_id' => $forms['form_id'], 'table_name' => 'zform_' . $forms['form_id'], 'form_name' => $forms['form_name']);
             }
@@ -432,7 +435,8 @@ class Customreports extends CI_Controller {
             $final_district_wise_array2 = array();
             $final = array();
 
-            $filter_result = get_graph_view_settings($selected_form['app_id']);
+            $filter_result = 
+            get_graph_view_settings($selected_form['app_id']);
             if (isset($filter_result->district_wise_report) && $filter_result->district_wise_report == 1) {
                 foreach ($new_category_list as $cat_listv) {
                     $district_wise_catorized = $this->form_results_model->get_school_categorized_count_new($form_id, $_REQUEST['district'], $filter_attribute[0], $cat_listv, $from_date, $to_date);
@@ -441,7 +445,9 @@ class Customreports extends CI_Controller {
                         if (!array_key_exists($_REQUEST['district'], $final_district_wise_array2)) {
                             $final_district_wise_array2[$_REQUEST['district']] = array();
                             foreach ($new_category_list as $cat_listvv) {
-                                $final_district_wise_array2[$_REQUEST['district']] = array_merge($final_district_wise_array2[$_REQUEST['district']], array($cat_listvv => $cat_listvv, 'total' => $val['total']));
+                                $final_district_wise_array2[$_REQUEST['district']] =
+                                array_merge($final_district_wise_array2[$_REQUEST['district']],
+                                array($cat_listvv => $cat_listvv, 'total' => $val['total']));
                             }
                         }
                         if (array_key_exists($_REQUEST['district'], $final_district_wise_array2)) {
@@ -630,7 +636,9 @@ class Customreports extends CI_Controller {
             $filter_result = get_graph_view_settings($selected_form['app_id']);
             if (isset($filter_result->district_wise_report) && $filter_result->district_wise_report == 1) {
                 foreach ($new_category_list as $cat_listv) {
-                    $district_wise_catorized = $this->form_results_model->get_monthwise_categorized_count_new($form_id, '', $filter_attribute[0], $cat_listv, $from_date, $to_date);
+                    $district_wise_catorized =
+                    $this->form_results_model->get_monthwise_categorized_count_new($form_id,
+                    '', $filter_attribute[0], $cat_listv, $from_date, $to_date);
 
                     foreach ($district_wise_catorized as $key => $val) {
                         if (!array_key_exists($val['MONYER'], $final_district_wise_array2)) {
@@ -794,15 +802,18 @@ class Customreports extends CI_Controller {
             $final_disb_array = array();
             $tehsil_disb_array = array();
             foreach ($disbursment_rec as $myrep) {
-                if (!key_exists($myrep['District'], $final_disb_array)) {
+                if (!key_exists($myrep['District'],
+                    $final_disb_array)) {
                     $final_disb_array[$myrep['District']] = array();
                 }
 
                 if (!key_exists($myrep['Tehsil'], $final_disb_array[$myrep['District']])) {
-                    $final_disb_array[$myrep['District']][$myrep['Tehsil']] = array();
+                    $final_disb_array[$myrep['District']]
+                    [$myrep['Tehsil']] = array();
                 }
 
-                if (!key_exists($myrep['Disbursement_Center'], $final_disb_array[$myrep['District']][$myrep['Tehsil']])) {
+                if (!key_exists($myrep['Disbursement_Center'],
+                   $final_disb_array[$myrep['District']][$myrep['Tehsil']])) {
                     $final_disb_array[$myrep['District']][$myrep['Tehsil']][$myrep['Disbursement_Center']] = array();
                 }
 
@@ -839,7 +850,8 @@ class Customreports extends CI_Controller {
                         $final_district_wise_array = array_merge($final_district_wise_array, array('total' => $total));
                     }
                 }
-                $final_district_wise_array2[$district['district_name']] = $final_district_wise_array;
+                $final_district_wise_array2[$district['district_name']] =
+                $final_district_wise_array;
             }
 
             $data['district_categorized'] = $final_district_wise_array2;
@@ -907,7 +919,9 @@ class Customreports extends CI_Controller {
             //add part for disbursment app - Start
             $formid = '1654';
             $date_search = '';
-            $disbursment_rec = $this->form_results_model->get_disbursment_record($formid, $date_search);
+            $disbursment_rec = $this->form_results_model->
+            get_disbursment_record($formid, $date_search);
+            
             $final_disb_array = array();
             $tehsil_disb_array = array();
             foreach ($disbursment_rec as $myrep) {
