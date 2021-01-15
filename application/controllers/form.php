@@ -1366,7 +1366,8 @@ class Form extends CI_Controller {
                             }
                     } else {
                         if ($category[$changed_category])
-                            $category_values = array_merge($category_values, array($category[$changed_category] => $category[$changed_category]));
+                            $category_values = array_merge($category_values, 
+                            	array($category[$changed_category] => $category[$changed_category]));
                     }
                 }
             }
