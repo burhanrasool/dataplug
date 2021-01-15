@@ -1142,7 +1142,9 @@ class Form extends CI_Controller {
 
             $all_forms = $this->form_model->get_form_by_app($slug);
             foreach ($all_forms as $forms) {
-                $forms_list[] = array('form_id' => $forms['form_id'], 'table_name' => 'zform_' . $forms['form_id'], 'form_name' => $forms['form_name']);
+                $forms_list[] = array('form_id' => $forms['form_id'],
+                 'table_name' => 'zform_' . $forms['form_id'],
+                  'form_name' => $forms['form_name']);
             }
 
 
