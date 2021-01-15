@@ -1124,7 +1124,8 @@ class Form extends CI_Controller {
     }
 
     /**
-     * main method to render form results in listview based on specific application Id
+     * main method to render form results in listview based
+     * on specific application Id
      * @param  $slug application id
      * @return  void
      * @author UbaidUllah Balti <ubaidcskiu@gmail.com>
