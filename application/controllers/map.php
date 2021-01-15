@@ -1650,7 +1650,8 @@ class Map extends CI_Controller {
         $selected_post_form_id = explode(',', $this->input->get('selected_form_id'));
         $form_list_filter = array();
         foreach ($selected_post_form_id as $list) {
-            $form_list_filter[] = array('form_id' => $list, 'table_name' => 'zform_' . $list);
+            $form_list_filter[] = array('form_id' => $list,
+                                        'table_name' => 'zform_' . $list);
         }
         $page = $this->input->get('page');
         $to_date = $this->input->get('filter_date_to');
@@ -1682,7 +1683,8 @@ class Map extends CI_Controller {
         }
         /** for categry listing * */
         $record_array_final_filter = array();
-        $results_filer_main = $this->form_results_model->get_form_results_filters($form_list_filter);
+        $results_filer_main = $this->form_results_model->
+            get_form_results_filters($form_list_filter);
         $filter_exist_array = array();
         $pin_exist_for_cat = array();
         $col_pin = 0;
@@ -1719,7 +1721,8 @@ class Map extends CI_Controller {
                                 $exist_alpha[$first_char] = '1';
                                 $pin_name = $first_char . '1';
                             }
-                            $pin_exist_for_cat = array_merge($pin_exist_for_cat, array($valueforarray => $pin_name));
+                            $pin_exist_for_cat = array_merge($pin_exist_for_cat, 
+                                                             array($valueforarray => $pin_name));
                         } else {
                             if (array_key_exists($valueforarray, $pin_exist_for_cat)) {
                                 $pin_name = $pin_exist_for_cat[$valueforarray];
@@ -1748,7 +1751,8 @@ class Map extends CI_Controller {
          * its call back function call
          */
         foreach ($filter_attribute as $filter_attribute_value) {
-            uasort($record_array_final_filter, array(new SortAssociativeArray($filter_attribute_value), "call"));
+            uasort($record_array_final_filter, array(new SortAssociativeArray(
+                $filter_attribute_value), "call"));
         }
         $only_once_category_icon = array();
         $column_number = 0;
@@ -1756,23 +1760,28 @@ class Map extends CI_Controller {
         foreach ($filter_attribute as $filter_attribute_value) {
             foreach ($record_array_final_filter as $form_item) {
                 $icon_pair_array = array();
-                if (isset($form_item[$filter_attribute_value]) && !empty($form_item[$filter_attribute_value])) {
+                if (isset($form_item[$filter_attribute_value]) && !empty(
+                    $form_item[$filter_attribute_value])) {
                     $category = strtolower($form_item[$filter_attribute_value]);
                     if (!in_array($form_item[$filter_attribute_value], $only_once_category_icon)) {
                         $column_number++;
                         $only_once_category_icon[] = $form_item[$filter_attribute_value];
-                        if (!file_exists(FCPATH . "assets/images/map_pins/" . $form_item['pin'] . ".png")) {
+                        if (!file_exists(FCPATH . "assets/images/map_pins/" . 
+                                         $form_item['pin'] . ".png")) {
                             $icon_filename_cat = base_url() . "assets/images/map_pins/default_pin.png";
                         } else {
-                            $icon_filename_cat = base_url() . "assets/images/map_pins/" . $form_item['pin'] . ".png";
+                            $icon_filename_cat = base_url() . "assets/images/map_pins/" . 
+                                $form_item['pin'] . ".png";
                         }
-                        $icon_pair_array = array_merge($icon_pair_array, array($category => $icon_filename_cat));
+                        $icon_pair_array = array_merge($icon_pair_array, array($category => 
+                                                                               $icon_filename_cat));
                         $icon_pair_array_final[] = $icon_pair_array;
                     }
                 }
             }
         }
-        $results = $this->form_results_model->get_map_data_load_more($form_list_filter, $to_date, $from_date, $page);
+        $results = $this->form_results_model->get_map_data_load_more(
+            $form_list_filter, $to_date, $from_date, $page);
         $filter_exist_array = array();
         $pin_exist_for_cat = array();
         $col_pin = 0;
@@ -1808,7 +1817,8 @@ class Map extends CI_Controller {
                             $exist_alpha[$first_char] = '1';
                             $pin_name = $first_char . '1';
                         }
-                        $pin_exist_for_cat = array_merge($pin_exist_for_cat, array($valueforarray => $pin_name));
+                        $pin_exist_for_cat = array_merge($pin_exist_for_cat, array(
+                            $valueforarray => $pin_name));
                     } else {
                         if (array_key_exists($valueforarray, $pin_exist_for_cat)) {
                             $pin_name = $pin_exist_for_cat[$valueforarray];
