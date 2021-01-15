@@ -1267,7 +1267,8 @@ class Form extends CI_Controller {
             $final_send = array();
             foreach ($forms_list as $final_view) {
                 if (in_array($final_view['form_id'], $form_list_posted)) {
-                    $final_send = array_merge($final_send, array($final_view['form_name'] => $final_view['form_id']));
+                    $final_send = array_merge($final_send, 
+                    	array($final_view['form_name'] => $final_view['form_id']));
                 }
                 $view_list = array_merge($view_list, 
                 	array($final_view['form_name'] => $final_view['form_id']));
