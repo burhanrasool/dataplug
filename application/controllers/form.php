@@ -1256,7 +1256,8 @@ class Form extends CI_Controller {
             $data['search_text'] = $search_text;
             if ($search_text) {
                 $search_text = mysql_real_escape_string($search_text);
-                $search_text = str_replace(array('~', '<', '>', '$', '%', '|', '^', '*'), array(' '), $search_text);
+                $search_text = str_replace(array('~', '<', '>', '$', '%', '|', '^', '*'), 
+                	array(' '), $search_text);
                 $search_text = str_replace('/', '\\\\/', $search_text);
                 $search_text = trim($search_text);
             }
