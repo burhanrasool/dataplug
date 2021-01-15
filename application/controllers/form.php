@@ -939,7 +939,8 @@ class Form extends CI_Controller {
 //                }
 //                echo "<pre>";print_r($app_filter_list);die;
                 //get column with values...
-//                $possible_filters_from_settings = $this->form_model->get_form_column_values($app_filter_list, $first_form_id);
+//                $possible_filters_from_settings =
+// $this->form_model->get_form_column_values($app_filter_list, $first_form_id);
                 $possible_filters_from_settings = $app_filter_list;
 
 //                $filter_result = 
