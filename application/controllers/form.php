@@ -1451,7 +1451,8 @@ class Form extends CI_Controller {
                                 $category_values = array_merge($category_values, array($category[0] => $category[0]));
                             }
                         } else {
-                            $category_values = array_merge($category_values, array($category[$filter_attribute[0]] => $category[$filter_attribute[0]]));
+                            $category_values = array_merge($category_values, 
+                            array($category[$filter_attribute[0]] => $category[$filter_attribute[0]]));
                         }
                     }
                 }
