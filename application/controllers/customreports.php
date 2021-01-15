@@ -32,7 +32,9 @@ class Customreports extends CI_Controller {
 
         if ($this->session->userdata('logged_in')) {
             if (!$this->acl->hasPermission('form', 'view')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $this->session->set_flashdata('validate', 
+                                              array('message' => "You don't have enough permissions to do this task.", 
+                                                        'type' => 'warning'));
                 redirect(base_url() . 'apps');
             }
             $session_data = $this->session->userdata('logged_in');
@@ -45,7 +47,9 @@ class Customreports extends CI_Controller {
             $forms_list = array();
             $all_forms = $this->form_model->get_form_by_app($slug);
             foreach ($all_forms as $forms) {
-                $forms_list[] = array('form_id' => $forms['form_id'], 'table_name' => 'zform_' . $forms['form_id'], 'form_name' => $forms['form_name']);
+                $forms_list[] = array('form_id' => $forms['form_id'], 
+                                      'table_name' => 'zform_' . $forms['form_id'], 
+                                      'form_name' => $forms['form_name']);
             }
                     $data['form_lists'] = $forms_list;
 
@@ -53,7 +57,9 @@ class Customreports extends CI_Controller {
 
                     $form_id = $forms_list[0]['form_id'];
                     $form_single_to_query = array();
-                    $form_single_to_query[] = array('form_id' => $form_id, 'table_name' => 'zform_' . $form_id, 'form_name' => $forms_list[0]['form_name']);
+                    $form_single_to_query[] = array('form_id' => $form_id, 
+                                                    'table_name' => 'zform_' . $form_id, 
+                                                    'form_name' => $forms_list[0]['form_name']);
                     /** Get filters from  multiple forms * */
                     $multiple_filters = $this->form_model->get_form_filters($form_single_to_query);
 //                    echo "<pre>";
