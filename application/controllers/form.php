@@ -1201,7 +1201,8 @@ class Form extends CI_Controller {
             $forms_list[] = array('form_id' => $forms['form_id'], 'table_name' => 'zform_' . $forms['form_id'], 'form_name' => $forms['form_name']);
         }
         $app_settings = $this->app_model->get_app_settings($slug);
-        if (isset($app_settings['district_filter']) && $app_settings['district_filter'] == 'On') {
+        if (isset($app_settings['district_filter']) && 
+        	$app_settings['district_filter'] == 'On') {
 
             $district_list = $this->form_results_model->get_distinct_district($slug);
             $data['district_list'] = $district_list;
