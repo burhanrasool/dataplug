@@ -1081,7 +1081,9 @@ class Form extends CI_Controller {
     public function exportcurrentresults() {
 
         $session_data = $this->session->userdata('logged_in');
-        $activity_aready_exist = $this->db->order_by('id', 'desc')->get_where('form_result_temp', array('user_id' => $session_data['login_user_id']), 1)->row_array();
+        $activity_aready_exist = $this->db->order_by('id', 'desc')->
+        get_where('form_result_temp', array('user_id' => 
+        	$session_data['login_user_id']), 1)->row_array();
         $activity_aready_exist = 
         (array) json_decode($activity_aready_exist['query_user']);
         $headings = $activity_aready_exist['heading'];
