@@ -972,7 +972,8 @@ class Form extends CI_Controller {
                 $data['possible_filters_from_settings'] = $possible_filters_from_settings;
                 $data['category_values'] = $category_values;
                 $data['body_content'] = $this->parser->parse('form/form_results_data', $subdata, TRUE);
-                $data['pageTitle'] = $selected_app['name'] . ' Records - List View-' . PLATFORM_NAME;
+                $data['pageTitle'] = $selected_app['name'] .
+                 ' Records - List View-' . PLATFORM_NAME;
                 $town_lists = $this->app_users_model->get_towns($selected_form['app_id']);
                 $town_list_array = array();
 //                foreach ($town_lists as $towns) {
