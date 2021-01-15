@@ -42,7 +42,7 @@
                         <br />
                         <img id='img_splash_screen' width="50" height="50" src="<?php
                         if(file_exists(FCPATH.'assets'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'form_icons'.DIRECTORY_SEPARATOR.$app_id.DIRECTORY_SEPARATOR.$splash_icon)){
-                            echo $imagepathicon = base_url() . 'assets/images/data/form_icons/' . $app_id . '/' .$splash_icon;
+                            echo $image_path_icon = base_url() . 'assets/images/data/form_icons/' . $app_id . '/' .$splash_icon;
                         } else {
                             echo $imagepathicon = FORM_IMG_DISPLAY_PATH . '../form_icons/splash.png';
                         }
