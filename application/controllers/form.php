@@ -949,7 +949,8 @@ class Form extends CI_Controller {
 //                    $filter_options.="<option value=''>Select One</option>";
 //                    if (isset($app_filter_list->$selected_form['id'])) {
 //                        if (!empty($app_filter_list->$selected_form['id'])) {
-//                            foreach ($app_filter_list->$selected_form['id'] as $key => $val) {
+//                            foreach ($app_filter_list->$selected_form['id'] as
+// 								$key => $val) {
 //                                $print_val = str_replace("_", " ", $val);
 //                                $filter_options .= "<option  value='$val'>
 //                				$print_val</option>";
