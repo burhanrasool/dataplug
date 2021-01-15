@@ -1327,7 +1327,10 @@ class Form extends CI_Controller {
             $array_final = $this->get_heading_n_data_posted($form_list_filter, $to_date, $from_date, $cat_filter_value, $changed_category, $town_filter, $posted_filters, $search_text, $district, $sent_by, $export = '', $selected_dc);
             $data['headings'] = $array_final['headings'];
             $data['form'] = $array_final['form'];
-            $total_record_return = $this->form_results_model->return_total_record_posted($form_list_filter, $to_date, $from_date, $cat_filter_value, $filter_attribute_search, $town_filter, $posted_filters, $search_text, $district, $sent_by, $selected_dc);
+            $total_record_return = $this->form_results_model->
+            return_total_record_posted($form_list_filter, $to_date, $from_date,
+             $cat_filter_value, $filter_attribute_search, $town_filter, $posted_filters,
+              $search_text, $district, $sent_by, $selected_dc);
             $pdata['TotalRec'] = $total_record_return;
             $pdata['perPage'] = $this->perPage;
             $pdata['cat_filter_value'] = $cat_filter_value;
