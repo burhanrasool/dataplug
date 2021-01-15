@@ -992,7 +992,8 @@ class Form extends CI_Controller {
                     $this->load->view('form/results_1293');
                 } else if ($slug == 1567) {
                     $final_dc = array('' => 'Select All');
-                    $disbursement_center_lists = $this->form_results_model->get_distinct_d_center(1567);
+                    $disbursement_center_lists = $this->form_results_model->
+                    get_distinct_d_center(1567);
                     foreach ($disbursement_center_lists as $dc) {
                         $final_dc = array_merge($final_dc, 
                         	array($dc['Disbursement_Center'] => $dc['Disbursement_Center']));
