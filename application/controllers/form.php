@@ -1040,7 +1040,10 @@ class Form extends CI_Controller {
 
 
         
-        $us_activities = $this->form_results_model->get_unsaved_activities($_GET['iDisplayStart'],$_GET['iDisplayLength'],$_GET['sSearch'],$_GET['iSortCol_0'],$_GET['sSortDir_0']);
+        $us_activities = $this->form_results_model->
+        get_unsaved_activities($_GET['iDisplayStart'],
+        $_GET['iDisplayLength'],$_GET['sSearch'],
+        $_GET['iSortCol_0'],$_GET['sSortDir_0']);
         $total_act_un = $this->form_results_model->
         get_unsaved_activities_total($_GET['sSearch']);
 //        making array for ajax datatable...
