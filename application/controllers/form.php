@@ -1089,7 +1089,8 @@ class Form extends CI_Controller {
 
         $header = '';
         foreach ($headings as $heading) {
-            if ($heading == 'is_take_picture' || $heading == 'actions' || $heading == 'image') {
+            if ($heading == 'is_take_picture' || $heading == 
+            	'actions' || $heading == 'image') {
                 continue;
             }
             $header .= $heading . ",";
