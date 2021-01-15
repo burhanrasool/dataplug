@@ -1374,7 +1374,8 @@ class Form extends CI_Controller {
             $data['selected_form'] = $form_id;
             $data['category_values'] = $category_values;
             $data['app_id'] = $selected_form['app_id'];
-            $data['app_comments'] = $this->form_model->get_comments($selected_form['app_id']);
+            $data['app_comments'] = $this->form_model->
+            get_comments($selected_form['app_id']);
             $data['pageTitle'] = $selected_app['name'] . 
             ' Records - List View-' . PLATFORM_NAME;
             $selected_app = $this->app_model->get_app($data['app_id']);
