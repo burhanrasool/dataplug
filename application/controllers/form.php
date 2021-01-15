@@ -994,7 +994,8 @@ class Form extends CI_Controller {
                     $final_dc = array('' => 'Select All');
                     $disbursement_center_lists = $this->form_results_model->get_distinct_d_center(1567);
                     foreach ($disbursement_center_lists as $dc) {
-                        $final_dc = array_merge($final_dc, array($dc['Disbursement_Center'] => $dc['Disbursement_Center']));
+                        $final_dc = array_merge($final_dc, 
+                        	array($dc['Disbursement_Center'] => $dc['Disbursement_Center']));
                     }
                     $data['selected_dc'] = array();
                     $data['d_center'] = $final_dc;
