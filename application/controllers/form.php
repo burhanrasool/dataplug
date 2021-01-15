@@ -1149,7 +1149,9 @@ class Form extends CI_Controller {
             /** multiple form handling system ends here * */
             /** in case of post of form filters * */
             $form_single_to_query = array();
-            $form_single_to_query[] = array('form_id' => $all_forms[0]['form_id'], 'table_name' => 'zform_' . $all_forms[0]['form_id'], 'form_name' => $all_forms[0]['form_name']);
+            $form_single_to_query[] = array('form_id' => $all_forms[0]['form_id'],
+             'table_name' => 'zform_' . $all_forms[0]['form_id'],
+              'form_name' => $all_forms[0]['form_name']);
             $data['selected_district'] = '';
             $data['selected_sent_by'] = '';
             $data['all_visits_hidden'] = 0;
