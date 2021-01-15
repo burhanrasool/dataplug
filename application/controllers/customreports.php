@@ -1397,9 +1397,15 @@ class Customreports extends CI_Controller {
                         }
                     }
                     if (array_key_exists($val['EMIS_Code'], $final_district_wise_array2)) {
-                        $final_district_wise_array2[$val['EMIS_Code']] = array_merge($final_district_wise_array2[$val['EMIS_Code']], array($cat_listv => $val['total'], 'Category' => $val['Category'], 'total' => $final_district_wise_array2[$val['EMIS_Code']]['total'] + $val['total']));
+                        $final_district_wise_array2[$val['EMIS_Code']] = array_merge(
+                            $final_district_wise_array2[$val['EMIS_Code']],
+                             array($cat_listv => $val['total'], 'Category' => $val['Category'],
+                              'total' => $final_district_wise_array2[$val['EMIS_Code']]['total'] +
+                               $val['total']));
                     } else {
-                        $final_district_wise_array2[$val['EMIS_Code']] = array('school' => $val['school_name'], $cat_listv => $val['total'], 'Category' => $val['Category'], 'total' => $val['total']);
+                        $final_district_wise_array2[$val['EMIS_Code']] = 
+                        array('school' => $val['school_name'], $cat_listv => $val['total'],
+                         'Category' => $val['Category'], 'total' => $val['total']);
                     }
                 }
             }
