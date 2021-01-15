@@ -38,10 +38,10 @@ if ($view_list) {
 //                print_r($file_headers);die;
 //                if ($file_headers[0] == 'HTTP/1.1 200 OK') {
                 if(file_exists(FCPATH.'assets'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'form_icons'.DIRECTORY_SEPARATOR.$app_id.DIRECTORY_SEPARATOR.$icon)){
-//                    echo $imagepathicon = FORM_IMG_DISPLAY_PATH . '../form_icons/' . $app_id . '/' . $icon;
-                    echo $imagepathappicon = base_url() . 'assets/images/data/form_icons/' . $app_id . '/' . $icon;
+//                    echo $image_path_icon = FORM_IMG_DISPLAY_PATH . '../form_icons/' . $app_id . '/' . $icon;
+                    echo $image_path_app_icon = base_url() . 'assets/images/data/form_icons/' . $app_id . '/' . $icon;
                 } else {
-                    echo $imagepathappicon = FORM_IMG_DISPLAY_PATH . '../form_icons/default_app.png';
+                    echo $image_path_app_icon = FORM_IMG_DISPLAY_PATH . '../form_icons/default_app.png';
                     $icon='default_app.png';
                 }
                 ?>" alt="" onClick="$('#userfile').click();"/>
@@ -52,9 +52,9 @@ if ($view_list) {
                 <strong style="width: 110px; line-height: 20px; margin-top: 8px;">Splash Screen (.png only)</strong>
                 <img id='img_splash_screen' width="50" height="50" src="<?php
                 if(file_exists(FCPATH.'assets'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'form_icons'.DIRECTORY_SEPARATOR.$app_id.DIRECTORY_SEPARATOR.$splash_icon)){
-                    echo $imagepathicon = base_url() . 'assets/images/data/form_icons/' . $app_id . '/' .$splash_icon;
+                    echo $image_path_icon = base_url() . 'assets/images/data/form_icons/' . $app_id . '/' .$splash_icon;
                 } else {
-                    echo $imagepathicon = FORM_IMG_DISPLAY_PATH . '../form_icons/splash.png';
+                    echo $image_path_icon = FORM_IMG_DISPLAY_PATH . '../form_icons/splash.png';
                 }
                 ?>" alt="" onClick="$('#splashfile').click();" style="margin-top: 7px;"/>
                 <input type="file" name="splashfile" id="splashfile" accept="*.png" onchange="check_file_splash(this)" style='display:none;'/>
@@ -93,7 +93,7 @@ if ($view_list) {
 <div id="content" class="wrapper">
     <div id="controls-left">
         <ul id="add-form-title" style="display:none;">
-            <li id="title-field" rel="<?php echo $name; ?>" icon_web="<?php echo $imagepathappicon; ?>" icon_device="<?php echo $icon; ?>">Form Title</li>
+            <li id="title-field" rel="<?php echo $name; ?>" icon_web="<?php echo $image_path_app_icon; ?>" icon_device="<?php echo $icon; ?>">Form Title</li>
         </ul>
         <ul id="form-fields">
 
