@@ -1420,7 +1420,8 @@ class Form extends CI_Controller {
             $data['headings'] = $array_final['headings'];
             $data['form'] = $array_final['form'];
             $data['active_tab'] = 'app';
-            $total_record_return = $this->form_results_model->return_total_record($form_single_to_query);
+            $total_record_return = $this->form_results_model->
+            return_total_record($form_single_to_query);
             $pdata['TotalRec'] = $total_record_return;
             $pdata['perPage'] = $this->perPage;
             $pdata['form_id'] = $first_form_id;
