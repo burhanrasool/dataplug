@@ -925,7 +925,8 @@ class Form extends CI_Controller {
                 $filter_result = get_result_view_settings($selected_form['app_id']);
 
                 if (isset($filter_result->filters)) {
-                    $app_filter_list = (isset($filter_result->filters->$first_form_id)) ? (array) $filter_result->filters->$first_form_id : array();
+                    $app_filter_list = (isset($filter_result->filters->$first_form_id)) ? 
+                    (array) $filter_result->filters->$first_form_id : array();
                 } else {
                     $app_filter_list = array();
                 }
