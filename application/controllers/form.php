@@ -1276,7 +1276,8 @@ class Form extends CI_Controller {
             $data['form_list_selected'] = $final_send;
             $form_list_filter = array();
             foreach ($form_list_posted as $list) {
-                $form_list_filter[] = array('form_id' => $list, 'table_name' => 'zform_' . $list);
+                $form_list_filter[] = array('form_id' => $list,
+                 'table_name' => 'zform_' . $list);
             }
             if (empty($to_date)) {
                 $to_date = "2013-06-03";
