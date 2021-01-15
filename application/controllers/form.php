@@ -1207,7 +1207,8 @@ class Form extends CI_Controller {
             $data['district_list'] = $district_list;
         }
 
-        if (isset($app_settings['sent_by_filter']) && $app_settings['sent_by_filter'] == 'On') {
+        if (isset($app_settings['sent_by_filter']) && 
+        	$app_settings['sent_by_filter'] == 'On') {
             $sent_by_list = $this->form_results_model->get_distinct_sent_by($slug);
             $data['sent_by_list'] = $sent_by_list;
         }
