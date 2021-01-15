@@ -1222,7 +1222,8 @@ class Form extends CI_Controller {
             $selected_dc = $this->input->post('d_center');
             $selected_form = $this->form_model->get_form($form_id);
             $app_id = $selected_form['app_id'];
-            $changed_filter_form_id = $this->get_form_filter_based($app_id, $changed_category);
+            $changed_filter_form_id = $this->get_form_filter_based($app_id,
+             $changed_category);
             $posted_array_filter = array();
             $data_per_filter = array();
             $posted_filters = array();
