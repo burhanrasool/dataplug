@@ -1101,7 +1101,8 @@ class Form extends CI_Controller {
             $form_item = (array) $form_item;
             $line = '';
             for ($i = 0; $i < $total_headings; $i++) {
-                if ($headings[$i] == 'is_take_picture' || $headings[$i] == 'actions' || $headings[$i] == 'image') {
+                if ($headings[$i] == 'is_take_picture' || $headings[$i] ==
+                 'actions' || $headings[$i] == 'image') {
                     continue;
                 } else {
                     $inside = ucwords($form_item[$headings[$i]]);
