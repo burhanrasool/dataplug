@@ -1342,7 +1342,8 @@ class Form extends CI_Controller {
             $pdata['district'] = $district;
             $pdata['ajax_function'] = 'paginated_ajax_data_posted';
             $pdata['slug'] = $form_id;
-            $subdata['paging_category_filter'] = $this->parser->parse('form/paging_category_filter', $pdata, TRUE);
+            $subdata['paging_category_filter'] = $this->parser->
+            parse('form/paging_category_filter', $pdata, TRUE);
             $subdata['all_form_results'] = $data['form'];
             $subdata['headings'] = $data['headings'];
             $subdata['form'] = $data['form'];
