@@ -1392,7 +1392,8 @@ class Form extends CI_Controller {
             $data['all_visits_hidden'] = 0;
             $view_list = array();
             foreach ($forms_list as $final_view) {
-                $view_list = array_merge($view_list, array($final_view['form_name'] => $final_view['form_id']));
+                $view_list = array_merge($view_list, 
+                	array($final_view['form_name'] => $final_view['form_id']));
             }
             $view_list = array_flip($view_list);
             $data['form_lists'] = $view_list;
