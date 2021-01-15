@@ -1,4 +1,5 @@
-<style>.applicationText a{position:relative;}.Category a{text-decoration:underline!important;}#cboxCurrent{display:none!important;}</style>
+<style>.applicationText a{position:relative;}.Category a{text-decoration:underline!important;}
+	#cboxCurrent{display:none!important;}</style>
 <div class="applicationText">
         <a id="add_more_app">Add Dropdown API</a>
     <h2>Dropdown API Maker</h2>
