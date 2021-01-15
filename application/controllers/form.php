@@ -1324,7 +1324,10 @@ class Form extends CI_Controller {
             $data['filter_attribute'] = $filter_attribute;
             $data['form_html'] = $form_html_multiple;
             $array_final = array();
-            $array_final = $this->get_heading_n_data_posted($form_list_filter, $to_date, $from_date, $cat_filter_value, $changed_category, $town_filter, $posted_filters, $search_text, $district, $sent_by, $export = '', $selected_dc);
+            $array_final = $this->get_heading_n_data_posted($form_list_filter, $to_date, 
+            	$from_date, $cat_filter_value, $changed_category, $town_filter, 
+            	$posted_filters, $search_text, $district, 
+            	$sent_by, $export = '', $selected_dc);
             $data['headings'] = $array_final['headings'];
             $data['form'] = $array_final['form'];
             $total_record_return = $this->form_results_model->
