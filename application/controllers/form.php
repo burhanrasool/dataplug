@@ -964,7 +964,8 @@ class Form extends CI_Controller {
 
                 $category_values = array();
 //                if ($filter_attribute[0]) {
-//                    $category_list = $this->form_results_model->get_category_values($form_single_to_query[0]['table_name'], $filter_attribute[0]);
+//               $category_list = $this->form_results_model->get_category_values
+//               ($form_single_to_query[0]['table_name'], $filter_attribute[0]);
 //                    $category_values = array();
 //                }
 //                $data['app_filters_array'] = array();
