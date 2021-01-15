@@ -981,7 +981,8 @@ class Form extends CI_Controller {
 //                    }
 //                }
                 $data['app_id'] = $selected_form['app_id'];
-                $data['app_comments'] = $this->form_model->get_comments($selected_form['app_id']);
+                $data['app_comments'] = $this->form_model->
+                get_comments($selected_form['app_id']);
                 $data['town_filter'] = $town_list_array;
                 $data['active_tab'] = 'form_results';
 //                $data['filter_options'] = $filter_options;
