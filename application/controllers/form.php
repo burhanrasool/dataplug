@@ -1448,7 +1448,8 @@ class Form extends CI_Controller {
                             if (!in_array($category, $category_values)) {
                                 $category = trim($category[$filter_attribute[0]]);
                                 $category = explode(',', $category);
-                                $category_values = array_merge($category_values, array($category[0] => $category[0]));
+                                $category_values = array_merge($category_values, 
+                                	array($category[0] => $category[0]));
                             }
                         } else {
                             $category_values = array_merge($category_values, 
