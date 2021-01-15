@@ -1355,7 +1355,8 @@ class Form extends CI_Controller {
             $data['app_filters_array'] = array();
             $category_values = array();
             if ($changed_category) {
-                $category_list = $this->form_results_model->get_category_values('zform_' . $changed_filter_form_id[0], $changed_category);
+                $category_list = $this->form_results_model->get_category_values('zform_' 
+                	. $changed_filter_form_id[0], $changed_category);
                 foreach ($category_list as $category) {
                     if ($slug == '1293') {
                         if ($category[$changed_category])
