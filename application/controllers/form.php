@@ -942,7 +942,8 @@ class Form extends CI_Controller {
 //                $possible_filters_from_settings = $this->form_model->get_form_column_values($app_filter_list, $first_form_id);
                 $possible_filters_from_settings = $app_filter_list;
 
-//                $filter_result = get_result_view_settings($selected_form['app_id']);
+//                $filter_result = 
+//                get_result_view_settings($selected_form['app_id']);
 //                if (isset($filter_result->filters)) {
 //                    $app_filter_list = $filter_result->filters;
 //                    $filter_options = '';
