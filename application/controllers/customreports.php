@@ -135,7 +135,8 @@ class Customreports extends CI_Controller {
                                         $final_district_wise_array2[$val["$new_category"]] = array_merge(
                                                                                                          $final_district_wise_array2[$val["$new_category"]], 
                                                                                                          array('district' => $val["$new_category"], 
-                                                                                                               $cat_listvv => '0', 'total' => '0'));
+                                                                                                               $cat_listvv => '0', 
+                                                                                                               'total' => '0'));
                                     }
                                 }
                                 if (array_key_exists($val["$new_category"], $final_district_wise_array2)) {
