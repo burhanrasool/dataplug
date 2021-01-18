@@ -3168,7 +3168,8 @@ class App extends CI_Controller {
 
         // if ($this->acl->hasPermission('app_users', 'delete')) {
         //     $result .= "<a style='padding:2px;' href='javascript:void(0)'>
-        //     <img src='".base_url()."assets/images/tableLink3.png' alt='edit' id='delete_user' user_id='".$app['user_id']."' title='Delete User'/>
+        //     <img src='".base_url()."assets/images/tableLink3.png' alt='edit' 
+		//     id='delete_user' user_id='".$app['user_id']."' title='Delete User'/>
         //     </a>";
         // }
         return $result;
@@ -3178,14 +3179,17 @@ class App extends CI_Controller {
     public function create_icon_image($app,$result_count){
         if ($result_count > 0) {
         $result='
-            <a style="padding-left:0px;" href="'.base_url().'application-results/'.$app['id'].'">
-                <img class="formIconsUpload" src="'.FORM_IMG_DISPLAY_PATH.'../form_icons/'.$app['id'].'/'.$app['icon'].'" alt="" />
+            <a style="padding-left:0px;" href="'.base_url().'application-
+			results/'.$app['id'].'">
+                <img class="formIconsUpload" src="'.FORM_IMG_DISPLAY_PATH.'../
+				form_icons/'.$app['id'].'/'.$app['icon'].'" alt="" />
             </a>';
 
         } else {
             $result='
             <a style="padding-left:0px; cursor: default" href="javascript:void(0)">
-                <img class="formIconsUpload" src="'.FORM_IMG_DISPLAY_PATH.'../form_icons/'.$app['id'].'/'.$app['icon'].'" alt="" />
+                <img class="formIconsUpload" src="'.FORM_IMG_DISPLAY_PATH.'../
+				form_icons/'.$app['id'].'/'.$app['icon'].'" alt="" />
             </a>';
         }
         return $result;
@@ -3199,8 +3203,10 @@ class App extends CI_Controller {
         	
         	if(file_exists($filename)){
         		$result='
-                <a style="padding-left:0px;" rel="lightbox" href="'.FORM_IMG_DISPLAY_PATH.'../../../android/qr_code/'.$app['qr_code_file'].'">
-                    <img class="formIconsUpload" src="'.FORM_IMG_DISPLAY_PATH.'../../../android/qr_code/'.$app['qr_code_file'].'" alt="" />
+                <a style="padding-left:0px;" rel="lightbox" href="'.FORM_IMG_DISPLAY_PATH.'../../../
+				android/qr_code/'.$app['qr_code_file'].'">
+                    <img class="formIconsUpload" src="'.FORM_IMG_DISPLAY_PATH.'../../../
+					android/qr_code/'.$app['qr_code_file'].'" alt="" />
                 </a>';
         	}
         }
@@ -3212,12 +3218,15 @@ class App extends CI_Controller {
     		$app_name = preg_replace('/[^A-Za-z0-9]/', '-', $app['name']);
     		$slug = $app_name . '-' . $app['id'];
     		$module=$app['module_name'];
-    		return $result='<a style="padding-left:0px;" href="'.base_url().$module.'"><b>'.htmlspecialchars($app_name).'</b></a>';
+    		return $result='<a style="padding-left:0px;" href="'.base_url().$module.'
+			"><b>'.htmlspecialchars($app_name).'</b></a>';
     	}else
         if ($result_count > 0) {
             $app_name = preg_replace('/[^A-Za-z0-9]/', '-', $app['name']);
             $slug = htmlspecialchars($app_name . '-' . $app['id']);
-            return $result='<a style="padding-left:0px;" href="'.base_url().'application-results/'.$slug.'"><b style="color:brown">'.$app_name.'</b></a>'."($result_count) ";
+            return $result='<a style="padding-left:0px;" href="'.base_url().'application-
+			results/'.$slug.'"><b style="color:brown">'.$app_name.'</b></a>'."
+			($result_count) ";
 
         } else {
             return htmlspecialchars($app['name']);
@@ -3227,7 +3236,8 @@ class App extends CI_Controller {
     }
 
     public function get_departments(){
-        $query=$this->db->query("select DISTINCT name from department where is_deleted=0");
+        $query=$this->db->query("select DISTINCT name from department 
+		where is_deleted=0");
         $result=$query->result_array();
         $string='';
         foreach($result as $key=>$val) {
@@ -3258,7 +3268,8 @@ class App extends CI_Controller {
         $column=$search_arr[0];
         $form_id=$search_arr[1];
         $table="zform_$form_id";
-        $result=$this->form_results_model->get_dynamic_results($column,$table,$search_word);
+        $result=$this->form_results_model->get_dynamic_results(
+		$column,$table,$search_word);
 
         $name_array=array();
         if($column=='location') {

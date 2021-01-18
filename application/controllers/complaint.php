@@ -152,7 +152,9 @@ class Complaint extends CI_Controller {
             $session_data = $this->session->userdata('logged_in');
 
 //            if (!$this->acl->hasPermission('app', 'add')) {
-//                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+//                $this->session->set_flashdata('validate', array('message' => "
+//				  You don't have enough permissions to do
+//				  this task.", 'type' => 'warning'));
 //                redirect(base_url() . '');
 //            }
 
@@ -180,7 +182,9 @@ class Complaint extends CI_Controller {
                 $app_user_detail = $this->app_users_model->get_app_user_by_id($app_user_id);
                 $app_user_info = '';
                 if($app_user_detail)
-                    $app_user_info = " <br>Mobile User Info : <br> User Name : ".$app_user_detail['user_name'].", IMEI# : ".$app_user_detail['imei_no'].", Mobile # : ".$app_user_detail['mobile_number'];
+                    $app_user_info = " <br>Mobile User Info : <br> User Name : 
+					".$app_user_detail['user_name'].", IMEI# : ".$app_user_detail['imei_no'].", 
+					Mobile # : ".$app_user_detail['mobile_number'];
 
                 $complaints = $this->input->post('complaints');
                 $complaint_type = $this->input->post('complaint_type');
@@ -203,8 +207,10 @@ class Complaint extends CI_Controller {
                     if($complaint=='Duplicate SIM'){
                         $description = 'Address : '.$this->input->post('duplicate_sim_address');
                         $description .= '<br />Reason : '.$this->input->post('duplicate_sim_reason');
-                        $complaint_array['duplicate_sim_address']=$this->input->post('duplicate_sim_address');
-                        $complaint_array['duplicate_sim_reason']=$this->input->post('duplicate_sim_reason');
+                        $complaint_array['duplicate_sim_address']=$this->input->post('
+						duplicate_sim_address');
+                        $complaint_array['duplicate_sim_reason']=$this->input->post(
+						'duplicate_sim_reason');
                         $resolution_time = "1 Working Day";
                         //$send_email = true;
                     }
@@ -214,23 +220,28 @@ class Complaint extends CI_Controller {
                         //$send_email = true;
                     }
                     elseif($complaint=='Internet & Balance Issue'){
-                        $description = "Internet and balance issue from ".$this->input->post('internet_issue_from_date');
+                        $description = "Internet and balance issue from ".$this->input->post(
+						'internet_issue_from_date');
                         $description .= ' to'.$this->input->post('internet_issue_to_date');
 
-                        $complaint_array['internet_issue_from_date']=$this->input->post('internet_issue_from_date');
-                        $complaint_array['internet_issue_to_date']=$this->input->post('internet_issue_to_date');
+                        $complaint_array['internet_issue_from_date']=$this->input->post(
+						'internet_issue_from_date');
+                        $complaint_array['internet_issue_to_date']=$this->input->post(
+						'internet_issue_to_date');
                         $resolution_time = "4 Hours";
                         //$send_email = true;
 
                     }
                     elseif($complaint=='Signal Problem'){
-                        $description = "Signal problem in following area. <br> District : ".$this->input->post('signal_problem_district');
+                        $description = "Signal problem in following area. <br> District : 
+						".$this->input->post('signal_problem_district');
                         $description .= "<br>Tehsil : ".$this->input->post('signal_problem_tehsil');
                         $description .= "<br>Markaz : ".$this->input->post('signal_problem_markaz');
                         $description .= "<br>UC : ".$this->input->post('signal_problem_uc');
                         $description .= "<br>Village : ".$this->input->post('signal_problem_village');
 
-                        $complaint_array['signal_problem_district']=$this->input->post('signal_problem_district');
+                        $complaint_array['signal_problem_district']=$this->input->post(
+						'signal_problem_district');
                         $complaint_array['signal_problem_tehsil']=$this->input->post('signal_problem_tehsil');
                         $complaint_array['signal_problem_markaz']=$this->input->post('signal_problem_markaz');
                         $complaint_array['signal_problem_uc']=$this->input->post('signal_problem_uc');
