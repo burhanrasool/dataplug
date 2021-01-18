@@ -2625,7 +2625,7 @@ class Form extends CI_Controller {
 
 
             $forms_list[] = array('form_id' => $forms['form_id'],
-                'table_name' => 'zform_' . $forms['form_id'],'form_name' => $forms['form_name']);
+			'table_name' => 'zform_' . $forms['form_id'],'form_name' => $forms['form_name']);
         }
         /** multi form ends herer.....* */
         $heading_array = array();
@@ -4087,6 +4087,11 @@ class Form extends CI_Controller {
                     }
                     $this->db->where('id', $form_id);
                     $this->db->update('form', $dataform);
+
+
+
+
+
 
 
 
