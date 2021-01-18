@@ -1923,9 +1923,12 @@ GROUP BY zf.id");
                             $update = true;
                             $explode_muac = explode(',', $muac);
                             //print_r($explode_iron);
-                            $v_post['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months'] = $explode_muac[0];
-                            $v_post['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months_orig'] = $explode_muac[0];
-                            $v_post['Number_of_Referrals_for_MAM_Aged_6_23_Months'] = $explode_muac[1];
+                            $v_post['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months']
+							= $explode_muac[0];
+                            $v_post['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months_orig'] 
+							= $explode_muac[0];
+                            $v_post['Number_of_Referrals_for_MAM_Aged_6_23_Months']
+							= $explode_muac[1];
 
                         }
 
@@ -1966,11 +1969,9 @@ GROUP BY zf.id");
         //unlink('/NFS-Dataplug/images/immmm.jpg');
         //unlink('/NFS-Dataplug/images/1998/27c7a6f7f7aaf0349cadd7386a0b16ef.jpg');
         //unlink('/NFS-Dataplug/images/1998/27c7a6f7f7aaf0349cadd7386a0b16ef.jpg');
-        //unlink('/NFS-Dataplug/images/app_id_1998/27c7a6f7f7aaf0349cadd7386a0b16ef.jpg');
+        
         //rmdir('/NFS-Dataplug/images/app_id_1998');
-        //rmdir('/NFS-Dataplug/live/dev');
-
-        //copy("/var/www/vhosts/dataplug.itu.edu.pk/htdoc/assets/images/data/form-data/73954c617545b2d2336e57d3ccc5ad5e.jpg", "/NFS-Dataplug/images/immmm.jpg");
+        //rmdir('/NFS-Dataplug/live/dev');     
 
         //get image which save on local folder
        // exit;
@@ -1997,7 +1998,9 @@ GROUP BY zf.id");
                 $url_explode = explode("/", $url);
                 $image_index = count($url_explode)-1;
                 $image_name = $url_explode[$image_index];
-                $source_path = "/var/www/vhosts/dataplug.itu.edu.pk/htdoc/assets/images/data/form-data/".$image_name;
+                $source_path = 
+				"/var/www/vhosts/dataplug.itu.edu.pk/htdoc/assets/images/data/form-data/"
+				.$image_name;
                 if(file_exists($source_path)){
                     @mkdir(NFS_IMAGE_PATH.'/app_id_'.$app_id);
                     $file_name = NFS_IMAGE_PATH."/app_id_$app_id/".$image_name;
@@ -2016,7 +2019,8 @@ GROUP BY zf.id");
 
         // $img = base64_encode('27c7a6f7f7aaf0349cadd7386a0b16ef.jpg@@@@1998');
         // echo base64_decode($img);
-        ?> <img src="<?php echo  get_image_path('/app_id_1998/27c7a6f7f7aaf0349cadd7386a0b16ef.jpg')?>" />
+        ?> <img src="<?php echo  
+		get_image_path('/app_id_1998/27c7a6f7f7aaf0349cadd7386a0b16ef.jpg')?>" />
         <?php 
     }
     public function image_download_from_amazon(){
