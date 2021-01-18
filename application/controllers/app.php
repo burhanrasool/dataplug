@@ -1043,7 +1043,8 @@ class App extends CI_Controller {
                         $this->db->insert('users_group', $groupdata);
                     }
 
-                    $this->session->set_flashdata('validate', array('message' => 'Application added successfully.', 'type' => 'success'));
+                    $this->session->set_flashdata('validate', array('message'
+                    => 'Application added successfully.','type' => 'success'));
                     if ($this->acl->hasPermission('app', 'edit')) {
                         redirect(base_url() . 'app-landing-page/' . $app_id);
                     } else {
@@ -1079,7 +1080,8 @@ class App extends CI_Controller {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             if (!$this->acl->hasPermission('form', 'edit')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $this->session->set_flashdata('validate', array('message'
+                => "You don't have enough permissions to do this task.", 'type' => 'warning'));
                 redirect(base_url() . '');
             }
 
@@ -1089,11 +1091,13 @@ class App extends CI_Controller {
                 $appName = trim($this->input->post('app_name'));
                 $selected_app = $this->app_model->get_app($app_id);
                 if ($appName == '') {
-                    $this->session->set_flashdata('validate', array('message' => 'Application name should not be empty.', 'type' => 'error'));
+                    $this->session->set_flashdata('validate', array('message'
+                    => 'Application name should not be empty.', 'type' => 'error'));
                     redirect(base_url() . 'app-landing-page/' . $app_id);
                 }
                 if ($this->app_model->app_already_exist($appName, $selected_app['department_id'], $app_id)) {
-                    $this->session->set_flashdata('validate', array('message' => 'This application name already exist for this department', 'type' => 'error'));
+                    $this->session->set_flashdata('validate', array('message'
+                    => 'This application name already exist for this department', 'type' => 'error'));
                     redirect(base_url() . 'app-landing-page/' . $app_id);
                 }
                 
@@ -1118,7 +1122,8 @@ class App extends CI_Controller {
                         if (!$this->upload->do_upload()) {
                             $iconName = $selected_app['icon'];
                             $this->data['error'] = $this->upload->display_errors();
-                            $this->session->set_flashdata('validate', array('message' => $this->upload->display_errors() . ', Default icon has been embeded with your app.', 'type' => 'warning'));
+                            $this->session->set_flashdata('validate', array('message' => $this->upload
+                            ->display_errors(). ', Default icon has been embeded with your app.', 'type' => 'warning'));
                         } else {
                             //success
                             $imageData=$this->upload->data();
@@ -1154,7 +1159,8 @@ class App extends CI_Controller {
                         if (!$this->upload->do_upload('splashfile')) {
                             $splash_icon = $selected_app['splash_icon'];
                             $this->data['error'] = $this->upload->display_errors();
-                            $this->session->set_flashdata('validate', array('message' => $this->upload->display_errors() . ', Default splash screen has been embeded with your app.', 'type' => 'warning'));
+                            $this->session->set_flashdata('validate', array('message' => $this->upload->display_errors()
+                            . ', Default splash screen has been embeded with your app.', 'type' => 'warning'));
                         } else {
                             //success
                             $imageData=$this->upload->data();
@@ -1194,10 +1200,13 @@ class App extends CI_Controller {
                 $selected_app['description'] = '';
                 $selected_app['full_description'] = '';
                 //array parameters : action, description, before, after, app_id, app_name, form_id, form_name
-                $logary = array('action' => 'update', 'description' => 'edit application', 'before' => json_encode($selected_app), 'after' => json_encode($change_icon), 'app_id' => $app_id, 'app_name' => $selected_app['name']);
+                $logary = array('action' => 'update', 'description'=> 'edit application',
+                'before' => json_encode($selected_app), 'after' => json_encode($change_icon),
+                'app_id' => $app_id, 'app_name' => $selected_app['name']);
                 addlog($logary);
                 if ($this->input->post('is_edit') == '1') {
-                    $this->session->set_flashdata('validate', array('message' => 'Android application created successfully.', 'type' => 'success'));
+                    $this->session->set_flashdata('validate', array('message'
+                    => 'Android application created successfully.', 'type' => 'success'));
                     redirect(base_url() . 'app/createapk/' . $app_id);
                 } else {
                     $this->session->set_flashdata('validate', array('message' => 'Application edited successfully.', 'type' => 'success'));
