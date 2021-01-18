@@ -1428,7 +1428,9 @@ class Tempapi extends CI_Controller {
         foreach ($forms as $form) {
             if ($form['is_deleted'] == '1') {
                 $form_id = $form['id'];
-                $table_exist_bit = $this->form_results_model->check_table_exits('zform_' . $form_id);
+                $table_exist_bit =
+				$this->form_results_model->
+				check_table_exits('zform_' . $form_id);
 
                 if (is_table_exist('zform_' . $form_id)) {
                     $query_form = $this->db->query("SELECT * FROM zform_" . $form_id);
