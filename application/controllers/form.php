@@ -364,9 +364,9 @@ class Form extends CI_Controller {
 
         $posted_filters = array();
         $app_settings = $this->app_model->get_app_settings($app_id);
-        $app_filter_list = explode(',', $app_settings['map_view_filters']);
+        app_filters = explode(',', $app_settings['map_view_filters']);
         if (!empty($app_settings['map_view_filters'])) {
-            foreach ($app_filter_list as $filters) {
+            foreach (app_filters as $filters) {
 
                 $data_per_filter[] = $this->input->get($filters);
                 foreach ($data_per_filter as $datum) {
@@ -447,12 +447,12 @@ class Form extends CI_Controller {
         $posted_filters = array();
         $app_settings = $this->app_model->get_app_settings($app_id);
         if(isset($app_settings['map_view_filters'])) {
-            $app_filter_list = explode(',', $app_settings['map_view_filters']);
+            app_filters = explode(',', $app_settings['map_view_filters']);
         }else{
-            $app_filter_list=array();
+            app_filters=array();
         }
         if (!empty($app_settings['map_view_filters'])) {
-            foreach ($app_filter_list as $filters) {
+            foreach (app_filters as $filters) {
                 $data_per_filter[] = $this->input->get($filters);
                 foreach ($data_per_filter as $datum) {
                     $final = array();
@@ -621,17 +621,17 @@ class Form extends CI_Controller {
 
                 //print_r($selected_form);die;
                 if (isset($filter_result->filters)) {
-                    $app_filter_list = isset($filter_result->filters->$form_li[0]) ? (array) $filter_result->filters->$form_li[0] : array();
+                    app_filters = isset($filter_result->filters->$form_li[0]) ? (array) $filter_result->filters->$form_li[0] : array();
                 } else {
-                    $app_filter_list = array();
+                    app_filters = array();
                 }
 //                if (!empty($selected_form)) {
-//                    $app_filter_list = explode(',', $selected_form['possible_filters']);
+//                    app_filters = explode(',', $selected_form['possible_filters']);
 //                } else {
-//                    $app_filter_list = array('id');
+//                    app_filters = array('id');
 //                }
-//                $possible_filters_from_settings = $this->form_model->get_form_column_values($app_filter_list, $form_li[0]);
-                $possible_filters_from_settings = $app_filter_list;
+//                $possible_filters_from_settings = $this->form_model->get_form_column_values(app_filters, $form_li[0]);
+                $possible_filters_from_settings = app_filters;
                 $selected_uc = '';
                 $selected_pp = '';
                 $selected_na = '';
@@ -655,12 +655,12 @@ class Form extends CI_Controller {
                 $filter_options = '';
 //                $filter_result = get_result_view_settings($selected_form['app_id']);
 //                if (isset($filter_result->filters->$form_id)) {
-//                    $app_filter_list = $filter_result->filters->$form_id;
+//                    app_filters = $filter_result->filters->$form_id;
 //
 //                    $filter_options .= "<option value=''>Select One</option>";
-//                    if (!empty($app_filter_list)) {
+//                    if (!empty(app_filters)) {
 //
-//                        foreach ($app_filter_list as $key => $val) {
+//                        foreach (app_filters as $key => $val) {
 //                            $print_val = str_replace("_", " ", $val);
 //                            if ($changed_category == $val) {
 //                                $selected = 'selected';
@@ -672,7 +672,7 @@ class Form extends CI_Controller {
 //                    }
 //                }
 //                if (!empty($app_settings['map_view_filters'])) {
-//                    foreach ($app_filter_list as $filters) {
+//                    foreach (app_filters as $filters) {
 //
 //                        $data_per_filter[] = $this->input->post($filters);
 //                        foreach ($data_per_filter as $datum) {
@@ -925,31 +925,31 @@ class Form extends CI_Controller {
                 $filter_result = get_result_view_settings($selected_form['app_id']);
 
                 if (isset($filter_result->filters)) {
-                    $app_filter_list = (isset($filter_result->filters->$first_form_id)) ? (array) $filter_result->filters->$first_form_id : array();
+                    app_filters = (isset($filter_result->filters->$first_form_id)) ? (array) $filter_result->filters->$first_form_id : array();
                 } else {
-                    $app_filter_list = array();
+                    app_filters = array();
                 }
 
 //                echo "<pre>";
-//                print_r($app_filter_list);die;
+//                print_r(app_filters);die;
 //                if (!empty($selected_form)) {
-//                    $app_filter_list = explode(',', $selected_form['possible_filters']);
+//                    app_filters = explode(',', $selected_form['possible_filters']);
 //                } else {
-//                    $app_filter_list = array('id');
+//                    app_filters = array('id');
 //                }
-//                echo "<pre>";print_r($app_filter_list);die;
+//                echo "<pre>";print_r(app_filters);die;
                 //get column with values...
-//                $possible_filters_from_settings = $this->form_model->get_form_column_values($app_filter_list, $first_form_id);
-                $possible_filters_from_settings = $app_filter_list;
+//                $possible_filters_from_settings = $this->form_model->get_form_column_values(app_filters, $first_form_id);
+                $possible_filters_from_settings = app_filters;
 
 //                $filter_result = get_result_view_settings($selected_form['app_id']);
 //                if (isset($filter_result->filters)) {
-//                    $app_filter_list = $filter_result->filters;
+//                    app_filters = $filter_result->filters;
 //                    $filter_options = '';
 //                    $filter_options.="<option value=''>Select One</option>";
-//                    if (isset($app_filter_list->$selected_form['id'])) {
-//                        if (!empty($app_filter_list->$selected_form['id'])) {
-//                            foreach ($app_filter_list->$selected_form['id'] as $key => $val) {
+//                    if (isset(app_filters->$selected_form['id'])) {
+//                        if (!empty(app_filters->$selected_form['id'])) {
+//                            foreach (app_filters->$selected_form['id'] as $key => $val) {
 //                                $print_val = str_replace("_", " ", $val);
 //                                $filter_options .= "<option  value='$val'>$print_val</option>";
 //                            }
@@ -1227,12 +1227,12 @@ class Form extends CI_Controller {
             $data_per_filter = array();
             $posted_filters = array();
             if (!empty($app_settings)) {
-                $app_filter_list = explode(',', $app_settings['list_view_filters']);
+                app_filters = explode(',', $app_settings['list_view_filters']);
             } else {
-                $app_filter_list = array('id');
+                app_filters = array('id');
             }
             if (!empty($app_settings['map_view_filters'])) {
-                foreach ($app_filter_list as $filters) {
+                foreach (app_filters as $filters) {
 
                     $data_per_filter[] = $this->input->post($filters);
                     foreach ($data_per_filter as $datum) {
@@ -1435,9 +1435,9 @@ class Form extends CI_Controller {
             $subdata['view_page'] = 'paging';
             $subdata['app_id'] = $selected_form['app_id'];
             if (!empty($app_settings)) {
-                $app_filter_list = explode(',', $app_settings['list_view_filters']);
+                app_filters = explode(',', $app_settings['list_view_filters']);
             } else {
-                $app_filter_list = array('id');
+                app_filters = array('id');
             }
             $category_values = array();
             if ($filter_trait[0]) {
@@ -1744,11 +1744,11 @@ class Form extends CI_Controller {
     /**
      * method to get heading data of multiple form for all data based on filter array
      * @param  $form_list list of form in a single applicatoin
-     * @param  $app_filter_list array of all filter set on which search is based
+     * @param  app_filters array of all filter set on which search is based
      * @return  array An array of form heading and its data
      * @author UbaidUllah Balti <ubaidcskiu@gmail.com>
      */
-    public function get_heading_data_multiple_all($form_lists, $app_filter_list) {
+    public function get_heading_data_multiple_all($form_lists, app_filters) {
         $form_id = $form_lists[0]['form_id'];
         $data['form_id'] = $form_id;
         $selected_form = $this->form_model->get_form($form_id);
@@ -1781,7 +1781,7 @@ class Form extends CI_Controller {
             $result_array = json_decode($result_json);
             foreach ($result_array as $key => $value) {
                 /* <-- Filter based on App Setting start here --> */
-                foreach ($app_filter_list as $filters) {
+                foreach (app_filters as $filters) {
                     if (isset($result_array->$filters)) {
                         $filter_entity = $result_array->$filters;
                         if (!key_exists($filters, $app_filters_array)) {
@@ -1815,11 +1815,11 @@ class Form extends CI_Controller {
     /**
      * method to get heading data of multiple form for all data based on filter array when posted
      * @param  $form_list list of form in a single applicatoin
-     * @param  $app_filter_list array of all filter set on which search is based
+     * @param  app_filters array of all filter set on which search is based
      * @return  array An array of form heading and its data
      * @author UbaidUllah Balti <ubaidcskiu@gmail.com>
      */
-    public function get_heading_data_multiple_all_for_posted($form_lists, $app_filter_list) {
+    public function get_heading_data_multiple_all_for_posted($form_lists, app_filters) {
         $form_id = $form_lists[0]['form_id'];
         $data['form_id'] = $form_id;
         $selected_form = $this->form_model->get_form($form_id);
@@ -1853,7 +1853,7 @@ class Form extends CI_Controller {
             foreach ($result_array as $key => $value) {
                 /** Making Filter system herer* */
                 $inside_counter = 0;
-                foreach ($app_filter_list as $keys => $f_values) {
+                foreach (app_filters as $keys => $f_values) {
                     if ($inside_counter != 0) {
                         if (!empty($f_values)) {
                             foreach ($f_values as $inside) {
@@ -1901,7 +1901,7 @@ class Form extends CI_Controller {
 
         $final_filter_sorted = array();
         /** sorting array based on key* */
-        foreach ($app_filter_list as $key_sorter => $posts) {
+        foreach (app_filters as $key_sorter => $posts) {
             $final_filter_sorted[$key_sorter] = $app_filters_array[$key_sorter];
         }
         $data['app_filters_array'] = $final_filter_sorted;
@@ -1949,9 +1949,9 @@ class Form extends CI_Controller {
                 $data_per_filter = array();
                 $posted_filters = array();
                 $app_settings = $this->app_model->get_app_settings($app_id);
-                $app_filter_list = explode(',', (isset($app_settings['map_view_filters'])) ? $app_settings['map_view_filters'] : '');
+                app_filters = explode(',', (isset($app_settings['map_view_filters'])) ? $app_settings['map_view_filters'] : '');
                 if (!empty($app_settings['map_view_filters'])) {
-                    foreach ($app_filter_list as $filters) {
+                    foreach (app_filters as $filters) {
                         $data_per_filter[] = $this->input->post($filters);
                         foreach ($data_per_filter as $datum) {
                             $final = array();
@@ -2086,7 +2086,7 @@ class Form extends CI_Controller {
                                 $heading_array = array_merge($heading_array, array($key));
                             }
                             /* <-- Filter based on App Setting start here --> */
-                            foreach ($app_filter_list as $filters) {
+                            foreach (app_filters as $filters) {
                                 if (isset($v->$filters)) {
                                     $filter_entity = $v->$filters;
                                     if (!key_exists($filters, $app_filters_array)) {
@@ -2239,10 +2239,10 @@ class Form extends CI_Controller {
                 $filter_options = '';
                 $filter_result = get_map_view_settings($selected_form['app_id']);
                 if (isset($filter_result->filters->$form_id)) {
-                    $app_filter_list = $filter_result->filters->$form_id;
+                    app_filters = $filter_result->filters->$form_id;
 //                    $filter_options .= "<option value=''>Select One</option>";
-                    if (!empty($app_filter_list)) {
-                        foreach ($app_filter_list as $key => $val) {
+                    if (!empty(app_filters)) {
+                        foreach (app_filters as $key => $val) {
                             $print_val = str_replace("_", " ", $val);
                             if ($changed_category == $val) {
                                 $selected = 'selected';
@@ -2269,7 +2269,7 @@ class Form extends CI_Controller {
                     uasort($record_array_final_filter, array(new SortAssociativeArray($filter_trait_value), "call"));
                 }
 
-                $possible_filters_from_settings = $this->form_model->get_form_column_values($app_filter_list, $selected_form['id']);
+                $possible_filters_from_settings = $this->form_model->get_form_column_values(app_filters, $selected_form['id']);
 
                 $data['possible_filters_from_settings'] = $possible_filters_from_settings;
                 $data['dynamic_filters'] = $dynamic_filters;
@@ -2314,7 +2314,7 @@ class Form extends CI_Controller {
                 $data['form_name'] = $selected_form['name'];
                 $data['app_id'] = $selected_form['app_id'];
                 $app_settings = $this->app_model->get_app_settings($selected_form['app_id']);
-                $app_filter_list = explode(',', (isset($app_settings['map_view_filters'])?$app_settings['map_view_filters']:""));
+                app_filters = explode(',', (isset($app_settings['map_view_filters'])?$app_settings['map_view_filters']:""));
                 $data['district_selected'] = "";
                 /** Get Multiple form filtesr* */
                 $multiple_filters = $this->form_model->get_form_filters($form_single_to_query);
@@ -2384,7 +2384,7 @@ class Form extends CI_Controller {
                                 $heading_array = array_merge($heading_array, array($key));
                             }
                             /* <-- Filter based on App Setting start here --> */
-                            foreach ($app_filter_list as $filters) {
+                            foreach (app_filters as $filters) {
                                 if (isset($v->$filters)) {
                                     $filter_entity = $v->$filters;
                                     if (!key_exists($filters, $app_filters_array)) {
@@ -2549,10 +2549,10 @@ class Form extends CI_Controller {
                 $filter_options = '';
                 $filter_result = get_map_view_settings($selected_form['app_id']);
                 if (isset($filter_result->filters->$first_form_id)) {
-                    $app_filter_list = $filter_result->filters->$first_form_id;
+                    app_filters = $filter_result->filters->$first_form_id;
 //                    $filter_options .= "<option value=''>Select One</option>";
-                    if (!empty($app_filter_list)) {
-                        foreach ($app_filter_list as $key => $val) {
+                    if (!empty(app_filters)) {
+                        foreach (app_filters as $key => $val) {
                             if ($default_selected_category == $val) {
                                 $default_selected = 'selected';
                             } else {
@@ -2565,7 +2565,7 @@ class Form extends CI_Controller {
                 }
 
 
-                $possible_filters_from_settings = $this->form_model->get_form_column_values($app_filter_list, $first_form_id);
+                $possible_filters_from_settings = $this->form_model->get_form_column_values(app_filters, $first_form_id);
 
                 $data['possible_filters_from_settings'] = $possible_filters_from_settings;
 
@@ -2615,7 +2615,10 @@ class Form extends CI_Controller {
         $forms_list = array();
         $all_forms = $this->form_model->get_form_by_app($slug);
         foreach ($all_forms as $forms) {
-            $forms_list[] = array('form_id' => $forms['form_id'], 'table_name' => 'zform_' . $forms['form_id'], 'form_name' => $forms['form_name']);
+
+
+            $forms_list[] = array('form_id' => $forms['form_id'],
+                'table_name' => 'zform_' . $forms['form_id'],'form_name' => $forms['form_name']);
         }
         /** multi form ends herer.....* */
         $heading_array = array();
@@ -2630,9 +2633,14 @@ class Form extends CI_Controller {
             $data_per_filter = array();
             $posted_filters = array();
             $app_settings = $this->app_model->get_app_settings($app_id);
-            $app_filter_list = explode(',', (isset($app_settings['map_view_filters'])) ? $app_settings['map_view_filters'] : '');
+            $map_filter ='map_view_filters'
+
+            app_filters=explode(',',(isset($app_settings[$map_filter]))
+                ?$app_settings[$map_filter]:'');
+            
+
             if (!empty($app_settings['map_view_filters'])) {
-                foreach ($app_filter_list as $filters) {
+                foreach (app_filters as $filters) {
                     $data_per_filter[] = $this->input->post($filters);
                     foreach ($data_per_filter as $datum) {
                         $final = array();
@@ -2653,7 +2661,9 @@ class Form extends CI_Controller {
             $data['search_text'] = $search_text;
             if ($search_text) {
                 $search_text = mysql_real_escape_string($search_text);
-                $search_text = str_replace(array('~', '<', '>', '$', '%', '|', '^', '*'), array(' '), $search_text);
+
+                $search_text = str_replace(array('~', '<', '>', '$', '%', '|', '^', '*'), 
+                    array(' '), $search_text);
                 $search_text = str_replace('/', '\\\\/', $search_text);
                 $search_text = trim($search_text);
             }
@@ -2664,9 +2674,11 @@ class Form extends CI_Controller {
             $final_send = array();
             foreach ($forms_list as $final_view) {
                 if (in_array($final_view['form_id'], $form_list_posted)) {
-                    $final_send = array_merge($final_send, array($final_view['form_name'] => $final_view['form_id']));
+                    $final_send = array_merge($final_send, 
+                        array($final_view['form_name'] => $final_view['form_id']));
                 }
-                $view_list = array_merge($view_list, array($final_view['form_name'] => $final_view['form_id']));
+                $view_list = array_merge($view_list,
+                 array($final_view['form_name'] => $final_view['form_id']));
             }
             $view_list = array_flip($view_list);
             $data['form_lists'] = $view_list;
@@ -2763,7 +2775,7 @@ class Form extends CI_Controller {
                             $heading_array = array_merge($heading_array, array($key));
                         }
                         /* <-- Filter based on App Setting start here --> */
-                        foreach ($app_filter_list as $filters) {
+                        foreach (app_filters as $filters) {
                             if (isset($v->$filters)) {
                                 $filter_entity = $v->$filters;
                                 if (!key_exists($filters, $app_filters_array)) {
@@ -2963,7 +2975,7 @@ class Form extends CI_Controller {
             $data['form_name'] = $selected_form['name'];
             $data['app_id'] = $selected_form['app_id'];
             $app_settings = $this->app_model->get_app_settings($selected_form['app_id']);
-            $app_filter_list = explode(',', $app_settings['map_view_filters']);
+            app_filters = explode(',', $app_settings['map_view_filters']);
             $data['district_selected'] = "";
             /** Get Multiple form filtesr* */
             $multiple_filters = $this->form_model->get_form_filters($form_single_to_query);
@@ -3022,7 +3034,7 @@ class Form extends CI_Controller {
                             $heading_array = array_merge($heading_array, array($key));
                         }
                         /* <-- Filter based on App Setting start here --> */
-                        foreach ($app_filter_list as $filters) {
+                        foreach (app_filters as $filters) {
                             if (isset($v->$filters)) {
                                 $filter_entity = $v->$filters;
                                 if (!key_exists($filters, $app_filters_array)) {
