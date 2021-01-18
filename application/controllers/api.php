@@ -120,7 +120,8 @@ class Api extends CI_Controller {
             }
             $html_file = '';
             if (file_exists('./assets/images/data/form_icons/' . $app_id . '/' . $file_name_html)) {
-                $html_file = FORM_IMG_DISPLAY_PATH . '../form_icons/' . $app_id . '/' . $file_name_html;
+                $html_file = FORM_IMG_DISPLAY_PATH . '../form_icons/';
+                $html_file = $html_file .  $app_id . '/' . $file_name_html;
             }
 
             $released = $this->app_released_model->get_latest_released($app_id);
@@ -177,7 +178,8 @@ class Api extends CI_Controller {
         $file_array [] = array(
             'form_id' => '0',
             'form_name' => 'noname',
-            'file_url' => base_url() . 'assets/android/app_resources/jquery-ui-autocomplete.js',
+            'file_url' => base_url();
+            'file_url' => 'file_url' . 'assets/android/app_resources/jquery-ui-autocomplete.js',
             'file_name' => 'jquery-ui-autocomplete.js'
         );
  
@@ -225,7 +227,8 @@ class Api extends CI_Controller {
         $file_array [] = array(
             'form_id' => '0',
             'form_name' => 'noname',
-            'file_url' => base_url() . 'assets/android/app_resources/jquery.select-to-autocomplete.min.js',
+            'file_url' => base_url()
+            'file_url' => 'file_url' . 'assets/android/app_resources/jquery.select-to-autocomplete.min.js',
             'file_name' => 'jquery.select-to-autocomplete.min.js'
         );
    
@@ -259,9 +262,18 @@ class Api extends CI_Controller {
         $app_general_setting = get_app_general_settings($app_id);
         $prefrences = array();
         if(isset($app_general_setting->has_geo_fencing)){
-            
-            $prefrences['IS_SECURE_APP']=($app_general_setting->secured_apk==1)?'YES':'NO';
-            $prefrences['showHighResOption']=($app_general_setting->high_resolution_image==1)?'YES':'NO';
+            if($app_general_setting->secured_apk==1){
+                $prefrences['IS_SECURE_APP'] = 'YES';
+            }
+            else{
+                $prefrences['IS_SECURE_APP'] = 'NO';
+            }
+            if($app_general_setting->high_resolution_image==1){
+                $prefrences['showHighResOption'] = 'YES';    
+            }
+            else{
+                $prefrences['showHighResOption'] = 'NO';
+            }
             $prefrences['PersistImagesOnDevice']=($app_general_setting->persist_images_on_device==1)?'YES':'NO';
             $prefrences['BackgroundUpdate']=($app_general_setting->background_update==1)?'YES':'NO';
             $prefrences['ForceUpdate']=($app_general_setting->force_update==1)?'YES':'NO';
