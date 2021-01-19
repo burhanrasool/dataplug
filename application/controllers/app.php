@@ -2995,7 +2995,8 @@ class App extends CI_Controller {
             //array parameters : action, description, before, after, app_id, app_name, form_id, form_name
             $logary = array('action' => 'delete', 'description' => 'Delete user view', 'after' => 'user_view=' . $app_view_id);
             addlog($logary);
-            $this->session->set_flashdata('validate', array('message' => 'Application deleted successfully.', 'type' => 'success'));
+            $this->session->set_flashdata('validate', array(
+			'message' => 'Application deleted successfully.', 'type' => 'success'));
             redirect(base_url() . 'app/appusersview');
         } else {
             //If no session, redirect to login page
@@ -3057,7 +3058,8 @@ class App extends CI_Controller {
             print "<br />";
 
             //update build.xml file for new app//For windows
-            echo $envpath = 'C:\ant\bin\ant;C:\Program Files\Java\jdk1.7.0_51\bin\;C:\adt\sdk\tools';
+            echo $envpath = 'C:\ant\bin\ant;C:\Program Files\Java\jdk1.7.0_51\bin\;
+			C:\adt\sdk\tools';
             print "<br />";
             exec($envpath, $output1, $co);
             if ($output1) {
@@ -3065,7 +3067,8 @@ class App extends CI_Controller {
             }
             print "<br />";
             //For Linux 1 for local and 4 for live
-            echo $command = "android update project --target $target --name $appname --path $path";
+            echo $command = "android update project --target $target 
+			--name $appname --path $path";
             print "<br />";
             exec($command, $output2, $co);
             if ($output2) {
@@ -3087,25 +3090,39 @@ class App extends CI_Controller {
             //copy the apk file to app repository
             echo 'Copping APK file after building.....';
             print "<br />";
-            copy("$directory_path/assets/android/godk_android_test/bin/$appname-release-unsigned.apk", "$directory_path/assets/android/apps/$appname-release-unsigned.apk");
+            copy("$directory_path/assets/android/godk_android_test/bin/
+			$appname-release-unsigned.apk", "$directory_path/assets/android/apps/
+			$appname-release-unsigned.apk");
             echo 'Renaming APK file after building.....';
             print "<br />";
-            rename("$directory_path/assets/android/apps/$appname-release-unsigned.apk", "$directory_path/assets/android/apps/unaligned_testapp.apk");
+            rename("$directory_path/assets/android/apps/$appname-release-unsigned.apk", 
+			"$directory_path/assets/android/apps/unaligned_testapp.apk");
             echo 'Deleting APK file from bin.....';
             print "<br />";
-            unlink("$directory_path/assets/android/godk_android_test/bin/$appname-release-unsigned.apk");
+            unlink("$directory_path/assets/android/godk_android_test/bin/
+			$appname-release-unsigned.apk");
 
-            //$keystore_command = "keytool -genkey -v -keystore $directory_path/assets/android/keystore/a_$app_id.keystore -alias DataPlug -keyalg RSA -keysize 2048 -validity 10000";
-            echo $signing_command = "jarsigner -verbose -keystore $directory_path/assets/android/keystore/DataPlug.keystore -storepass dataplug_pitb -keypass dataplug_pitb $directory_path/assets/android/apps/unaligned_testapp.apk DataPlug";
+            //$keystore_command = "keytool -genkey -v -keystore $directory_path
+			///assets/android/keystore/a_$app_id.keystore -alias DataPlug 
+			//-keyalg RSA -keysize 2048 -validity 10000";
+            echo $signing_command = "jarsigner -verbose -keystore $directory_path/assets
+			/android/keystore/DataPlug.keystore -storepass dataplug_pitb -keypass 
+			dataplug_pitb $directory_path/assets/android/apps/unaligned_testapp.apk 
+			DataPlug";
             print "<br />";
             exec($signing_command, $output4, $co);
             if ($output4) {
                 print_r($output4);
             }
             print "<br />";
-            //$unalignedFileName = $appname .'-'. $app_id . '-' . $version . 'v-unaligned.apk';
-            //$signing_command = "jarsigner -verbose -keystore $directory_path/assets/android/keystore/DataPlug.keystore -storepass dataplug_pitb -keypass dataplug_pitb $directory_path/assets/android/apps/$newFileName DataPlug";
-            echo $zipaligned_command = "zipalign -v 4 $directory_path/assets/android/apps/unaligned_testapp.apk $directory_path/assets/android/apps/testapp.apk";
+            //$unalignedFileName = $appname .'-'. $app_id . '-' . $version . 
+			//'v-unaligned.apk';
+            //$signing_command = "jarsigner -verbose -keystore $directory_path/assets/
+			//android/keystore/DataPlug.keystore -storepass dataplug_pitb -keypass 
+			//dataplug_pitb $directory_path/assets/android/apps/$newFileName DataPlug";
+            echo $zipaligned_command = "zipalign -v 4 $directory_path/assets/
+			android/apps/unaligned_testapp.apk $directory_path/assets/android
+			/apps/testapp.apk";
             print "<br />";
             exec($zipaligned_command, $output5, $co);
             if ($output5) {
