@@ -1833,7 +1833,8 @@ class App extends CI_Controller {
             exec($envpath);
 
             //For Linux 1 for local and 4 for live
-            $command = "android update project --target $target --name $appname --path $directory_path/assets/android/" . $newProjectFolder;
+            $command = "android update project --target $target --name $appname --path
+            $directory_path/assets/android/" . $newProjectFolder;
 
             exec($command, $output, $co);
 
@@ -1844,16 +1845,22 @@ class App extends CI_Controller {
 
             //copy the apk file to app repository
             $newFileName = $appname . '-' . $app_id . '-' . $version . 'v.apk';
-            copy("$directory_path/assets/android/$newProjectFolder/bin/$appname-release-unsigned.apk", "$directory_path/assets/android/apps/$appname-release-unsigned.apk");
-            rename("$directory_path/assets/android/apps/$appname-release-unsigned.apk", "$directory_path/assets/android/apps/unaligned_$newFileName");
+            copy("$directory_path/assets/android/$newProjectFolder/bin/$appname-release-unsigned.apk",
+            "$directory_path/assets/android/apps/$appname-release-unsigned.apk");
+            rename("$directory_path/assets/android/apps/$appname-release-unsigned.apk",
+            "$directory_path/assets/android/apps/unaligned_$newFileName");
 
             //$keystore_command = "keytool -genkey -v -keystore $directory_path/assets/android/keystore/a_$app_id.keystore -alias DataPlug -keyalg RSA -keysize 2048 -validity 10000";
-            $signing_command = "jarsigner -verbose -digestalg SHA1 -sigalg MD5withRSA -keystore $directory_path/assets/android/keystore/DataPlug.keystore -storepass dataplug_pitb -keypass dataplug_pitb $directory_path/assets/android/apps/unaligned_$newFileName DataPlug";
+            $signing_command = "jarsigner -verbose -digestalg SHA1 -sigalg MD5withRSA -keystore 
+            $directory_path/assets/android/keystore/DataPlug.keystore -storepass dataplug_pitb
+            -keypass dataplug_pitb $directory_path/assets/android/apps/unaligned_
+            $newFileName DataPlug";
             exec($signing_command, $output3, $co);
 
             //$unalignedFileName = $appname .'-'. $app_id . '-' . $version . 'v-unaligned.apk';
             //$signing_command = "jarsigner -verbose -keystore $directory_path/assets/android/keystore/DataPlug.keystore -storepass dataplug_pitb -keypass dataplug_pitb $directory_path/assets/android/apps/$newFileName DataPlug";
-            $zipaligned_command = "zipalign -v 4 $directory_path/assets/android/apps/unaligned_$newFileName $directory_path/assets/android/apps/$newFileName";
+            $zipaligned_command = "zipalign -v 4 $directory_path/assets/android/apps/unaligned_
+            $newFileName $directory_path/assets/android/apps/$newFileName";
             exec($zipaligned_command, $output4, $co);
             unlink("$directory_path/assets/android/apps/unaligned_$newFileName");
 
@@ -1878,12 +1885,15 @@ class App extends CI_Controller {
             $this->db->insert('app_released', $data);
             $this->db->delete('app_build_request', array('app_id' => $app_id));
             //array parameters : action, description, before, after, app_id, app_name, form_id, form_name
-            $logary = array('action' => 'build', 'description' => 'Build New version of application', 'after' => json_encode($data), 'app_id' => $app_id, 'app_name' => $new_appname);
+            $logary = array('action' => 'build', 'description' => 'Build New version of application',
+            'after' => json_encode($data), 'app_id' => $app_id, 'app_name' => $new_appname);
             addlog($logary);
 
             //delete new folder for this appname
             $this->recurse_delete($dst, true);
-            $this->session->set_flashdata('validate', array('message' => 'Android application created successfully.', 'type' => 'success'));
+            $this->session->set_flashdata('validate', array('message' 
+            => 'Android application created successfully.',
+            'type' => 'success'));
             //redirect(base_url() . 'app/releasedapk/' . $app_id);
             redirect(base_url() . 'apps');
         } else {
@@ -2052,7 +2062,8 @@ class App extends CI_Controller {
 
 
             if (!$this->acl->hasPermission('form', 'edit')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $this->session->set_flashdata('validate', array('message' 
+                => "You don't have enough permissions to do this task.", 'type' => 'warning'));
                 redirect(base_url() . 'apps');
             }
 
