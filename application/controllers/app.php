@@ -3112,9 +3112,12 @@ class App extends CI_Controller {
                 print_r($output5);
             }
             print "<br />";
-            unlink("$directory_path/assets/android/godk_android_test/bin/unaligned_testapp.apk");
-            //array parameters : action, description, before, after, app_id, app_name, form_id, form_name
-            $logary = array('action' => 'build', 'description' => 'Build test APK', 'after' => json_encode('Build apk'));
+            unlink("$directory_path/assets/android
+			/godk_android_test/bin/unaligned_testapp.apk");
+            //array parameters : action, description, 
+			//before, after, app_id, app_name, form_id, form_name
+            $logary = array('action' => 'build', 
+			'description' => 'Build test APK', 'after' => json_encode('Build apk'));
             addlog($logary);
             exit;
             //redirect(base_url() . 'app/testapk');
@@ -3129,23 +3132,32 @@ class App extends CI_Controller {
         $appId=$app['id'];
         $result='';
         if ($this->acl->hasPermission('form', 'edit')) {
-            $result .= "<a style='padding:2px;' href='".base_url()."application-setting/".$appId." '><img src='".base_url()."assets/images/settings-ico.png' alt='Settings' title=''Settings'/></a>";
+            $result .= "<a style='padding:2px;' href='
+			".base_url()."application-setting/".$appId." '><img src='".base_url()."
+			assets/images/settings-ico.png' alt='Settings' title=''Settings'/></a>";
         }
 
         if ($this->acl->hasPermission('form', 'edit')) {
-            $result .= "<a style='padding:2px;' href='".base_url()."app-landing-page/".$appId." '><img src='".base_url()."assets/images/tableLink1.png' alt='edit' title=''Edit'/></a>";
+            $result .= "<a style='padding:2px;' href='
+			".base_url()."app-landing-page/".$appId." '><img src='
+			".base_url()."assets/images/tableLink1.png' alt='edit' title=''Edit'/></a>";
         }
 
         if ($this->acl->hasPermission('app', 'delete')) {
-            $result .= "<a style='padding:2px;' href='javascript:void(0)'><img src='".base_url()."assets/images/tableLink3.png' alt='delete' id ='delete_app' title='Delete' app_id ='".$appId."' /></a>";
+            $result .= "<a style='padding:2px;' href='javascript:void(0)'><img src='
+			".base_url()."assets/images/tableLink3.png' alt='delete' id ='
+			delete_app' title='Delete' app_id ='".$appId."' /></a>";
         }
 
         if (isset($app['app_file']) && $app['app_file'] !='') {
-            $result .= "<a style='padding:2px;' href='".base_url()."app/releasedapk/".$appId."'>
-            <img style='' src='".base_url()."assets/images/version.png' alt='' title='Version History' />
+            $result .= "<a style='padding:2px;' href='
+			".base_url()."app/releasedapk/".$appId."'>
+            <img style='' src='
+			".base_url()."assets/images/version.png' alt='' title='Version History' />
             </a>
 
-            <a style='padding:2px;' href='".base_url()."assets/android/apps/".$app['app_file']."'>
+            <a style='padding:2px;' href='
+			".base_url()."assets/android/apps/".$app['app_file']."'>
             <img src='".base_url()."assets/images/tableLink6.png' alt='' title='Download'/>
             </a>
             ";
@@ -3161,7 +3173,8 @@ class App extends CI_Controller {
     {
         $result='';
         if ($this->acl->hasPermission('app_users', 'edit')) {
-            $result .= "<a style='padding:2px;' href='".base_url()."app/editAppUser/".$app['user_id']." '>
+            $result .= "<a style='padding:2px;' href='
+			".base_url()."app/editAppUser/".$app['user_id']." '>
             <img src='".base_url()."assets/images/tableLink1.png' alt='edit' title='Edit'/>
             </a>";
         }
@@ -3263,7 +3276,8 @@ class App extends CI_Controller {
         $name_array=array();
         if($column=='location') {
             foreach ($result as $key => $val) {
-                $name_array[] = array("value" => str_replace(" ", " ", $val[$column]), 'text' => $val[$column]);
+                $name_array[] = array("value" => str_replace(
+				" ", " ", $val[$column]), 'text' => $val[$column]);
 
             }
         }else{
@@ -3278,9 +3292,11 @@ class App extends CI_Controller {
                     }
                 }else {
                     if($column=="sent_by"){
-                        $name_array[] = array("value" => str_replace(" ", " ", $val['imei_no']), 'text' => $val[$column]);
+                        $name_array[] = array("value" => str_replace(
+						" ", " ", $val['imei_no']), 'text' => $val[$column]);
                     }else {
-                        $name_array[] = array("value" => str_replace(" ", " ", $val[$column]), 'text' => $val[$column]);
+                        $name_array[] = array("value" => str_replace(
+						" ", " ", $val[$column]), 'text' => $val[$column]);
                     }
                 }
 

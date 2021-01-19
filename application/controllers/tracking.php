@@ -214,7 +214,7 @@ exit;*/
         $gps_time = $params ['gpsTime'];
         $records = $tracking_records;
         $distanceCovered = $newDistance;
-        $distanceCoveredGeo = $newDistanceGeo;
+        $distance_covered_geo = $newDistanceGeo;
 
         
         $gps_time = date('Y-m-d H:i:s', strtotime($gps_time));
@@ -224,7 +224,7 @@ exit;*/
             'imei_no' => $imei_no,
             'gps_datetime' => $gps_time,
             'distanceCovered' => round($newDistance,2),
-            'distanceCoveredGeo' => round($distanceCoveredGeo,2),
+            'distance_covered_geo' => round($distance_covered_geo,2),
             'records' => $records,
             'created_datetime' => $created_datetime
         );
@@ -347,7 +347,7 @@ exit;*/
         // $gps_time = $params ['gpsTime'];
         // $records = $tracking_records;
         $distanceCovered = $newDistance;
-        $distanceCoveredGeo = $newDistanceGeo;
+        $distance_covered_geo = $newDistanceGeo;
 
         
         // $gps_time = date('Y-m-d H:i:s', strtotime($gps_time));
@@ -357,11 +357,11 @@ exit;*/
         //     'imei_no' => $imei_no,
         //     'gps_datetime' => $gps_time,
         //     'distanceCovered' => round($newDistance,2),
-        //     'distanceCoveredGeo' => round($distanceCoveredGeo,2),
+        //     'distance_covered_geo' => round($distance_covered_geo,2),
         //     'created_datetime' => $created_datetime
         // );
         echo 'coverd='.$distanceCovered;
-        echo 'New='.$distanceCoveredGeo;
+        echo 'New='.$distance_covered_geo;
         exit;
 
 // try {

@@ -63,20 +63,39 @@ class Complaint extends CI_Controller {
 
             if($this->acl->hasPermission('complaint','view all complaints'))
             {
-                $apps = $this->complaint_model->get_complaint(null,$_GET['iDisplayStart'], $_GET['iDisplayLength'], $_GET['sSearch'], $_GET['iSortCol_0'], $_GET['sSortDir_0'], $_GET['sSearch_0'], $_GET['sSearch_1'], $_GET['sSearch_2'], $_GET['sSearch_3'], $_GET['sSearch_4'], $_GET['sSearch_5'], $_GET['sSearch_6'], $_GET['sSearch_7'], $_GET['sSearch_8'], $_GET['sSearch_9']);
+                $apps = $this->complaint_model->get_complaint(
+				null,$_GET['iDisplayStart'], $_GET['iDisplayLength'], $_GET['sSearch'], 
+				$_GET['iSortCol_0'], $_GET['sSortDir_0'], $_GET['sSearch_0'], 
+				$_GET['sSearch_1'], $_GET['sSearch_2'], $_GET['sSearch_3'], $_GET['sSearch_4'], 
+				$_GET['sSearch_5'], $_GET['sSearch_6'], $_GET['sSearch_7'], $_GET['sSearch_8'], 
+				$_GET['sSearch_9']);
 
-                $get_all_complaints = $this->complaint_model->get_complaint(null,null, null, $_GET['sSearch'], $_GET['iSortCol_0'], $_GET['sSortDir_0'], $_GET['sSearch_0'], $_GET['sSearch_1'], $_GET['sSearch_2'], $_GET['sSearch_3'], $_GET['sSearch_4'], $_GET['sSearch_5'], $_GET['sSearch_6'], $_GET['sSearch_7'], $_GET['sSearch_8'], $_GET['sSearch_9']);
+                $get_all_complaints = $this->complaint_model->get_complaint(
+				null,null, null, $_GET['sSearch'], $_GET['iSortCol_0'], $_GET['sSortDir_0'], 
+				$_GET['sSearch_0'], $_GET['sSearch_1'], $_GET['sSearch_2'], $_GET['sSearch_3'], 
+				$_GET['sSearch_4'], $_GET['sSearch_5'], $_GET['sSearch_6'], $_GET['sSearch_7'], 
+				$_GET['sSearch_8'], $_GET['sSearch_9']);
                 $total_complaints = count($get_all_complaints);
             }
             else{
 
-                $apps = $this->complaint_model->get_complaint($data['login_user_id'],$_GET['iDisplayStart'], $_GET['iDisplayLength'], $_GET['sSearch'], $_GET['iSortCol_0'], $_GET['sSortDir_0'], $_GET['sSearch_0'], $_GET['sSearch_1'], $_GET['sSearch_2'], $_GET['sSearch_3'], $_GET['sSearch_4'], $_GET['sSearch_5'], $_GET['sSearch_6'], $_GET['sSearch_7'], $_GET['sSearch_8'], $_GET['sSearch_9']);
+                $apps = $this->complaint_model->get_complaint(
+				$data['login_user_id'],$_GET['iDisplayStart'], $_GET['iDisplayLength'], 
+				$_GET['sSearch'], $_GET['iSortCol_0'], $_GET['sSortDir_0'], $_GET['sSearch_0'], 
+				$_GET['sSearch_1'], $_GET['sSearch_2'], $_GET['sSearch_3'], $_GET['sSearch_4'], 
+				$_GET['sSearch_5'], $_GET['sSearch_6'], $_GET['sSearch_7'], $_GET['sSearch_8'], 
+				$_GET['sSearch_9']);
 
-                $get_all_complaints = $this->complaint_model->get_complaint($data['login_user_id'],null, null, $_GET['sSearch'], $_GET['iSortCol_0'], $_GET['sSortDir_0'], $_GET['sSearch_0'], $_GET['sSearch_1'], $_GET['sSearch_2'], $_GET['sSearch_3'], $_GET['sSearch_4'], $_GET['sSearch_5'], $_GET['sSearch_6'], $_GET['sSearch_7'], $_GET['sSearch_8'], $_GET['sSearch_9']);
+                $get_all_complaints = $this->complaint_model->get_complaint(
+				$data['login_user_id'],null, null, $_GET['sSearch'], $_GET['iSortCol_0'], 
+				$_GET['sSortDir_0'], $_GET['sSearch_0'], $_GET['sSearch_1'], $_GET['sSearch_2'], 
+				$_GET['sSearch_3'], $_GET['sSearch_4'], $_GET['sSearch_5'], $_GET['sSearch_6'], 
+				$_GET['sSearch_7'], $_GET['sSearch_8'], $_GET['sSearch_9']);
                 $total_complaints = count($get_all_complaints);
 
 
-                //$apps = $this->complaint_model->get_complaint_by_user($data['login_user_id']);
+                //$apps = $this->complaint_model->get_complaint_by_user(
+				//$data['login_user_id']);
             }
             
             
@@ -128,8 +147,10 @@ class Complaint extends CI_Controller {
         $result='';
         if ($image) {
         $result='
-            <a style="padding-left:0px;" rel="lightbox['.$c_id.']" href="'.FORM_IMG_DISPLAY_PATH.'../../../../assets/complaints/'.$image.'">
-                <img class="formIconsUpload" src="'.FORM_IMG_DISPLAY_PATH.'../../../../assets/complaints/'.$image.'" alt="" />
+            <a style="padding-left:0px;" rel="lightbox['.$c_id.']" href="
+			'.FORM_IMG_DISPLAY_PATH.'../../../../assets/complaints/'.$image.'">
+                <img class="formIconsUpload" src="
+				'.FORM_IMG_DISPLAY_PATH.'../../../../assets/complaints/'.$image.'" alt="" />
             </a>';
 
         }
@@ -231,26 +252,35 @@ class Complaint extends CI_Controller {
                         $description .= "<br>Village : ".$this->input->post('signal_problem_village');
 
                         $complaint_array['signal_problem_district']=$this->input->post('signal_problem_district');
-                        $complaint_array['signal_problem_tehsil']=$this->input->post('signal_problem_tehsil');
-                        $complaint_array['signal_problem_markaz']=$this->input->post('signal_problem_markaz');
+                        $complaint_array['signal_problem_tehsil']=$this->input->post(
+						'signal_problem_tehsil');
+                        $complaint_array['signal_problem_markaz']=$this->input->post(
+						'signal_problem_markaz');
                         $complaint_array['signal_problem_uc']=$this->input->post('signal_problem_uc');
-                        $complaint_array['signal_problem_village']=$this->input->post('signal_problem_village');
+                        $complaint_array['signal_problem_village']=$this->input->post(
+						'signal_problem_village');
                         $resolution_time = "1 Working Day";
                         //$send_email = true;
 
                     }
                     elseif($complaint=='Balance Deduction'){
-                        $description = "Balance received on ".$this->input->post('balance_received_date');
-                        $description .= "<br> Balance deduction on ".$this->input->post('balance_deduction_date');
+                        $description = "Balance received on ".$this->input->post(
+						'balance_received_date');
+                        $description .= "<br> Balance deduction on ".$this->input->post(
+						'balance_deduction_date');
 
-                        $complaint_array['balance_received_date']=$this->input->post('balance_received_date');
-                        $complaint_array['balance_deduction_date']=$this->input->post('balance_deduction_date');
+                        $complaint_array['balance_received_date']=$this->input->post(
+						'balance_received_date');
+                        $complaint_array['balance_deduction_date']=$this->input->post(
+						'balance_deduction_date');
                         $resolution_time = "4 Hours";
                         //$send_email = true;
                     }
                     elseif($complaint=='Sim Mapping/Activation'){
-                        $description = $this->input->post('sim_mapping_activation_comments')."<br />ICCID will add in change status page after resolve the issue";
-                        $complaint_array['sim_mapping_activation_comments']=$this->input->post('sim_mapping_activation_comments');
+                        $description = $this->input->post('sim_mapping_activation_comments')."<br 
+						/>ICCID will add in change status page after resolve the issue";
+                        $complaint_array['sim_mapping_activation_comments']=$this->input->post(
+						'sim_mapping_activation_comments');
                         $resolution_time = "2 Hours";
                         //$send_email = true;
 
