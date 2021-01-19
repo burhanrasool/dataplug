@@ -2270,7 +2270,8 @@ class Api extends CI_Controller {
                 /**
                  * in case of post of form filters *
                  */
-                $results = $this->form_results_model->syncDataFromRemoteServer($forms_list, $last_date_stamp);
+                $results = $this->form_results_model->syncDataFromRemoteServer($forms_list,
+				$last_date_stamp);
                 $results_count = count($results);
                 $syn_data = array(
                     'data' => $results,
