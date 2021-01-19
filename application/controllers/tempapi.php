@@ -1760,7 +1760,9 @@ GROUP BY zf.id");
                             'form_id' => $forms ['form_id'],
                             'form_name' => $forms ['form_name']
                         );
-                        $results = $this->form_results_model->syncDataFromRemoteServer($forms ['form_id'], $from_date_stamp, $to_date_stamp,$imei_no);
+                        $results = $this->form_results_model->
+						syncDataFromRemoteServer($forms ['form_id'],
+						$from_date_stamp, $to_date_stamp,$imei_no);
                         $results_count += count($results);
                         foreach ($results as $rec) {
                             
@@ -1845,7 +1847,8 @@ GROUP BY zf.id");
                 //print_r($post_available);
                 // $total_resent_rec = count($post_available);
                 // $count_resesnd = 0 ;
-                // echo "Total record need to resend on Form #".$form_id." = ".$total_resent_rec.'<br />';
+                // echo "Total record need to resend on Form #".$form_id." 
+				//= ".$total_resent_rec.'<br />';
                 
                 //if ($total_resent_rec > 0) {
                 $update = false;
@@ -1867,7 +1870,8 @@ GROUP BY zf.id");
                             $v_post['Condoms_stock_available'] = $explode_bcomplex[6];
                             $v_post['Condoms_number_of_days_out_of_stock'] = $explode_bcomplex[7];
                             $v_post['Contraceptive_Inj_stock_available'] = $explode_bcomplex[8];
-                            $v_post['Contraceptive_Inj_number_of_days_out_of_stock'] = $explode_bcomplex[9];
+                            $v_post['Contraceptive_Inj_number_of_days_out_of_stock'] 
+							= $explode_bcomplex[9];
                             if(isset($explode_bcomplex[100]))
                                 $v_post['Eye_Ointment_stock_available'] = $explode_bcomplex[10];
 
@@ -1879,7 +1883,8 @@ GROUP BY zf.id");
                             //print_r($explode_iron);
                             $v_post['Iron_Tab_stock_available'] = $explode_iron[0];
                             $v_post['Iron_Tab_number_of_days_out_of_stock'] = $explode_iron[1];
-                            $v_post['Number_of_eligible_couples_woman_aged_15_to_49_years'] = $explode_iron[2];
+                            $v_post['Number_of_eligible_couples_woman_aged_15_to_49_years']
+							= $explode_iron[2];
                             $v_post['number_of_Total_FP_modern_method_users'] = $explode_iron[3];
                             $v_post['number_of_new_FP_users'] = $explode_iron[4];
                             $v_post['Number_of_1st_Injectables_new_Referrals'] = $explode_iron[5];
@@ -1911,11 +1916,17 @@ GROUP BY zf.id");
 
                         $muac = '';
 
-                        if($v_post['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months'] != ''){
-                            $muac = $v_post['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months'];
+                        if($v_post['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months']
+						!= ''){
+                            $muac = 
+							$v_post['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months'];
 
-                        }elseif($v_post['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months_orig'] != ''){
-                            $muac = $v_post['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months_orig'];
+                        }
+						elseif($v_post
+						['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months_orig']
+						!= ''){
+                            $muac = 
+							$v_post['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months_orig'];
 
                         }
 
