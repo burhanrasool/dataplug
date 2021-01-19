@@ -3205,13 +3205,14 @@ class Form extends CI_Controller {
     /**
      * Inline method giving string of records
      * @param  $locations array of  all data having info about each single record
-     * @param  $filter_attribute attribute list based on data is parsed icons assigned
+     * @param  $filter_attribute attribute list on data is parsed icons assigned
      * @param  $headings Heading list fetched from all results
      * @return  string A string concatinated with commas
      * @access Inline
      * @author UbaidUllah Balti <ubaidcskiu@gmail.com>
      */
-    private function getMapHtmlInfo($locations = array(), $headings = array(), $filter_attribute) {
+    private function getMapHtmlInfo($locations = array(), $headings = array(),
+     $filter_attribute) {
         if (isset($locations[0]['form_id'])) {
             $form_id = $locations[0]['form_id'];
         } else {
@@ -3233,17 +3234,22 @@ class Form extends CI_Controller {
 
                     foreach ($locations as $form_item) {
                         if (isset($form_item[$filter_attribute_value])) {
-                            $category_name = (!empty($form_item[$filter_attribute_value])) ? $form_item[$filter_attribute_value] : "No " . ucfirst($filter_attribute_value);
-                            $category_name = preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', $category_name);
-                            if (isset($form_item[$filter_attribute_value]) && !empty($form_item[$filter_attribute_value])) {
+                            $value=$filter_attribute_value;
+                            $category_name = (!empty($form_item[$value])) ? $form_item[$value] : "
+                            No " . ucfirst($filter_attribute_value);
+                            $category_name = preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', 
+                                '', $category_name);
+                            if (isset($form_item[$value]) && !empty($form_item[$value])) {
                                 if (!in_array($form_item[$filter_attribute_value], $only_once_category)) {
                                     $column_number++;
                                     $only_once_category[] = $form_item[$filter_attribute_value];
                                 }
                                 $valueforarray = $form_item[$filter_attribute_value];
                                 $valueforarray1 = str_replace(' ', '_', $valueforarray);
-                                if (isset($map_saved_pins[$filter_attribute_value][$valueforarray1]) && $map_saved_pins[$filter_attribute_value][$valueforarray1] != '') {
-                                    $pin_name = $map_saved_pins[$filter_attribute_value][$valueforarray1];
+                                $pins=$map_saved_pins;
+                                if(isset($pins[$value][$valueforarray1]) && $pins[$value][$valueforarray1] !='')
+                                 {
+                                    $pin_name = $pins[$filter_attribute_value][$valueforarray1];
                                 } else
                                 if (!in_array($valueforarray, $filter_exist_array)) {
                                     $filter_exist_array[] = $valueforarray;
@@ -3258,7 +3264,8 @@ class Form extends CI_Controller {
                                         $exist_alpha[$first_char] = '1';
                                         $pin_name = $first_char . '1.png';
                                     }
-                                    $pin_exist_for_cat = array_merge($pin_exist_for_cat, array($valueforarray => $pin_name));
+                                    $pin_exist_for_cat = array_merge($pin_exist_for_cat,
+                                     array($valueforarray => $pin_name));
                                 } else {
 
                                     if (array_key_exists($valueforarray, $pin_exist_for_cat)) {
@@ -3288,24 +3295,43 @@ class Form extends CI_Controller {
                                     //$info_window .= $headings[$i]."=>";
                                     if ($headings[$i] == 'is_take_picture') {}
                                     else if ($headings[$i] == 'id') {
-                                        $query_img = "select image from zform_images where form_id='".$form_id."' AND zform_result_id ='".$form_item[$headings[$i]]."'";
+                                        $query_img = "select image from zform_images where form_id='".$form_id."
+                                        ' AND zform_result_id ='".$form_item[$headings[$i]]."'";
                                         $image_info = $this->db->query($query_img)->result_array();
                                         if(!empty($image_info)){
                                             $path = get_image_path($image_info[0]['image']);
-                                            $image_row .= "<tr align='center'><td colspan='2'><a href=" . $path . " class='image_colorbox' title='All Rights Reserved © 2013-" . date('Y') . " - " . PLATFORM_NAME . " <br>By ITU Government of Punjab - Pakistan'><img src=" . $path . " alt='' width='200' height='200'/></a></td></tr>";
+                                            $image_row .= "<tr align='center'><td colspan='2'><a href=" . $path . "
+                                             class='image_colorbox' title='All Rights Reserved © 2013-" . date('Y') . "
+                                              - " . PLATFORM_NAME . " 
+                                              <br>By ITU Government of Punjab - Pakistan'><img src=" . $path . "
+                                               alt='' width='200' height='200'/></a></td></tr>";
                                         }
                                     }
                                     else if ($headings[$i] == 'image') {
                                         $path = get_image_path($form_item[$headings[$i]][0]['image']);
-                                        $image_row .= "<tr align='center'><td colspan='2'><a href=" . $path . " class='image_colorbox' title='All Rights Reserved © 2013-" . date('Y') . " - " . PLATFORM_NAME . " <br>By ITU Government of Punjab - Pakistan'><img src=" . $path . " alt='' width='200' height='200'/></a></td></tr>";
+                                        $image_row .= "<tr align='center'><td colspan='2'><a href=" . $path . " 
+                                        class='image_colorbox' title='All Rights Reserved © 2013-" . date('Y') . "
+                                         - " . PLATFORM_NAME . " 
+                                         <br>By ITU Government of Punjab - Pakistan'><img src=" . $path . " 
+                                         alt='' width='200' height='200'/></a></td></tr>";
                                     } else if ($headings[$i] == 'created_datetime') {
-                                        $datetime_row .='<tr><td><b>DATE : </b></td><td>' . date('Y-m-d', strtotime($form_item[$headings[$i]])) . '</td></tr><tr><td><b>TIME : </b></td><td>' . date('H:i:s', strtotime($form_item[$headings[$i]])) . '</td></tr>';
+                                        $datetime_row .='<tr><td><b>DATE : </b></td><td>' . date('Y-m-d', 
+                                            strtotime($form_item[$headings[$i]])) . '
+                                        </td></tr><tr><td><b>TIME : </b></td><td>' . date('H:i:s', 
+                                            strtotime($form_item[$headings[$i]])) . '</td></tr>';
                                     } else {
-                                        $map_data .= preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', $headings[$i]) . ' : ' . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', $form_item[$headings[$i]]) . '<br>\n';
+                                        $map_data .= preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '',
+                                         $headings[$i]) . ' : ' . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', 
+                                         '', $form_item[$headings[$i]]) . '<br>\n';
                                         if($form_id == 551){
-                                            $array_col = array('BUILDING NAME','NAME OF DIVISION','NAME OF MCS','BUILDING TYPE','ACTIVITY DATETIME');
-                                            if(in_array(preg_replace("/[^A-Za-z0-9\-]/", " ", strtoupper(urldecode($headings[$i]))),$array_col))
-                                                $data_row .= "<tr><td><b>" . preg_replace("/[^A-Za-z0-9\-]/", " ", strtoupper(urldecode($headings[$i]))) . " : </b></td><td>" . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', strtoupper($form_item[$headings[$i]])) . "</td></tr>";
+                                            $array_col = array('BUILDING NAME','NAME OF DIVISION','NAME OF MCS',
+                                                'BUILDING TYPE','ACTIVITY DATETIME');
+                                            if(in_array(preg_replace("/[^A-Za-z0-9\-]/", " ", 
+                                                strtoupper(urldecode($headings[$i]))),$array_col))
+                                                $data_row .= "<tr><td><b>" . preg_replace("/[^A-Za-z0-9\-]/",
+                                                 " ", strtoupper(urldecode($headings[$i]))) . " 
+                                            : </b></td><td>" . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '',
+                                             strtoupper($form_item[$headings[$i]])) . "</td></tr>";
                                         }
                                         $id = $form_item['id'];
                                     }
@@ -3313,7 +3339,9 @@ class Form extends CI_Controller {
                             }
                             $info_window = "<table>".$image_row.$data_row."</table>";
                             $marker_date = $form_item['created_datetime'];
-                            $final .='["' . $location[0] . '","' . $location[1] . '","' . $form_id . '","' . $icon_filename . '","' . $id . '","' . $category_name . '","' . $marker_date . '","'.$info_window.'"] ,';
+                            $final .='["' . $location[0] . '","' . $location[1] . '","' . $form_id . '"
+                            ,"' . $icon_filename . '","' . $id . '","' . $category_name . '","' . $marker_date . '","
+                            '.$info_window.'"] ,';
                         }
                     }
 
@@ -3336,13 +3364,17 @@ class Form extends CI_Controller {
      * @access Inline
      * @author UbaidUllah Balti <ubaidcskiu@gmail.com>
      */
-    private function getMapHtmlInfoSingle($locations = array(), $headings = array(), $filter_attribute) {
+    private function getMapHtmlInfoSingle($locations = array(), $headings = array(),
+     $filter_attribute) {
         $final = '';
         if (count($locations)) {
             foreach ($filter_attribute as $filter_attribute_value) {
                 foreach ($locations as $form_item) {
-                    $category_name = (!empty($form_item[$filter_attribute_value])) ? $form_item[$filter_attribute_value] : str_replace('_', " ", ucfirst($filter_attribute_value));
-                    $pin_name = (!empty($form_item[$filter_attribute_value])) ? substr($form_item[$filter_attribute_value], 0, 1) . '1' : "all_visit";
+                    $value=$filter_attribute_value;
+                    $category_name = (!empty($form_item[$value])) ? $form_item[$value] : str_replace('_', " 
+                        ", ucfirst($filter_attribute_value));
+                    $pin_name = (!empty($form_item[$value])) ? substr($form_item[$value],
+                     0, 1) . '1' : "all_visit";
                     if (!file_exists(FCPATH . "assets/images/map_pins/" . $pin_name)) {
                         $icon_filename = base_url() . "assets/images/map_pins/default_pin.png";
                     } else {
@@ -3363,19 +3395,33 @@ class Form extends CI_Controller {
                                 
                             } else if ($headings[$i] == 'image') {
                                 $path = $form_item[$headings[$i]][0]['image'];
-                                $image_row = "<tr align='center'><td colspan='2'><a href=" . $path . " class='image_colorbox' title='All Rights Reserved © 2013-" . date('Y') . " - " . PLATFORM_NAME . " <br>By ITU Government of Punjab - Pakistan'><img src=" . $path . " alt='' width='200' height='200'/></a></td></tr>";
+                                $image_row = "<tr align='center'><td colspan='2'><a href=" . $path . " 
+                                class='image_colorbox' title='All Rights Reserved © 2013-" . date('Y') . "
+                                 - " . PLATFORM_NAME . " 
+                                 <br>By ITU Government of Punjab - Pakistan'><img src=" . $path . "
+                                  alt='' width='200' height='200'/></a></td></tr>";
                             } else if ($headings[$i] == 'created_datetime') {
-                                $datetime_row .='<tr><td><b>DATE : </b></td><td>' . date('Y-m-d', strtotime($form_item[$headings[$i]])) . '</td></tr><tr><td><b>TIME : </b></td><td>' . date('H:i:s', strtotime($form_item[$headings[$i]])) . '</td></tr>';
+                                $datetime_row .='<tr><td><b>DATE : </b></td><td>' . date('Y-m-d',
+                                 strtotime($form_item[$headings[$i]])) . '
+                                </td></tr><tr><td><b>TIME : </b></td><td>' . date('H:i:s',
+                                 strtotime($form_item[$headings[$i]])) . '</td></tr>';
                             } else {
-                                $map_data .= preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', $headings[$i]) . ' : ' . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', $form_item[$headings[$i]]) . '<br>\n';
-                                $data_row .= "<tr><td><b>" . preg_replace("/[^A-Za-z0-9\-]/", " ", strtoupper(urldecode($headings[$i]))) . " : </b></td><td>" . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', strtoupper($form_item[$headings[$i]])) . "</td></tr>";
+                                $map_data .= preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '',
+                                 $headings[$i]) . ' : ' . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '',
+                                  $form_item[$headings[$i]]) . '<br>\n';
+                                $data_row .= "<tr><td><b>" . preg_replace("/[^A-Za-z0-9\-]/", " ",
+                                 strtoupper(urldecode($headings[$i]))) . "
+                                  : </b></td><td>" . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '',
+                                   strtoupper($form_item[$headings[$i]])) . "</td></tr>";
                                 $id = $form_item['id'];
                             }
                         }
                     }
                     $html_layout = $html_layout . $image_row . $data_row . $datetime_row;
                     $html_layout .= "</table>";
-                    $final .='["' . $location[0] . '","' . $location[1] . '","' . $html_layout . '","' . $icon_filename . '","' . $id . '","' . $category_name . '"] ,';
+                    $final .='["' . $location[0] . '","' . $location[1] . '"
+                    ,"' . $html_layout . '","' . $icon_filename . '","' . $id . '"
+                    ,"' . $category_name . '"] ,';
                 }
             }
             $final = substr($final, 0, -1);
