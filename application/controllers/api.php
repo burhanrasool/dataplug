@@ -274,11 +274,37 @@ class Api extends CI_Controller {
             else{
                 $prefrences['showHighResOption'] = 'NO';
             }
-            $prefrences['PersistImagesOnDevice']=($app_general_setting->persist_images_on_device==1)?'YES':'NO';
-            $prefrences['BackgroundUpdate']=($app_general_setting->background_update==1)?'YES':'NO';
-            $prefrences['ForceUpdate']=($app_general_setting->force_update==1)?'YES':'NO';
-            $prefrences['EnableAutoTime']=($app_general_setting->enable_auto_time==1)?'YES':'NO';
-            $prefrences['TrackingStatus']=($app_general_setting->tracking_status==1)?'YES':'NO';
+            if($app_general_setting->persist_images_on_device==1){
+                $prefrences['PersistImagesOnDevice']='YES';
+            }
+            else{
+                $prefrences['PersistImagesOnDevice']='NO';
+            }
+            if($app_general_setting->background_update==1){
+                $prefrences['BackgroundUpdate']='YES';
+            }
+            else{
+                $prefrences['BackgroundUpdate']='NO';
+            }
+            if($app_general_setting->force_update==1){
+                $prefrences['ForceUpdate']='YES';
+
+            }
+            else{
+                $prefrences['ForceUpdate']='NO';
+            }
+            if($app_general_setting->enable_auto_time==1){
+                $prefrences['EnableAutoTime']='YES';
+            }
+            else{
+                $prefrences['EnableAutoTime']='NO';
+            }
+            if($app_general_setting->tracking_status==1){
+                $prefrences['TrackingStatus']='YES';
+            }
+            else{
+                $prefrences['TrackingStatus']='NO';
+            }
             $prefrences['TrackingInterval']=(isset($app_general_setting->tracking_interval))?$app_general_setting->tracking_interval:'5';
             $prefrences['TrackingDistance']=(isset($app_general_setting->tracking_distance))?$app_general_setting->tracking_distance:'100';
             $prefrences['DebugTracking']=(isset($app_general_setting->debug_tracking) && $app_general_setting->debug_tracking == 1)?'YES':'NO';
