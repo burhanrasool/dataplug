@@ -3205,7 +3205,7 @@ class Form extends CI_Controller {
     /**
      * Inline method giving string of records
      * @param  $locations array of  all data having info about each single record
-     * @param  $filter_attribute list of attributed based on data is parsed icons assigned
+     * @param  $filter_attribute attribute list based on data is parsed icons assigned
      * @param  $headings Heading list fetched from all results
      * @return  string A string concatinated with commas
      * @access Inline
