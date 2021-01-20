@@ -305,11 +305,42 @@ class Api extends CI_Controller {
             else{
                 $prefrences['TrackingStatus']='NO';
             }
-            $prefrences['TrackingInterval']=(isset($app_general_setting->tracking_interval))?$app_general_setting->tracking_interval:'5';
-            $prefrences['TrackingDistance']=(isset($app_general_setting->tracking_distance))?$app_general_setting->tracking_distance:'100';
-            $prefrences['DebugTracking']=(isset($app_general_setting->debug_tracking) && $app_general_setting->debug_tracking == 1)?'YES':'NO';
-            $prefrences['hasGeoFencing']=(isset($app_general_setting->has_geo_fencing) && $app_general_setting->has_geo_fencing == 1)?'YES':'NO';
-            $prefrences['DebugGeoFencing']=(isset($app_general_setting->debug_geo_fencing) && $app_general_setting->debug_geo_fencing == 1)?'YES':'NO';
+            if(isset($app_general_setting->tracking_interval)){
+                $prefrences['TrackingInterval']=$app_general_setting->tracking_interval;
+            }
+            else{
+                $prefrences['TrackingInterval']='5';
+
+            }
+            if(isset($app_general_setting->tracking_distance)){
+                $prefrences['TrackingDistance']=$app_general_setting->tracking_distance;
+            }
+            else{
+                $prefrences['TrackingDistance']='100';
+            }
+            if(isset($app_general_setting->debug_tracking) 
+            && $app_general_setting->debug_tracking == 1){
+                $prefrences['DebugTracking']='YES';
+            }
+            else{
+                $prefrences['DebugTracking']='NO';
+            }
+            if(isset($app_general_setting->has_geo_fencing)
+             && $app_general_setting->has_geo_fencing == 1){
+                $prefrences['hasGeoFencing']='YES';
+
+            }
+            else{
+                $prefrences['hasGeoFencing']='NO';
+            }
+            if(isset($app_general_setting->debug_geo_fencing) 
+            && $app_general_setting->debug_geo_fencing == 1){
+                $prefrences['DebugGeoFencing']='YES';
+            }
+            else{
+                $prefrences['DebugGeoFencing']='NO';
+            }
+            
             //Get geoFence from App user table
             $prefrences['geoFence']="[{'lng':74.33375,'lat':31.50282},{'lng':72.32271,'lat':31.49976},{'lng':74.3286,'lat':31.48541},{'lng':74.3474,'lat':30.48577},{'lng':74.33764,'lat':34.5049}]";
             
