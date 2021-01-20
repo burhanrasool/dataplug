@@ -920,8 +920,8 @@ class Api extends CI_Controller {
             ///////////////////////// HASSAN ANWAR     ////////////////////////////
             ///////////////////////////////////////////////////////////////////////
 
-            $multiChoices = $this->db->query("Select * from form_multiselectFieldLabels where formId='$form_id'");
-            foreach($multiChoices->result() as $row)
+            $multi_choices = $this->db->query("Select * from form_multiselectFieldLabels where formId='$form_id'");
+            foreach($multi_choices->result() as $row)
             {
                 $fd=(array) $dataresultnew1;
 
@@ -958,9 +958,8 @@ class Api extends CI_Controller {
 
         }
 
-        try{
-            $ret_ins = $this->db->insert( 'zform_'.$form_id, $final_array );
-            
+        try {
+            $ret_ins = $this->db->insert('zform_'.$form_id, $final_array);
             if(!$ret_ins){
                 $err_msg .= $this->db->_error_message();
                 $this->form_results_model->update_mobile_activity($activity_inserted_id,array('error'=>$err_msg));
@@ -971,7 +970,7 @@ class Api extends CI_Controller {
                 exit();
             }
             $form_result_id_new = $this->db->insert_id();
-        }catch (Exception $e) {
+        } catch (Exception $e) {
                 $this->form_results_model->update_mobile_activity($activity_inserted_id,array('error'=>$e->message()));
                 echo json_encode($jsone_array);
                 exit;
@@ -980,9 +979,9 @@ class Api extends CI_Controller {
               
         
         if (!empty($sub_table_record)) {
-            foreach ($sub_table_record as $sb_key => $sb_value) {
+            foreach ($sub_table_record as $sb_key => $sub_value) {
                 $subtable_name = 'zform_' . $form_id . '_' . $sb_key;
-                foreach ($sb_value as $sub_array) {
+                foreach ($sub_value as $sub_array) {
                     $sub_comon_fields = array();
                     foreach ($sub_array as $fild_key => $filds) {
                         $sub_fild_ary = array(
@@ -1029,7 +1028,7 @@ class Api extends CI_Controller {
         $post_url = '';
         if (!empty($form_info ['post_url'])) {
             $post_url = $form_info ['post_url'];
-        } else if (!empty($form_info ['fv_post_url'])) {
+        } elseif (!empty($form_info ['fv_post_url'])) {
             $post_url = $form_info ['fv_post_url'];
         }
 
@@ -1144,7 +1143,7 @@ class Api extends CI_Controller {
                 $replacement = '$1-$2-$3 $4:$5:$6';
                 $activity_datetime = preg_replace($pattern, $replacement, $dateTime_device);
                 $activity_datetime = date('Y-m-d H:i:s', strtotime($activity_datetime));
-            } else if (strpos($dateTime_device, '/') < 12) {
+            } elseif (strpos($dateTime_device, '/') < 12) {
                 $pattern = '#(\d+)/(\d+)/(\d+) (\d+):(\d+):(\d+)#';
                 $replacement = '$1-$2-$3 $4:$5:$6';
                 $activity_datetime = preg_replace($pattern, $replacement, $dateTime_device);
@@ -1189,7 +1188,7 @@ class Api extends CI_Controller {
                         }
                         $record[$key] = 'SHOW RECORDS';
                     }
-                } else if ($cap_first [0] == 'caption') {
+                } elseif ($cap_first [0] == 'caption') {
                     $tempary_cap = array(
                         $key => $v
                     );
@@ -1284,8 +1283,10 @@ class Api extends CI_Controller {
             }
 
 
-            $this->form_results_model->update_mobile_activity($activity_inserted_id, array('form_data_decoded' => json_encode($dataresultnew1)));
-            $ret_ins = $this->db->insert('zform_' . $form_id, $dataresultnew1);
+            $this->form_results_model->update_mobile_activity(
+                $activity_inserted_id, array('form_data_decoded' => json_encode($dataresultnew1))
+            );
+            $ret_ins = $this->db->insert('zform_'.$form_id, $dataresultnew1);
             $form_result_id_new = $this->db->insert_id();
             if (!$ret_ins) {
                 $err_msg .= 'Record Not Submitted. ' . $this->db->_error_message() . '.                         "Please Refresh your application"';
@@ -1324,7 +1325,7 @@ class Api extends CI_Controller {
                         'form_id' => $form_id,
                         'image' => $image_path['image']
                     );
-                    if(strpos($image_path ['title'], $form_info['security_key']) !== FALSE){
+                    if (strpos($image_path ['title'],$form_info['security_key']) !== FALSE) {
                         $add_images ['title'] = urldecode(base64_decode(str_replace($form_info ['security_key'], '', $image_path ['title'])));
                     } else {
                         $add_images ['title'] = urldecode($image_path ['title']);
@@ -1343,7 +1344,7 @@ class Api extends CI_Controller {
             $post_url = '';
             if (!empty($form_info ['post_url'])) {
                 $post_url = $form_info ['post_url'];
-            } else if (!empty($form_info ['fv_post_url'])) {
+            } elseif (!empty($form_info ['fv_post_url'])) {
                 $post_url = $form_info ['fv_post_url'];
             }
 
@@ -1425,7 +1426,7 @@ class Api extends CI_Controller {
                                     where id ='$form_id'");
         $security_key_result = $query->row_array();
         $saved_security_key=$security_key_result['security_key'];
-        if($security_key != $saved_security_key){
+        if ($security_key != $saved_security_key) {
             $jsone_array = array(
                 'error' => 'Security key does not match'
             );
@@ -1434,7 +1435,11 @@ class Api extends CI_Controller {
         }
 
         //Stop activity saving if already saved
-        $activity_aready_exist = $this->db->get_where('zform_'.$form_id, array('form_id' => $form_id, 'imei_no' => $imei_no,'activity_datetime' => $activity_datetime))->row_array();
+        $activity_aready_exist = $this->db->get_where('zform_'.$form_id, 
+        array(
+            'form_id' => $form_id, 
+            'imei_no' => $imei_no,
+            'activity_datetime' => $activity_datetime))->row_array();
         if ($activity_aready_exist) {
             $jsone_array = array(
                 'success' => 'This activity already submitted.'
@@ -1722,7 +1727,7 @@ class Api extends CI_Controller {
                     }
                     $record[$key] = 'SHOW RECORDS';
                 }
-            } else if ($cap_first [0] == 'caption') {
+            } elseif ($cap_first [0] == 'caption') {
                 $tempary_cap = array(
                     $key => $v
                 );
@@ -1760,7 +1765,7 @@ class Api extends CI_Controller {
                         {
                             $warning_message  = 'Your location mismatched. ';
                         }
-                        else{
+                        else {
                             $warning_message  = 'You are on right location' ;
                         }
                     }
@@ -1892,8 +1897,8 @@ class Api extends CI_Controller {
             ///////////////////////// HASSAN ANWAR     ////////////////////////////
             ///////////////////////////////////////////////////////////////////////
 
-            $multiChoices = $this->db->query("Select * from form_multiselectFieldLabels where formId='$form_id'");
-            foreach($multiChoices->result() as $row)
+            $multi_choices = $this->db->query("Select * from form_multiselectFieldLabels where formId='$form_id'");
+            foreach ($multi_choices->result() as $row)
             {
                 $fd=(array) $dataresultnew1;
 
@@ -1901,7 +1906,7 @@ class Api extends CI_Controller {
                 $choicesSent= $dataresultnew1[$label];
                 $choicesSent=explode(',',$choicesSent);
 
-                foreach($choicesSent as $choice)
+                foreach ($choicesSent as $choice)
                 {
                     $choice=str_replace(' ', '_', $choice);
                     $dataresultnew1[$label.'_'.$choice]='1';
@@ -2104,9 +2109,9 @@ class Api extends CI_Controller {
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         //$body = curl_exec($ch);
-        if( ! $body = curl_exec($ch)) {
+        if (!$body = curl_exec($ch)) {
             return false;
-        }else{
+        } else {
             $townname = json_decode($body, 1);
             if ($townname != 'null_string') {
                 return $townname;
@@ -2132,9 +2137,9 @@ class Api extends CI_Controller {
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $body = curl_exec($ch);
-        if( ! $body = curl_exec($ch)) {
+        if (!$body = curl_exec($ch)) {
             return false;
-        }else{
+        } else {
             $districtname = json_decode($body, 1);
             if ($districtname [0]) {
                 return $districtname [1];
