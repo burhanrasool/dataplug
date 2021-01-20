@@ -2593,7 +2593,8 @@ class App extends CI_Controller {
                 $batch = array();
                 $session_data = $this->session->userdata('logged_in');
                 if (!$this->acl->hasPermission('form', 'view')) {
-                    $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                    $this->session->set_flashdata('validate', array('message' => "You don't have 
+					enough permissions to do this task.", 'type' => 'warning'));
                     redirect(base_url() . 'apps');
                 }
 
@@ -2634,7 +2635,8 @@ class App extends CI_Controller {
         $column=$_POST['column'];
         $value=$_POST['value'];
         $table_name="zform_".$form_id;
-        $result=$this->db->query("select distinct $column from $table_name where $column LIKE '%$value%'")->result_array();
+        $result=$this->db->query("select distinct $column from $table_name 
+		where $column LIKE '%$value%'")->result_array();
         $i=0;
         $options=array();
         foreach($result as $key=>$val){
@@ -2656,7 +2658,8 @@ class App extends CI_Controller {
                 <div class='row'>
                     <label for='d1_textfield'>Assign pin to value</label>
                     <div>
-                        <input typpe='text' name='fieldvlaue' class='myfield textBoxLogin' id='myfield'>
+                        <input typpe='text' name='fieldvlaue' class='myfield 
+						textBoxLogin' id='myfield'>
                     </div>
                 </div>
 
@@ -2673,10 +2676,13 @@ class App extends CI_Controller {
             $form_id = $_POST['form_id'];
             $field_value = str_replace(" ", "_", $_POST['value']);
             $pins = '';
-            $pins .= '<div class="row"><label for="d1_textfield">' . $value . '</label><div><select name="pins[]" id="pins" class="icon-menu">
+            $pins .= '<div class="row"><label for="d1_textfield">' . $value . 
+			'</label><div><select name="pins[]" id="pins" class="icon-menu">
             <option value="">Select One</option>';
             $site_settings = $this->site_model->get_settings('1');
-            $directory = $site_settings['directory_path'] . DIRECTORY_SEPARATOR . "assets" . DIRECTORY_SEPARATOR . "images" . DIRECTORY_SEPARATOR . "map_pins" . DIRECTORY_SEPARATOR;
+            $directory = $site_settings['directory_path'] . DIRECTORY_SEPARATOR . "assets" 
+			. DIRECTORY_SEPARATOR . "images" . DIRECTORY_SEPARATOR . "map_pins" 
+			. DIRECTORY_SEPARATOR;
             $images = glob($directory . "*.png");
 
             foreach ($images as $key => $val) {
@@ -2696,7 +2702,8 @@ class App extends CI_Controller {
                     }
                 }
 
-                $pins .= "<option data-imagesrc=\"$image_url\" value=\"$image_name\" $selected></option>";
+                $pins .= "<option data-imagesrc=\"$image_url\" value=\"$image_name\" 
+				$selected></option>";
             }
 
             $pins .= "</select>
@@ -2710,7 +2717,8 @@ class App extends CI_Controller {
     }
 
     public function get_saved_pins($form_id){
-        $result=$this->db->query("select pins from map_pin_settings where form_id='$form_id'")->result_array();
+        $result=$this->db->query("select pins from map_pin_settings 
+		where form_id='$form_id'")->result_array();
         if(!empty($result)) {
             return json_decode($result[0]['pins'], true);
         }
@@ -2718,7 +2726,8 @@ class App extends CI_Controller {
 
     public function get_saved_pins_html(){
         $form_id=$_POST['form_id'];
-        $result=$this->db->query("select pins from map_pin_settings where form_id='$form_id'")->result_array();
+        $result=$this->db->query("select pins from map_pin_settings 
+		where form_id='$form_id'")->result_array();
         if(!empty($result)) {
             $pins_data=json_decode($result[0]['pins'], true);
             $table="<div class='row'><table>";
@@ -2732,7 +2741,8 @@ class App extends CI_Controller {
                         <tr style='padding: 5px;'>
                             <td>$field</td>
                             <td>
-                                <img onclick=\"change_filter('$key','$field')\" src='$image_url' title='Click icon to edit' style='cursor:pointer'>
+                                <img onclick=\"change_filter('$key','$field')\" src='$image_url' 
+								title='Click icon to edit' style='cursor:pointer'>
                                 </td>
                         </tr>
                         ";
@@ -2755,7 +2765,8 @@ class App extends CI_Controller {
             $pins_arr[$field_name][$field_value] = $pin[0];
 
             $json_pins=json_encode($pins_arr);
-            $form_result=$this->db->query("select * from map_pin_settings where form_id='$form_id'")->result_array();
+            $form_result=$this->db->query("select * from map_pin_settings 
+			where form_id='$form_id'")->result_array();
             if(count($form_result)==0) {
                 if($this->db->query("insert into map_pin_settings (`form_id`,`pins`) values('$form_id','$json_pins')")){
                     echo "success";
