@@ -37,10 +37,10 @@ class Tempapi extends CI_Controller {
     //Re-Post the all record of given application which have not sent
     public function cardverificationapi(){
         $form_id = 10601;//$_REQUEST['api_id'];//10601
-        $cardnumber = $_REQUEST['cardnumber'];
+        $card_number = $_REQUEST['cardnumber'];
         $this->db->select('*');
         $this->db->from('zform_'.$form_id);
-        $this->db->where('cardnumber', $cardnumber);
+        $this->db->where('cardnumber', $card_number);
         $this->db->where('is_deleted', '0');
         $query = $this->db->get();
         $post_available = $query->result_array();

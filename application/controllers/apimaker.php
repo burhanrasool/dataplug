@@ -82,7 +82,7 @@ class Apimaker extends CI_Controller {
             $file_path = "assets/data/".$api_rec['file_name'];
             $row = 1;
             $options = array();
-            $existArray = array();
+            $exist_array = array();
             $data['fields_name']='';
             if (($handle = fopen($file_path, "r")) !== FALSE) {
                 while (($datas = fgetcsv($handle, 15000, ",")) !== FALSE) {
