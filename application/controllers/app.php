@@ -1915,7 +1915,8 @@ $this->session->set_flashdata('validate', array('message' =>
             $signing_command = "jarsigner -verbose -digestalg SHA1 -sigalg MD5withRSA
              -keystore $directory_path/assets/android/keystore/DataPlug.keystore
               -storepass dataplug_pitb -keypass 
-              dataplug_pitb $directory_path/assets/android/apps/unaligned_$newFileName DataPlug";
+              dataplug_pitb $directory_path/assets/android/apps/unaligned_
+              $newFileName DataPlug";
 
             exec($signing_command, $output3, $co);
 
@@ -1923,7 +1924,8 @@ $this->session->set_flashdata('validate', array('message' =>
             //$signing_command = "jarsigner -verbose -keystore $directory_path/assets/android/keystore/DataPlug.keystore -storepass dataplug_pitb -keypass dataplug_pitb $directory_path/assets/android/apps/$newFileName DataPlug";
 
             $zipaligned_command = "zipalign -v 4 
-            $directory_path/assets/android/apps/unaligned_$newFileName $directory_path/assets/android/apps/$newFileName";
+            $directory_path/assets/android/apps/unaligned_$newFileName 
+            $directory_path/assets/android/apps/$newFileName";
 
             exec($zipaligned_command, $output4, $co);
             unlink("$directory_path/assets/android/apps/unaligned_$newFileName");
@@ -1961,7 +1963,7 @@ $this->session->set_flashdata('validate', array('message' =>
             $this->session->set_flashdata('validate', array('message' 
 
                 => 'Android application created successfully.',
-                 'type' => 'success'));
+                'type' => 'success'));
 
             //redirect(base_url() . 'app/releasedapk/' . $app_id);
             redirect(base_url() . 'apps');
@@ -2144,9 +2146,12 @@ $this->session->set_flashdata('validate', array('message' =>
             $department_id = $session_data['login_department_id'];
 
             if ($this->input->post()) {
-                $this->form_validation->set_rules('latitude', 'Latitude', 'trim|required|xss_clean');
-                $this->form_validation->set_rules('longitude', 'Longitude', 'trim|required|xss_clean');
-                $this->form_validation->set_rules('zoom_level', 'Zoom Level', 'trim|required|xss_clean');
+                $this->form_validation->set_rules('latitude', 'Latitude',
+                'trim|required|xss_clean');
+                $this->form_validation->set_rules('longitude', 'Longitude',
+                'trim|required|xss_clean');
+                $this->form_validation->set_rules('zoom_level', 'Zoom Level',
+                'trim|required|xss_clean');
 
                 if ($this->form_validation->run() == FALSE) {
 
@@ -2210,7 +2215,7 @@ $this->session->set_flashdata('validate', array('message' =>
                         //array parameters : action, description, before, after, app_id, app_name, form_id, form_name
                         $logary = array('action' => 'insert', 'description' 
                             => 'Add application settings', 'after' => json_encode($app_settings),
-                             'app_id' => $app_id, 'app_name' => $selected_app['name']);
+                            'app_id' => $app_id, 'app_name' => $selected_app['name']);
                         addlog($logary);
                     }
 
@@ -2251,7 +2256,8 @@ $this->session->set_flashdata('validate', array('message' =>
         $first_form_columns='';
         $settings_exist = $this->app_model->get_app_settings_filters($app_id);
 //        get form settings first get all forms...
-        $app_forms = $this->form_model->get_form_by_app_for_app_settings($app_id);
+        $app_forms = $this->form_model
+        ->get_form_by_app_for_app_settings($app_id);
         $final_forms=array();
         $possible_and_defaults=array();
         $possible_filters_array='';
@@ -2269,7 +2275,8 @@ $this->session->set_flashdata('validate', array('message' =>
 //            get table columns name...
             $possible_filter_selected=$val['possible_filters'];
             $default_filter_selected=$val['filter'];
-            $table_columns=$this->form_results_model->getTableHeadingsFromSchema("zform_".$val['id']);
+            $table_columns=$this->form_results_model->
+            getTableHeadingsFromSchema("zform_".$val['id']);
             $all_columns=array();
             foreach($table_columns as $columns){
                 $all_columns[]=$columns["Field"];
