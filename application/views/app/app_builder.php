@@ -52,12 +52,14 @@ if ($view_list) {
                 <strong style="width: 110px; line-height: 20px; margin-top: 8px;">Splash Screen (.png only)</strong>
                 <img id='img_splash_screen' width="50" height="50" src="<?php
                 if(file_exists(FCPATH.'assets'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'data'.DIRECTORY_SEPARATOR.'form_icons'.DIRECTORY_SEPARATOR.$app_id.DIRECTORY_SEPARATOR.$splash_icon)){
-                    echo $imagepathicon = base_url() . 'assets/images/data/form_icons/' . $app_id . '/' .$splash_icon;
+                    echo $imagepathicon = base_url() .
+                        'assets/images/data/form_icons/' . $app_id . '/' .$splash_icon;
                 } else {
                     echo $imagepathicon = FORM_IMG_DISPLAY_PATH . '../form_icons/splash.png';
                 }
                 ?>" alt="" onClick="$('#splashfile').click();" style="margin-top: 7px;"/>
-                <input type="file" name="splashfile" id="splashfile" accept="*.png" onchange="check_file_splash(this)" style='display:none;'/>
+                <input type="file" name="splashfile" id="splashfile" 
+                       accept="*.png" onchange="check_file_splash(this)" style='display:none;'/>
 
             </td>
             <td></td>
@@ -69,7 +71,8 @@ if ($view_list) {
             <td>
                 <a href="#" class="saveForm" id="saveForm" style="top:-10px;">Save</a>
                 <?php if($this->acl->hasPermission('app', 'build')) {?>
-                <a id="create_application" onclick="$('#is_edit').val('1');" style="top:-10px;" >Build New Version</a>
+                <a id="create_application" onclick="$('#is_edit').
+                                                    val('1');" style="top:-10px;" >Build New Version</a>
                 <?php }?>
             </td>
         </tr>
@@ -77,10 +80,14 @@ if ($view_list) {
         <?php if($super_app_user=='yes'){?>
         <tr>
             <td colspan="2" style="padding: 5px 0 5px 35px">
-                <a href="<?= base_url() ?>assign-applicatioin-users/<?php echo $app_id?>" style="background-color: green; padding: 5px; color: white; border-radius: 5px;text-decoration: none;"  class="cbp-tm-icon-archive">
+                <a href="<?= base_url() ?>assign-applicatioin-users/<?php echo $app_id?>" 
+                   style="background-color: green; padding: 5px; color: white; border-radius: 5px;
+                          text-decoration: none;"  class="cbp-tm-icon-archive">
                     Assign application to other users
                 </a>
-                <a target="new" href="<?= base_url() ?>web/test/<?php echo $app_id?>" style="background-color: green; padding: 5px; color: white; border-radius: 5px; margin-left: 6px;text-decoration: none;" class="cbp-tm-icon-archive">
+                <a target="new" href="<?= base_url() ?>web/test/<?php echo $app_id?>" 
+                   style="background-color: green; padding: 5px; color: white; border-radius: 5px;
+                          margin-left: 6px;text-decoration: none;" class="cbp-tm-icon-archive">
                     Test in Web Mode
                 </a>
             </td>
@@ -93,30 +100,40 @@ if ($view_list) {
 <div id="content" class="wrapper">
     <div id="controls-left">
         <ul id="add-form-title" style="display:none;">
-            <li id="title-field" rel="<?php echo $name; ?>" icon_web="<?php echo $imagepathappicon; ?>" icon_device="<?php echo $icon; ?>">Form Title</li>
+            <li id="title-field" rel="<?php echo $name; ?>"
+                icon_web="<?php echo $imagepathappicon; ?>"
+                icon_device="<?php echo $icon; ?>">Form Title</li>
         </ul>
         <ul id="form-fields">
 
-            <li style='background: none;font-size: 16px;font-weight: bold;cursor: default;'>Control Menu</li>
+            <li style='background: none;font-size: 16px;font-weight: bold;
+                       cursor: default;'>Control Menu</li>
             <?php
             if(count($forms)==0)
             {
                if($this->acl->hasPermission('form', 'add')) {?>
         
-                <a style="text-decoration:none;"><li id="add_more_form_left" style="height: 30px;"><span></span>Add Form</li></a>
+                <a style="text-decoration:none;"><li id="add_more_form_left" 
+                                                     style="height: 30px;"><span></span>Add Form</li></a>
         
             <?php }
         
             }
             foreach ($forms as $form) {
                 ?>
-            <li id="form-icon-field" icon="<?php echo $form['icon']; ?>" icon-url="<?php echo FORM_IMG_DISPLAY_PATH . '../form_icons/' . $app_id . '/' . $form['icon']; ?>" form-url="<?php echo $form['linkfile']; ?>" form-title="<?php echo $form['title']; ?>" style="height:36px;">
+            <li id="form-icon-field" icon="<?php echo $form['icon']; ?>" 
+                icon-url="<?php echo FORM_IMG_DISPLAY_PATH . '../form_icons/' . $app_id . 
+                    '/' . $form['icon']; ?>" form-url="<?php echo $form['linkfile']; ?>" 
+                form-title="<?php echo $form['title']; ?>" style="height:36px;">
 
 
                     <?php
                     if (!empty($form['icon'])) {
                         ?>
-                        <img alt="" title="<?php echo $form['title']; ?>" class="formIconsUpload" src="<?php echo FORM_IMG_DISPLAY_PATH . '../form_icons/' . $app_id . '/' . $form['icon'] ?>">
+                        <img alt="" title="<?php echo $form['title']; ?>"
+                             class="formIconsUpload" 
+                             src="<?php echo FORM_IMG_DISPLAY_PATH . '../form_icons/' 
+                            . $app_id . '/' . $form['icon'] ?>">
                         <?php
                     }?>
                         <span title="<?php echo $form['title'];?>">
