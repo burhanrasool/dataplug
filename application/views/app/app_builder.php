@@ -103,20 +103,27 @@ if ($view_list) {
             {
                if($this->acl->hasPermission('form', 'add')) {?>
         
-                <a style="text-decoration:none;"><li id="add_more_form_left" style="height: 30px;"><span></span>Add Form</li></a>
+                <a style="text-decoration:none;">
+                    <li id="add_more_form_left" style="height: 30px;">
+                        <span></span>Add Form</li></a>
         
             <?php }
         
             }
             foreach ($forms as $form) {
                 ?>
-            <li id="form-icon-field" icon="<?php echo $form['icon']; ?>" icon-url="<?php echo FORM_IMG_DISPLAY_PATH . '../form_icons/' . $app_id . '/' . $form['icon']; ?>" form-url="<?php echo $form['linkfile']; ?>" form-title="<?php echo $form['title']; ?>" style="height:36px;">
+            <li id="form-icon-field" icon="<?php echo $form['icon']; ?>
+                                           " icon-url="<?php echo FORM_IMG_DISPLAY_PATH . '../form_icons/' . $app_id . 
+                    '/' . $form['icon']; ?>" form-url="<?php echo $form['linkfile']; ?>"
+                form-title="<?php echo $form['title']; ?>" style="height:36px;">
 
 
                     <?php
                     if (!empty($form['icon'])) {
                         ?>
-                        <img alt="" title="<?php echo $form['title']; ?>" class="formIconsUpload" src="<?php echo FORM_IMG_DISPLAY_PATH . '../form_icons/' . $app_id . '/' . $form['icon'] ?>">
+                        <img alt="" title="<?php echo $form['title']; ?>" 
+                             class="formIconsUpload" src="<?php echo FORM_IMG_DISPLAY_PATH .
+                            '../form_icons/' . $app_id . '/' . $form['icon'] ?>">
                         <?php
                     }?>
                         <span title="<?php echo $form['title'];?>">
@@ -176,8 +183,10 @@ if ($view_list) {
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="form-hd">
-                            <form id="form-preview" action="" class="TTWForm" method="post" novalidate onSubmit="return submitform(this)">
-                                <input type="hidden" name="app_id" id="app_id" value="<?php echo $app_id; ?>" />
+                            <form id="form-preview" action="" class="TTWForm" 
+                                  method="post" novalidate onSubmit="return submitform(this)">
+                                <input type="hidden" name="app_id" id="app_id"
+                                       value="<?php echo $app_id; ?>" />
                             </form>
                         </div>
                     </div>
@@ -205,12 +214,15 @@ if ($view_list) {
             foreach ($forms as $form) {
                 ?>
                 <li>
-                    <a href="<?= base_url() ?>app-form/<?php echo $form['form_id']; ?>" style="text-decoration:none;color:currentColor;">
+                    <a href="<?= base_url() ?>app-form/<?php echo $form['form_id']; ?>" 
+                       style="text-decoration:none;color:currentColor;">
 
                     <?php
                     if (!empty($form['icon'])) {
                         ?>
-                        <img  class="formIconsUpload" alt="" title="<?php echo $form['title']; ?>" src="<?php echo FORM_IMG_DISPLAY_PATH . '../form_icons/' . $app_id . '/' . $form['icon'] ?>">
+                        <img  class="formIconsUpload" alt="" title="<?php echo $form['title']; ?>"
+                             src="<?php echo FORM_IMG_DISPLAY_PATH .
+                            '../form_icons/' . $app_id . '/' . $form['icon'] ?>">
                         <?php
                     } ?>
                         <span title="<?php echo $form['title'];?>">
@@ -230,10 +242,15 @@ if ($view_list) {
                     <?php
                     if (!$view_id) {
                         ?>
-                        <a form_id="<?php echo $form['form_id']; ?>" app_id="<?=$app_id?>"  class="copy_form" title="Copy"><img src="<?= base_url() ?>assets/images/buildform.png" alt="" /></a>
+                        <a form_id="<?php echo $form['form_id']; ?>" app_id="<?=$app_id?>" 
+                           class="copy_form" title="Copy"><img src="<?= base_url() ?>
+                            assets/images/buildform.png" alt="" /></a>
                     <?php } ?>
                         <?php if($this->acl->hasPermission('form', 'delete')) {?>
-                        <a href="javascript:void(0)" title="Delete"><img form_id ="<?php echo $form['form_id']; ?>" class="delete_form" src="<?= base_url() ?>assets/images/tableLink3.png" alt="" /></a>
+                        <a href="javascript:void(0)" title="Delete">
+                            <img form_id ="<?php echo $form['form_id']; ?>" 
+                                 class="delete_form" src="<?= base_url() ?>
+                                                          assets/images/tableLink3.png" alt="" /></a>
                         <?php }?>
                     </div>
                 </li>
@@ -243,7 +260,8 @@ if ($view_list) {
         </ul>
         <?php if($this->acl->hasPermission('form', 'add')) {?>
         <ul id="add-form">
-             <a style="text-decoration:none;"><li id="add_more_form" style="height: 30px;"><span></span>Add Form</li></a>
+             <a style="text-decoration:none;"><li id="add_more_form" 
+                                                  style="height: 30px;"><span></span>Add Form</li></a>
         </ul>
         <?php }?>
     </div>
