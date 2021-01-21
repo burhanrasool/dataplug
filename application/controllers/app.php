@@ -2413,7 +2413,8 @@ class App extends CI_Controller {
                 $batch = array();
                 $session_data = $this->session->userdata('logged_in');
                 if (!$this->acl->hasPermission('form', 'view')) {
-                    $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                    $this->session->set_flashdata('validate', array('message' => "You don't have 
+					enough permissions to do this task.", 'type' => 'warning'));
                     redirect(base_url() . 'apps');
                 }
                 $app_r = array(''=>'Accept All Versions');
@@ -2494,20 +2495,24 @@ class App extends CI_Controller {
 //            get table columns name...
             $possible_filter_selected=$val['possible_filters'];
             $default_filter_selected=$val['filter'];
-            $table_columns=$this->form_results_model->getTableHeadingsFromSchema("zform_".$val['id']);
+            $table_columns=$this->form_results_model->getTableHeadingsFromSchema(
+			"zform_".$val['id']);
             $all_columns=array();
             foreach($table_columns as $columns){
                 $all_columns[]=$columns["Field"];
             }
             $all_forms_columns[$val['id']]=$all_columns;
 
-            $exclude_array = array('id', 'form_id','location_source','activity_datetime','created_datetime');
+            $exclude_array = array('id', 'form_id','location_source',
+			'activity_datetime','created_datetime');
             $possible_filters_array=array_diff($all_columns,$exclude_array);
             if($i==1) {
                 $first_form_columns = $possible_filters_array;
             }
-            $possible_and_defaults[$val['id']]['possible_filter_selected']=$possible_filter_selected;
-            $possible_and_defaults[$val['id']]['default_filter_selected']=$default_filter_selected;
+            $possible_and_defaults[$val['id']]['possible_filter_selected'
+			]=$possible_filter_selected;
+            $possible_and_defaults[$val['id']]['default_filter_selected'
+			]=$default_filter_selected;
             $filters_array[$val['id']]=$possible_filters_array+array("sent_by");
             $final_forms[$val['name']]=$val;
             $i++;
