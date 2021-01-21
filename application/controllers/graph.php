@@ -1149,14 +1149,22 @@ class Graph extends CI_Controller {
                 $counter = 0;
                 foreach ($category_list as $category) {
                     $counter ++;
-                    $district_wise_catorized = $this->form_results_model->get_district_categorized_count($form_id, $district['district_name'], $filter_attribute[0], $category, $from_date, $to_date);
+                    $district_wise_catorized = $this->form_results_model
+					->get_district_categorized_count($form_id,
+					$district['district_name'], $filter_attribute[0],
+					$category, $from_date, $to_date);
                     $total += $district_wise_catorized;
-                    $final_district_wise_array = array_merge($final_district_wise_array, array('district' => $district['district_name'], $category => $district_wise_catorized));
+                    $final_district_wise_array = array_merge
+					($final_district_wise_array, array('district' =>
+					$district['district_name'], $category =>
+					$district_wise_catorized));
                     if ($counter == count($category_list)) {
-                        $final_district_wise_array = array_merge($final_district_wise_array, array('total' => $total));
+                        $final_district_wise_array = array_merge
+						($final_district_wise_array, array('total' => $total));
                     }
                 }
-                $final_district_wise_array2[$district['district_name']] = $final_district_wise_array;
+                $final_district_wise_array2[$district
+				['district_name']] = $final_district_wise_array;
             }
             $data['district_categorized'] = $final_district_wise_array2;
 
@@ -1165,8 +1173,11 @@ class Graph extends CI_Controller {
             foreach ($category_list as $category) {
                 $categorieslist = explode(',', $category);
                 foreach ($categorieslist as $catu) {
-                    $category_count = $this->form_results_model->getCountCatgoryBase($form_id, $catu, $filter_attribute, $from_date, $to_date, $selected_district = '');
-                    $category_list_count = array_merge($category_list_count, array($catu => $category_count));
+                    $category_count = $this->form_results_model->getCountCatgoryBase
+					($form_id, $catu, $filter_attribute, $from_date,
+					$to_date, $selected_district = '');
+                    $category_list_count = array_merge($category_list_count,
+					array($catu => $category_count));
                     $totalRecords += $category_count;
                 }
             }
@@ -1185,7 +1196,8 @@ class Graph extends CI_Controller {
             $data['category_list'] = $category_list;
             $data['total_records'] = $total_record;
             $data['category_list_count'] = $category_list_count;
-            $data['graph_text'] = 'Graph By Category <b> ' . str_replace('_', ' ', $filter_attribute[0]) . '</b>';
+            $data['graph_text'] = 'Graph By Category <b> ' . 
+			str_replace('_', ' ', $filter_attribute[0]) . '</b>';
             $data['pageTitle'] = " Graph-View";
             $data['graph_type'] = 'Category';
             $data['app_id'] = $selected_form['app_id'];
@@ -1222,16 +1234,19 @@ class Graph extends CI_Controller {
         $data['app_name'] = $selected_app['name'];
 
         if ($graph_type == 'user') {
-            $users_lists = $this->app_users_model->get_app_users_app_based($selected_form['app_id'], $login_district);
+            $users_lists = $this->app_users_model->get_app_users_app_based
+			($selected_form['app_id'], $login_district);
             $users_lists_array = array();
             foreach ($users_lists as $users_name) {
 
-                $users_lists_array[] = array('imei_no' => $users_name['imei_no'], 'user_name' => $users_name['user_name']);
+                $users_lists_array[] = array('imei_no' => 
+				$users_name['imei_no'], 'user_name' => $users_name['user_name']);
             }
             $users_wise_counter = array();
             $totalRecords = 0;
             foreach ($users_lists_array as $users) {
-                $users_count = $this->form_results_model->getCountUserBased($slug, $users['imei_no']);
+                $users_count = $this->form_results_model
+				->getCountUserBased($slug, $users['imei_no']);
                 $users_wise_counter = array_merge($users_wise_counter, array($users['user_name'] => $users_count));
                 $totalRecords += $users_count;
             }
@@ -1598,13 +1613,21 @@ class Graph extends CI_Controller {
                     if (!array_key_exists($val['district_name'], $final_district_wise_array2)) {
                         $final_district_wise_array2[$val['district_name']] = array();
                         foreach ($new_category_list as $cat_listvv) {
-                            $final_district_wise_array2[$val['district_name']] = array_merge($final_district_wise_array2[$val['district_name']], array('district' => $val['district_name'], $cat_listvv => '0', 'total' => '0'));
+                            $final_district_wise_array2[$val['district_name']] = array_merge(
+							$final_district_wise_array2[$val['district_name']],
+							array('district' => $val['district_name'],
+							$cat_listvv => '0', 'total' => '0'));
                         }
                     }
                     if (array_key_exists($val['district_name'], $final_district_wise_array2)) {
-                        $final_district_wise_array2[$val['district_name']] = array_merge($final_district_wise_array2[$val['district_name']], array($cat_listv => $val['total'], 'total' => $final_district_wise_array2[$val['district_name']]['total'] + $val['total']));
+                        $final_district_wise_array2[$val['district_name']] = array_merge(
+						$final_district_wise_array2[$val['district_name']],
+						array($cat_listv => $val['total'], 'total' => $final_district_wise_array2
+						[$val['district_name']]['total'] + $val['total']));
                     } else {
-                        $final_district_wise_array2[$val['district_name']] = array('district' => $val['district_name'], $cat_listv => $val['total'], 'total' => $val['total']);
+                        $final_district_wise_array2[$val['district_name']] = array(
+						'district' => $val['district_name'], $cat_listv => $val['total'],
+						'total' => $val['total']);
                     }
                 }
             }
@@ -1666,7 +1689,8 @@ class Graph extends CI_Controller {
         $selected_form = $this->form_model->get_form($slug);
         //print_r($selected_form);
         $form_single_to_query = array();
-        $form_single_to_query[] = array('form_id' => $form_id, 'table_name' => 'zform_' . $form_id, 'form_name' => $selected_form['name']);
+        $form_single_to_query[] = array('form_id' => $form_id,
+		'table_name' => 'zform_' . $form_id, 'form_name' => $selected_form['name']);
 
         /** Get filters from  multiple forms * */
         $multiple_filters = $this->form_model->get_form_filters($form_single_to_query);
@@ -1692,7 +1716,8 @@ class Graph extends CI_Controller {
 
         $filter_result = get_graph_view_settings($selected_form['app_id']);
 
-        if (isset($filter_result->district_wise_report) && $filter_result->district_wise_report == 1) {
+        if (isset($filter_result->district_wise_report) 
+		&& $filter_result->district_wise_report == 1) {
 
             $new_category_list = array();
             foreach ($category_list as $cl_key => $cl_value) {
@@ -1707,19 +1732,30 @@ class Graph extends CI_Controller {
             $data['category_list'] = $new_category_list;
             $final_district_wise_array2 = array();
             foreach ($new_category_list as $cat_listv) {
-                $district_wise_catorized = $this->form_results_model->get_school_categorized_count_new($form_id, $_REQUEST['district'], $filter_attribute[0], $cat_listv, $from_date, $to_date);
+                $district_wise_catorized = $this->
+				form_results_model->get_school_categorized_count_new($form_id,
+				$_REQUEST['district'], $filter_attribute[0], $cat_listv, $from_date, $to_date);
 
                 foreach ($district_wise_catorized as $key => $val) {
                     if (!array_key_exists($val['EMIS_Code'], $final_district_wise_array2)) {
                         $final_district_wise_array2[$val['EMIS_Code']] = array();
                         foreach ($new_category_list as $cat_listvv) {
-                            $final_district_wise_array2[$val['EMIS_Code']] = array_merge($final_district_wise_array2[$val['EMIS_Code']], array('school' => $val['school_name'], 'Category' => $val['Category'], $cat_listvv => '0','total' => '0'));
+                            $final_district_wise_array2[$val['EMIS_Code']] = array_merge(
+							$final_district_wise_array2[$val['EMIS_Code']],
+							array('school' => $val['school_name'], 
+							'Category' => $val['Category'], $cat_listvv => '0','total' => '0'));
                         }
                     }
                     if (array_key_exists($val['EMIS_Code'], $final_district_wise_array2)) {
-                        $final_district_wise_array2[$val['EMIS_Code']] = array_merge($final_district_wise_array2[$val['EMIS_Code']], array($cat_listv => $val['total'], 'Category' => $val['Category'], 'total' => $final_district_wise_array2[$val['EMIS_Code']]['total'] + $val['total']));
+                        $final_district_wise_array2[$val['EMIS_Code']] = array_merge(
+						$final_district_wise_array2[$val['EMIS_Code']], array(
+						$cat_listv => $val['total'], 'Category' => $val['Category'],
+						'total' => $final_district_wise_array2
+						[$val['EMIS_Code']]['total'] + $val['total']));
                     } else {
-                        $final_district_wise_array2[$val['EMIS_Code']] = array('school' => $val['school_name'], $cat_listv => $val['total'], 'Category' => $val['Category'], 'total' => $val['total']);
+                        $final_district_wise_array2[$val['EMIS_Code']] = array('school' => 
+						$val['school_name'], $cat_listv => $val['total'], 'Category' => 
+						$val['Category'], 'total' => $val['total']);
                     }
                 }
             }

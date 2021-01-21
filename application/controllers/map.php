@@ -38,7 +38,9 @@ class Map extends CI_Controller {
      * @return  array An array of form heading and its data
      * @author UbaidUllah Balti <ubaidcskiu@gmail.com>
      */
-    public function get_heading_data_by_category($forms_list, $to_date, $from_date, $category_name, $filter_attribute_search, $town_filter, $posted_filters, $search_text = null, $export = null) {
+    public function get_heading_data_by_category($forms_list, $to_date,
+	$from_date, $category_name, $filter_attribute_search,
+	$town_filter, $posted_filters, $search_text = null, $export = null) {
         $form_id = $forms_list[0]['form_id'];
         $data['form_id'] = $form_id;
         $selected_form = $this->form_model->get_form($form_id);
@@ -162,7 +164,8 @@ class Map extends CI_Controller {
         $data['headings'] = $array_final['headings'];
         $data['form'] = $array_final['form'];
         $data['form_id'] = $forms_list[0]['form_id'];
-        $total_record_return = $this->form_results_model->TotalRecMultipleForm($forms_list);
+        $total_record_return = $this->form_results_model->
+		TotalRecMultipleForm($forms_list);
         $pdata['app_id'] = $slug;
         $pdata['TotalRec'] = $total_record_return;
         $pdata['perPage'] = $this->perPage;
@@ -180,13 +183,15 @@ class Map extends CI_Controller {
     public function pagination_ajax_data($slug = Null) {
         $forms_list = array();
         $form_single_to_query = array();
-        $form_single_to_query[] = array('form_id' => $slug, 'table_name' => 'zform_' . $slug);
+        $form_single_to_query[] = array('form_id' => $slug,
+		'table_name' => 'zform_' . $slug);
         $page_variable = isset($_POST['page']) ? $_POST['page'] : 0;
         $array_final = array();
         $array_final = $this->get_heading_n_data($form_single_to_query, 0);
         $data['headings'] = $array_final['headings'];
         $data['form'] = $array_final['form'];
-        $total_record_return = $this->form_results_model->return_total_record($form_single_to_query);
+        $total_record_return = $this->form_results_model->
+		return_total_record($form_single_to_query);
         $pdata['app_id'] = $slug;
         $pdata['TotalRec'] = $total_record_return;
         $pdata['perPage'] = $this->perPage;
@@ -202,7 +207,8 @@ class Map extends CI_Controller {
     }
 
     /**
-     * method  used to render the form pagination data by ajax call called from paging.php based on category
+     * method  used to render the form pagination data by 
+	 ajax call called from paging.php based on category
      * @return  void
      * @author UbaidUllah Balti <ubaidcskiu@gmail.com>
      */
@@ -233,7 +239,8 @@ class Map extends CI_Controller {
         } else {
             $data['selected_filters'] = '';
         }
-        $cat_filter_value = isset($_GET['cat_filter_value']) ? $_GET['cat_filter_value'] : " ";
+        $cat_filter_value = isset($_GET['cat_filter_value']) 
+		? $_GET['cat_filter_value'] : " ";
         $filter_attribute_search = $_GET['filter_attribute_search'];
         $search_text = $_GET['search_text'];
         $form_list_filter = $_GET['form_list_filter'];
@@ -248,16 +255,21 @@ class Map extends CI_Controller {
         $form_id = $slug;
         $array_final = array();
         $cat_filter_value = $value = str_replace('_', '/', $cat_filter_value);
-        $array_final = $this->get_heading_data_by_category($view_list, $to_date, $from_date, $cat_filter_value, $filter_attribute_search, $town_filter, $posted_filters, $search_text, $export = '');
+        $array_final = $this->get_heading_data_by_category($view_list, $to_date,
+		$from_date, $cat_filter_value, $filter_attribute_search,
+		$town_filter, $posted_filters, $search_text, $export = '');
         $data['headings'] = $array_final['headings'];
         $data['form'] = $array_final['form'];
         $selected_form = $this->form_model->get_form($slug);
         $forms_list = array();
         $all_forms = $this->form_model->get_form_by_app($selected_form['app_id']);
         foreach ($all_forms as $forms) {
-            $forms_list[] = array('form_id' => $forms['form_id'], 'form_name' => $forms['form_name']);
+            $forms_list[] = array('form_id' => $forms['form_id'],
+			'form_name' => $forms['form_name']);
         }
-        $total_record_return = $this->form_results_model->TotalRecByCategoryFilter($forms_list, $to_date, $from_date, $cat_filter_value, $filter_attribute_search, $town_filter, $posted_filters, $search_text);
+        $total_record_return = $this->form_results_model->TotalRecByCategoryFilter
+		($forms_list, $to_date, $from_date, $cat_filter_value, $filter_attribute_search,
+		$town_filter, $posted_filters, $search_text);
         $pdata['app_id'] = $selected_form['app_id'];
         $pdata['TotalRec'] = $total_record_return;
         $pdata['perPage'] = $this->perPage;
@@ -266,7 +278,8 @@ class Map extends CI_Controller {
         $pdata['form_list_filter'] = $form_list_filter;
         $data['form_id'] = $slug;
         $pdata['search_text'] = $search_text;
-        $data['paging_category_filter'] = $this->parser->parse('map/paging_category_filter', $pdata, TRUE);
+        $data['paging_category_filter'] = $this->parser->parse
+		('map/paging_category_filter', $pdata, TRUE);
         $data['all_form_results'] = $data['form'];
         $data['total_record_return'] = $total_record_return;
         $data['page_variable'] = $page_variable;
@@ -310,7 +323,8 @@ class Map extends CI_Controller {
         } else {
             $data['selected_filters'] = '';
         }
-        $cat_filter_value = isset($_GET['cat_filter_value']) ? $_GET['cat_filter_value'] : array();
+        $cat_filter_value = isset($_GET['cat_filter_value']) 
+		? $_GET['cat_filter_value'] : array();
         $filter_attribute_search = $_GET['filter_attribute_search'];
         $search_text = $_GET['search_text'];
         $form_list_filter = $_GET['form_list_filter'];
@@ -1719,7 +1733,8 @@ class Map extends CI_Controller {
                                 $exist_alpha[$first_char] = '1';
                                 $pin_name = $first_char . '1';
                             }
-                            $pin_exist_for_cat = array_merge($pin_exist_for_cat, array($valueforarray => $pin_name));
+                            $pin_exist_for_cat = array_merge($pin_exist_for_cat,
+							array($valueforarray => $pin_name));
                         } else {
                             if (array_key_exists($valueforarray, $pin_exist_for_cat)) {
                                 $pin_name = $pin_exist_for_cat[$valueforarray];
