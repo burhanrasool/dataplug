@@ -32,7 +32,8 @@ class Api extends CI_Controller {
         }
         @$imei_no = $_REQUEST ['imei_no'];
         $jsone_array = array();
-        $already_installed = $this->app_installed_model->get_app_installed($app_id, $imei_no);
+        $already_installed = $this->app_installed_model->
+        get_app_installed($app_id, $imei_no);
         if ($already_installed) {
             //$change_status = $already_installed ['change_status'];
             $jsone_array = $this->get_forms($app_id, $imei_no);
@@ -342,14 +343,18 @@ class Api extends CI_Controller {
             }
             
             //Get geoFence from App user table
-            $prefrences['geoFence']="[{'lng':74.33375,'lat':31.50282},{'lng':72.32271,'lat':31.49976},{'lng':74.3286,'lat':31.48541},{'lng':74.3474,'lat':30.48577},{'lng':74.33764,'lat':34.5049}]";
+            $prefrences['geoFence']="[{'lng':74.33375,'lat':31.50282},
+            {'lng':72.32271,'lat':31.49976},
+            {'lng':74.3286,'lat':31.48541},{'lng':74.3474,'lat':30.48577},
+            {'lng':74.33764,'lat':34.5049}]";
             
         }
         else{
             $prefrences = new stdClass();
         }
         $p = array('preferences' => $prefrences);
-        $form_array_return = array_merge($image_array_final, $form_array_final, $file_array_final,$p);
+        $form_array_return = array_merge($image_array_final,
+                                               $form_array_final, $file_array_final,$p);
         return $form_array_return;
     }
 
@@ -364,11 +369,14 @@ class Api extends CI_Controller {
         $app_id = $_REQUEST ['app_id'];
         $imei_no = $_REQUEST ['imei_no'];
         $jsone_array = array();
-        $latest_release = $this->app_released_model->get_latest_released($app_id);
+        $latest_release = $this->app_released_model->
+        get_latest_released($app_id);
         
-        $version_installed = $this->app_released_model->get_version_against_version_code($app_id,$version_code);
+        $version_installed = $this->app_released_model->
+        get_version_against_version_code($app_id,$version_code);
         
-        $already_installed = $this->app_installed_model->get_app_installed($app_id, $imei_no);
+        $already_installed = $this->app_installed_model->
+        get_app_installed($app_id, $imei_no);
 
         if ($already_installed) {
 
@@ -478,7 +486,8 @@ class Api extends CI_Controller {
         } else if (strpos($dateTime_device, '/') < 12) {
             $pattern = '#(\d+)/(\d+)/(\d+) (\d+):(\d+):(\d+)#';
             $replacement = '$1-$2-$3 $4:$5:$6';
-            $activity_datetime = preg_replace($pattern, $replacement, $dateTime_device);
+            $activity_datetime = preg_replace($pattern, $replacement,
+             $dateTime_device);
             $activity_datetime = date('Y-m-d H:i:s', strtotime($activity_datetime));
         } else {
             $activity_datetime = date('Y-m-d H:i:s', strtotime($_REQUEST ['dateTime']));
@@ -557,7 +566,8 @@ class Api extends CI_Controller {
 
             if ((float)$version_name < (float)$app_general_setting->minimum_version_to_accept) {
                 $jsone_array = array(
-                    'error' => 'Please refresh the application version, This is old version and not allow to submit data.'
+                    'error' => 
+                    'Please refresh the application version, This is old version and not allow to submit data.'
                 );
                 echo json_encode($jsone_array);
                 exit();
@@ -567,8 +577,10 @@ class Api extends CI_Controller {
         }
 
 
-        if (isset($app_general_setting->record_stop_sending) && $app_general_setting->record_stop_sending == 1) {
-            $error_message = "Record receiving service currently not available. Record saved localy. Please Try later";
+        if (isset($app_general_setting->record_stop_sending) && 
+        $app_general_setting->record_stop_sending == 1) {
+            $error_message = "Record receiving service currently not available.";
+            $error_message=$error_message."Record saved localy. Please Try later";
             if ($app_general_setting->message_stop_sending_record != '') {
                 $error_message = $app_general_setting->message_stop_sending_record;
             }
@@ -590,7 +602,8 @@ class Api extends CI_Controller {
         
         if($imei_no!==''){
             $authorized = $this->app_model->appuser_imei_already_exist($imei_no, $app_id);
-            if (isset($app_general_setting->only_authorized) && $app_general_setting->only_authorized == 1 && !$authorized) {
+            if (isset($app_general_setting->only_authorized) && 
+            $app_general_setting->only_authorized == 1 && !$authorized) {
                 $jsone_array = array(
                     'error' => 'You are not authorized'
                 );
@@ -610,12 +623,14 @@ class Api extends CI_Controller {
             'location_source' => $_REQUEST['location_source'],
             'version_name' => $_REQUEST['version_name']
             );
-        $activity_inserted_id = $this->form_results_model->save_mobile_activity($activity_temp);
+        $activity_inserted_id = $this->
+        form_results_model->save_mobile_activity($activity_temp);
         
 
 
         $direct_save = true;
-        if (isset($app_general_setting->direct_save) && $app_general_setting->direct_save == 1)
+        if (isset($app_general_setting->direct_save) && 
+        $app_general_setting->direct_save == 1)
         {
             $direct_save = false;
         }
@@ -649,7 +664,9 @@ class Api extends CI_Controller {
                 $captions_images[$key] = $v;
             } else if ($key == 'caption_sequence') {
                 $caption_sequence = urldecode($v);
-            } elseif ($key == 'form_id' || $key == 'row_key' || $key == 'security_key' || $key == "dateTime" || $key == "landing_page" || $key == "is_take_picture" || $key == 'form_icon_name') {
+            } elseif ($key == 'form_id' || $key == 'row_key' ||
+             $key == 'security_key' || $key == "dateTime" || $key == "landing_page" ||
+              $key == "is_take_picture" || $key == 'form_icon_name') {
                 
             } else {
 
@@ -681,7 +698,8 @@ class Api extends CI_Controller {
             //echo $this->db->last_query().'=======';
             //echo count($activity_aready_exist);
             if(!empty($activity_aready_exist)) {
-               $this->form_results_model->update_mobile_activity($activity_inserted_id,array('error'=>  'This card number already entered.'));
+               $this->form_results_model->update_mobile_activity($activity_inserted_id,
+               array('error'=>  'This card number already entered.'));
                $jsone_array = array(
                    'success' => 'This card number already uploaded and entered.'
                );
@@ -692,7 +710,8 @@ class Api extends CI_Controller {
 
         $warning_message = '';
         $app_map_view_setting = get_map_view_settings($app_id);
-        if(isset($app_map_view_setting->map_distance_mapping) && $app_map_view_setting->map_distance_mapping)//if Distance maping on then call this block
+        if(isset($app_map_view_setting->map_distance_mapping)
+         && $app_map_view_setting->map_distance_mapping)//if Distance maping on then call this block
         {
             $rectemp = $record; 
 
@@ -719,11 +738,14 @@ class Api extends CI_Controller {
 
 
                     $matching_value = $matching_array_temp[$app_map_view_setting->matching_field]; //this field name getting from setting and getting value from received json
-                    $kml_poligon_rec = $this->db->get_where('kml_poligon', array('app_id' => $app_id, 'type' => 'distence','matching_value' => $matching_value))->row_array();
+                    $kml_poligon_rec = $this->db->get_where('kml_poligon',
+                     array('app_id' => $app_id, 'type' => 'distence',
+                     'matching_value' => $matching_value))->row_array();
                     
                     if(!empty($kml_poligon_rec)){
                         $lat_long = explode(',', $location);//Received location from mobile device
-                        $distance_from_center = lan_lng_distance($kml_poligon_rec['latitude'], $kml_poligon_rec['longitude'],$lat_long[0], $lat_long[1]);
+                        $distance_from_center = lan_lng_distance($kml_poligon_rec['latitude'], 
+                        $kml_poligon_rec['longitude'],$lat_long[0], $lat_long[1]);
                         if($distance_from_center > $saved_distance)
                         {
                             $jsone_array = array(
@@ -805,7 +827,8 @@ class Api extends CI_Controller {
                 }
 
                 // move the file
-                if ($s3->putObjectFile($fileTempName, $bucket_name, $imgName, S3::ACL_PUBLIC_READ)) {
+                if ($s3->putObjectFile($fileTempName, $bucket_name, 
+                    $imgName, S3::ACL_PUBLIC_READ)) {
                     $imgName = 'http://' . $bucket_name . '.s3.amazonaws.com/' . $imgName;
                     $temp_array = array(
                         'image' => $imgName,
@@ -837,7 +860,8 @@ class Api extends CI_Controller {
                             'file' => $data ['upload_data'] ['file_name']
                         );
                         //$imgName = base_url() . 'assets/images/data/form-data/' . $data ['upload_data'] ['file_name'];
-                        $imgName = NFS_IMAGE_PATH.'/app_id_'.$app_id.'/'.$data ['upload_data'] ['file_name'];
+                        $imgName = NFS_IMAGE_PATH.'/app_id_'.$app_id.'/';
+                        $imgName = $imgName.$data ['upload_data'] ['file_name'];
                         $temp_array = array(
                             'image' => $imgName,
                             'title' => $image_title
