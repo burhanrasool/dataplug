@@ -461,7 +461,10 @@ class App extends CI_Controller {
     public function appusersimportcsv(){
 
              if (!$this->acl->hasPermission('app_users', 'add')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $this->session->set_flashdata('validate', array(
+                    'message' =>
+                     "You don't have enough permissions to do this task.",
+                      'type' => 'warning'));
                 redirect('/');
             }
             $this->load->library('form_validation');
@@ -474,13 +477,21 @@ class App extends CI_Controller {
             }
             if ($this->input->post()) {
                 if ($this->acl->hasSuperAdmin()) {
-                        $this->form_validation->set_rules('department_id_import', 'Department', 'trim|required|xss_clean');
+                        $this->form_validation->set_rules(
+                            'department_id_import',
+                             'Department', 'trim|required|xss_clean');
                 }
-                $this->form_validation->set_rules('app_id_import', 'App Id', 'trim|required|xss_clean');
+                $this->form_validation->set_rules(
+                    'app_id_import',
+                     'App Id', 'trim|required|xss_clean');
 
                 if ($this->form_validation->run() == FALSE) {
                     $batch = array($this->input->post('department_id_import'));
-                    $this->session->set_flashdata('validate', array('message' => "User must enter required field(s).", 'type' => 'warning'));
+                    $this->session->set_flashdata('validate',
+                     array(
+                         'message' =>
+                          "User must enter required field(s).",
+                           'type' => 'warning'));
                     redirect(base_url() . 'applicatioin-users');
                 } else {
 
@@ -508,7 +519,15 @@ class App extends CI_Controller {
 
                         if (!$this->upload->do_upload('user_import')) {
 
-                            $this->session->set_flashdata('validate', array('message' => 'File uploading issue, Check format of file or remove special character and spaces into file name', 'type' => 'error'));
+                            $this->session->set_flashdata(
+                                'validate',
+                                 array(
+                                     'message' =>
+                                      'File uploading issue,
+                                       Check format of file or
+                                        remove special character
+                                         and spaces into file name',
+                                          'type' => 'error'));
                             redirect(base_url() . 'applicatioin-users');
                             
                         } else {
@@ -542,7 +561,11 @@ class App extends CI_Controller {
 
                     }
                     else{
-                        $this->session->set_flashdata('validate', array('message' => "Select CSV file", 'type' => 'warning'));
+                        $this->session->set_flashdata(
+                            'validate', array(
+                                'message' =>
+                                 "Select CSV file",
+                                  'type' => 'warning'));
                         redirect(base_url() . 'applicatioin-users');
                     }
                 }
@@ -587,7 +610,9 @@ class App extends CI_Controller {
     		$file_path = $this->input->post('upload_file_path');
     		$row = 1;
     		$total_insertion = 0;
-    		$query = $this->db->query("SELECT * FROM app_users WHERE is_deleted=0 AND app_id = '$app_id'");
+    		$query = $this->db->query(
+                "SELECT * FROM
+                 app_users WHERE is_deleted=0 AND app_id = '$app_id'");
     		$myimeidata = $query->result_array();
     		$already_exist = array();
     		foreach ($myimeidata as $key => $myimei) {
@@ -608,11 +633,20 @@ class App extends CI_Controller {
                                         
                         if(!empty($data[$imei_no_index])){
                             $unique_identifi = $data[$imei_no_index];
-                            $query = $this->db->query("SELECT * FROM app_users WHERE is_deleted=0 AND app_id = '$app_id' AND imei_no='$unique_identifi'");
+                            $query = $this->db->query(
+                                "SELECT * FROM
+                                 app_users WHERE
+                                  is_deleted=0 AND
+                                   app_id = '$app_id'
+                                    AND imei_no='$unique_identifi'");
                         }
                         elseif(!empty($data[$login_user_index])){
                             $unique_identifi = $data[$login_user_index];
-                            $query = $this->db->query("SELECT * FROM app_users WHERE is_deleted=0 AND app_id = '$app_id' AND login_user='$unique_identifi'");
+                            $query = $this->db->query(
+                                "SELECT * FROM
+                                 app_users WHERE is_deleted=
+                                  AND app_id = '$app_id'
+                                   AND login_user='$unique_identifi'");
                         }
                         $current_rec = $query->row_array();
                         if (in_array($unique_identifi, $already_exist)) {
@@ -628,8 +662,21 @@ class App extends CI_Controller {
                                                 'mobile_number' => $data[$mobile_number_index],
                                                 'is_deleted' => '0',
                                                 'login_user' => isset($data[$login_user_index])?$data[$login_user_index]:'',
-                                                'login_password' => isset($data[$login_password_index])?$data[$login_password_index]:'',
-                                                'mobile_network' => isset($data[$mobile_network_index])?$data[$mobile_network_index]:'',
+                                                'login_password' 
+                                                => 
+                                                isset(
+                                                    $data[$login_password_index]
+                                                    )
+                                                    ?
+                                                    $data[$login_password_index]
+                                                    :'',
+                                                'mobile_network' => 
+                                                isset(
+                                                    $data[$mobile_network_index]
+                                                    )
+                                                    ?
+                                                    $data[$mobile_network_index]
+                                                    :'',
                                 );
 
                                 $this->db->where('id', $current_rec['id']);
@@ -650,15 +697,32 @@ class App extends CI_Controller {
                                                 'mobile_number' => $data[$mobile_number_index],
                                                 'is_deleted' => '0',
                                                 'login_user' => isset($data[$login_user_index])?$data[$login_user_index]:'',
-                                                'login_password' => isset($data[$login_password_index])?$data[$login_password_index]:'',
-                                                'mobile_network' => isset($data[$mobile_network_index])?$data[$mobile_network_index]:'',
+                                                'login_password'
+                                                 => 
+                                                 isset(
+                                                     $data[$login_password_index]
+                                                     )
+                                                     ?
+                                                     $data[$login_password_index]
+                                                     :'',
+                                                'mobile_network'
+                                                 => 
+                                                 isset(
+                                                     $data[$mobile_network_index]
+                                                     )?$data[$mobile_network_index]
+                                                     :'',
                                 );
 
                                 $total_insertion++;
                                 $this->db->insert('app_users', $record_imei);
                         }
-                        //array parameters : action, description, before, after, app_id, app_name, form_id, form_name
-                        $logary = array('action' => 'insert', 'description' => 'app users using import CSV', 'after' => json_encode($record_imei), 'app_id' => $app_id,);
+                        //array parameters : action, description, before,
+                        // after, app_id, app_name, form_id, form_name
+                        $logary = array(
+                            'action' => 
+                            'insert', 'description' => 
+                            'app users using import CSV', 'after' => 
+                            json_encode($record_imei), 'app_id' => $app_id,);
                         addlog($logary);
     				}
     			}
@@ -666,7 +730,9 @@ class App extends CI_Controller {
     				$already_ex=", Already Registered Users but Updated : ".$already_ex;
     			}
     			
-    			$this->session->set_flashdata('validate', array('message' => 'Application User imported successfully, Total Inserted Users = '.$total_insertion.$already_ex, 'type' => 'success'));
+                $this->session->set_flashdata('validate', array('message' =>
+                 'Application User imported successfully, Total Inserted Users = '
+                 .$total_insertion.$already_ex, 'type' => 'success'));
     			
     			fclose($handle);
     		}
@@ -683,7 +749,10 @@ class App extends CI_Controller {
     public function editAppUser($slug) {
         $user_id = $slug;
         if (!$this->acl->hasPermission('app_users', 'edit')) {
-            $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+            $this->session->set_flashdata(
+                'validate', array(
+                    'message' =>
+                     "You don't have enough permissions to do this task.", 'type' => 'warning'));
             redirect(base_url() . 'users');
         }
         $user_rec = $this->app_users_model->get_app_user_by_id($user_id);
@@ -710,11 +779,14 @@ class App extends CI_Controller {
         session_to_page($session_data, $data);
         $department_id = $session_data['login_department_id'];
         if ($this->input->post()) {
-            $this->form_validation->set_rules('user_name', 'User', 'trim|required|xss_clean');
+            $this->form_validation->set_rules(
+                'user_name', 'User', 'trim|required|xss_clean');
             if($this->input->post('login_user') == '')
-                $this->form_validation->set_rules('imei_no', 'IMEI NO', 'trim|required|xss_clean');
+                $this->form_validation->set_rules(
+                    'imei_no', 'IMEI NO', 'trim|required|xss_clean');
             else
-                $this->form_validation->set_rules('login_user', 'User Name', 'trim|required|callback_appuser_login_name_already_exist');
+                $this->form_validation->set_rules(
+                    'login_user', 'User Name', 'trim|required|callback_appuser_login_name_already_exist');
             //$this->form_validation->set_rules('mobile_number', 'Mobile NO', 'trim|required|xss_clean');
             //$this->form_validation->set_rules('town', 'Town  Name', 'trim|required|min_length[1]|xss_clean');
             if ($this->form_validation->run() == FALSE) {
@@ -748,9 +820,16 @@ class App extends CI_Controller {
                 
 
                 //array parameters : action, description, before, after, app_id, app_name, form_id, form_name
-                $logary = array('action' => 'update', 'description' => 'Edit application user', 'after' => json_encode($data), 'before' => json_encode($user_rec));
+                $logary = array(
+                    'action' => 'update', 'description' =>
+                     'Edit application user', 'after' =>
+                      json_encode($data), 'before' =>
+                       json_encode($user_rec));
                 addlog($logary);
-                $this->session->set_flashdata('validate', array('message' => 'Application User Updated Successfully.', 'type' => 'success'));
+                $this->session->set_flashdata(
+                    'validate', array(
+                        'message' =>
+                         'Application User Updated Successfully.', 'type' => 'success'));
                 redirect(base_url() . 'applicatioin-users');
             }
         }
@@ -778,7 +857,11 @@ class App extends CI_Controller {
     public function appusersview() {
 
         if (!$this->acl->hasPermission('users', 'add')) {
-            $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+            $this->session->set_flashdata(
+                'validate', array(
+                    'message' =>
+                     "You don't have enough permissions to do this task.",
+                      'type' => 'warning'));
             redirect('/');
         }
         $this->load->library('form_validation');
@@ -796,10 +879,17 @@ class App extends CI_Controller {
 
             $app_id = $this->input->post('app_id');
             if ($this->acl->hasSuperAdmin()) {
-                $this->form_validation->set_rules('department_id', 'Department', 'trim|required|xss_clean');
+                $this->form_validation->set_rules(
+                    'department_id',
+                     'Department',
+                      'trim|required|xss_clean');
             }
-            $this->form_validation->set_rules('app_id', 'App Id', 'trim|required|xss_clean');
-            $this->form_validation->set_rules('name', 'First Name', 'trim|required|min_length[1]|xss_clean');
+            $this->form_validation->set_rules(
+                'app_id', 'App Id',
+                 'trim|required|xss_clean');
+            $this->form_validation->set_rules(
+                'name', 'First Name',
+                 'trim|required|min_length[1]|xss_clean');
 
             if ($this->form_validation->run() == FALSE) {
                 $batch = array($this->input->post('department_id'));
@@ -813,7 +903,11 @@ class App extends CI_Controller {
                 );
 
                 $this->db->insert('app_users_view', $appviewdata);
-                $this->session->set_flashdata('validate', array('message' => 'User view added successfully', 'type' => 'success'));
+                $this->session->set_flashdata(
+                    'validate', array(
+                        'message' =>
+                         'User view added successfully',
+                          'type' => 'success'));
                 redirect(base_url() . 'app/appusersview');
             }
         }
@@ -845,7 +939,9 @@ class App extends CI_Controller {
      */
     function appuser_imei_already_exist($imei_no, $app_id) {
         if ($this->app_model->appuser_imei_already_exist($imei_no, $app_id)) {
-            $this->form_validation->set_message('appuser_imei_already_exist', 'The %s already registered for this app.');
+            $this->form_validation->set_message(
+                'appuser_imei_already_exist',
+                 'The %s already registered for this app.');
             return false;
         } else {
             return true;
@@ -859,7 +955,9 @@ class App extends CI_Controller {
      */
     function appuser_login_name_already_exist($login_user, $app_id) {
         if ($this->app_model->appuser_login_name_already_exist($login_user, $app_id)) {
-            $this->form_validation->set_message('appuser_login_name_already_exist', 'The %s not available.');
+            $this->form_validation->set_message(
+                'appuser_login_name_already_exist',
+                 'The %s not available.');
             return false;
         } else {
             return true;
@@ -878,7 +976,11 @@ class App extends CI_Controller {
             $session_data = $this->session->userdata('logged_in');
 
             if (!$this->acl->hasPermission('app', 'add')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $this->session->set_flashdata(
+                    'validate', array(
+                        'message' =>
+                         "You don't have enough permissions to do this task.",
+                          'type' => 'warning'));
                 redirect(base_url() . '');
             }
 
@@ -904,17 +1006,26 @@ class App extends CI_Controller {
                             'name' => $this->input->post('department_name')
                         );
                     } else {
-                        $this->form_validation->set_rules('app_name', 'App', 'trim|required|xss_clean|callback_app_already_exist[' . $department_id . ']');
+                        $this->form_validation->set_rules(
+                            'app_name', 'App',
+                             'trim|required|xss_clean|callback_app_already_exist[' . $department_id . ']');
                     }
                     $required_if = $this->input->post('department_id') == 'new' ? '|required' : '';
-                    $this->form_validation->set_rules('department_name', 'Department Name', 'trim' . $required_if . '|min_length[4]|xss_clean|callback_department_name_exists');
-                    $this->form_validation->set_rules('department_id', 'Department', 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('department_name',
+                     'Department Name',
+                      'trim' . $required_if .
+                       '|min_length[4]|xss_clean|callback_department_name_exists');
+                    $this->form_validation->set_rules(
+                        'department_id', 'Department', 'trim|required|xss_clean');
                 } else {
-                    $this->form_validation->set_rules('app_name', 'App', 'trim|required|xss_clean|callback_app_already_exist[' . $department_id . ']');
+                    $this->form_validation->set_rules(
+                        'app_name', 'App',
+                         'trim|required|xss_clean|callback_app_already_exist[' . $department_id . ']');
                 }
 
                 if ($this->form_validation->run() == FALSE) {
-                    $this->session->set_flashdata('validate', array('message' => 'Please enter the Required Fields', 'type' => 'error'));
+                    $this->session->set_flashdata('validate',
+                     array('message' => 'Please enter the Required Fields', 'type' => 'error'));
                     redirect(base_url());
                 } else {
                     $new = false;
@@ -941,12 +1052,18 @@ class App extends CI_Controller {
                     $app_id = $this->db->insert_id();
 
                     if (!$this->acl->hasSuperAdmin()) {
-                        $asign_array = array('user_id' => $session_data['login_user_id'], 'app_id' => $app_id);
+                        $asign_array = array(
+                            'user_id' =>
+                             $session_data['login_user_id'], 'app_id' => $app_id);
                         $this->db->insert('users_app', $asign_array);
                     }
 
-                    //array parameters : action, description, before, after, app_id, app_name, form_id, form_name
-                    $logary = array('action' => 'insert', 'description' => 'add new application', 'after' => json_encode($appdata), 'app_id' => $app_id, 'app_name' => $appName);
+                    //array parameters :
+                    // action, description, before, after, app_id, app_name, form_id, form_name
+                    $logary = array(
+                        'action' => 'insert', 'description' =>
+                         'add new application', 'after' =>
+                          json_encode($appdata), 'app_id' => $app_id, 'app_name' => $appName);
                     addlog($logary);
 
                     //upload app icon
@@ -967,7 +1084,11 @@ class App extends CI_Controller {
 
                         if (!$this->upload->do_upload('userfile_addapp')) {
                             $this->data['error'] = $this->upload->display_errors();
-                            $this->session->set_flashdata('validate', array('message' => $this->upload->display_errors() . ', Default icon has been embeded with your app.', 'type' => 'warning'));
+                            $this->session->set_flashdata(
+                                'validate', array(
+                                    'message' => $this->upload->display_errors() .
+                                     ', Default icon has been embeded with your app.',
+                                      'type' => 'warning'));
                         } else {
                             //success
                             $imageData=$this->upload->data();
@@ -1004,7 +1125,11 @@ class App extends CI_Controller {
 
                     //Old app setting
                     $general_settings = array(
-                        'app_id' => $app_id,'latitude' => '31.58219141239757','longitude' => '73.7677001953125','zoom_level' => '7','map_type' => 'Pin','district_filter' => 'Off','uc_filter' => 'Off','app_language' => 'english',
+                        'app_id' => $app_id,'latitude' =>
+                         '31.58219141239757','longitude' =>
+                          '73.7677001953125','zoom_level' =>
+                           '7','map_type' => 'Pin','district_filter' =>
+                            'Off','uc_filter' => 'Off','app_language' => 'english',
                     	'setting_type'=>'GENERAL_SETTINGS',
                     	'filters'=>GENERAL_SETTINGS
                     );
