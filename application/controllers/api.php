@@ -562,7 +562,8 @@ class Api extends CI_Controller {
 
 
         //Minimum version to accept activity
-        if(isset($app_general_setting->minimum_version_to_accept) && $app_general_setting->minimum_version_to_accept != ''){
+        if(isset($app_general_setting->minimum_version_to_accept) &&
+         $app_general_setting->minimum_version_to_accept != ''){
 
             if ((float)$version_name < (float)$app_general_setting->minimum_version_to_accept) {
                 $jsone_array = array(
@@ -906,7 +907,8 @@ class Api extends CI_Controller {
                     $error_before = array(
                         'file' => $data ['upload_data'] ['file_name']
                     );
-                    $imgName = NFS_IMAGE_PATH.'/app_id_'.$app_id.'/'.$data ['upload_data'] ['file_name'];
+                    $imgName = NFS_IMAGE_PATH.'/app_id_'.$app_id.'/';
+                    $imgName= $imgName.$data ['upload_data'] ['file_name'];
                     //$imgName = base_url() . 'assets/images/data/form-data/' . $data ['upload_data'] ['file_name'];
                     $temp_array = array(
                         'image' => $imgName,
@@ -919,7 +921,8 @@ class Api extends CI_Controller {
             $cap_id++;
         }
 
-        $this->form_results_model->update_mobile_activity($activity_inserted_id,array('form_images'=>  json_encode($images_array)));
+        $this->form_results_model->update_mobile_activity($activity_inserted_id,
+        array('form_images'=>  json_encode($images_array)));
         
         $err_msg='';
         $uc_name = '';
@@ -990,7 +993,8 @@ class Api extends CI_Controller {
                         $fields_count = $this->db->list_fields('zform_' . $form_id);
                         $fields_count = array_map('strtolower', $fields_count);
                         if(count($fields_count) < 90){
-                            $field = array($element => array('type' => 'VARCHAR', 'constraint' => 200, 'NULL' => TRUE));
+                            $field = array($element => array('type' => 'VARCHAR',
+                             'constraint' => 200, 'NULL' => TRUE));
                             $this->dbforge->add_column('zform_' . $form_id, $field, $after_field);
                         }else
                         {
@@ -1013,7 +1017,10 @@ class Api extends CI_Controller {
             ///////////////////////// HASSAN ANWAR     ////////////////////////////
             ///////////////////////////////////////////////////////////////////////
 
-            $multiChoices = $this->db->query("Select * from form_multiselectFieldLabels where formId='$form_id'");
+            $multiChoices = $this->db->
+            query(
+                "Select * from form_multiselectFieldLabels where formId='$form_id'"
+            );
             foreach($multiChoices->result() as $row)
             {
                 $fd=(array) $dataresultnew1;
@@ -1036,7 +1043,8 @@ class Api extends CI_Controller {
             ///////////////////////////////////////////////////////////////////////
         }
          
-        $this->form_results_model->update_mobile_activity($activity_inserted_id,array('form_data_decoded'=>  json_encode($dataresultnew1)));
+        $this->form_results_model->update_mobile_activity($activity_inserted_id,
+        array('form_data_decoded'=>  json_encode($dataresultnew1)));
 
         $final_array = array();
         foreach ($dataresultnew1 as $key => $value) {
@@ -1056,7 +1064,8 @@ class Api extends CI_Controller {
             
             if(!$ret_ins){
                 $err_msg .= $this->db->_error_message();
-                $this->form_results_model->update_mobile_activity($activity_inserted_id,array('error'=>$err_msg));
+                $this->form_results_model->update_mobile_activity($activity_inserted_id,
+                array('error'=>$err_msg));
     //            $jsone_array = array (
     //                        'error' => $err_msg
     //            );
@@ -1065,7 +1074,8 @@ class Api extends CI_Controller {
             }
             $form_result_id_new = $this->db->insert_id();
         }catch (Exception $e) {
-                $this->form_results_model->update_mobile_activity($activity_inserted_id,array('error'=>$e->message()));
+                $this->form_results_model->update_mobile_activity(
+                    $activity_inserted_id,array('error'=>$e->message()));
                 echo json_encode($jsone_array);
                 exit;
         }
@@ -1103,7 +1113,9 @@ class Api extends CI_Controller {
                     'image' => $image_path ['image']
                 );
                 if(strpos($image_path['title'], $form_info['security_key']) !== FALSE){
-                    $add_images ['title'] = urldecode(base64_decode(str_replace($form_info ['security_key'], '', $image_path['title'])));
+                    $add_images ['title'] = urldecode(
+                        base64_decode(str_replace($form_info ['security_key'],
+                     '', $image_path['title'])));
                 } else {
                     $add_images ['title'] = urldecode($image_path ['title']);
                 }
