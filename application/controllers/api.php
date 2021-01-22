@@ -1217,7 +1217,8 @@ class Api extends CI_Controller {
         //ob_get_level();
         //ob_start();
         ini_set ( 'memory_limit', '-1' );
-        $unsent_activity_array = $this->db->order_by('id', 'ASC')->get_where('mobile_activity_log',array(),100)->result_array();
+        $unsent_activity_array = $this->db->order_by('id'
+        , 'ASC')->get_where('mobile_activity_log',array(),100)->result_array();
         //echo count($unsent_activity_array);
         //exit;
         $i = 0;
