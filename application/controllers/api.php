@@ -19,7 +19,8 @@ class Api extends CI_Controller {
     }
 
     /**
-     * This function is used for updating the android application when user click on refresh button that available on android application title bar.
+     * This function is used for updating the android application when
+     user click on refresh button that available on android application title bar.
      * 
      * @return json
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
@@ -32,7 +33,8 @@ class Api extends CI_Controller {
         }
         @$imei_no = $_REQUEST ['imei_no'];
         $jsone_array = array();
-        $already_installed = $this->app_installed_model->get_app_installed($app_id, $imei_no);
+        $already_installed = $this->app_installed_model->get_app_installed($app_id,
+            $imei_no);
         if ($already_installed) {
             //$change_status = $already_installed ['change_status'];
             $jsone_array = $this->get_forms($app_id, $imei_no);
@@ -50,7 +52,8 @@ class Api extends CI_Controller {
     }
 
     /**
-     * This function is used for saving the installed application device imei#, for further updation of application.
+     * This function is used for saving the installed application
+     device imei#, for further updation of application.
      * 
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
@@ -65,8 +68,10 @@ class Api extends CI_Controller {
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
     function get_forms($app_id, $imei_no) {
-        // get imei_no against view_id if multiple views available of a single application
-        $views_list = $this->app_users_model->get_view_id_by_imei_no($app_id, $imei_no);
+        // get imei_no against view_id if multiple
+        //views available of a single application
+        $views_list = $this->app_users_model->get_view_id_by_imei_no($app_id,
+            $imei_no);
         $view_id = '';
         if ($views_list && $views_list ['view_id'] != '0') {
             $view_id = $views_list ['view_id'];
@@ -78,11 +83,13 @@ class Api extends CI_Controller {
         $form_array = array();
         $total_forms = count($forms);
 
-        // if multiple form available then make landing page which consist form icon with links. Otherwise launch form directly
+        // if multiple form available then make landing page
+        //which consist form icon with links. Otherwise launch form directly
         if ($total_forms > 1) {
             $selected_app = $this->app_model->get_app($app_id, $view_id);
             $image_array [] = array(
-                'image_url' => FORM_IMG_DISPLAY_PATH . '../form_icons/' . $app_id . '/' . $selected_app ['icon'],
+                'image_url' => FORM_IMG_DISPLAY_PATH . '../form_icons/' 
+                    . $app_id . '/' . $selected_app ['icon'],
                 'image_name' => $selected_app ['icon']
             );
 
@@ -107,7 +114,8 @@ class Api extends CI_Controller {
             $formId = $form ['form_id'];
             $formName = $form ['form_name'];
             $image_array [] = array(
-                'image_url' => FORM_IMG_DISPLAY_PATH . '../form_icons/' . $app_id . '/' . $form ['form_icon'],
+                'image_url' => FORM_IMG_DISPLAY_PATH . '../form_icons/' 
+                    . $app_id . '/' . $form ['form_icon'],
                 'image_name' => $form ['form_icon']
             );
             $formFullDescription = $form ['full_description'];
@@ -119,8 +127,10 @@ class Api extends CI_Controller {
                 $file_name_html = 'form_'.$form['form_id'].'.html';
             }
             $html_file = '';
-            if (file_exists('./assets/images/data/form_icons/' . $app_id . '/' . $file_name_html)) {
-                $html_file = FORM_IMG_DISPLAY_PATH . '../form_icons/' . $app_id . '/' . $file_name_html;
+            if (file_exists('./assets/images/data/form_icons/' 
+                . $app_id . '/' . $file_name_html)) {
+                $html_file = FORM_IMG_DISPLAY_PATH . '../form_icons/' ;
+                $html_file .= $app_id . '/' . $file_name_html;
             }
 
             $released = $this->app_released_model->get_latest_released($app_id);
@@ -2382,7 +2392,8 @@ class Api extends CI_Controller {
 
     //for hospital watch app
     public function hospitalwatchapi() {
-        //if (isset($_REQUEST['app_id']) && isset($_REQUEST['last_date_stamp']) && isset($_REQUEST['security_token'])) {
+        //if (isset($_REQUEST['app_id']) && isset($_REQUEST['last_date_stamp'])
+        //&& isset($_REQUEST['security_token'])) {
         if (isset($_REQUEST['app_id'])) {
             $app_id = $_REQUEST['app_id'];
             $last_date_stamp = isset($_REQUEST['last_date_stamp']) ? $_REQUEST['last_date_stamp'] : '';

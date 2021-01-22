@@ -89,7 +89,6 @@ class Cron extends CI_Controller {
 
         
         //$query = "SELECT * FROM mobile_activity_log WHERE CAST(created_datetime AS DATE) < '$datetime' and app_id='269' limit 20000";
-      
         $query_result = $this->db->query($query);
         $results = $query_result->result_array();
         if(count($results)>0){
