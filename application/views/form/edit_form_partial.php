@@ -1,14 +1,16 @@
 <div style="width: 473px; margin: 0 0 0 67px">
     <?php
     $this->load->helper('form');
-    echo form_open_multipart('form/edit_listview_partial', array('method' => 'post', 'id' => 'add_data_form'));
+    echo form_open_multipart('form/edit_listview_partial',
+     array('method' => 'post', 'id' => 'add_data_form'));
     ?>
     <?php if (empty($description)) { ?>
         <input type="hidden" name="form_id" id="form_id" value="<?php echo $form_id; ?>" />
         <?php
     } else {
         ?>
-        <input type="hidden" name="form_result_id" id="form_result_id" value="<?php echo $form_result_id; ?>" />
+        <input type="hidden" name="form_result_id" id="form_result_id" 
+        value="<?php echo $form_result_id; ?>" />
         <?php
         echo $description;
     }
@@ -181,7 +183,8 @@
             var tab_id = jQuery('#' + drop_to_item_id).attr('rel');
             ui.draggable.remove();
             jQuery('#' + tab_id).append(item.context.outerHTML);
-            jQuery('#' + ui.draggable.attr('id')).attr('style', 'left:auto;right:auto;position:relative;opacity:1')
+            jQuery('#' + ui.draggable.attr('id')).attr('style',
+             'left:auto; right:auto; position:relative; opacity:1' )
         }
     });
 

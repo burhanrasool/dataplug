@@ -10,7 +10,10 @@ Class Users_model extends CI_Model {
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
     function login($username, $password) {
-        $this->db->select('u.id id, u.email, u.username,u.first_name,u.last_name, u.password,d.id department_id,d.name department_name, u.parent_id, u.group_id, u.is_deleted, u.status,u.verification_code,u.default_url, u.district');
+        $this->db->select('u.id id, u.email, u.username,u.first_name,u.last_name,
+         u.password,d.id department_id,d.name department_name, u.parent_id,
+          u.group_id, u.is_deleted, u.status,u.verification_code,u.default_url,
+           u.district');
         $this->db->from('users u');
         $this->db->join('users_group ug', 'u.group_id = ug.id', 'left');
         $this->db->join('department d', 'u.department_id = d.id', 'left');
@@ -37,7 +40,9 @@ Class Users_model extends CI_Model {
      */
     function get_users($parent_id) {
 
-        $this->db->select('u.id id, u.username,u.email,u.first_name,u.last_name,d.id department_id,d.name department_name, u.parent_id, u.group_id,ug.type group_name,u.status');
+        $this->db->select('u.id id, u.username,u.email,u.first_name,u.last_name,
+        d.id department_id,d.name department_name, u.parent_id, u.group_id,
+        ug.type group_name,u.status');
         $this->db->from('users u');
         $this->db->join('users_group ug', 'u.group_id = ug.id', 'left');
         $this->db->join('department d', 'u.department_id = d.id');
@@ -59,7 +64,8 @@ Class Users_model extends CI_Model {
      */
     function get_all_users() {
 
-        $this->db->select('u.id id, u.username,u.email,u.first_name,u.last_name,u.department_id, u.parent_id, u.group_id,u.status');
+        $this->db->select('u.id id, u.username,u.email,u.first_name,u.last_name,
+        u.department_id, u.parent_id, u.group_id,u.status');
         $this->db->from('users u');
         
         $this->db->where('u.is_deleted', 0);
@@ -74,7 +80,8 @@ Class Users_model extends CI_Model {
      */
     function get_super_admin() {
 
-        $this->db->select('u.id id, u.username,u.email,u.first_name,u.last_name,u.parent_id, u.group_id');
+        $this->db->select('u.id id, u.username,u.email,u.first_name,u.last_name,
+        u.parent_id, u.group_id');
         $this->db->from('users u');
         $this->db->where('u.department_id !=', 0);
         $this->db->where('u.is_deleted', 0);
@@ -90,7 +97,9 @@ Class Users_model extends CI_Model {
      */
     function get_user_by_id($user_id) {
 
-        $this->db->select('u.id id, u.username, u.email,u.first_name,u.last_name,d.id department_id,d.name department_name, u.parent_id, u.group_id,ug.type group_name, u.default_url, u.district');
+        $this->db->select('u.id id, u.username, u.email,u.first_name,u.last_name,
+        d.id department_id,d.name department_name, u.parent_id, u.group_id,
+        ug.type group_name, u.default_url, u.district');
         $this->db->from('users u');
         $this->db->join('users_group ug', 'u.group_id = ug.id', 'left');
         $this->db->join('department d', 'u.department_id = d.id', 'left');
@@ -110,7 +119,8 @@ Class Users_model extends CI_Model {
      */
     public function username_already_exist($user_name) {
 
-        $query = $this->db->get_where('users', array('username' => $user_name, 'is_deleted' => '0'));
+        $query = $this->db->get_where('users', 
+        array('username' => $user_name, 'is_deleted' => '0'));
         $exist = $query->result_array();
         if ($exist) {
             return true;
@@ -151,7 +161,8 @@ Class Users_model extends CI_Model {
      */
     public function get_user_by_username($user_name) {
 
-        $query = $this->db->get_where('users', array('username' => $user_name, 'is_deleted' => '0'));
+        $query = $this->db->get_where('users',
+         array('username' => $user_name, 'is_deleted' => '0'));
         $exist = $query->row_array();
         if ($exist) {
             return $exist;
@@ -186,7 +197,8 @@ Class Users_model extends CI_Model {
      */
     public function user_name_already_exist($user_name, $user_id) {
 
-        $query = $this->db->get_where('users', array('username' => $user_name, 'is_deleted' => '0', 'id !=' => $user_id));
+        $query = $this->db->get_where('users',
+         array('username' => $user_name, 'is_deleted' => '0', 'id !=' => $user_id));
         $exist = $query->result_array();
         if ($exist) {
             return true;
@@ -204,7 +216,8 @@ Class Users_model extends CI_Model {
      */
     public function email_already_exist_edit($email, $user_id) {
 
-        $query = $this->db->get_where('users', array('email' => $email, 'is_deleted' => '0', 'id !=' => $user_id));
+        $query = $this->db->get_where('users',
+         array('email' => $email, 'is_deleted' => '0', 'id !=' => $user_id));
         $exist = $query->result_array();
         if ($exist) {
             return true;
@@ -222,7 +235,8 @@ Class Users_model extends CI_Model {
      */
     public function current_password_check($password, $user_id) {
 
-        $query = $this->db->get_where('users', array('password' => md5($password), 'is_deleted' => '0', 'id' => $user_id));
+        $query = $this->db->get_where('users',
+         array('password' => md5($password), 'is_deleted' => '0', 'id' => $user_id));
         $exist = $query->result_array();
         if ($exist) {
             return true;
@@ -409,7 +423,8 @@ Class Users_model extends CI_Model {
      */
     public function group_already_exist($group_name, $department_id) {
 
-        $query = $this->db->get_where('users_group', array('type' => $group_name, 'department_id' => $department_id));
+        $query = $this->db->get_where('users_group',
+         array('type' => $group_name, 'department_id' => $department_id));
         $exist = $query->result_array();
         if ($exist) {
             return true;
@@ -426,7 +441,8 @@ Class Users_model extends CI_Model {
      */
     public function get_parent_user($department_id) {
 
-        $query = $this->db->get_where('users', array('parent_id' => '0', 'department_id' => $department_id,'is_deleted'=>'0'));
+        $query = $this->db->get_where('users',
+         array('parent_id' => '0', 'department_id' => $department_id,'is_deleted'=>'0'));
         return $query->row_array();
     }
 
@@ -440,7 +456,8 @@ Class Users_model extends CI_Model {
 
         $session_data = $this->session->userdata('logged_in');
         $group_id = $session_data['login_group_id'];
-        $query = $this->db->get_where('users_group', array('department_id' => $department_id, 'id !=' => $group_id));
+        $query = $this->db->get_where('users_group', 
+        array('department_id' => $department_id, 'id !=' => $group_id));
 
         $groups = array();
 
@@ -485,7 +502,8 @@ Class Users_model extends CI_Model {
      */
     function get_app_users($department_id) {
 
-        $this->db->select('au.id id, u.name,u.town,u.imei_no,d.id department_id,d.name department_name, u.parent_id, u.group_id,ug.type group_name,u.status');
+        $this->db->select('au.id id, u.name,u.town,u.imei_no,d.id department_id,
+        d.name department_name, u.parent_id, u.group_id,ug.type group_name,u.status');
         $this->db->from('app_users au');
         $this->db->join('users_group ug', 'u.group_id = ug.id', 'left');
         $this->db->join('department d', 'u.department_id = d.id');
@@ -508,7 +526,8 @@ Class Users_model extends CI_Model {
      */
     function get_user_by_department_id($department_id) {
 
-        $this->db->select('u.id id, u.username, u.email,u.first_name,u.last_name, u.parent_id, u.group_id, u.default_url, u.district');
+        $this->db->select('u.id id, u.username, u.email,u.first_name,u.last_name, 
+        u.parent_id, u.group_id, u.default_url, u.district');
         $this->db->from('users u');
         //$this->db->join('users_group ug', 'u.group_id = ug.id', 'left');
         //$this->db->join('department d', 'u.department_id = d.id', 'left');

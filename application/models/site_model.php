@@ -33,7 +33,9 @@ class Site_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function get_all_log_ajax($limit=null,$length=null,$search0=null,$search1=null,$search2=null,$search3=null,$search6=null,$search7=null,$search10=null,$sort_column=null,$sort_order=null) {
+    public function get_all_log_ajax($limit=null,$length=null,$search0=null,
+    $search1=null,$search2=null,$search3=null,$search6=null,$search7=null,
+    $search10=null,$sort_column=null,$sort_order=null) {
         $allColumns=array("changed_by_name",
                         "department_name",
                         "action_type",

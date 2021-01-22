@@ -253,7 +253,9 @@ class Complaint_model extends CI_Model {
             "created_datetime"
         );
 //        $query = $this->db->get_where('app', array('is_deleted' => '0'));
-        $this->db->select("a.id id,a.type,a.module_name, d.id department_id,a.icon, a.name name, a.created_datetime created_datetime, d.name department_name, CONCAT_WS(' ',u.first_name ,u.last_name) as user_name",FALSE);
+        $this->db->select("a.id id,a.type,a.module_name, d.id department_id,a.icon, 
+        a.name name, a.created_datetime created_datetime, d.name department_name,
+         CONCAT_WS(' ',u.first_name ,u.last_name) as user_name",FALSE);
         $this->db->from('app a');
         $this->db->join('department d', 'a.department_id = d.id');
         $this->db->join('users u', 'a.user_id = u.id','left');

@@ -492,7 +492,12 @@ class Form_Results_model extends CI_Model {
     }
 
     //new isntanct
-    public function get_result_paginated_posted($table_name = FALSE, $to_date, $from_date, $category_name = array(), $filter_attribute_search = Null, $town_filter = '', $posted_filters = array(), $search_text, $district = '', $sent_by = '', $per_page, $selected_dc, $selected_uc, $selected_pp, $selected_na, $dynamic_filters) {
+    public function get_result_paginated_posted($table_name = FALSE,
+     $to_date, $from_date, $category_name = array(),
+      $filter_attribute_search = Null, $town_filter = '',
+       $posted_filters = array(), $search_text, $district = '',
+        $sent_by = '', $per_page, $selected_dc, $selected_uc, 
+        $selected_pp, $selected_na, $dynamic_filters) {
 
         $table_array = explode('_', $table_name);
         $form_id = $table_array[count($table_array) - 1];
@@ -702,7 +707,16 @@ class Form_Results_model extends CI_Model {
 
     //new instance
 
-    public function return_total_record_posted($form_list, $to_date, $from_date, $category_name = array(), $filter_attribute_search, $town_filter = '', $posted_filters = array(), $search_text = '', $district = '', $sent_by = '', $selected_dc, $dynamic_filters) {
+    public function return_total_record_posted($form_list, $to_date, $from_date,
+     $category_name = array(),
+      $filter_attribute_search, 
+      $town_filter = '',
+      $posted_filters = array(),
+       $search_text = '',
+        $district = '',
+       $sent_by = '',
+        $selected_dc, $dynamic_filters) {
+
         $dynamic_cond = '';
         $lists = '';
         $join_cond = "";
@@ -721,7 +735,10 @@ class Form_Results_model extends CI_Model {
             $table_headers_array = array();
             $heading_counter_array = array();
             $table_header_text = '';
-            $exclude_array = array('id', 'uc_name', 'created_datetime', 'district_name', 'town_name', 'location', 'form_id', 'img1', 'img2', 'img3', 'img4', 'img5', 'img1_title', 'img2_title', 'img3_title', 'img4_title', 'img5_title', 'is_deleted');
+            $exclude_array = array('id', 'uc_name', 'created_datetime', 'district_name',
+             'town_name', 'location', 'form_id', 'img1', 'img2', 'img3', 'img4', 'img5', 
+             'img1_title', 'img2_title', 'img3_title', 'img4_title', 'img5_title',
+              'is_deleted');
             $heading_query = $this->getTableHeadingsFromSchema($table_name);
             foreach ($heading_query as $key => $value) {
                 $header_value = $value['COLUMN_NAME'];

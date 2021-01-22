@@ -19,8 +19,10 @@
                                     <strong>Form Name</strong>
                                 </label>
                                 <div>
-                                    <input class="required" type="text" name="form_name" id="form_name" value="" onKeyPress="$('#addformbtn').show();"/>
-                                    <input type="hidden" name="app_id" id="d1_textfield" value="<?php echo $app_id; ?>" />
+                                    <input class="required" type="text" name="form_name" 
+                                    id="form_name" value="" onKeyPress="$('#addformbtn').show();"/>
+                                    <input type="hidden" name="app_id" id="d1_textfield" 
+                                    value="<?php echo $app_id; ?>" />
                                 </div>
                             </div>
                             <div class="row">
@@ -28,12 +30,14 @@
                                     <strong>Form Icon (.png only)</strong>
                                 </label>
                                 <div style="float: left;">
-                                    <input type="file" name="userfile_addform" id="userfile_addform" accept="*.png" onchange="check_file()"/>
+                                    <input type="file" name="userfile_addform" id="userfile_addform"
+                                     accept="*.png" onchange="check_file()"/>
                                 </div>
                             </div>
                             <div class="actions">
                                 <div class="right">
-                                    <button class="submit genericBtn" id="addformbtn" onclick="$(this).hide();">Add Form</button>
+                                    <button class="submit genericBtn" id="addformbtn"
+                                     onclick="$(this).hide();">Add Form</button>
                                 </div>
 
                             </div>

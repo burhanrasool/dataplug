@@ -8,13 +8,15 @@
                 <tbody>
                     <tr>
                         <td>
-                            <form action="<?= base_url() ?>form/edit/<?php echo $form_id ?>" method="POST" class="full validate add_task_form" enctype="multipart/form-data"/>
+                            <form action="<?= base_url() ?>form/edit/<?php echo $form_id ?>" 
+                            method="POST" class="full validate add_task_form" enctype="multipart/form-data"/>
                             <div class="row">
                                 <label for="d1_textfield">
                                     <strong>Form Name</strong>
                                 </label>
                                 <div>
-                                    <input class="required" type="text" name="form_name" id="d1_textfield" value="<?php echo $form_name; ?>"/>
+                                    <input class="required" type="text" name="form_name" id="d1_textfield"
+                                     value="<?php echo $form_name; ?>"/>
                                     <input type="hidden" name="app_id" id="d1_textfield" value="<?php echo $app_id;?>" />
                                 </div>
                             </div>
@@ -23,7 +25,8 @@
                                     <strong>Form Icon (.png only)</strong>
                                 </label>
                                 <div>
-                                    <input type="file" name="userfile" id="userfile" accept="*.png" onchange="check_file()"/>
+                                    <input type="file" name="userfile" id="userfile" accept="*.png" 
+                                    onchange="check_file()"/>
                                 </div>
                                 
                                     <?php

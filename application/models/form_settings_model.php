@@ -68,7 +68,8 @@ class Form_Settings_model extends CI_Model {
         $data=array(
             "form_id"=>$form_id,
             "field_name"=>$field_name,
-            "field_show_name"=>trim(preg_replace('/[^A-Za-z0-9\-]/', ' ', urldecode($field_name)))
+            "field_show_name"=>trim(preg_replace('/[^A-Za-z0-9\-]/', ' ', 
+            urldecode($field_name)))
         );
         $this->db->insert('form_field_settings', $data);
         return $this->db->insert_id();

@@ -13,14 +13,16 @@
                 <tbody>
                     <tr>
                         <td>
-                            <?php echo form_open(base_url().'form/copy/'.$form_id,'id="addform" class="full validate add_task_form " enctype="multipart/form-data"'); ?>
+                            <?php echo form_open(base_url().'form/copy/'.$form_id,
+                            'id="addform" class="full validate add_task_form " enctype="multipart/form-data"'); ?>
                             <?php if ($this->acl->hasSuperAdmin()) { ?>
                                 <div class="row">
                                     <label for="d1_textfield">
                                         <strong>Copy to Department</strong>
                                     </label>
                                     <div>
-                                        <?php echo form_dropdown('department_id', $departments, $batch, 'id="department_id"'); ?>
+                                        <?php echo form_dropdown('department_id', $departments,
+                                         $batch, 'id="department_id"'); ?>
                                     </div>
                                     <span class="error">
                                         <?php echo $this->form_validation->error('department_id'); ?>
@@ -41,7 +43,8 @@
                                                 foreach ($app_list as $value) {
                                                     ?>
                                                     <option
-                                                        value="<?php echo $value['id'] ?>"><?php echo $value['name']; ?></option>
+                                                        value="<?php echo $value['id'] ?>">
+                                                        <?php echo $value['name']; ?></option>
                                                 <?php
                                                 }
                                             }
