@@ -198,19 +198,23 @@ if ($view_list) {
             if(count($forms)>1){?>
             <li class="li-checked" style="padding: 20px!important;height: 22px;">Control Menu</li>
             <?php }else{?>
-            <li id="edit_app_popup" style="cursor: pointer;height: 22px;">Edit Application</li>
+            <li id="edit_app_popup" style="cursor: pointer;
+                                           height: 22px;">Edit Application</li>
             <?php }
             }?>
             <?php
             foreach ($forms as $form) {
                 ?>
                 <li>
-                    <a href="<?= base_url() ?>app-form/<?php echo $form['form_id']; ?>" style="text-decoration:none;color:currentColor;">
+                    <a href="<?= base_url() ?>app-form/<?php echo $form['form_id']; ?>"
+                       style="text-decoration:none;color:currentColor;">
 
                     <?php
                     if (!empty($form['icon'])) {
                         ?>
-                        <img  class="formIconsUpload" alt="" title="<?php echo $form['title']; ?>" src="<?php echo FORM_IMG_DISPLAY_PATH . '../form_icons/' . $app_id . '/' . $form['icon'] ?>">
+                        <img  class="formIconsUpload" alt="" title="<?php echo $form['title']; ?>" 
+                             src="<?php echo FORM_IMG_DISPLAY_PATH . '../form_icons/' . $app_id 
+                            . '/' . $form['icon'] ?>">
                         <?php
                     } ?>
                         <span title="<?php echo $form['title'];?>">
@@ -230,10 +234,15 @@ if ($view_list) {
                     <?php
                     if (!$view_id) {
                         ?>
-                        <a form_id="<?php echo $form['form_id']; ?>" app_id="<?=$app_id?>"  class="copy_form" title="Copy"><img src="<?= base_url() ?>assets/images/buildform.png" alt="" /></a>
+                        <a form_id="<?php echo $form['form_id']; ?>" app_id="<?=$app_id?>" 
+                           class="copy_form" title="Copy"><img src="<?= base_url() ?>
+                            assets/images/buildform.png" alt="" /></a>
                     <?php } ?>
                         <?php if($this->acl->hasPermission('form', 'delete')) {?>
-                        <a href="javascript:void(0)" title="Delete"><img form_id ="<?php echo $form['form_id']; ?>" class="delete_form" src="<?= base_url() ?>assets/images/tableLink3.png" alt="" /></a>
+                        <a href="javascript:void(0)" title="Delete">
+                            <img form_id ="<?php echo $form['form_id']; ?>"
+                                 class="delete_form" src="<?= base_url() ?>
+                                                          assets/images/tableLink3.png" alt="" /></a>
                         <?php }?>
                     </div>
                 </li>
@@ -243,7 +252,9 @@ if ($view_list) {
         </ul>
         <?php if($this->acl->hasPermission('form', 'add')) {?>
         <ul id="add-form">
-             <a style="text-decoration:none;"><li id="add_more_form" style="height: 30px;"><span></span>Add Form</li></a>
+             <a style="text-decoration:none;">
+                 <li id="add_more_form" style="height: 30px;">
+                     <span></span>Add Form</li></a>
         </ul>
         <?php }?>
     </div>
@@ -304,7 +315,8 @@ if ($view_list) {
     <div id="validation-settings">
 
         <div class="val-settings-section">
-            <div id="val-required"><input type="checkbox" checked="checked"/> Required</div>
+            <div id="val-required"><input type="checkbox"
+                                          checked="checked"/> Required</div>
         </div>
 
         <div class="val-settings-section">
