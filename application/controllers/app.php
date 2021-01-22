@@ -1905,7 +1905,8 @@ $this->session->set_flashdata('validate', array('message' =>
 
             //copy the apk file to app repository
             $newFileName = $appname . '-' . $app_id . '-' . $version . 'v.apk';
-            copy("$directory_path/assets/android/$newProjectFolder/bin/$appname-release-unsigned.apk",
+            copy("$directory_path/assets/android/$newProjectFolder/bin/
+            $appname-release-unsigned.apk",
 
              "$directory_path/assets/android/apps/$appname-release-unsigned.apk");
             rename("$directory_path/assets/android/apps/$appname-release-unsigned.apk",
@@ -2289,8 +2290,10 @@ $this->session->set_flashdata('validate', array('message' =>
             if($i==1) {
                 $first_form_columns = $possible_filters_array;
             }
-            $possible_and_defaults[$val['id']]['possible_filter_selected']=$possible_filter_selected;
-            $possible_and_defaults[$val['id']]['default_filter_selected']=$default_filter_selected;
+            $possible_and_defaults[$val['id']]['possible_filter_selected']=
+            $possible_filter_selected;
+            $possible_and_defaults[$val['id']]['default_filter_selected']=
+            $default_filter_selected;
             $filters_array[$val['id']]=$possible_filters_array+array("sent_by");
             $final_forms[$val['name']]=$val;
             $i++;
@@ -2312,7 +2315,8 @@ $this->session->set_flashdata('validate', array('message' =>
             }
             $result3=array_key_exists("RESULT_VIEW_SETTINGS",$settings_exist_new);
             if($result3!=''){
-                $result_view_settings_filter=$settings_exist_new['RESULT_VIEW_SETTINGS']['filters'];
+                $result_view_settings_filter=
+                $settings_exist_new['RESULT_VIEW_SETTINGS']['filters'];
             }
             $result4=array_key_exists("MAP_VIEW_SETTINGS",$settings_exist_new);
             if($result4!=''){
@@ -2320,7 +2324,8 @@ $this->session->set_flashdata('validate', array('message' =>
             }
             $result5=array_key_exists("GRAPH_VIEW_SETTINGS",$settings_exist_new);
             if($result5!=''){
-                $graph_view_settings_filter=$settings_exist_new['GRAPH_VIEW_SETTINGS']['filters'];
+                $graph_view_settings_filter
+                =$settings_exist_new['GRAPH_VIEW_SETTINGS']['filters'];
             }
             $result6=array_key_exists("SMS_SETTINGS",$settings_exist_new);
             if($result6!=''){
@@ -2336,7 +2341,9 @@ $this->session->set_flashdata('validate', array('message' =>
                 $application_name=$selected_app['name'];
                 $users=$_POST['users'];
                 $message=$_POST['message'];
-                $settings_exist = $this->app_model->get_app_settings_filters($app_id, $setting_type);
+                $settings_exist = $this->app_model
+                ->get_app_settings_filters($app_id, $setting_type);
+
                 if (empty($settings_exist)) {
                     $action = "insert";
                 } else {
@@ -2396,7 +2403,9 @@ $this->session->set_flashdata('validate', array('message' =>
                 $form_id=$_POST['form_id'];
                 $form_column_settings_exist = $this->app_model->get_form_column_settings($app_id);
                 if(!empty($form_column_settings_exist)) {
-                    $form_column_settings_exist_db = (array)json_decode($form_column_settings_exist['columns'],true);
+                    $form_column_settings_exist_db
+                    = (array)json_decode($form_column_settings_exist['columns'],true);
+                    
                     if (array_key_exists($form_id, $form_column_settings_exist_db)) {
                         unset($form_column_settings_exist[$form_id]);
                     }else{
@@ -2442,7 +2451,9 @@ $this->session->set_flashdata('validate', array('message' =>
                     $_POST['filters']=array();
                 }
 
-                $settings_exist = $this->app_model->get_app_settings_filters($app_id, $setting_type);
+                $settings_exist = $this->app_model
+                ->get_app_settings_filters($app_id, $setting_type);
+
                 if (empty($settings_exist)) {
                     $action = "insert";
                     $_POST['filters'][$form_id]=$filters;
@@ -2481,8 +2492,12 @@ $this->session->set_flashdata('validate', array('message' =>
             //first form...
             foreach($all_forms as $key=>$val){
                 $form_id=$val['form_id'];
-                $fields=$this->form_results_model->getTableHeadingsFromSchema("zform_".$form_id);
-                $exclude_array = array('id', 'form_id', 'is_deleted', 'location_source', 'created_datetime');
+                $fields=$this->form_results_model
+                ->getTableHeadingsFromSchema("zform_".$form_id);
+
+                $exclude_array = array('id', 'form_id', 'is_deleted',
+                'location_source', 'created_datetime');
+                
                 $filterd_fileds=array();
                 $required_fields=array();
                 $table_name="zform_$form_id";
@@ -2497,7 +2512,9 @@ $this->session->set_flashdata('validate', array('message' =>
                 }
                 $required_fields[$form_id]=$filterd_fileds;
 
-                $table_result = $this->form_results_model->getTableHeadingsFromSchema($table_name);
+                $table_result = $this->form_results_model
+                ->getTableHeadingsFromSchema($table_name);
+
                 $schema_columns=array();
                 foreach($table_result as $key=>$val){
                     if(!in_array($val['COLUMN_NAME'],$exclude_array)) {
@@ -2617,8 +2634,12 @@ $this->session->set_flashdata('validate', array('message' =>
             if($i==1) {
                 $first_form_columns = $possible_filters_array;
             }
-            $possible_and_defaults[$val['id']]['possible_filter_selected']=$possible_filter_selected;
-            $possible_and_defaults[$val['id']]['default_filter_selected']=$default_filter_selected;
+            $possible_and_defaults[$val['id']]['possible_filter_selected']=
+            $possible_filter_selected;
+
+            $possible_and_defaults[$val['id']]['default_filter_selected']=
+            $default_filter_selected;
+
             $filters_array[$val['id']]=$possible_filters_array+array("sent_by");
             $final_forms[$val['name']]=$val;
             $i++;
@@ -2640,7 +2661,8 @@ $this->session->set_flashdata('validate', array('message' =>
             }
             $result3=array_key_exists("RESULT_VIEW_SETTINGS",$settings_exist_new);
             if($result3!=''){
-                $result_view_settings_filter=$settings_exist_new['RESULT_VIEW_SETTINGS']['filters'];
+                $result_view_settings_filter=
+                $settings_exist_new['RESULT_VIEW_SETTINGS']['filters'];
             }
             $result4=array_key_exists("MAP_VIEW_SETTINGS",$settings_exist_new);
             if($result4!=''){
@@ -2648,7 +2670,8 @@ $this->session->set_flashdata('validate', array('message' =>
             }
             $result5=array_key_exists("GRAPH_VIEW_SETTINGS",$settings_exist_new);
             if($result5!=''){
-                $graph_view_settings_filter=$settings_exist_new['GRAPH_VIEW_SETTINGS']['filters'];
+                $graph_view_settings_filter=
+                $settings_exist_new['GRAPH_VIEW_SETTINGS']['filters'];
             }
             $result6=array_key_exists("SMS_SETTINGS",$settings_exist_new);
             if($result6!=''){
@@ -2667,7 +2690,9 @@ $this->session->set_flashdata('validate', array('message' =>
             //first form...
             foreach($all_forms as $key=>$val){
                 $form_id=$val['form_id'];
-                $fields=$this->form_results_model->getTableHeadingsFromSchema("zform_".$form_id);
+                $fields=$this->form_results_model
+                ->getTableHeadingsFromSchema("zform_".$form_id);
+
                 $exclude_array = array('id', 'form_id', 'is_deleted',
                  'location_source', 'created_datetime');
                 $filterd_fileds=array();
@@ -2683,7 +2708,9 @@ $this->session->set_flashdata('validate', array('message' =>
                 }
                 $required_fields[$form_id]=$filterd_fileds;
 
-                $table_result = $this->form_results_model->getTableHeadingsFromSchema($table_name);
+                $table_result = $this->form_results_model
+                ->getTableHeadingsFromSchema($table_name);
+
                 $schema_columns=array();
                 foreach($table_result as $key=>$val){
                     if(!in_array($val['COLUMN_NAME'],$exclude_array)) {
@@ -2748,7 +2775,9 @@ $this->session->set_flashdata('validate', array('message' =>
         $column=$_POST['column'];
         $value=$_POST['value'];
         $table_name="zform_".$form_id;
-        $result=$this->db->query("select distinct $column from $table_name where $column LIKE '%$value%'")->result_array();
+        $result=$this->db->query("select distinct $column from 
+        $table_name where $column LIKE '%$value%'")->result_array();
+
         $i=0;
         $options=array();
         foreach($result as $key=>$val){
@@ -2787,10 +2816,16 @@ $this->session->set_flashdata('validate', array('message' =>
             $form_id = $_POST['form_id'];
             $field_value = str_replace(" ", "_", $_POST['value']);
             $pins = '';
-            $pins .= '<div class="row"><label for="d1_textfield">' . $value . '</label><div><select name="pins[]" id="pins" class="icon-menu">
+            $pins .= '<div class="row"><label for="d1_textfield">' . 
+            $value . '</label><div><select name="pins[]" id="pins" class="icon-menu">
+
             <option value="">Select One</option>';
             $site_settings = $this->site_model->get_settings('1');
-            $directory = $site_settings['directory_path'] . DIRECTORY_SEPARATOR . "assets" . DIRECTORY_SEPARATOR . "images" . DIRECTORY_SEPARATOR . "map_pins" . DIRECTORY_SEPARATOR;
+
+            $directory = $site_settings['directory_path'] . 
+            DIRECTORY_SEPARATOR . "assets" . DIRECTORY_SEPARATOR . "images" . 
+            DIRECTORY_SEPARATOR . "map_pins" . DIRECTORY_SEPARATOR;
+
             $images = glob($directory . "*.png");
 
             foreach ($images as $key => $val) {
@@ -2810,7 +2845,9 @@ $this->session->set_flashdata('validate', array('message' =>
                     }
                 }
 
-                $pins .= "<option data-imagesrc=\"$image_url\" value=\"$image_name\" $selected></option>";
+                $pins .= "<option data-imagesrc=\"$image_url\" value=\"$image_name\"
+                $selected></option>";
+                
             }
 
             $pins .= "</select>
@@ -2824,7 +2861,10 @@ $this->session->set_flashdata('validate', array('message' =>
     }
 
     public function get_saved_pins($form_id){
-        $result=$this->db->query("select pins from map_pin_settings where form_id='$form_id'")->result_array();
+        $result=$this->db
+        ->query("select pins from map_pin_settings where form_id='$form_id'")
+        ->result_array();
+        
         if(!empty($result)) {
             return json_decode($result[0]['pins'], true);
         }
@@ -2832,7 +2872,10 @@ $this->session->set_flashdata('validate', array('message' =>
 
     public function get_saved_pins_html(){
         $form_id=$_POST['form_id'];
-        $result=$this->db->query("select pins from map_pin_settings where form_id='$form_id'")->result_array();
+        $result=$this->db
+        ->query("select pins from map_pin_settings where form_id='$form_id'")
+        ->result_array();
+
         if(!empty($result)) {
             $pins_data=json_decode($result[0]['pins'], true);
             $table="<div class='row'><table>";
@@ -2846,7 +2889,8 @@ $this->session->set_flashdata('validate', array('message' =>
                         <tr style='padding: 5px;'>
                             <td>$field</td>
                             <td>
-                                <img onclick=\"change_filter('$key','$field')\" src='$image_url' title='Click icon to edit' style='cursor:pointer'>
+                                <img onclick=\"change_filter('$key','$field')\" 
+                                src='$image_url' title='Click icon to edit' style='cursor:pointer'>
                                 </td>
                         </tr>
                         ";
@@ -2869,9 +2913,15 @@ $this->session->set_flashdata('validate', array('message' =>
             $pins_arr[$field_name][$field_value] = $pin[0];
 
             $json_pins=json_encode($pins_arr);
-            $form_result=$this->db->query("select * from map_pin_settings where form_id='$form_id'")->result_array();
+            $form_result=$this->db
+            ->query("select * from map_pin_settings where form_id='$form_id'")
+            ->result_array();
+
             if(count($form_result)==0) {
-                if($this->db->query("insert into map_pin_settings (`form_id`,`pins`) values('$form_id','$json_pins')")){
+                if($this->db
+                ->query("insert into map_pin_settings (`form_id`,`pins`) values('$form_id','
+                $json_pins')")){
+
                     echo "success";
                 }
             }else{
@@ -2893,7 +2943,8 @@ $this->session->set_flashdata('validate', array('message' =>
                 }
 
                 $json_pins=json_encode($final_result);
-                if($this->db->query("update map_pin_settings set pins='$json_pins' where form_id='$form_id'")){
+                if($this->db->query("update map_pin_settings set pins='
+                $json_pins' where form_id='$form_id'")){
                     echo "success";
                 }
 
@@ -2945,7 +2996,8 @@ $this->session->set_flashdata('validate', array('message' =>
 
         $form_view_saved_form_id=$_POST['form_view_saved_form_id'];
 //        $table_columns=$this->form_model->get_form_filters($form_id_arr);
-        $table_columns=$this->form_results_model->getTableHeadingsFromSchema("zform_".$form_id);
+        $table_columns=$this->form_results_model
+        ->getTableHeadingsFromSchema("zform_".$form_id);
 
 //        $table_filters=$table_columns[0]['possible_filters'];
 //        $table_filters=explode(",",$table_filters);
@@ -2973,7 +3025,9 @@ $this->session->set_flashdata('validate', array('message' =>
         }
 
         header('Content-Type: application/x-json; charset=utf-8');
-        $final_json = array('category' => $final_array, 'selected_options' => $selected_options);
+        $final_json = array('category'
+        => $final_array, 'selected_options' => $selected_options);
+
         echo json_encode($final_json);
     }
 
@@ -3111,7 +3165,9 @@ $this->session->set_flashdata('validate', array('message' =>
             }
             $this->db->delete('app_users_view', array('id' => $app_view_id));
             //array parameters : action, description, before, after, app_id, app_name, form_id, form_name
-            $logary = array('action' => 'delete', 'description' => 'Delete user view', 'after' => 'user_view=' . $app_view_id);
+            $logary = array('action' => 'delete', 'description'
+            => 'Delete user view', 'after' => 'user_view=' . $app_view_id);
+
             addlog($logary);
             $this->session->set_flashdata('validate', array('message' 
                 => 'Application deleted successfully.',
@@ -3177,7 +3233,9 @@ $this->session->set_flashdata('validate', array('message' =>
             print "<br />";
 
             //update build.xml file for new app//For windows
-            echo $envpath = 'C:\ant\bin\ant;C:\Program Files\Java\jdk1.7.0_51\bin\;C:\adt\sdk\tools';
+            echo $envpath
+            = 'C:\ant\bin\ant;C:\Program Files\Java\jdk1.7.0_51\bin\;C:\adt\sdk\tools';
+
             print "<br />";
             exec($envpath, $output1, $co);
             if ($output1) {
@@ -3185,7 +3243,9 @@ $this->session->set_flashdata('validate', array('message' =>
             }
             print "<br />";
             //For Linux 1 for local and 4 for live
-            echo $command = "android update project --target $target --name $appname --path $path";
+            echo $command = "android update project --target
+            $target --name $appname --path $path";
+
             print "<br />";
             exec($command, $output2, $co);
             if ($output2) {
@@ -3207,19 +3267,27 @@ $this->session->set_flashdata('validate', array('message' =>
             //copy the apk file to app repository
             echo 'Copping APK file after building.....';
             print "<br />";
-            copy("$directory_path/assets/android/godk_android_test/bin/$appname-release-unsigned.apk",
-             "$directory_path/assets/android/apps/$appname-release-unsigned.apk");
+
+            copy("$directory_path/assets/android/godk_android_test/bin/
+            $appname-release-unsigned.apk",
+            "$directory_path/assets/android/apps/$appname-release-unsigned.apk");
+
             echo 'Renaming APK file after building.....';
             print "<br />";
+
             rename("$directory_path/assets/android/apps/$appname-release-unsigned.apk",
-             "$directory_path/assets/android/apps/unaligned_testapp.apk");
+            "$directory_path/assets/android/apps/unaligned_testapp.apk");
+
             echo 'Deleting APK file from bin.....';
             print "<br />";
             unlink("$directory_path/assets/android/godk_android_test/bin/$appname-release-unsigned.apk");
 
             //$keystore_command = "keytool -genkey -v -keystore $directory_path/assets/android/keystore/a_$app_id.keystore -alias DataPlug -keyalg RSA -keysize 2048 -validity 10000";
-            echo $signing_command = "jarsigner -verbose -keystore $directory_path/assets/android/keystore/DataPlug.keystore 
-            -storepass dataplug_pitb -keypass dataplug_pitb $directory_path/assets/android/apps/unaligned_testapp.apk DataPlug";
+            echo $signing_command = "jarsigner -verbose -keystore
+            $directory_path/assets/android/keystore/DataPlug.keystore 
+            -storepass dataplug_pitb -keypass dataplug_pitb
+            $directory_path/assets/android/apps/unaligned_testapp.apk DataPlug";
+
             print "<br />";
             exec($signing_command, $output4, $co);
             if ($output4) {
@@ -3228,7 +3296,10 @@ $this->session->set_flashdata('validate', array('message' =>
             print "<br />";
             //$unalignedFileName = $appname .'-'. $app_id . '-' . $version . 'v-unaligned.apk';
             //$signing_command = "jarsigner -verbose -keystore $directory_path/assets/android/keystore/DataPlug.keystore -storepass dataplug_pitb -keypass dataplug_pitb $directory_path/assets/android/apps/$newFileName DataPlug";
-            echo $zipaligned_command = "zipalign -v 4 $directory_path/assets/android/apps/unaligned_testapp.apk $directory_path/assets/android/apps/testapp.apk";
+            echo $zipaligned_command = "zipalign -v 4
+            $directory_path/assets/android/apps/unaligned_testapp.apk
+            $directory_path/assets/android/apps/testapp.apk";
+
             print "<br />";
             exec($zipaligned_command, $output5, $co);
             if ($output5) {
@@ -3253,23 +3324,34 @@ $this->session->set_flashdata('validate', array('message' =>
         $appId=$app['id'];
         $result='';
         if ($this->acl->hasPermission('form', 'edit')) {
-            $result .= "<a style='padding:2px;' href='".base_url()."application-setting/".$appId." '><img src='".base_url()."assets/images/settings-ico.png' alt='Settings' title=''Settings'/></a>";
+            $result .= "<a style='padding:2px;' href='".base_url().
+            "application-setting/".$appId." '><img src='".base_url().
+            "assets/images/settings-ico.png' alt='Settings' title=''Settings'/></a>";
         }
 
         if ($this->acl->hasPermission('form', 'edit')) {
-            $result .= "<a style='padding:2px;' href='".base_url()."app-landing-page/".$appId." '><img src='".base_url()."assets/images/tableLink1.png' alt='edit' title=''Edit'/></a>";
+            $result .= "<a style='padding:2px;' href='".base_url()
+            ."app-landing-page/".$appId." '><img src='".base_url()
+            ."assets/images/tableLink1.png' alt='edit' title=''Edit'/></a>";
         }
 
         if ($this->acl->hasPermission('app', 'delete')) {
-            $result .= "<a style='padding:2px;' href='javascript:void(0)'><img src='".base_url()."assets/images/tableLink3.png' alt='delete' id ='delete_app' title='Delete' app_id ='".$appId."' /></a>";
+            $result .= "<a style='padding:2px;' href='javascript:void(0)'>
+            <img src='".base_url()."assets/images/tableLink3.png' alt='delete' 
+            id ='delete_app' title='Delete' app_id ='".$appId."' /></a>";
         }
 
         if (isset($app['app_file']) && $app['app_file'] !='') {
-            $result .= "<a style='padding:2px;' href='".base_url()."app/releasedapk/".$appId."'>
-            <img style='' src='".base_url()."assets/images/version.png' alt='' title='Version History' />
+            $result .= "<a style='padding:2px;' href='".base_url()
+            ."app/releasedapk/".$appId."'>
+
+            <img style='' src='".base_url()
+            ."assets/images/version.png' alt='' title='Version History' />
             </a>
 
-            <a style='padding:2px;' href='".base_url()."assets/android/apps/".$app['app_file']."'>
+            <a style='padding:2px;' href='".base_url()."assets/android/apps/"
+            .$app['app_file']."'>
+
             <img src='".base_url()."assets/images/tableLink6.png' alt='' title='Download'/>
             </a>
             ";
@@ -3304,9 +3386,13 @@ $this->session->set_flashdata('validate', array('message' =>
     public function create_icon_image($app,$result_count){
         if ($result_count > 0) {
         $result='
-            <a style="padding-left:0px;" href="'.base_url().'application-results/'.$app['id'].'">
+            <a style="padding-left:0px;" href="'.base_url()
+            .'application-results/'.$app['id'].'">
+
                 <img class="formIconsUpload" 
-                src="'.FORM_IMG_DISPLAY_PATH.'../form_icons/'.$app['id'].'/'.$app['icon'].'" alt="" />
+                src="'.FORM_IMG_DISPLAY_PATH.'../form_icons/'.$app['id'].'/'
+                .$app['icon'].'" alt="" />
+                
             </a>';
 
         } else {
@@ -3329,7 +3415,9 @@ $this->session->set_flashdata('validate', array('message' =>
         	if(file_exists($filename)){
         		$result='
                 <a style="padding-left:0px;" 
-                rel="lightbox" href="'.FORM_IMG_DISPLAY_PATH.'../../../android/qr_code/'.$app['qr_code_file'].'">
+                rel="lightbox" href="'.FORM_IMG_DISPLAY_PATH.'../../../android/qr_code/'
+                .$app['qr_code_file'].'">
+                
                     <img class="formIconsUpload" 
                     src="'.FORM_IMG_DISPLAY_PATH.'../../../android/qr_code/'.$app['qr_code_file'].'" 
                     alt="" />
@@ -3344,7 +3432,8 @@ $this->session->set_flashdata('validate', array('message' =>
     		$app_name = preg_replace('/[^A-Za-z0-9]/', '-', $app['name']);
     		$slug = $app_name . '-' . $app['id'];
     		$module=$app['module_name'];
-    		return $result='<a style="padding-left:0px;" href="'.base_url().$module.'"><b>'.htmlspecialchars($app_name).'</b></a>';
+            return $result='<a style="padding-left:0px;" href="'.base_url()
+            .$module.'"><b>'.htmlspecialchars($app_name).'</b></a>';
     	}else
         if ($result_count > 0) {
             $app_name = preg_replace('/[^A-Za-z0-9]/', '-', $app['name']);
@@ -3361,7 +3450,9 @@ $this->session->set_flashdata('validate', array('message' =>
     }
 
     public function get_departments(){
-        $query=$this->db->query("select DISTINCT name from department where is_deleted=0");
+        $query=$this->db
+        ->query("select DISTINCT name from department where is_deleted=0");
+
         $result=$query->result_array();
         $string='';
         foreach($result as $key=>$val) {
@@ -3392,12 +3483,14 @@ $this->session->set_flashdata('validate', array('message' =>
         $column=$search_arr[0];
         $form_id=$search_arr[1];
         $table="zform_$form_id";
-        $result=$this->form_results_model->get_dynamic_results($column,$table,$search_word);
+        $result=$this->form_results_model
+        ->get_dynamic_results($column,$table,$search_word);
 
         $name_array=array();
         if($column=='location') {
             foreach ($result as $key => $val) {
-                $name_array[] = array("value" => str_replace(" ", " ", $val[$column]), 'text' => $val[$column]);
+                $name_array[] = array("value"
+                => str_replace(" ", " ", $val[$column]), 'text' => $val[$column]);
 
             }
         }else{
