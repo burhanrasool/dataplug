@@ -20,11 +20,13 @@ class App_model extends CI_Model {
             return $result;
         }
 
-        $this->db->select('app.*,av.description as av_description, av.full_description as av_full_description, av.id as avid');
+        $this->db->select(`app.*,av.description as av_description, av.full_description 
+        as av_full_description, av.id as avid`);
         $this->db->from('app');
         if($view_id)
         {
-            $this->db->join('app_views av', 'av.app_id = app.id AND av.view_id="'.$view_id.'"', 'left');
+            $this->db->join('app_views av',
+             'av.app_id = app.id AND av.view_id="'.$view_id.'"', 'left');
         }
         else
         {
@@ -48,7 +50,9 @@ class App_model extends CI_Model {
      */
     public function get_app_by_department($department_id) {
 
-        $query = $this->db->get_where('app', array('department_id' => $department_id, 'is_deleted' => '0'));
+        $query = $this->db->get_where('app',
+         array('department_id' => $department_id,
+         'is_deleted' => '0'));
         return $query->result_array();
     }
     /**
@@ -57,7 +61,8 @@ class App_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_app_by_user($user_id,$limit=null,$lenght=null,$search0=null,$sort_column=null,$sort_order=null) {
+    public function get_app_by_user($user_id,$limit=null,
+    $lenght=null,$search0=null,$sort_column=null,$sort_order=null) {
         $allColumns=array(
             "name",
             "",
@@ -66,7 +71,8 @@ class App_model extends CI_Model {
         
         $this->db->select('a.*');
         $this->db->from('app a');
-        $this->db->join('users_app ua', 'ua.app_id = a.id AND ua.user_id="'.$user_id.'"');
+        $this->db->join('users_app ua',
+        'ua.app_id = a.id AND ua.user_id="'.$user_id.'"');
         $this->db->where('a.is_deleted', '0');
         if($search0!=null){
             $this->db->like('a.name', "$search0");
@@ -91,7 +97,8 @@ class App_model extends CI_Model {
     }
 
 
-    public function total_apps($user_id=null,$search0=null,$search2=null,$search3=null){
+    public function total_apps($user_id=null,
+        $search0=null,$search2=null,$search3=null){
         $this->db->where ('app.is_deleted','0');
 //                echo $search;die;
         if($search0!=null) {
@@ -117,12 +124,14 @@ class App_model extends CI_Model {
             }
 
         if($user_id!=null){
-            $this->db->join('users_app ua', 'ua.app_id = app.id AND ua.user_id="'.$user_id.'"');
+            $this->db->join('users_app ua',
+            'ua.app_id = app.id AND ua.user_id="'.$user_id.'"');
         }
 
         $result =   $this->db->count_all_results('app');
         // $str = $this->db->last_query();
-        // file_put_contents('./assets/data/query_executed.txt', $str.PHP_EOL , FILE_APPEND | LOCK_EX);
+        // file_put_contents('./assets/data/query_executed.txt',
+        // $str.PHP_EOL , FILE_APPEND | LOCK_EX);
         return $result;
 
     }
@@ -132,7 +141,9 @@ class App_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_app_by_department_for_super($limit=null,$length=null,$search0=null,$search2=null,$search3=null,$sort_column=null,$sort_order=null) {
+    public function get_app_by_department_for_super($limit=null,
+    $length=null,$search0=null,$search2=null,$search3=null,
+    $sort_column=null,$sort_order=null) {
         $allColumns=array(
             "name",
             "",
