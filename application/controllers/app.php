@@ -1043,7 +1043,9 @@ class App extends CI_Controller {
                         $this->db->insert('users_group', $groupdata);
                     }
 
-                    $this->session->set_flashdata('validate', array('message' => 'Application added successfully.', 'type' => 'success'));
+                    $this->session->set_flashdata('validate', 
+                        array('message' => 'Application added successfully.',
+                         'type' => 'success'));
                     if ($this->acl->hasPermission('app', 'edit')) {
                         redirect(base_url() . 'app-landing-page/' . $app_id);
                     } else {
@@ -1079,7 +1081,9 @@ class App extends CI_Controller {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             if (!$this->acl->hasPermission('form', 'edit')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $this->session->set_flashdata('validate', 
+                    array('message' => "You don't have enough permissions to do this task.",
+                     'type' => 'warning'));
                 redirect(base_url() . '');
             }
 
@@ -1089,11 +1093,16 @@ class App extends CI_Controller {
                 $appName = trim($this->input->post('app_name'));
                 $selected_app = $this->app_model->get_app($app_id);
                 if ($appName == '') {
-                    $this->session->set_flashdata('validate', array('message' => 'Application name should not be empty.', 'type' => 'error'));
+                    $this->session->set_flashdata('validate', 
+                        array('message' => 'Application name should not be empty.',
+                         'type' => 'error'));
                     redirect(base_url() . 'app-landing-page/' . $app_id);
                 }
-                if ($this->app_model->app_already_exist($appName, $selected_app['department_id'], $app_id)) {
-                    $this->session->set_flashdata('validate', array('message' => 'This application name already exist for this department', 'type' => 'error'));
+                if ($this->app_model->app_already_exist($appName,
+                 $selected_app['department_id'], $app_id)) {
+                    $this->session->set_flashdata('validate', 
+                        array('message' => 'This application name already exist for this department',
+                         'type' => 'error'));
                     redirect(base_url() . 'app-landing-page/' . $app_id);
                 }
                 
@@ -1118,7 +1127,9 @@ class App extends CI_Controller {
                         if (!$this->upload->do_upload()) {
                             $iconName = $selected_app['icon'];
                             $this->data['error'] = $this->upload->display_errors();
-                            $this->session->set_flashdata('validate', array('message' => $this->upload->display_errors() . ', Default icon has been embeded with your app.', 'type' => 'warning'));
+                            $this->session->set_flashdata('validate', 
+                                array('message' => $this->upload->display_errors() . ',
+                                 Default icon has been embeded with your app.', 'type' => 'warning'));
                         } else {
                             //success
                             $imageData=$this->upload->data();
@@ -1154,7 +1165,9 @@ class App extends CI_Controller {
                         if (!$this->upload->do_upload('splashfile')) {
                             $splash_icon = $selected_app['splash_icon'];
                             $this->data['error'] = $this->upload->display_errors();
-                            $this->session->set_flashdata('validate', array('message' => $this->upload->display_errors() . ', Default splash screen has been embeded with your app.', 'type' => 'warning'));
+                            $this->session->set_flashdata('validate', 
+                                array('message' => $this->upload->display_errors() . ',
+                                 Default splash screen has been embeded with your app.', 'type' => 'warning'));
                         } else {
                             //success
                             $imageData=$this->upload->data();
@@ -1194,13 +1207,18 @@ class App extends CI_Controller {
                 $selected_app['description'] = '';
                 $selected_app['full_description'] = '';
                 //array parameters : action, description, before, after, app_id, app_name, form_id, form_name
-                $logary = array('action' => 'update', 'description' => 'edit application', 'before' => json_encode($selected_app), 'after' => json_encode($change_icon), 'app_id' => $app_id, 'app_name' => $selected_app['name']);
+                $logary = array('action' => 'update', 'description' => 'edit application',
+                 'before' => json_encode($selected_app), 'after' => json_encode($change_icon),
+                  'app_id' => $app_id, 'app_name' => $selected_app['name']);
                 addlog($logary);
                 if ($this->input->post('is_edit') == '1') {
-                    $this->session->set_flashdata('validate', array('message' => 'Android application created successfully.', 'type' => 'success'));
+                    $this->session->set_flashdata('validate', 
+                        array('message' => 'Android application created successfully.',
+                         'type' => 'success'));
                     redirect(base_url() . 'app/createapk/' . $app_id);
                 } else {
-                    $this->session->set_flashdata('validate', array('message' => 'Application edited successfully.', 'type' => 'success'));
+                    $this->session->set_flashdata('validate', array('message' => 
+                        'Application edited successfully.','type' => 'success'));
                     redirect(base_url() . 'app-landing-page/' . $app_id);
                 }
             }
@@ -1222,7 +1240,8 @@ class App extends CI_Controller {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             if (!$this->acl->hasPermission('form', 'edit')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $this->session->set_flashdata('validate', array('message' => 
+                    "You don't have enough permissions to do this task.", 'type' => 'warning'));
                 redirect(base_url() . 'apps');
             }
             session_to_page($session_data, $data);
@@ -1230,8 +1249,10 @@ class App extends CI_Controller {
             if ($this->input->post('app_name')) {
                 $appName = trim($this->input->post('app_name'));
                 $selected_app = $this->app_model->get_app($app_id);
-                if ($this->app_model->app_already_exist($appName, $selected_app['department_id'], $app_id)) {
-                    $this->session->set_flashdata('validate', array('message' => 'This application name already exist for this department', 'type' => 'error'));
+                if ($this->app_model->app_already_exist($appName, 
+                    $selected_app['department_id'], $app_id)) {
+$this->session->set_flashdata('validate', array('message' => 
+    'This application name already exist for this department', 'type' => 'error'));
                     redirect(base_url() . 'app-landing-page/' . $app_id);
                 }
                 //upload form icon
@@ -1253,7 +1274,10 @@ class App extends CI_Controller {
                     if (!$this->upload->do_upload('userfile_popup')) {
                         $iconName = $selected_app['icon'];
                         $this->data['error'] = $this->upload->display_errors();
-                        $this->session->set_flashdata('validate', array('message' => $this->upload->display_errors() . ', Default icon has been embeded with your app.', 'type' => 'warning'));
+                        $this->session->set_flashdata('validate', array('message' => 
+                            $this->upload->display_errors() . ',
+                             Default icon has been embeded with your app.',
+                             'type' => 'warning'));
                     } else {
                         //success
                         //success
@@ -1289,7 +1313,10 @@ class App extends CI_Controller {
                         if (!$this->upload->do_upload('splashfile')) {
                             $splash_icon = $selected_app['splash_icon'];
                             $this->data['error'] = $this->upload->display_errors();
-                            $this->session->set_flashdata('validate', array('message' => $this->upload->display_errors() . ', Default splash screen has been embeded with your app.', 'type' => 'warning'));
+                            $this->session->set_flashdata('validate', array('message' 
+                                => $this->upload->display_errors() . ',
+                                 Default splash screen has been embeded with your app.',
+                                 'type' => 'warning'));
                             redirect(base_url() . 'app-landing-page/' . $app_id);
                         } else {
                             //success
@@ -1321,7 +1348,8 @@ class App extends CI_Controller {
                 $this->db->where('id', $app_id);
                 $this->db->update('app', $change_icon);
 
-                $this->session->set_flashdata('validate', array('message' => 'Application edited successfully.', 'type' => 'success'));
+                $this->session->set_flashdata('validate', array('message' => 
+                    'Application edited successfully.', 'type' => 'success'));
                 redirect(base_url() . 'app-landing-page/' . $app_id);
             }
 
@@ -1355,14 +1383,17 @@ class App extends CI_Controller {
 
             $request_app = $this->app_model->get_app($app_id);
             if (!$request_app) {
-                $this->session->set_flashdata('validate', array('message' => "Application has been removed", 'type' => 'warning'));
+                $this->session->set_flashdata('validate', array('message' => 
+                    "Application has been removed", 'type' => 'warning'));
                 redirect(base_url() . 'apps');
             }
             $data['super_app_user'] = 'no';
             if (!$this->acl->hasSuperAdmin()) {
                 $login_data = $this->session->userdata('logged_in');
                 if ($request_app['department_id'] != $login_data['login_department_id']) {
-                    $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                    $this->session->set_flashdata('validate', array('message' => 
+                        "You don't have enough permissions to do this task.",
+                         'type' => 'warning'));
                     redirect(base_url() . 'apps');
                 }
                 if ($request_app['user_id'] == $login_data['login_user_id']) {
@@ -1418,7 +1449,9 @@ class App extends CI_Controller {
             }
 
             if (!$this->acl->hasPermission('form', 'edit')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $this->session->set_flashdata('validate', array('message' => 
+                    "You don't have enough permissions to do this task.",
+                     'type' => 'warning'));
                 redirect(base_url() . 'apps');
             }
 
@@ -1525,7 +1558,8 @@ class App extends CI_Controller {
      */
     function department_name_exists($key) {
         if ($this->department_model->department_already_exist($key)) {
-            $this->form_validation->set_message('department_name_exists', 'The %s already exists');
+            $this->form_validation->set_message('department_name_exists',
+             'The %s already exists');
             return false;
         } else {
             return true;
@@ -1539,7 +1573,8 @@ class App extends CI_Controller {
      */
     function app_already_exist($app_name, $department_id) {
         if ($this->app_model->app_already_exist($app_name, $department_id)) {
-            $this->form_validation->set_message('app_already_exist', 'The %s already exists');
+            $this->form_validation->set_message('app_already_exist',
+             'The %s already exists');
             return false;
         } else {
             return true;
@@ -1578,7 +1613,9 @@ class App extends CI_Controller {
         if ($this->session->userdata('logged_in')) {
             $app_id = $slug;
             if (!$this->acl->hasPermission('app', 'delete')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $this->session->set_flashdata('validate', array('message' => 
+                    "You don't have enough permissions to do this task.",
+                     'type' => 'warning'));
                 redirect(base_url() . 'apps');
             }
             $data = array(
@@ -1601,10 +1638,13 @@ class App extends CI_Controller {
             }
 
             //array parameters : action, description, before, after, app_id, app_name, form_id, form_name
-            $logary = array('action' => 'delete', 'description' => 'delete application', 'after' => json_encode($data), 'app_id' => $app_id, 'app_name' => $appName);
+            $logary = array('action' => 'delete', 'description' => 
+                'delete application', 'after' => json_encode($data), 
+                'app_id' => $app_id, 'app_name' => $appName);
             addlog($logary);
 
-            $this->session->set_flashdata('validate', array('message' => 'Application deleted successfully.', 'type' => 'success'));
+            $this->session->set_flashdata('validate', array('message' =>
+             'Application deleted successfully.', 'type' => 'success'));
         } else {
             //If no session, redirect to login page
             redirect(base_url());
@@ -1623,7 +1663,9 @@ class App extends CI_Controller {
             $data['app_name'] = $app['name'];
             $data['app_id'] = $app_id;
             if (!$this->acl->hasPermission('app', 'view')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $this->session->set_flashdata('validate', array('message' 
+                    => "You don't have enough permissions to do this task.", 
+                    'type' => 'warning'));
                 redirect(base_url());
             }
 
@@ -1652,7 +1694,9 @@ class App extends CI_Controller {
             //change directory path
             //change target 4 for live
             if (!$this->acl->hasPermission('app', 'build')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $this->session->set_flashdata('validate', array('message' =>
+                 "You don't have enough permissions to do this task.",
+                  'type' => 'warning'));
                 redirect(base_url() . 'apps');
             }
             ignore_user_abort(true);
@@ -1686,31 +1730,37 @@ class App extends CI_Controller {
 
             $is_secure = ($app_general_setting->secured_apk == 1)?'yes':'no';
             $high_resolution_image = 'NO';
-            if(isset($app_general_setting->high_resolution_image) && $app_general_setting->high_resolution_image == 1){
+            if(isset($app_general_setting->high_resolution_image) && 
+                $app_general_setting->high_resolution_image == 1){
                 $high_resolution_image = 'YES';
             }
             $persist_images_on_device = 'YES';//If image delete after activity
-            if(isset($app_general_setting->persist_images_on_device) && $app_general_setting->persist_images_on_device == 1){
+            if(isset($app_general_setting->persist_images_on_device) &&
+             $app_general_setting->persist_images_on_device == 1){
                 $persist_images_on_device = 'NO';//if image not delete after activity
             }
             
             
             $background_update = 'YES';//If image delete after activity
-            if(isset($app_general_setting->background_update) && $app_general_setting->background_update == 0){
+            if(isset($app_general_setting->background_update) &&
+             $app_general_setting->background_update == 0){
                 $background_update = 'NO';//if image not delete after activity
             }
             $force_update = 'YES';//If image delete after activity
-            if(isset($app_general_setting->force_update) && $app_general_setting->force_update == 0){
+            if(isset($app_general_setting->force_update) && 
+                $app_general_setting->force_update == 0){
                 $force_update = 'NO';//if image not delete after activity
             }
             $enable_auto_time = 'YES';
-            if(isset($app_general_setting->enable_auto_time) && $app_general_setting->enable_auto_time == 0){
+            if(isset($app_general_setting->enable_auto_time) && 
+                $app_general_setting->enable_auto_time == 0){
                 $enable_auto_time = 'NO';
             }
            
             
             $tracking_status = 'YES';
-            if(isset($app_general_setting->tracking_status) && $app_general_setting->tracking_status == 0){
+            if(isset($app_general_setting->tracking_status) && 
+                $app_general_setting->tracking_status == 0){
                 $tracking_status = 'NO';
             }
             $tracking_interval = 5;
@@ -1722,15 +1772,18 @@ class App extends CI_Controller {
                 $tracking_distance = $app_general_setting->tracking_distance;
             }
              $debug_tracking = 'NO';
-            if(isset($app_general_setting->debug_tracking) && $app_general_setting->debug_tracking == 1){
+            if(isset($app_general_setting->debug_tracking) && 
+                $app_general_setting->debug_tracking == 1){
                 $debug_tracking = 'YES';
             }
             $has_geo_fencing = 'NO';
-            if(isset($app_general_setting->has_geo_fencing) && $app_general_setting->has_geo_fencing == 1){
+            if(isset($app_general_setting->has_geo_fencing) &&
+             $app_general_setting->has_geo_fencing == 1){
                 $has_geo_fencing = 'YES';
             }
             $debug_geo_fencing = 'NO';
-            if(isset($app_general_setting->debug_geo_fencing) && $app_general_setting->debug_geo_fencing == 1){
+            if(isset($app_general_setting->debug_geo_fencing) &&
+             $app_general_setting->debug_geo_fencing == 1){
                 $debug_geo_fencing = 'YES';
             }
             
@@ -1772,8 +1825,10 @@ class App extends CI_Controller {
             $this->change_manifest_file($path_string, $package, $version, $version_code);
 
             if (file_exists("$directory_path/assets/images/data/form_icons/$app_id/appicon_$app_id.png")) {
-                copy("$directory_path/assets/images/data/form_icons/$app_id/appicon_$app_id.png", "$dst/res/drawable/icon.png");
-                copy("$directory_path/assets/images/data/form_icons/$app_id/splash.png", "$dst/res/drawable/splash.png");
+                copy("$directory_path/assets/images/data/form_icons/$app_id/appicon_$app_id.png",
+                 "$dst/res/drawable/icon.png");
+                copy("$directory_path/assets/images/data/form_icons/$app_id/splash.png",
+                 "$dst/res/drawable/splash.png");
             }
 
             //Copy all app_resources on build time
@@ -1824,7 +1879,8 @@ class App extends CI_Controller {
             exec($envpath);
 
             //For Linux 1 for local and 4 for live
-            $command = "android update project --target $target --name $appname --path $directory_path/assets/android/" . $newProjectFolder;
+            $command = "android update project --target $target --name $appname 
+            --path $directory_path/assets/android/" . $newProjectFolder;
 
             exec($command, $output, $co);
 
@@ -1835,16 +1891,22 @@ class App extends CI_Controller {
 
             //copy the apk file to app repository
             $newFileName = $appname . '-' . $app_id . '-' . $version . 'v.apk';
-            copy("$directory_path/assets/android/$newProjectFolder/bin/$appname-release-unsigned.apk", "$directory_path/assets/android/apps/$appname-release-unsigned.apk");
-            rename("$directory_path/assets/android/apps/$appname-release-unsigned.apk", "$directory_path/assets/android/apps/unaligned_$newFileName");
+            copy("$directory_path/assets/android/$newProjectFolder/bin/$appname-release-unsigned.apk",
+             "$directory_path/assets/android/apps/$appname-release-unsigned.apk");
+            rename("$directory_path/assets/android/apps/$appname-release-unsigned.apk",
+             "$directory_path/assets/android/apps/unaligned_$newFileName");
 
             //$keystore_command = "keytool -genkey -v -keystore $directory_path/assets/android/keystore/a_$app_id.keystore -alias DataPlug -keyalg RSA -keysize 2048 -validity 10000";
-            $signing_command = "jarsigner -verbose -digestalg SHA1 -sigalg MD5withRSA -keystore $directory_path/assets/android/keystore/DataPlug.keystore -storepass dataplug_pitb -keypass dataplug_pitb $directory_path/assets/android/apps/unaligned_$newFileName DataPlug";
+            $signing_command = "jarsigner -verbose -digestalg SHA1 -sigalg MD5withRSA
+             -keystore $directory_path/assets/android/keystore/DataPlug.keystore
+              -storepass dataplug_pitb -keypass 
+              dataplug_pitb $directory_path/assets/android/apps/unaligned_$newFileName DataPlug";
             exec($signing_command, $output3, $co);
 
             //$unalignedFileName = $appname .'-'. $app_id . '-' . $version . 'v-unaligned.apk';
             //$signing_command = "jarsigner -verbose -keystore $directory_path/assets/android/keystore/DataPlug.keystore -storepass dataplug_pitb -keypass dataplug_pitb $directory_path/assets/android/apps/$newFileName DataPlug";
-            $zipaligned_command = "zipalign -v 4 $directory_path/assets/android/apps/unaligned_$newFileName $directory_path/assets/android/apps/$newFileName";
+            $zipaligned_command = "zipalign -v 4 
+            $directory_path/assets/android/apps/unaligned_$newFileName $directory_path/assets/android/apps/$newFileName";
             exec($zipaligned_command, $output4, $co);
             unlink("$directory_path/assets/android/apps/unaligned_$newFileName");
 
@@ -1869,12 +1931,16 @@ class App extends CI_Controller {
             $this->db->insert('app_released', $data);
             $this->db->delete('app_build_request', array('app_id' => $app_id));
             //array parameters : action, description, before, after, app_id, app_name, form_id, form_name
-            $logary = array('action' => 'build', 'description' => 'Build New version of application', 'after' => json_encode($data), 'app_id' => $app_id, 'app_name' => $new_appname);
+            $logary = array('action' => 'build', 'description' 
+                => 'Build New version of application', 'after' 
+                => json_encode($data), 'app_id' => $app_id, 'app_name' => $new_appname);
             addlog($logary);
 
             //delete new folder for this appname
             $this->recurse_delete($dst, true);
-            $this->session->set_flashdata('validate', array('message' => 'Android application created successfully.', 'type' => 'success'));
+            $this->session->set_flashdata('validate', array('message' 
+                => 'Android application created successfully.',
+                 'type' => 'success'));
             //redirect(base_url() . 'app/releasedapk/' . $app_id);
             redirect(base_url() . 'apps');
         } else {
@@ -2043,7 +2109,9 @@ class App extends CI_Controller {
 
 
             if (!$this->acl->hasPermission('form', 'edit')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $this->session->set_flashdata('validate', array('message' 
+                    => "You don't have enough permissions to do this task.",
+                     'type' => 'warning'));
                 redirect(base_url() . 'apps');
             }
 
@@ -2096,7 +2164,10 @@ class App extends CI_Controller {
                         $this->db->where('app_id', $app_id);
                         $this->db->update('app_settings', $app_settings);
                         //array parameters : action, description, before, after, app_id, app_name, form_id, form_name
-                        $logary = array('action' => 'update', 'description' => 'Change application setting', 'after' => json_encode($app_settings), 'before' => json_encode($settings_exist), 'app_id' => $app_id, 'app_name' => $selected_app['name']);
+                        $logary = array('action' => 'update', 'description' 
+                            => 'Change application setting', 'after' 
+                            => json_encode($app_settings), 'before' => json_encode($settings_exist),
+                             'app_id' => $app_id, 'app_name' => $selected_app['name']);
                         addlog($logary);
                     } else {
                         $app_settings = array(
@@ -2113,11 +2184,14 @@ class App extends CI_Controller {
                         );
                         $this->db->insert('app_settings', $app_settings);
                         //array parameters : action, description, before, after, app_id, app_name, form_id, form_name
-                        $logary = array('action' => 'insert', 'description' => 'Add application settings', 'after' => json_encode($app_settings), 'app_id' => $app_id, 'app_name' => $selected_app['name']);
+                        $logary = array('action' => 'insert', 'description' 
+                            => 'Add application settings', 'after' => json_encode($app_settings),
+                             'app_id' => $app_id, 'app_name' => $selected_app['name']);
                         addlog($logary);
                     }
 
-                    $this->session->set_flashdata('validate', array('message' => 'Setting saved successfully.', 'type' => 'success'));
+                    $this->session->set_flashdata('validate', array('message' 
+                        => 'Setting saved successfully.', 'type' => 'success'));
                     redirect(base_url() . 'app-landing-page/' . $app_id);
                 }
             }
@@ -2178,7 +2252,8 @@ class App extends CI_Controller {
             }
             $all_forms_columns[$val['id']]=$all_columns;
 
-            $exclude_array = array('id', 'form_id','location_source','activity_datetime','created_datetime');
+            $exclude_array = array('id', 'form_id','location_source',
+                'activity_datetime','created_datetime');
             $possible_filters_array=array_diff($all_columns,$exclude_array);
             if($i==1) {
                 $first_form_columns = $possible_filters_array;
@@ -2254,7 +2329,9 @@ class App extends CI_Controller {
                     $result=explode("_",$val);
                     $mobile_number=$result[0];
                     $name=$result[1];
-                    $message_to_send="Dear $name ,\r \n Application : $application_name\r \n$message\r \n From: ".PLATFORM_NAME." Support Team";
+                    $message_to_send="Dear $name ,
+                    \r \n Application : $application_name\r \n$message\r \n 
+                    From: ".PLATFORM_NAME." Support Team";
                     if($mobile_number!=''){
                         //send message
                         send_sms($mobile_number,$message_to_send);
@@ -2413,7 +2490,9 @@ class App extends CI_Controller {
                 $batch = array();
                 $session_data = $this->session->userdata('logged_in');
                 if (!$this->acl->hasPermission('form', 'view')) {
-                    $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                    $this->session->set_flashdata('validate', array('message' 
+                        => "You don't have enough permissions to do this task.",
+                         'type' => 'warning'));
                     redirect(base_url() . 'apps');
                 }
                 $app_r = array(''=>'Accept All Versions');
@@ -2501,7 +2580,8 @@ class App extends CI_Controller {
             }
             $all_forms_columns[$val['id']]=$all_columns;
 
-            $exclude_array = array('id', 'form_id','location_source','activity_datetime','created_datetime');
+            $exclude_array = array('id', 'form_id','location_source',
+                'activity_datetime','created_datetime');
             $possible_filters_array=array_diff($all_columns,$exclude_array);
             if($i==1) {
                 $first_form_columns = $possible_filters_array;
@@ -2557,7 +2637,8 @@ class App extends CI_Controller {
             foreach($all_forms as $key=>$val){
                 $form_id=$val['form_id'];
                 $fields=$this->form_results_model->getTableHeadingsFromSchema("zform_".$form_id);
-                $exclude_array = array('id', 'form_id', 'is_deleted', 'location_source', 'created_datetime');
+                $exclude_array = array('id', 'form_id', 'is_deleted',
+                 'location_source', 'created_datetime');
                 $filterd_fileds=array();
                 $required_fields=array();
                 $table_name="zform_$form_id";
@@ -2593,7 +2674,9 @@ class App extends CI_Controller {
                 $batch = array();
                 $session_data = $this->session->userdata('logged_in');
                 if (!$this->acl->hasPermission('form', 'view')) {
-                    $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                    $this->session->set_flashdata('validate', array('message' 
+                        => "You don't have enough permissions to do this task.",
+                         'type' => 'warning'));
                     redirect(base_url() . 'apps');
                 }
 
@@ -2844,7 +2927,8 @@ class App extends CI_Controller {
         }
         $all_columns[]='sent_by';
 
-        $exclude_array = array('id', 'form_id','location_source', 'activity_datetime','created_datetime','is_deleted');
+        $exclude_array = array('id', 'form_id','location_source',
+         'activity_datetime','created_datetime','is_deleted');
         $possible_filters_array=array_diff($all_columns,$exclude_array);
         $option_string='';
         $final_array=array();
@@ -2941,7 +3025,8 @@ class App extends CI_Controller {
     }
 
     public function redirectFlashOnly() {
-        $this->session->set_flashdata('validate', array('message' => 'No Application Exists', 'type' => 'error'));
+        $this->session->set_flashdata('validate', array('message' 
+            => 'No Application Exists', 'type' => 'error'));
         redirect(base_url() . 'apps');
     }
 
@@ -2988,14 +3073,18 @@ class App extends CI_Controller {
         if ($this->session->userdata('logged_in')) {
             $app_view_id = $slug;
             if (!$this->acl->hasPermission('app', 'delete')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $this->session->set_flashdata('validate', array('message' 
+                    => "You don't have enough permissions to do this task.",
+                     'type' => 'warning'));
                 redirect(base_url() . 'apps');
             }
             $this->db->delete('app_users_view', array('id' => $app_view_id));
             //array parameters : action, description, before, after, app_id, app_name, form_id, form_name
             $logary = array('action' => 'delete', 'description' => 'Delete user view', 'after' => 'user_view=' . $app_view_id);
             addlog($logary);
-            $this->session->set_flashdata('validate', array('message' => 'Application deleted successfully.', 'type' => 'success'));
+            $this->session->set_flashdata('validate', array('message' 
+                => 'Application deleted successfully.',
+                 'type' => 'success'));
             redirect(base_url() . 'app/appusersview');
         } else {
             //If no session, redirect to login page
@@ -3087,16 +3176,19 @@ class App extends CI_Controller {
             //copy the apk file to app repository
             echo 'Copping APK file after building.....';
             print "<br />";
-            copy("$directory_path/assets/android/godk_android_test/bin/$appname-release-unsigned.apk", "$directory_path/assets/android/apps/$appname-release-unsigned.apk");
+            copy("$directory_path/assets/android/godk_android_test/bin/$appname-release-unsigned.apk",
+             "$directory_path/assets/android/apps/$appname-release-unsigned.apk");
             echo 'Renaming APK file after building.....';
             print "<br />";
-            rename("$directory_path/assets/android/apps/$appname-release-unsigned.apk", "$directory_path/assets/android/apps/unaligned_testapp.apk");
+            rename("$directory_path/assets/android/apps/$appname-release-unsigned.apk",
+             "$directory_path/assets/android/apps/unaligned_testapp.apk");
             echo 'Deleting APK file from bin.....';
             print "<br />";
             unlink("$directory_path/assets/android/godk_android_test/bin/$appname-release-unsigned.apk");
 
             //$keystore_command = "keytool -genkey -v -keystore $directory_path/assets/android/keystore/a_$app_id.keystore -alias DataPlug -keyalg RSA -keysize 2048 -validity 10000";
-            echo $signing_command = "jarsigner -verbose -keystore $directory_path/assets/android/keystore/DataPlug.keystore -storepass dataplug_pitb -keypass dataplug_pitb $directory_path/assets/android/apps/unaligned_testapp.apk DataPlug";
+            echo $signing_command = "jarsigner -verbose -keystore $directory_path/assets/android/keystore/DataPlug.keystore 
+            -storepass dataplug_pitb -keypass dataplug_pitb $directory_path/assets/android/apps/unaligned_testapp.apk DataPlug";
             print "<br />";
             exec($signing_command, $output4, $co);
             if ($output4) {
@@ -3114,7 +3206,8 @@ class App extends CI_Controller {
             print "<br />";
             unlink("$directory_path/assets/android/godk_android_test/bin/unaligned_testapp.apk");
             //array parameters : action, description, before, after, app_id, app_name, form_id, form_name
-            $logary = array('action' => 'build', 'description' => 'Build test APK', 'after' => json_encode('Build apk'));
+            $logary = array('action' => 'build', 'description' 
+                => 'Build test APK', 'after' => json_encode('Build apk'));
             addlog($logary);
             exit;
             //redirect(base_url() . 'app/testapk');
@@ -3161,8 +3254,10 @@ class App extends CI_Controller {
     {
         $result='';
         if ($this->acl->hasPermission('app_users', 'edit')) {
-            $result .= "<a style='padding:2px;' href='".base_url()."app/editAppUser/".$app['user_id']." '>
-            <img src='".base_url()."assets/images/tableLink1.png' alt='edit' title='Edit'/>
+            $result .= "<a style='padding:2px;' 
+            href='".base_url()."app/editAppUser/".$app['user_id']." '>
+            <img src='".base_url()."assets/images/tableLink1.png' 
+            alt='edit' title='Edit'/>
             </a>";
         }
 
@@ -3179,13 +3274,16 @@ class App extends CI_Controller {
         if ($result_count > 0) {
         $result='
             <a style="padding-left:0px;" href="'.base_url().'application-results/'.$app['id'].'">
-                <img class="formIconsUpload" src="'.FORM_IMG_DISPLAY_PATH.'../form_icons/'.$app['id'].'/'.$app['icon'].'" alt="" />
+                <img class="formIconsUpload" 
+                src="'.FORM_IMG_DISPLAY_PATH.'../form_icons/'.$app['id'].'/'.$app['icon'].'" alt="" />
             </a>';
 
         } else {
             $result='
             <a style="padding-left:0px; cursor: default" href="javascript:void(0)">
-                <img class="formIconsUpload" src="'.FORM_IMG_DISPLAY_PATH.'../form_icons/'.$app['id'].'/'.$app['icon'].'" alt="" />
+                <img class="formIconsUpload" 
+                src="'.FORM_IMG_DISPLAY_PATH.'../form_icons/'.$app['id'].'/'.$app['icon'].'" 
+                alt="" />
             </a>';
         }
         return $result;
@@ -3199,8 +3297,11 @@ class App extends CI_Controller {
         	
         	if(file_exists($filename)){
         		$result='
-                <a style="padding-left:0px;" rel="lightbox" href="'.FORM_IMG_DISPLAY_PATH.'../../../android/qr_code/'.$app['qr_code_file'].'">
-                    <img class="formIconsUpload" src="'.FORM_IMG_DISPLAY_PATH.'../../../android/qr_code/'.$app['qr_code_file'].'" alt="" />
+                <a style="padding-left:0px;" 
+                rel="lightbox" href="'.FORM_IMG_DISPLAY_PATH.'../../../android/qr_code/'.$app['qr_code_file'].'">
+                    <img class="formIconsUpload" 
+                    src="'.FORM_IMG_DISPLAY_PATH.'../../../android/qr_code/'.$app['qr_code_file'].'" 
+                    alt="" />
                 </a>';
         	}
         }
@@ -3217,7 +3318,9 @@ class App extends CI_Controller {
         if ($result_count > 0) {
             $app_name = preg_replace('/[^A-Za-z0-9]/', '-', $app['name']);
             $slug = htmlspecialchars($app_name . '-' . $app['id']);
-            return $result='<a style="padding-left:0px;" href="'.base_url().'application-results/'.$slug.'"><b style="color:brown">'.$app_name.'</b></a>'."($result_count) ";
+            return $result='<a style="padding-left:0px;" 
+            href="'.base_url().'application-results/'.$slug.'">
+            <b style="color:brown">'.$app_name.'</b></a>'."($result_count) ";
 
         } else {
             return htmlspecialchars($app['name']);
@@ -3278,9 +3381,11 @@ class App extends CI_Controller {
                     }
                 }else {
                     if($column=="sent_by"){
-                        $name_array[] = array("value" => str_replace(" ", " ", $val['imei_no']), 'text' => $val[$column]);
+                        $name_array[] = array("value" => str_replace(" ", 
+                            " ", $val['imei_no']), 'text' => $val[$column]);
                     }else {
-                        $name_array[] = array("value" => str_replace(" ", " ", $val[$column]), 'text' => $val[$column]);
+                        $name_array[] = array("value" => str_replace(" ", 
+                            " ", $val[$column]), 'text' => $val[$column]);
                     }
                 }
 

@@ -97,8 +97,10 @@ $session_data = $this->session->userdata('logged_in');
 
                             <?php } ?>
                             <td class="Category">
-                                <a href="<?= base_url() ?>app/deleteasignuser/<?php echo $app_user['assigned_id']?>/<?php echo $app_id?>">
-                                    <img src="<?= base_url() ?>assets/images/tableLink3.png" alt=""  title ="Delete assigned user" />
+                                <a href="<?= base_url() ?>app/deleteasignuser/<?php 
+								echo $app_user['assigned_id']?>/<?php echo $app_id?>">
+                                    <img src="<?= base_url() ?>assets/images/tableLink3.png" alt="" 
+									title ="Delete assigned user" />
                                 </a>
                                
                             </td>
