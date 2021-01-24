@@ -109,7 +109,8 @@ class Tempapi extends CI_Controller {
     			$post_available = $query->result_array();
     			$total_resent_rec = count($post_available);
     			$count_resesnd = 0 ;
-    			echo "Total record need to resend on Form #".$form_id." = ".$total_resent_rec.'<br />';
+    			echo "Total record need to resend on Form #"
+				.$form_id." = ".$total_resent_rec.'<br />';
     			
     			if ($total_resent_rec > 0) {
     				
@@ -185,7 +186,8 @@ class Tempapi extends CI_Controller {
     					//exit;
     					
     				}
-    				echo "Record Resent successfully on form # ".$form_id." = ".$count_resesnd.'<br />';
+    				echo "Record Resent successfully on form # "
+					.$form_id." = ".$count_resesnd.'<br />';
     			}
     			//exit;
     		}
@@ -197,7 +199,8 @@ class Tempapi extends CI_Controller {
 //     				$this->email->subject('Cron Executed');
 //     				$message = "<b>Welcome to ".PLATFORM_NAME."</b><br />";
 //     				$message .= $form_list;
-//     				$message .= "<br /><br /><br />Note: This is system generated e-mail. Please do not reply<br>";
+//     				$message .= "<br /><br /><br 
+// 		/>Note: This is system generated e-mail. Please do not reply<br>";
 //     				$message .= "<br /><b>".PLATFORM_NAME."</b>";
     		
 //     				$this->email->message($message);
@@ -215,7 +218,12 @@ class Tempapi extends CI_Controller {
     	$base_url = urldecode($base_url);
     	$urlpost = $base_url;
     	$fields_string = "form_data=" . $data_post_json;
-    	//$urlpost = "http://zimaidarofficer.pitb.gov.pk/task/addAssignTask/?form_data={%22complaint_violations%22%3A%22Banner+Removing%22%2C%22complaint_comments%22%3A%22Guvku+hiffo+yhuj+yiyxg%22%2C%22town_id%22%3A%222%22%2C%22imei_no%22%3A%2225463215487%22%2C%22complaint_picture%22%3A%22%22%2C%22location%22%3A%222.56456%2C2.35468%22}";
+    	//$urlpost = "http://zimaidarofficer.pitb.gov.pk/task/
+// 	    addAssignTask/?form_data={%22complaint_violations%22%3A%22Banner
+// 	    +Removing%22%2C%22complaint_comments%22%3A%22Guvku+hiffo+yhuj+
+// 	    yiyxg%22%2C%22town_id%22%3A%222%22%2C%22imei_
+// 	    no%22%3A%2225463215487%22%2C%22complaint_
+// 	    picture%22%3A%22%22%2C%22location%22%3A%222.56456%2C2.35468%22}";
     	$curl = curl_init();
     
     	curl_setopt($curl,CURLOPT_URL, $urlpost);
@@ -231,7 +239,8 @@ class Tempapi extends CI_Controller {
 //     function zform_2206($formValues)
 //     {
 //     	unset($formValues->image);
-//     	$rec = $this->db->query("SELECT id FROM zform_2206 WHERE remote_record_id='".$formValues->id."'")->row();
+//     	$rec = $this->db->query("SELECT id FROM zform_2206
+// 	WHERE remote_record_id='".$formValues->id."'")->row();
 //     	if(count($rec)==0)
 //     	{
 //     		$res = $this->db->insert('zform_2206', $formValues);
@@ -250,7 +259,8 @@ class Tempapi extends CI_Controller {
 //     function zform_2206($formValues)
 //     {
 //     	unset($formValues->image);
-//     	$rec = $this->db->query("SELECT id FROM zform_2206 WHERE remote_record_id='".$formValues->id."'")->row();
+//     	$rec = $this->db->query("SELECT id FROM zform_2206 
+// 	WHERE remote_record_id='".$formValues->id."'")->row();
     	 
     	 
 //     	if(count($rec)==0)
@@ -279,7 +289,8 @@ class Tempapi extends CI_Controller {
     //Functions which used for import CSV - Start
 
     /**
-     * This is a specific application function, included here just for example, you make your function follow this.
+     * This is a specific application function, 
+//      included here just for example, you make your function follow this.
      * @return json
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
@@ -291,7 +302,9 @@ class Tempapi extends CI_Controller {
             while (($data = fgetcsv($handle, 10000, ",")) !== FALSE) {
 
                 if ($row == 1) {
-                    if ($data[0] != 'License No' && $data[1] != 'Store Name' && $data[2] != 'Store Address' && $data[3] != 'Town Name') {
+                    if ($data[0] != 'License No' && $data[1] != 
+			'Store Name' && $data[2] != 'Store Address' 
+			&& $data[3] != 'Town Name') {
 
                         print "<br />Its not a right formated file. <br />";
                         break;
@@ -355,7 +368,8 @@ class Tempapi extends CI_Controller {
                         'matching_value' => $matching_value,
                     );
                     
-                    $rec = $this->db->query("SELECT * FROM kml_poligon WHERE matching_value='".$matching_value."'")->row();
+                    $rec = $this->db->query("SELECT * FROM kml_poligon 
+		    WHERE matching_value='".$matching_value."'")->row();
                      if(count($rec)==0)
                      {
                          $this->db->insert('kml_poligon', $record);
@@ -397,7 +411,8 @@ class Tempapi extends CI_Controller {
                         'matching_value' => $matching_value,
                     );
                      
-                     $rec = $this->db->query("SELECT * FROM kml_poligon WHERE matching_value='".$matching_value."'")->row();
+                     $rec = $this->db->query("SELECT * FROM kml_poligon 
+		     WHERE matching_value='".$matching_value."'")->row();
                      if(count($rec)==0)
                      {
                          $this->db->insert('kml_poligon', $record);
