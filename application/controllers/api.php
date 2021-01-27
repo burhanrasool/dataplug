@@ -814,7 +814,9 @@ class Api extends CI_Controller {
                         'file' => $data ['upload_data'] ['file_name']
                     );
                     $imgName = NFS_IMAGE_PATH.'/app_id_'.$app_id.'/'.$data ['upload_data'] ['file_name'];
-                    //$imgName = base_url() . 'assets/images/data/form-data/' . $data ['upload_data'] ['file_name'];
+                    //$imgName = base_url() 
+                        // . 'assets/images/data/form-data/' 
+                        // . $data ['upload_data'] ['file_name'];
                     $temp_array = array(
                         'image' => $imgName,
                         'title' => $image_title
@@ -826,7 +828,10 @@ class Api extends CI_Controller {
             $cap_id++;
         }
 
-        $this->form_results_model->update_mobile_activity($activity_inserted_id,array('form_images'=>  json_encode($images_array)));
+        $this->form_results_model->
+            update_mobile_activity(
+                $activity_inserted_id,array('form_images'=>  json_encode($images_array))
+            );
         
         $err_msg='';
         $uc_name = '';
@@ -848,7 +853,8 @@ class Api extends CI_Controller {
                 $err_msg.="TOWN api return null, ";
             }
 
-            $district = $this->getDistrictName($location); // Get Town name against location
+            $district = $this->
+                getDistrictName($location); // Get Town name against location
             if ($district) {
                 $district_name = strip_tags($district);
             }else{
@@ -897,7 +903,8 @@ class Api extends CI_Controller {
                         $fields_count = $this->db->list_fields('zform_' . $form_id);
                         $fields_count = array_map('strtolower', $fields_count);
                         if(count($fields_count) < 90){
-                            $field = array($element => array('type' => 'VARCHAR', 'constraint' => 200, 'NULL' => TRUE));
+                            $field = array($element => 
+                                array('type' => 'VARCHAR', 'constraint' => 200, 'NULL' => TRUE));
                             $this->dbforge->add_column('zform_' . $form_id, $field, $after_field);
                         }else
                         {
@@ -920,7 +927,9 @@ class Api extends CI_Controller {
             ///////////////////////// HASSAN ANWAR     ////////////////////////////
             ///////////////////////////////////////////////////////////////////////
 
-            $multiChoices = $this->db->query("Select * from form_multiselectFieldLabels where formId='$form_id'");
+            $multiChoices = $this->db->
+                query("Select * from form_multiselectFieldLabels 
+                where formId='$form_id'");
             foreach($multiChoices->result() as $row)
             {
                 $fd=(array) $dataresultnew1;
@@ -943,7 +952,11 @@ class Api extends CI_Controller {
             ///////////////////////////////////////////////////////////////////////
         }
          
-        $this->form_results_model->update_mobile_activity($activity_inserted_id,array('form_data_decoded'=>  json_encode($dataresultnew1)));
+        $this->form_results_model->
+            update_mobile_activity(
+                $activity_inserted_id,
+                array('form_data_decoded'=>  json_encode($dataresultnew1))
+            );
 
         $final_array = array();
         foreach ($dataresultnew1 as $key => $value) {
@@ -963,7 +976,10 @@ class Api extends CI_Controller {
             
             if(!$ret_ins){
                 $err_msg .= $this->db->_error_message();
-                $this->form_results_model->update_mobile_activity($activity_inserted_id,array('error'=>$err_msg));
+                $this->form_results_model->
+                    update_mobile_activity(
+                        $activity_inserted_id,array('error'=>$err_msg)
+                    );
     //            $jsone_array = array (
     //                        'error' => $err_msg
     //            );
@@ -972,7 +988,10 @@ class Api extends CI_Controller {
             }
             $form_result_id_new = $this->db->insert_id();
         }catch (Exception $e) {
-                $this->form_results_model->update_mobile_activity($activity_inserted_id,array('error'=>$e->message()));
+                $this->form_results_model->
+                    update_mobile_activity(
+                        $activity_inserted_id,array('error'=>$e->message())
+                    );
                 echo json_encode($jsone_array);
                 exit;
         }
@@ -1010,7 +1029,14 @@ class Api extends CI_Controller {
                     'image' => $image_path ['image']
                 );
                 if(strpos($image_path['title'], $form_info['security_key']) !== FALSE){
-                    $add_images ['title'] = urldecode(base64_decode(str_replace($form_info ['security_key'], '', $image_path['title'])));
+                    $add_images ['title'] = 
+                        urldecode(
+                            base64_decode(
+                                str_replace(
+                                    $form_info ['security_key'], '', $image_path['title']
+                                )
+                            )
+                        );
                 } else {
                     $add_images ['title'] = urldecode($image_path ['title']);
                 }
@@ -1035,7 +1061,8 @@ class Api extends CI_Controller {
 
         // this code is used for sending record to other domain
         if ($post_url) {
-            if ($form_id == '4575' && strpos($_SERVER ['SERVER_NAME'], 'dataplug.itu') !== false) {
+            if ($form_id == '4575' && 
+                strpos($_SERVER ['SERVER_NAME'], 'dataplug.itu') !== false) {
                 $tempary = array(
                     'imei_no' => $imei_no,
                     'image_url' => $add_images ['image'],
@@ -1100,7 +1127,8 @@ class Api extends CI_Controller {
                 // app3883($app_id,$imei_no,$dataresultnew1);
             }
         }
-        //$this->form_results_model->update_mobile_activity($activity_inserted_id,array('error'=>'submitted'));
+        //$this->form_results_model->update_mobile_activity(
+            // $activity_inserted_id,array('error'=>'submitted'));
         $this->form_results_model->remove_mobile_activity($activity_inserted_id);
         $jsone_array = array(
             'success' => 'Record submitted successfully!.'
@@ -1112,7 +1140,9 @@ class Api extends CI_Controller {
         //ob_get_level();
         //ob_start();
         ini_set ( 'memory_limit', '-1' );
-        $unsent_activity_array = $this->db->order_by('id', 'ASC')->get_where('mobile_activity_log',array(),100)->result_array();
+        $unsent_activity_array = $this->db->
+            order_by('id', 'ASC')->
+            get_where('mobile_activity_log',array(),100)->result_array();
         //echo count($unsent_activity_array);
         //exit;
         $i = 0;
@@ -1194,12 +1224,16 @@ class Api extends CI_Controller {
                         $key => $v
                     );
                     $captions_images = array_merge($captions_images, $tempary_cap);
-                } elseif ($key == 'form_id' || $key == 'security_key' || $key == "dateTime" || $key == "landing_page" || $key == "is_take_picture" || $key == 'form_icon_name') {
+                } elseif ($key == 'form_id' || $key == 'security_key' 
+                    || $key == "dateTime" || $key == "landing_page" 
+                    || $key == "is_take_picture" || $key == 'form_icon_name') {
                     
                 } else {
 
                 if(strpos($v, $form_info['security_key']) !== FALSE){
-                    $vdcode = urldecode(base64_decode(str_replace($form_info['security_key'], '', $v)));
+                    $vdcode = urldecode(
+                        base64_decode(str_replace($form_info['security_key'], '', $v))
+                    );
                 }
                 else {
                     $vdcode = urldecode($v);
@@ -1234,7 +1268,8 @@ class Api extends CI_Controller {
                     $err_msg.="TOWN api return null, ";
                 }
 
-                $district = $this->getDistrictName($location); // Get Town name against location
+                $district = $this->
+                    getDistrictName($location); // Get Town name against location
                 if ($district) {
                     $district_name = strip_tags($district);
                 } else {
@@ -1272,7 +1307,12 @@ class Api extends CI_Controller {
                         $fields_count = $this->db->list_fields('zform_' . $form_id);
                         $fields_count = array_map('strtolower', $fields_count);
                         if (count($fields_count) < 90) {
-                            $field = array($element => array('type' => 'VARCHAR', 'constraint' => 200, 'NULL' => TRUE));
+                            $field = 
+                                array(
+                                    $element => array(
+                                        'type' => 'VARCHAR', 'constraint' => 200, 'NULL' => TRUE
+                                    )
+                                );
                             $this->dbforge->add_column('zform_' . $form_id, $field, $after_field);
                         } else {
                             $field = array($element => array('type' => 'TEXT', 'NULL' => TRUE));
@@ -1284,12 +1324,23 @@ class Api extends CI_Controller {
             }
 
 
-            $this->form_results_model->update_mobile_activity($activity_inserted_id, array('form_data_decoded' => json_encode($dataresultnew1)));
+            $this->form_results_model->
+                update_mobile_activity(
+                    $activity_inserted_id, 
+                    array('form_data_decoded' => json_encode($dataresultnew1))
+                );
             $ret_ins = $this->db->insert('zform_' . $form_id, $dataresultnew1);
             $form_result_id_new = $this->db->insert_id();
             if (!$ret_ins) {
-                $err_msg .= 'Record Not Submitted. ' . $this->db->_error_message() . '.                         "Please Refresh your application"';
-                $this->form_results_model->update_mobile_activity($activity_inserted_id, array('error' => $err_msg));
+                $err_msg .= 
+                    'Record Not Submitted. ' 
+                    . $this->db->_error_message() 
+                    . '.                         "Please Refresh your application"';
+                $this->form_results_model->
+                    update_mobile_activity(
+                        $activity_inserted_id, 
+                        array('error' => $err_msg)
+                    );
 
                 continue;
             }
@@ -1325,7 +1376,14 @@ class Api extends CI_Controller {
                         'image' => $image_path['image']
                     );
                     if(strpos($image_path ['title'], $form_info['security_key']) !== FALSE){
-                        $add_images ['title'] = urldecode(base64_decode(str_replace($form_info ['security_key'], '', $image_path ['title'])));
+                        $add_images ['title'] = 
+                            urldecode(
+                                base64_decode(
+                                    str_replace(
+                                        $form_info ['security_key'], '', $image_path ['title']
+                                    )
+                                )
+                            );
                     } else {
                         $add_images ['title'] = urldecode($image_path ['title']);
                     }
@@ -1434,7 +1492,15 @@ class Api extends CI_Controller {
         }
 
         //Stop activity saving if already saved
-        $activity_aready_exist = $this->db->get_where('zform_'.$form_id, array('form_id' => $form_id, 'imei_no' => $imei_no,'activity_datetime' => $activity_datetime))->row_array();
+        $activity_aready_exist = $this->db->
+            get_where(
+                'zform_'.$form_id, 
+                array(
+                    'form_id' => $form_id, 
+                    'imei_no' => $imei_no,
+                    'activity_datetime' => $activity_datetime
+                )
+            )->row_array();
         if ($activity_aready_exist) {
             $jsone_array = array(
                 'success' => 'This activity already submitted.'
@@ -1455,8 +1521,10 @@ class Api extends CI_Controller {
         $app_id = $form_info ['app_id'];
         // Temprary block the record sending
         $app_general_setting = get_app_general_settings($app_id);
-        if (isset($app_general_setting->record_stop_sending) && $app_general_setting->record_stop_sending == 1) {
-            $error_message = "Record receiving service currently not available. Please Try later";
+        if (isset($app_general_setting->record_stop_sending) 
+            && $app_general_setting->record_stop_sending == 1) {
+            $error_message = "Record receiving service currently not available. 
+                Please Try later";
             if ($app_general_setting->message_stop_sending_record != '') {
                 $error_message = $app_general_setting->message_stop_sending_record;
             }
@@ -1508,7 +1576,10 @@ class Api extends CI_Controller {
                     
                     
                     // move the file
-                    if ($s3->putObjectFile($fileTempName, $bucket_name, $imgName, S3::ACL_PUBLIC_READ)) {
+                    if ($s3->
+                            putObjectFile(
+                                $fileTempName, $bucket_name, $imgName, S3::ACL_PUBLIC_READ)
+                            ) {
                         $imgName = 'http://' . $bucket_name . '.s3.amazonaws.com/' . $imgName;
                         $temp_array = array(
                             'image' => $imgName,
@@ -1539,7 +1610,10 @@ class Api extends CI_Controller {
                                 $error_before = array(
                                     'file' => $data ['upload_data'] ['file_name']
                                 );
-                                $imgName = base_url() . 'assets/images/data/form-data/' . $data ['upload_data'] ['file_name'];
+                                $imgName = 
+                                    base_url() 
+                                    . 'assets/images/data/form-data/' 
+                                    . $data ['upload_data'] ['file_name'];
                                 $temp_array = array(
                                     'image' => $imgName,
                                     'title' => $image_title
@@ -1575,7 +1649,10 @@ class Api extends CI_Controller {
                         $error_before = array(
                             'file' => $data ['upload_data'] ['file_name']
                         );
-                        $imgName = base_url() . 'assets/images/data/form-data/' . $data ['upload_data'] ['file_name'];
+                        $imgName = 
+                            base_url() 
+                            . 'assets/images/data/form-data/' 
+                            . $data ['upload_data'] ['file_name'];
                         $temp_array = array(
                             'image' => $imgName,
                             'title' => $image_title
@@ -1611,7 +1688,8 @@ class Api extends CI_Controller {
     }
 
     /**
-     * This function is used for saving the record which sent from android application
+     * This function is used for saving the record 
+     * which sent from android application
      * 
      * @return json
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
@@ -1650,7 +1728,15 @@ class Api extends CI_Controller {
         }
         
         //Stop activity saving if already saved
-        $activity_aready_exist = $this->db->get_where('zform_'.$form_id, array('form_id' => $form_id, 'imei_no' => $imei_no,'activity_datetime' => $activity_datetime))->row_array();
+        $activity_aready_exist = $this->db->
+            get_where(
+                'zform_'.$form_id, 
+                array(
+                    'form_id' => $form_id, 
+                    'imei_no' => $imei_no,
+                    'activity_datetime' => $activity_datetime
+                )
+            )->row_array();
         if ($activity_aready_exist) {
             $jsone_array = array(
                 'success' => 'This activity already submitted.'
@@ -1671,8 +1757,10 @@ class Api extends CI_Controller {
         $app_id = $form_info ['app_id'];
         // Temprary block the record sending
         $app_general_setting = get_app_general_settings($app_id);
-        if (isset($app_general_setting->record_stop_sending) && $app_general_setting->record_stop_sending == 1) {
-            $error_message = "Record receiving service currently not available. Please Try later";
+        if (isset($app_general_setting->record_stop_sending) 
+            && $app_general_setting->record_stop_sending == 1) {
+            $error_message = "Record receiving service currently not available. 
+                Please Try later";
             if ($app_general_setting->message_stop_sending_record != '') {
                 $error_message = $app_general_setting->message_stop_sending_record;
             }
@@ -1692,7 +1780,8 @@ class Api extends CI_Controller {
             exit();
         }
 
-/*        $authorized = $this->app_model->appuser_imei_already_exist($imei_no, $app_id);
+/*        $authorized = $this->app_model->
+                appuser_imei_already_exist($imei_no, $app_id);
         if ($app_general_setting->only_authorized == 1 && !$authorized) {
             $jsone_array = array(
                 'error' => 'You are not authorized'
@@ -1727,12 +1816,22 @@ class Api extends CI_Controller {
                     $key => $v
                 );
                 $captions_images = array_merge($captions_images, $tempary_cap);
-            } elseif ($key == 'form_id' || $key == 'security_key' || $key == "dateTime" || $key == "landing_page" || $key == "is_take_picture" || $key == 'form_icon_name') {
+            } elseif ($key == 'form_id' || $key == 'security_key' || $key == "dateTime" 
+                || $key == "landing_page" || $key == "is_take_picture" 
+                || $key == 'form_icon_name') {
                 
             } else {
 
                 if ($security_key) {
-                    $vdcode = urldecode(base64_decode(str_replace($form_info ['security_key'], '', $v)));
+                    $vdcode = urldecode(
+                                base64_decode(
+                                    str_replace(
+                                        $form_info ['security_key'], 
+                                        '', 
+                                        $v
+                                    )
+                                )
+                            );
                 } else {
                     $vdcode = urldecode($v);
                 }
@@ -1744,18 +1843,36 @@ class Api extends CI_Controller {
         }
         $warning_message = '';
         $app_map_view_setting = get_map_view_settings($app_id);
-        if(isset($app_map_view_setting->map_distance_mapping) && $app_map_view_setting->map_distance_mapping)//if Distance maping on then call this block
+        //if Distance maping on then call this block
+        if(isset($app_map_view_setting->map_distance_mapping) 
+            && $app_map_view_setting->map_distance_mapping)
         {
                     $saved_distance=500;
-                    if($app_map_view_setting->distance !== ''){//if distance not given then default distance will assign as 500
+                    if($app_map_view_setting->distance !== ''){
+                        //if distance not given then default distance will assign as 500
                         $saved_distance=$app_map_view_setting->distance;
                     }
-                    $matching_value = $record[$app_map_view_setting->matching_field]; //this field name getting from setting and getting value from received json
-                    $kml_poligon_rec = $this->db->get_where('kml_poligon', array('app_id' => $app_id, 'type' => 'distence','matching_value' => $matching_value))->row_array();
+                    
+                    // this field name getting from setting and getting value from received json
+                    $matching_value = $record[$app_map_view_setting->matching_field]; 
+                    $kml_poligon_rec = $this->db->
+                        get_where(
+                            'kml_poligon', 
+                            array('app_id' => $app_id, 
+                                'type' => 'distence',
+                                'matching_value' => $matching_value
+                            )
+                        )->row_array();
                     
                     if(!empty($kml_poligon_rec)){
                         $lat_long = explode(',', $location);//Received location from mobile device
-                        $distance_from_center = lan_lng_distance($kml_poligon_rec['latitude'], $kml_poligon_rec['longitude'],$lat_long[0], $lat_long[1]);
+                        $distance_from_center = 
+                            lan_lng_distance(
+                                $kml_poligon_rec['latitude'], 
+                                $kml_poligon_rec['longitude'],
+                                $lat_long[0], 
+                                $lat_long[1]
+                            );
                         if($distance_from_center > $saved_distance)
                         {
                             $warning_message  = 'Your location mismatched. ';
@@ -1793,7 +1910,13 @@ class Api extends CI_Controller {
                         }
                     }
                     // move the file
-                    if ($s3->putObjectFile($fileTempName, $bucket_name, $imgName, S3::ACL_PUBLIC_READ)) {
+                    if ($s3->putObjectFile(
+                                $fileTempName, 
+                                $bucket_name, 
+                                $imgName, 
+                                S3::ACL_PUBLIC_READ
+                            )
+                        ) {
                         $imgName = 'http://' . $bucket_name . '.s3.amazonaws.com/' . $imgName;
                         $temp_array = array(
                             'image' => $imgName,
@@ -1838,7 +1961,9 @@ class Api extends CI_Controller {
                         $error_before = array(
                             'file' => $data ['upload_data'] ['file_name']
                         );
-                        $imgName = NFS_IMAGE_PATH.'/app_id_'.$app_id .'/'. $data ['upload_data'] ['file_name'];
+                        $imgName = 
+                            NFS_IMAGE_PATH.'/app_id_'.$app_id .'/'. 
+                            $data ['upload_data'] ['file_name'];
                         $temp_array = array(
                             'image' => $imgName,
                             'title' => $image_title
@@ -1864,7 +1989,9 @@ class Api extends CI_Controller {
                 $town_name = strip_tags($town);
             }
 
-            $district = $this->getDistrictName($location); // Get Town name against location
+            $district = 
+                $this->
+                    getDistrictName($location); // Get Town name against location
             if ($district) {
                 $district_name = strip_tags($district);
             }
@@ -1892,7 +2019,12 @@ class Api extends CI_Controller {
             ///////////////////////// HASSAN ANWAR     ////////////////////////////
             ///////////////////////////////////////////////////////////////////////
 
-            $multiChoices = $this->db->query("Select * from form_multiselectFieldLabels where formId='$form_id'");
+            $multiChoices = 
+                $this->db->
+                    query(
+                        "Select * from form_multiselectFieldLabels 
+                        where formId='$form_id'"
+                    );
             foreach($multiChoices->result() as $row)
             {
                 $fd=(array) $dataresultnew1;
@@ -1926,7 +2058,8 @@ class Api extends CI_Controller {
             );
             $this->db->insert( 'mobile_activity_log', $mobile_log);
             //Mobile activity log - End
-            $err_msg = 'Record Not Submitted. '.$this->db->_error_message().'.                         "Please Refresh your application"';
+            $err_msg = 'Record Not Submitted. '.$this->db->
+                _error_message().'.                         "Please Refresh your application"';
             $jsone_array = array (
                         'error' => $err_msg
             );
@@ -1967,7 +2100,15 @@ class Api extends CI_Controller {
                     'image' => $image_path ['image']
                 );
                 if ($security_key) {
-                    $add_images ['title'] = urldecode(base64_decode(str_replace($form_info ['security_key'], '', $image_path ['title'])));
+                    $add_images ['title'] = urldecode(
+                        base64_decode(
+                            str_replace(
+                                $form_info ['security_key'], 
+                                '', 
+                                $image_path ['title']
+                            )
+                        )
+                    );
                 } else {
                     $add_images ['title'] = urldecode($image_path ['title']);
                 }

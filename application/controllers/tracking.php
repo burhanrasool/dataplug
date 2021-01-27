@@ -27,8 +27,8 @@ class Tracking extends CI_Controller {
         $altitude = $_REQUEST ['altitude'];
         $speed = $_REQUEST ['speed'];
         $route_id = $_REQUEST ['routeId'];
-        $gpsTime = date('Y-m-d H:i:s', strtotime($_REQUEST ['gpsTime']));
-        $deviceTS = date('Y-m-d H:i:s', strtotime($_REQUEST ['deviceTS']));
+        $gps_time = date('Y-m-d H:i:s', strtotime($_REQUEST ['gpsTime']));
+        $device_ts = date('Y-m-d H:i:s', strtotime($_REQUEST ['deviceTS']));
         $created_datetime = date('Y-m-d H:i:s');
         $dataresultnew = array(
             'app_id' => $app_id,
@@ -36,8 +36,8 @@ class Tracking extends CI_Controller {
             'location' => $location,
             'lat' => $lat,
             'lng' => $lng,
-            'gpsTime' => $gpsTime,
-            'deviceTS' => $deviceTS,
+            'gps_time' => $gps_time,
+            'device_ts' => $device_ts,
             'accuracy' => $accuracy,
             'altitude' => $altitude,
             'speed' => $speed,
