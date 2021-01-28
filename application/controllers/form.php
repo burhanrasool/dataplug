@@ -33,7 +33,7 @@ class Form extends CI_Controller {
 
     /**
      * Index Page for Form controller.
-     * 
+     *
      * @param  $slug application id
      * @return void
      * @author UbaidUllah Balti <ubaidcskiu@gmail.com>
@@ -87,8 +87,8 @@ class Form extends CI_Controller {
     }
 
     /**
-     * method to get heading and form data of  form results table 
-     * @param  $slug form id 
+     * method to get heading and form data of  form results table
+     * @param  $slug form id
      * @param $all_data bit for all data of a form or paginated data
      * @return  array An array of form heading and its data
      * @author UbaidUllah Balti <ubaidcskiu@gmail.com>
@@ -526,7 +526,7 @@ class Form extends CI_Controller {
     }
 
     /**
-     * Return form list based on app id and 
+     * Return form list based on app id and
      * filter attribute
      *  @return  form-ids array
      * @author UbaidUllah Balti <ubaidcskiu@gmail.com>
@@ -1009,8 +1009,8 @@ class Form extends CI_Controller {
             redirect(base_url() . 'guest');
         }
     }
-    
-    
+
+
     /**
      * Action for Unsaved Activities
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
@@ -1039,7 +1039,7 @@ class Form extends CI_Controller {
 
 
 
-        
+
         $us_activities = $this->form_results_model->get_unsaved_activities($_GET['iDisplayStart'],$_GET['iDisplayLength'],$_GET['sSearch'],$_GET['iSortCol_0'],$_GET['sSortDir_0']);
         $total_act_un = $this->form_results_model->get_unsaved_activities_total($_GET['sSearch']);
 //        making array for ajax datatable...
@@ -1065,18 +1065,18 @@ class Form extends CI_Controller {
 
         if($total_act_un==0){
             //echo json_encode(array('aaData'=>''));
-            echo json_encode(array(                
-                    //"sEcho" => 0,                
-                    "iTotalRecords" => "0",                
-                    "iTotalDisplayRecords" => "0",                
-                    "aaData" => array()            
+            echo json_encode(array(
+                    //"sEcho" => 0,
+                    "iTotalRecords" => "0",
+                    "iTotalDisplayRecords" => "0",
+                    "aaData" => array()
                     ));
         }else {
             echo json_encode($data2);
         }
     }
-    
-    
+
+
 
     public function exportcurrentresults() {
 
@@ -2262,7 +2262,7 @@ class Form extends CI_Controller {
                 $data['form'] = $record_array_final;
                 /**
                  * sorting based on filter attribute of the array data
-                 * will called a helper class SortAssociativeArray WITH 
+                 * will called a helper class SortAssociativeArray WITH
                  * its call back function call
                  */
                 foreach ($filter_attribute as $filter_attribute_value) {
@@ -2456,7 +2456,7 @@ class Form extends CI_Controller {
                 $data['uc'] = $uc_array;
                 /**
                  * sorting based on filter attribute of the array data
-                 * will called a helper class SortAssociativeArray WITH 
+                 * will called a helper class SortAssociativeArray WITH
                  * its call back function call
                  */
                 foreach ($filter_attribute as $filter_attribute_value) {
@@ -2605,7 +2605,7 @@ class Form extends CI_Controller {
         }
     }
 
-    //new 
+    //new
     public function mapviewframe($slug) {
         $slug_array = array();
         $slug_array = explode('-', $slug);
@@ -2920,7 +2920,7 @@ class Form extends CI_Controller {
             $data['form'] = $record_array_final;
             /**
              * sorting based on filter attribute of the array data
-             * will called a helper class SortAssociativeArray WITH 
+             * will called a helper class SortAssociativeArray WITH
              * its call back function call
              */
             foreach ($filter_attribute as $filter_attribute_value) {
@@ -3093,7 +3093,7 @@ class Form extends CI_Controller {
             $data['uc'] = $uc_array;
             /**
              * sorting based on filter attribute of the array data
-             * will called a helper class SortAssociativeArray WITH 
+             * will called a helper class SortAssociativeArray WITH
              * its call back function call
              */
             foreach ($filter_attribute as $filter_attribute_value) {
@@ -3360,7 +3360,7 @@ class Form extends CI_Controller {
                     for ($i = 0; $i < $total_headings; $i++) {
                         if (!empty($form_item[$headings[$i]])) {
                             if ($headings[$i] == 'is_take_picture') {
-                                
+
                             } else if ($headings[$i] == 'image') {
                                 $path = $form_item[$headings[$i]][0]['image'];
                                 $image_row = "<tr align='center'><td colspan='2'><a href=" . $path . " class='image_colorbox' title='All Rights Reserved © 2013-" . date('Y') . " - " . PLATFORM_NAME . " <br>By ITU Government of Punjab - Pakistan'><img src=" . $path . " alt='' width='200' height='200'/></a></td></tr>";
@@ -3386,7 +3386,7 @@ class Form extends CI_Controller {
     }
 
     /**
-     *  Update form on form builder 
+     *  Update form on form builder
      * @return void
      * @param  $slug form id
      * @author UbaidUllah Balti <ubaidcskiu@gmail.com>
@@ -3412,13 +3412,13 @@ class Form extends CI_Controller {
                 $upgrade_from_google_play = 1;
             }
             $data['upgrade_from_google_play'] = $upgrade_from_google_play;
-            
+
             $location_required = 1;
             if (isset($app_general_setting->location_required) && $app_general_setting->location_required == 0) {
                 $location_required = 0;
             }
             $data['location_required'] = $location_required;
-            
+
             $data['super_app_user'] = 'no';
             if (!$this->acl->hasSuperAdmin()) {
                 $login_data = $this->session->userdata('logged_in');
@@ -3651,7 +3651,7 @@ class Form extends CI_Controller {
                 umask($old);
                 if ($_FILES['userfile_addform']['name'] != '') {
                     //upload form icon
-                   
+
                     $config['upload_path'] = $abs_path;
                     $config['file_name'] = $iconName;
                     $config['overwrite'] = TRUE;
@@ -3682,7 +3682,7 @@ class Form extends CI_Controller {
                     }
                 } else {
                     $from_path = FORM_IMG_DISPLAY_PATH . '../form_icons/default_' . $total_forms . '.png';
-                    
+
                     @copy($from_path,$abs_path.$iconName);
                    // file_put_contents($abs_path . $iconName, file_get_contents($from_path));
                 }
@@ -3706,7 +3706,7 @@ class Form extends CI_Controller {
             redirect(base_url() . 'guest');
         }
     }
-    
+
 
     function check_form_name_availability() {
         $form_name = $this->input->post('form_name');
@@ -3732,7 +3732,7 @@ class Form extends CI_Controller {
         if ($this->session->userdata('logged_in')) {
             if($this->input->post()){
                 $form_id = $slug;//form_id which want to move to view
-                
+
                 $view_id = $this->input->post('view_id');//view_id where want to move the selected form
                 $selected_form = $this->form_model->get_form($form_id,$view_id);
                 $app_id = $selected_form['app_id'];
@@ -3759,7 +3759,7 @@ class Form extends CI_Controller {
                     );
                     //file_write()
                     file_write($abs_path.'/'.$view_id.'_'.$file_name_html,$selected_form['full_description']);
-                    
+
                 }
                 else{
                     //move view to view
@@ -3773,8 +3773,8 @@ class Form extends CI_Controller {
                     );
                     file_write($abs_path.'/'.$view_id.'_'.$file_name_html,$selected_view_form['fv_full_description']);
                 }
-                
-                
+
+
                 if(isset($selected_form['fvid']) && !empty($selected_form['fvid'])) {
                     $this->db->where('id', $selected_form['fvid']);
                     $this->db->update('form_views', $form_move_data);
@@ -3782,7 +3782,7 @@ class Form extends CI_Controller {
                 else{
                     $this->db->insert('form_views', $form_move_data);
                 }
-                
+
                 $this->session->set_flashdata('validate', array('message' => 'Active form copied to your required view successfully', 'type' => 'success'));
                 redirect(base_url() . 'app-form/' . $form_id);
             }
@@ -3801,9 +3801,9 @@ class Form extends CI_Controller {
             if($this->input->post()){
                 $form_id = $slug;//form_id which want to copy
                 $app_id = $this->input->post('app_id_popup');//app_id where want to copy the selected form
-                
-                
-                
+
+
+
                 $selected_form = $this->form_model->get_form($form_id);
                 $allforms_patern = $this->form_model->get_form_by_app($app_id);
                 $i = 1;
@@ -3857,9 +3857,9 @@ class Form extends CI_Controller {
             redirect(base_url() . 'guest');
         }
     }
-    
+
     /**
-     * 
+     *
      * @param type $slug
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
@@ -3870,12 +3870,12 @@ class Form extends CI_Controller {
             $session_data = $this->session->userdata('logged_in');
             session_to_page($session_data, $data);
             $department_id = $session_data['login_department_id'];
-            
-            
+
+
             $parameter = explode('_', $slug);
             $app_id = $parameter[0];
             $form_id = $parameter[1];
-                        
+
             $data['app_id'] = $app_id;
             $data['form_id'] = $form_id;
             if (!$this->acl->hasPermission('form', 'add')) {
@@ -3890,13 +3890,13 @@ class Form extends CI_Controller {
                 }
                 $data['departments'] = $dep;
             }
-            
+
             if ($this->acl->hasSuperAdmin()) {
                 $data['app_list'] = array();
             } else {
                 $data['app_list'] = $this->app_model->get_app_by_user($data['login_user_id']);
             }
-            
+
             $app = $this->app_model->get_app($app_id);
 
             $data['batch'] = $batch;
@@ -3931,7 +3931,7 @@ class Form extends CI_Controller {
                 umask($old);
                 $iconName = 'formicon_' . $form_id . '.png';
                 if ($_FILES['userfile']['name'] != '') {
-                
+
 //                $config['upload_path'] = $abs_path;
 //                $config['file_name'] = $iconName;
 //                $config['overwrite'] = TRUE;
@@ -4258,12 +4258,12 @@ class Form extends CI_Controller {
                                 //if($app_id=="8" || $app_id==8)
                                 //{
                                     $full_description=$full_description.'<link href="bootstrap.min.css" rel=stylesheet>
-                                        <link href="common.css" rel=stylesheet> 
+                                        <link href="common.css" rel=stylesheet>
 
-                                          <script type="text/javascript" src="jquerylatest.js"></script> 
+                                          <script type="text/javascript" src="jquerylatest.js"></script>
                                          <script src="jquery-ui-autocomplete.js"></script>
                                          <script src="jquery.select-to-autocomplete.min.js"></script>
-                                        
+
                                         <script type="text/javascript" src="jqui.js"></script>
                                         <script type="text/javascript" src="datebox.js"></script>
                                         <script type="text/javascript" src="dateformatting.js"></script>
@@ -4273,18 +4273,18 @@ class Form extends CI_Controller {
                                 //}
                                 //else{
                             //         $full_description=$full_description.'
-                            // <script src="jquery.min.js"></script> 
-                            // <script src="bootstrap.min.js"></script> 
+                            // <script src="jquery.min.js"></script>
+                            // <script src="bootstrap.min.js"></script>
                             // <script src="bootstrap.js"></script>
-                            // <script src="jquery-2.0.2.min.js"></script> 
+                            // <script src="jquery-2.0.2.min.js"></script>
                             // <script src="jquery.js"></script>
                             // <script src="jquery-ui-autocomplete.js"></script>
                             // <script src="jquery.select-to-autocomplete.min.js"></script>
-                            // <script src="jquery-ui.min.js"></script>        
+                            // <script src="jquery-ui.min.js"></script>
                             // <script src="common.js"></script> ';
                                 //}
 
- 
+
                             $full_description=$full_description.'<style type="text/css" media="screen">
                                 body {
                                   font-family: Arial, Verdana, sans-serif;
@@ -4418,7 +4418,7 @@ class Form extends CI_Controller {
                     $this->data['error'] = $this->upload->display_errors();
                     $this->session->set_flashdata('validate', array('message' => $this->upload->display_errors(), 'type' => 'warning'));
                 } else {
-//success   
+//success
                     $imei_number = (!empty($imei_number)) ? $imei_number : "";
                     $data = array(
                         'form_id' => $form_id,
@@ -4476,7 +4476,7 @@ class Form extends CI_Controller {
     }
 
     /**
-     * Form ajax based editing 
+     * Form ajax based editing
      * @author Ubaidullah Balti <ubaidcskiu@gmail.com>
      */
     public function edit_form_result_ajax() {
@@ -4614,7 +4614,7 @@ class Form extends CI_Controller {
 
         /**
          * sorting based on filter attribute of the array data
-         * will called a helper class SortAssociativeArray WITH 
+         * will called a helper class SortAssociativeArray WITH
          * its call back function call
          */
         foreach ($filter_attribute as $filter_attribute_value) {
@@ -4844,7 +4844,7 @@ class Form extends CI_Controller {
         }
         /**
          * sorting based on filter attribute of the array data
-         * will called a helper class SortAssociativeArray WITH 
+         * will called a helper class SortAssociativeArray WITH
          * its call back function call
          */
         foreach ($filter_attribute as $filter_attribute_value) {
@@ -5092,7 +5092,7 @@ class Form extends CI_Controller {
         }
         /**
          * sorting based on filter attribute of the array data
-         * will called a helper class SortAssociativeArray WITH 
+         * will called a helper class SortAssociativeArray WITH
          * its call back function call
          */
         foreach ($filter_attribute as $filter_attribute_value) {
@@ -5327,7 +5327,7 @@ class Form extends CI_Controller {
         }
         /**
          * sorting based on filter attribute of the array data
-         * will called a helper class SortAssociativeArray WITH 
+         * will called a helper class SortAssociativeArray WITH
          * its call back function call
          */
         foreach ($filter_attribute as $filter_attribute_value) {
@@ -5712,7 +5712,7 @@ class Form extends CI_Controller {
 
                                         $icon_filename = $icon[$valueforarray];
                                     } else {
-                                        
+
                                     }
                                 }
                             } else {
@@ -5732,7 +5732,7 @@ class Form extends CI_Controller {
                                 $final2 = array();
                                 if (!empty($form_item[$headings[$i]])) {
                                     if ($headings[$i] == 'is_take_picture') {
-                                        
+
                                     } else if ($headings[$i] == 'image') {
                                         $path = $form_item[$headings[$i]];
                                         $image_row = "<tr align='center'><td colspan='2'><a href=" . $path . " class='image_colorbox' title='All Rights Reserved © 2013-" . date('Y') . " - " . PLATFORM_NAME . " Developed By ITU Government of Punjab - Pakistan'><img src=" . $path . " alt='' width='200' height='200'/></a></td></tr>";
@@ -5920,7 +5920,7 @@ class Form extends CI_Controller {
                         $final2 = array();
                         if (!empty($form_item[$heading_array[$i]])) {
                             if ($heading_array[$i] == 'is_take_picture') {
-                                
+
                             } else if ($heading_array[$i] == 'image') {
                                 $path = $form_item[$heading_array[$i]][0]['image'];
                                 $html_layout = array_merge($html_layout, array('image' => $imagess));
@@ -5954,7 +5954,7 @@ class Form extends CI_Controller {
     }
 
     /**
-     * 
+     *
      * function to edit in color box with ajax call
      * @return  void
      * @author UbaidUllah Balti <ubaidcskiu@gmail.com>
@@ -6027,7 +6027,7 @@ class Form extends CI_Controller {
     }
 
     /**
-     * 
+     *
      * ajax call for editing data from mapview based on edit_form_partial_map()
      * @return  void
      * @author UbaidUllah Balti <ubaidcskiu@gmail.com>
@@ -6071,7 +6071,7 @@ class Form extends CI_Controller {
     }
 
     /**
-     * 
+     *
      * method for edit map paritial for  in mapview
      * @return  void
      * @author UbaidUllah Balti <ubaidcskiu@gmail.com>
@@ -6147,7 +6147,7 @@ class Form extends CI_Controller {
     }
 
     /**
-     * 
+     *
      * Get Heading and form data based on filter date
      * @return  void
      * @author UbaidUllah Balti <ubaidcskiu@gmail.com>
@@ -6582,7 +6582,7 @@ class Form extends CI_Controller {
     }
 
     /**
-     * Change filter 
+     * Change filter
      * @param type $slug form_id
      * @return  void
      * @author UbaidUllah Balti <ubaidcskiu@gmail.com>
@@ -6914,7 +6914,8 @@ class Form extends CI_Controller {
             }
         }
         if ($category_final || $sub_final) {
-            $final_json = array('category' => $category_final, 'sub_category' => $sub_final, 'selected_cat' => $filter);
+            $final_json = array('category' => $category_final,
+            'sub_category' => $sub_final, 'selected_cat' => $filter);
             header('Content-Type: application/x-json; charset=utf-8');
             echo json_encode($final_json);
         } else {
@@ -6940,7 +6941,7 @@ class Form extends CI_Controller {
         $data['heading'] = $heading;
         $this->load->view('form/form_subtable', $data);
     }
-    
+
     public function changestatusrecord() {
         //$this->load->model('form_result_model');
         $rec_id = $this->input->post('id');
