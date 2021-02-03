@@ -21,9 +21,14 @@
 $session_data = $this->session->userdata('logged_in');
 //echo form_open(base_url()."applicatioin-users"); ?>
 
-<form style='margin: auto;width: 100%;' action="<?= base_url() ?>assign-applicatioin-users/<?php echo $app_id?>" method="POST" class="full validate add_task_form"  enctype="multipart/form-data"  id='form_edit'/>
+<form style='margin: auto;width: 100%;' action=
+      "<?= base_url() ?>assign-applicatioin-users/<?php echo $app_id?>"
+      method="POST" class="full validate add_task_form"
+      enctype="multipart/form-data"  id='form_edit'/>
 <input type="hidden" name="htmldesc" id="htmldesc" />
-<table cellpadding="0" cellspacing="0" border="0" class="display addappusertable" id="example" style='width: 100%;box-shadow:0 0 6px rgba(0, 0, 0, 0.25);margin:15px 0 14px 0'>
+<table cellpadding="0" cellspacing="0" border="0"
+       class="display addappusertable" id="example" style='width: 100%;
+							   box-shadow:0 0 6px rgba(0, 0, 0, 0.25);margin:15px 0 14px 0'>
     <tbody>
         <tr>
             <td style='width: 50px;'>
@@ -36,7 +41,8 @@ $session_data = $this->session->userdata('logged_in');
 
                     <div>
 
-                        <select id="user_id" name="user_id" style="width: 135px;" class="customSelect">
+                        <select id="user_id" name="user_id" style="width: 135px;" 
+				class="customSelect">
                             <option value="">Select User</option>
                             <?php
                             
@@ -44,7 +50,9 @@ $session_data = $this->session->userdata('logged_in');
                                 foreach ($usr_list as $value) {
                                     if($session_data['login_user_id']!=$value['id']){
                                     ?>
-                                    <option value="<?php echo $value['id'] ?>"><?php echo $value['first_name'].' '.$value['last_name'].' ('.$value['email'].')'; ?></option>
+                                    <option value="<?php echo $value['id'] ?>">
+					    <?php echo $value['first_name'].' '.$value['last_name'].' ('.$value['email'].')'; ?>
+				</option>
                                     <?php }
                                 }
                             }
@@ -70,7 +78,8 @@ $session_data = $this->session->userdata('logged_in');
 
 <div class="tableContainer">
     <div>
-        <table cellspacing="0" cellpadding="0" id="application-listing" class="display">
+        <table cellspacing="0" cellpadding="0" 
+	       id="application-listing" class="display">
             <thead>
                 <tr>
                     <th class="Categoryh">Application Name</th>
@@ -88,17 +97,24 @@ $session_data = $this->session->userdata('logged_in');
                     if($session_data['login_user_id']!=$app_user['user_id']){
                         ?>
                         <tr class="trSelect" >
-                            <td class="Category"><a href=""><?php echo htmlspecialchars($app_user['app_name']) ?></a></td>
+                            <td class="Category"><a href="">
+				    <?php echo htmlspecialchars($app_user['app_name']) ?>
+				    </a></td>
                            
                            
-                            <td class="Category"><?php echo $app_user['first_name']." ".$app_user['last_name'] ?></td>
+                            <td class="Category">
+				    <?php echo $app_user['first_name']." ".$app_user['last_name'] ?>
+				</td>
                             <?php if ($this->acl->hasSuperAdmin()) { ?>
-                                <td class="Category"><?php echo $app_user['department_name'] ?></td>
+                                <td class="Category">
+					<?php echo $app_user['department_name'] ?></td>
 
                             <?php } ?>
                             <td class="Category">
-                                <a href="<?= base_url() ?>app/deleteasignuser/<?php echo $app_user['assigned_id']?>/<?php echo $app_id?>">
-                                    <img src="<?= base_url() ?>assets/images/tableLink3.png" alt=""  title ="Delete assigned user" />
+                                <a href="<?= base_url() ?>app/deleteasignuser/<?php 
+								echo $app_user['assigned_id']?>/<?php echo $app_id?>">
+                                    <img src="<?= base_url() ?>assets/images/tableLink3.png" alt="" 
+									title ="Delete assigned user" />
                                 </a>
                                
                             </td>

@@ -37,10 +37,10 @@ class Tempapi extends CI_Controller {
     //Re-Post the all record of given application which have not sent
     public function cardverificationapi(){
         $form_id = 10601;//$_REQUEST['api_id'];//10601
-        $cardnumber = $_REQUEST['cardnumber'];
+        $card_number = $_REQUEST['card_number'];
         $this->db->select('*');
         $this->db->from('zform_'.$form_id);
-        $this->db->where('cardnumber', $cardnumber);
+        $this->db->where('card_number', $card_number);
         $this->db->where('is_deleted', '0');
         $query = $this->db->get();
         $post_available = $query->result_array();
@@ -109,7 +109,8 @@ class Tempapi extends CI_Controller {
     			$post_available = $query->result_array();
     			$total_resent_rec = count($post_available);
     			$count_resesnd = 0 ;
-    			echo "Total record need to resend on Form #".$form_id." = ".$total_resent_rec.'<br />';
+    			echo "Total record need to resend on Form #"
+				.$form_id." = ".$total_resent_rec.'<br />';
     			
     			if ($total_resent_rec > 0) {
     				
@@ -185,7 +186,8 @@ class Tempapi extends CI_Controller {
     					//exit;
     					
     				}
-    				echo "Record Resent successfully on form # ".$form_id." = ".$count_resesnd.'<br />';
+    				echo "Record Resent successfully on form # "
+					.$form_id." = ".$count_resesnd.'<br />';
     			}
     			//exit;
     		}
@@ -197,7 +199,8 @@ class Tempapi extends CI_Controller {
 //     				$this->email->subject('Cron Executed');
 //     				$message = "<b>Welcome to ".PLATFORM_NAME."</b><br />";
 //     				$message .= $form_list;
-//     				$message .= "<br /><br /><br />Note: This is system generated e-mail. Please do not reply<br>";
+//     				$message .= "<br /><br /><br 
+// 		/>Note: This is system generated e-mail. Please do not reply<br>";
 //     				$message .= "<br /><b>".PLATFORM_NAME."</b>";
     		
 //     				$this->email->message($message);
@@ -215,7 +218,12 @@ class Tempapi extends CI_Controller {
     	$base_url = urldecode($base_url);
     	$urlpost = $base_url;
     	$fields_string = "form_data=" . $data_post_json;
-    	//$urlpost = "http://zimaidarofficer.pitb.gov.pk/task/addAssignTask/?form_data={%22complaint_violations%22%3A%22Banner+Removing%22%2C%22complaint_comments%22%3A%22Guvku+hiffo+yhuj+yiyxg%22%2C%22town_id%22%3A%222%22%2C%22imei_no%22%3A%2225463215487%22%2C%22complaint_picture%22%3A%22%22%2C%22location%22%3A%222.56456%2C2.35468%22}";
+    	//$urlpost = "http://zimaidarofficer.pitb.gov.pk/task/
+// 	    addAssignTask/?form_data={%22complaint_violations%22%3A%22Banner
+// 	    +Removing%22%2C%22complaint_comments%22%3A%22Guvku+hiffo+yhuj+
+// 	    yiyxg%22%2C%22town_id%22%3A%222%22%2C%22imei_
+// 	    no%22%3A%2225463215487%22%2C%22complaint_
+// 	    picture%22%3A%22%22%2C%22location%22%3A%222.56456%2C2.35468%22}";
     	$curl = curl_init();
     
     	curl_setopt($curl,CURLOPT_URL, $urlpost);
@@ -231,7 +239,8 @@ class Tempapi extends CI_Controller {
 //     function zform_2206($formValues)
 //     {
 //     	unset($formValues->image);
-//     	$rec = $this->db->query("SELECT id FROM zform_2206 WHERE remote_record_id='".$formValues->id."'")->row();
+//     	$rec = $this->db->query("SELECT id FROM zform_2206
+// 	WHERE remote_record_id='".$formValues->id."'")->row();
 //     	if(count($rec)==0)
 //     	{
 //     		$res = $this->db->insert('zform_2206', $formValues);
@@ -250,7 +259,8 @@ class Tempapi extends CI_Controller {
 //     function zform_2206($formValues)
 //     {
 //     	unset($formValues->image);
-//     	$rec = $this->db->query("SELECT id FROM zform_2206 WHERE remote_record_id='".$formValues->id."'")->row();
+//     	$rec = $this->db->query("SELECT id FROM zform_2206 
+// 	WHERE remote_record_id='".$formValues->id."'")->row();
     	 
     	 
 //     	if(count($rec)==0)
@@ -279,7 +289,8 @@ class Tempapi extends CI_Controller {
     //Functions which used for import CSV - Start
 
     /**
-     * This is a specific application function, included here just for example, you make your function follow this.
+     * This is a specific application function, 
+//      included here just for example, you make your function follow this.
      * @return json
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
@@ -291,7 +302,9 @@ class Tempapi extends CI_Controller {
             while (($data = fgetcsv($handle, 10000, ",")) !== FALSE) {
 
                 if ($row == 1) {
-                    if ($data[0] != 'License No' && $data[1] != 'Store Name' && $data[2] != 'Store Address' && $data[3] != 'Town Name') {
+                    if ($data[0] != 'License No' && $data[1] != 
+			'Store Name' && $data[2] != 'Store Address' 
+			&& $data[3] != 'Town Name') {
 
                         print "<br />Its not a right formated file. <br />";
                         break;
@@ -355,7 +368,8 @@ class Tempapi extends CI_Controller {
                         'matching_value' => $matching_value,
                     );
                     
-                    $rec = $this->db->query("SELECT * FROM kml_poligon WHERE matching_value='".$matching_value."'")->row();
+                    $rec = $this->db->query("SELECT * FROM kml_poligon 
+		    WHERE matching_value='".$matching_value."'")->row();
                      if(count($rec)==0)
                      {
                          $this->db->insert('kml_poligon', $record);
@@ -397,7 +411,8 @@ class Tempapi extends CI_Controller {
                         'matching_value' => $matching_value,
                     );
                      
-                     $rec = $this->db->query("SELECT * FROM kml_poligon WHERE matching_value='".$matching_value."'")->row();
+                     $rec = $this->db->query("SELECT * FROM kml_poligon 
+		     WHERE matching_value='".$matching_value."'")->row();
                      if(count($rec)==0)
                      {
                          $this->db->insert('kml_poligon', $record);
@@ -1428,7 +1443,9 @@ class Tempapi extends CI_Controller {
         foreach ($forms as $form) {
             if ($form['is_deleted'] == '1') {
                 $form_id = $form['id'];
-                $table_exist_bit = $this->form_results_model->check_table_exits('zform_' . $form_id);
+                $table_exist_bit =
+				$this->form_results_model->
+				check_table_exits('zform_' . $form_id);
 
                 if (is_table_exist('zform_' . $form_id)) {
                     $query_form = $this->db->query("SELECT * FROM zform_" . $form_id);
@@ -1758,7 +1775,9 @@ GROUP BY zf.id");
                             'form_id' => $forms ['form_id'],
                             'form_name' => $forms ['form_name']
                         );
-                        $results = $this->form_results_model->syncDataFromRemoteServer($forms ['form_id'], $from_date_stamp, $to_date_stamp,$imei_no);
+                        $results = $this->form_results_model->
+						syncDataFromRemoteServer($forms ['form_id'],
+						$from_date_stamp, $to_date_stamp,$imei_no);
                         $results_count += count($results);
                         foreach ($results as $rec) {
                             
@@ -1843,7 +1862,8 @@ GROUP BY zf.id");
                 //print_r($post_available);
                 // $total_resent_rec = count($post_available);
                 // $count_resesnd = 0 ;
-                // echo "Total record need to resend on Form #".$form_id." = ".$total_resent_rec.'<br />';
+                // echo "Total record need to resend on Form #".$form_id." 
+				//= ".$total_resent_rec.'<br />';
                 
                 //if ($total_resent_rec > 0) {
                 $update = false;
@@ -1865,7 +1885,8 @@ GROUP BY zf.id");
                             $v_post['Condoms_stock_available'] = $explode_bcomplex[6];
                             $v_post['Condoms_number_of_days_out_of_stock'] = $explode_bcomplex[7];
                             $v_post['Contraceptive_Inj_stock_available'] = $explode_bcomplex[8];
-                            $v_post['Contraceptive_Inj_number_of_days_out_of_stock'] = $explode_bcomplex[9];
+                            $v_post['Contraceptive_Inj_number_of_days_out_of_stock'] 
+							= $explode_bcomplex[9];
                             if(isset($explode_bcomplex[100]))
                                 $v_post['Eye_Ointment_stock_available'] = $explode_bcomplex[10];
 
@@ -1877,7 +1898,8 @@ GROUP BY zf.id");
                             //print_r($explode_iron);
                             $v_post['Iron_Tab_stock_available'] = $explode_iron[0];
                             $v_post['Iron_Tab_number_of_days_out_of_stock'] = $explode_iron[1];
-                            $v_post['Number_of_eligible_couples_woman_aged_15_to_49_years'] = $explode_iron[2];
+                            $v_post['Number_of_eligible_couples_woman_aged_15_to_49_years']
+							= $explode_iron[2];
                             $v_post['number_of_Total_FP_modern_method_users'] = $explode_iron[3];
                             $v_post['number_of_new_FP_users'] = $explode_iron[4];
                             $v_post['Number_of_1st_Injectables_new_Referrals'] = $explode_iron[5];
@@ -1909,11 +1931,17 @@ GROUP BY zf.id");
 
                         $muac = '';
 
-                        if($v_post['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months'] != ''){
-                            $muac = $v_post['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months'];
+                        if($v_post['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months']
+						!= ''){
+                            $muac = 
+							$v_post['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months'];
 
-                        }elseif($v_post['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months_orig'] != ''){
-                            $muac = $v_post['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months_orig'];
+                        }
+						elseif($v_post
+						['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months_orig']
+						!= ''){
+                            $muac = 
+							$v_post['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months_orig'];
 
                         }
 
@@ -1921,9 +1949,12 @@ GROUP BY zf.id");
                             $update = true;
                             $explode_muac = explode(',', $muac);
                             //print_r($explode_iron);
-                            $v_post['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months'] = $explode_muac[0];
-                            $v_post['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months_orig'] = $explode_muac[0];
-                            $v_post['Number_of_Referrals_for_MAM_Aged_6_23_Months'] = $explode_muac[1];
+                            $v_post['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months']
+							= $explode_muac[0];
+                            $v_post['Number_of_Children_MUAC_done_and_recorded_Aged_6_23_Months_orig'] 
+							= $explode_muac[0];
+                            $v_post['Number_of_Referrals_for_MAM_Aged_6_23_Months']
+							= $explode_muac[1];
 
                         }
 
@@ -1964,11 +1995,9 @@ GROUP BY zf.id");
         //unlink('/NFS-Dataplug/images/immmm.jpg');
         //unlink('/NFS-Dataplug/images/1998/27c7a6f7f7aaf0349cadd7386a0b16ef.jpg');
         //unlink('/NFS-Dataplug/images/1998/27c7a6f7f7aaf0349cadd7386a0b16ef.jpg');
-        //unlink('/NFS-Dataplug/images/app_id_1998/27c7a6f7f7aaf0349cadd7386a0b16ef.jpg');
+        
         //rmdir('/NFS-Dataplug/images/app_id_1998');
-        //rmdir('/NFS-Dataplug/live/dev');
-
-        //copy("/var/www/vhosts/dataplug.itu.edu.pk/htdoc/assets/images/data/form-data/73954c617545b2d2336e57d3ccc5ad5e.jpg", "/NFS-Dataplug/images/immmm.jpg");
+        //rmdir('/NFS-Dataplug/live/dev');     
 
         //get image which save on local folder
        // exit;
@@ -1995,7 +2024,9 @@ GROUP BY zf.id");
                 $url_explode = explode("/", $url);
                 $image_index = count($url_explode)-1;
                 $image_name = $url_explode[$image_index];
-                $source_path = "/var/www/vhosts/dataplug.itu.edu.pk/htdoc/assets/images/data/form-data/".$image_name;
+                $source_path = 
+				"/var/www/vhosts/dataplug.itu.edu.pk/htdoc/assets/images/data/form-data/"
+				.$image_name;
                 if(file_exists($source_path)){
                     @mkdir(NFS_IMAGE_PATH.'/app_id_'.$app_id);
                     $file_name = NFS_IMAGE_PATH."/app_id_$app_id/".$image_name;
@@ -2014,7 +2045,8 @@ GROUP BY zf.id");
 
         // $img = base64_encode('27c7a6f7f7aaf0349cadd7386a0b16ef.jpg@@@@1998');
         // echo base64_decode($img);
-        ?> <img src="<?php echo  get_image_path('/app_id_1998/27c7a6f7f7aaf0349cadd7386a0b16ef.jpg')?>" />
+        ?> <img src="<?php echo  
+		get_image_path('/app_id_1998/27c7a6f7f7aaf0349cadd7386a0b16ef.jpg')?>" />
         <?php 
     }
     public function image_download_from_amazon(){

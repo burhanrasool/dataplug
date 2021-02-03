@@ -2,9 +2,12 @@
     <div class="inner-wrap">
         <div class="table-sec">
             <h2>Create API URL</h2>
-            <input type="hidden" name="app_secret" id="app_secret" value="<?php echo $app_secret; ?>"/>
+            <input type="hidden" name="app_secret" 
+			id="app_secret" value="<?php echo $app_secret; ?>"/>
             <input type="hidden" name="app_id" id="app_id" value="<?php echo $app_id; ?>"/>
-            <table cellpadding="0" cellspacing="0" border="0" class="display" id="example" style="box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);min-height: 230px;">
+            <table cellpadding="0" cellspacing="0" border="0"
+			class="display" id="example" 
+			style="box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);min-height: 230px;">
                 <tbody>
                     <tr>
                         <td>
@@ -13,7 +16,9 @@
                                     <strong>From </strong>
                                 </label>
                                 <div>
-                                    <input size ="15" type="text" id="from_date" value="" name="from_date"  onchange="check_date_validity()" ondblclick="clear_field(this)" class="textBoxLogin">
+                                    <input size ="15" type="text" id="from_date" value=""
+									name="from_date"  onchange="check_date_validity()"
+									ondblclick="clear_field(this)" class="textBoxLogin">
                                 </div>
 
                             </div>
@@ -23,13 +28,16 @@
                                     <strong>To </strong>
                                 </label>
                                 <div>
-                                    <input size="15" type="text" id="to_date" value="" name="to_date"  onchange="check_date_validity()" ondblclick="clear_field(this)" class="textBoxLogin">
+                                    <input size="15" type="text" id="to_date" value=""
+									name="to_date"  onchange="check_date_validity()"
+									ondblclick="clear_field(this)" class="textBoxLogin">
                                 </div>
 
                             </div>
                             <div class="row" style="text-align: center;">
 
-                                <div id="urldiv" style="margin-top: 15px; background-color: yellow;" onclick="select_all(this)">
+                                <div id="urldiv" style="margin-top: 15px; background-color: yellow;"
+									onclick="select_all(this)">
 
                                 </div>
 
@@ -40,7 +48,8 @@
                                     <strong> </strong>
                                 </label>
                                 <div>
-                                    <a href="<?php echo base_url() . 'app-landing-page/' . $app_id ?>"  class="genericBtn" style="">
+                                    <a href="<?php echo base_url() .
+										'app-landing-page/' . $app_id ?>"  class="genericBtn" style="">
                                         Back
                                     </a>
                                     <a href="" id="checkurl" target="_new" class="genericBtn" style="">
@@ -57,13 +66,15 @@
 
 <script type="text/javascript">
     function select_all(el) {
-        if (typeof window.getSelection != "undefined" && typeof document.createRange != "undefined") {
+        if (typeof window.getSelection != "undefined" 
+				&& typeof document.createRange != "undefined") {
             var range = document.createRange();
             range.selectNodeContents(el);
             var sel = window.getSelection();
             sel.removeAllRanges();
             sel.addRange(range);
-        } else if (typeof document.selection != "undefined" && typeof document.body.createTextRange != "undefined") {
+        } else if (typeof document.selection != "undefined" 
+				&& typeof document.body.createTextRange != "undefined") {
             var textRange = document.body.createTextRange();
             textRange.moveToElementText(el);
             textRange.select();
