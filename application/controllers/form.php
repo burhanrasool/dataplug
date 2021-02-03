@@ -3,7 +3,8 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Form extends CI_Controller {
+class Form extends CI_Controller 
+{
 
     private $perPage = 25;
     private $perMap = 5000;
