@@ -18,7 +18,7 @@
                 </thead>
                 <tbody>
                     <?php foreach ($app as $app_item):
-                        $filename = './assets/android/qr_code/'.$app_item['qr_code_file'];
+                        $file_name = './assets/android/qr_code/'.$app_item['qr_code_file'];
                         $result = '';
                         if(file_exists($filename)){
                             $result='
