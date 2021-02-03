@@ -32,7 +32,9 @@ class Customreports extends CI_Controller {
 
         if ($this->session->userdata('logged_in')) {
             if (!$this->acl->hasPermission('form', 'view')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $this->session->set_flashdata('validate', 
+                                              array('message' => "You don't have enough permissions to do this task.", 
+                                                        'type' => 'warning'));
                 redirect(base_url() . 'apps');
             }
             $session_data = $this->session->userdata('logged_in');
@@ -45,7 +47,9 @@ class Customreports extends CI_Controller {
             $forms_list = array();
             $all_forms = $this->form_model->get_form_by_app($slug);
             foreach ($all_forms as $forms) {
-                $forms_list[] = array('form_id' => $forms['form_id'], 'table_name' => 'zform_' . $forms['form_id'], 'form_name' => $forms['form_name']);
+                $forms_list[] = array('form_id' => $forms['form_id'], 
+                                      'table_name' => 'zform_' . $forms['form_id'], 
+                                      'form_name' => $forms['form_name']);
             }
                     $data['form_lists'] = $forms_list;
 
@@ -53,7 +57,9 @@ class Customreports extends CI_Controller {
 
                     $form_id = $forms_list[0]['form_id'];
                     $form_single_to_query = array();
-                    $form_single_to_query[] = array('form_id' => $form_id, 'table_name' => 'zform_' . $form_id, 'form_name' => $forms_list[0]['form_name']);
+                    $form_single_to_query[] = array('form_id' => $form_id, 
+                                                    'table_name' => 'zform_' . $form_id, 
+                                                    'form_name' => $forms_list[0]['form_name']);
                     /** Get filters from  multiple forms * */
                     $multiple_filters = $this->form_model->get_form_filters($form_single_to_query);
 //                    echo "<pre>";
@@ -116,20 +122,32 @@ class Customreports extends CI_Controller {
                             $new_category="district_name";
                         }
                         foreach ($new_category_list as $cat_listv) {
-                            $district_wise_catorized = $this->form_results_model->get_custom_reports_new($form_id, "", $filter_attribute[0], $cat_listv, $from_date, $to_date,$new_category);
+                            $district_wise_catorized = $this->
+                                    form_results_model->get_custom_reports_new($form_id, "", 
+                                                                               $filter_attribute[0], $cat_listv, $from_date, 
+                                                                               $to_date,$new_category);
 //                            echo "<pre>";
 //                            print_r($district_wise_catorized);die;
                             foreach ($district_wise_catorized as $key => $val) {
                                 if (!array_key_exists($val["$new_category"], $final_district_wise_array2)) {
                                     $final_district_wise_array2[$val["$new_category"]] = array();
                                     foreach ($new_category_list as $cat_listvv) {
-                                        $final_district_wise_array2[$val["$new_category"]] = array_merge($final_district_wise_array2[$val["$new_category"]], array('district' => $val["$new_category"], $cat_listvv => '0', 'total' => '0'));
+                                        $final_district_wise_array2[$val["$new_category"]] = array_merge(
+                                                                                                         $final_district_wise_array2[$val["$new_category"]], 
+                                                                                                         array('district' => $val["$new_category"], 
+                                                                                                               $cat_listvv => '0', 
+                                                                                                               'total' => '0'));
                                     }
                                 }
                                 if (array_key_exists($val["$new_category"], $final_district_wise_array2)) {
-                                    $final_district_wise_array2[$val["$new_category"]] = array_merge($final_district_wise_array2[$val["$new_category"]], array($cat_listv => $val['total'], 'total' => $final_district_wise_array2[$val["$new_category"]]['total'] + $val['total']));
+                                    $final_district_wise_array2[$val["$new_category"]] = array_merge(
+                                                                                                    $final_district_wise_array2[$val["$new_category"]], 
+                                                                                                     array($cat_listv => $val['total'], 
+                                                                                                            'total' => $final_district_wise_array2[$val["$new_category"]]['total'] + $val['total']));
                                 } else {
-                                    $final_district_wise_array2[$val["$new_category"]] = array('district' => $val["$new_category"], $cat_listv => $val['total'], 'total' => $val['total']);
+                                    $final_district_wise_array2[$val["$new_category"]] = array('district' => $val["$new_category"], 
+                                                                                               $cat_listv => $val['total'], 
+                                                                                               'total' => $val['total']);
                                 }
 
                             }
@@ -143,7 +161,8 @@ class Customreports extends CI_Controller {
 
                     $filter_options = '';
                     if (isset($filter_result->filters->$selected_form['id'])) {
-                        $app_filter_list = $filter_result->filters->$selected_form['id'];
+                        $app_filter_list = $filter_result->
+                                            filters->$selected_form['id'];
                         $filter_options.="<option value=''>Select One</option>";
                         if (!empty($app_filter_list)) {
                             foreach ($app_filter_list as $key => $val) {
@@ -160,7 +179,8 @@ class Customreports extends CI_Controller {
 
                     $filter_options1 = '';
                     if (isset($filter_result->filters->$selected_form['id'])) {
-                        $app_filter_list = $filter_result->filters->$selected_form['id'];
+                        $app_filter_list = $filter_result->filters->
+                                                        $selected_form['id'];
                         $filter_options1.="<option value=''>Select One</option>";
                         if (!empty($app_filter_list)) {
                             foreach ($app_filter_list as $key => $val) {
@@ -172,7 +192,9 @@ class Customreports extends CI_Controller {
 
 
                                 $print_val = str_replace("_", " ", $val);
-                                $filter_options1 .= "<option value='$val' $default_selected>$print_val</option>";
+                                $filter_options1 .= "<option 
+                                                    value='$val' $default_selected>$print_val
+                                                     </option>";
                             }
                         }
                     }
@@ -184,7 +206,8 @@ class Customreports extends CI_Controller {
                     $data['filter_options1'] = $filter_options1;
                     $data['app_name'] = $selected_app['name'];
                     $data['form_id'] = $form_id;
-                    $data['graph_text'] = 'Graph By <b> ' . str_replace('_', ' ', $filter_attribute[0]) . '</b>';
+                    $data['graph_text'] = 'Graph By <b> ' . str_replace('_', ' ', $filter_attribute[0]) .
+                                                    '</b>';
                     $data['pageTitle'] = " Graph-View";
                     $data['graph_type'] = 'Category';
                     $data['app_id'] = $selected_form['app_id'];
@@ -212,7 +235,9 @@ class Customreports extends CI_Controller {
         $selected_form = $this->form_model->get_form($slug);
         //print_r($selected_form);
         $form_single_to_query = array();
-        $form_single_to_query[] = array('form_id' => $form_id, 'table_name' => 'zform_' . $form_id, 'form_name' => $selected_form['name']);
+        $form_single_to_query[] = array('form_id' => 
+                                        $form_id, 'table_name' => 'zform_' . $form_id, 'form_name' => 
+                                        $selected_form['name']);
         $new_category=$_REQUEST['filter1'];
         /** Get filters from  multiple forms * */
         $multiple_filters = $this->form_model->get_form_filters($form_single_to_query);
@@ -262,19 +287,34 @@ class Customreports extends CI_Controller {
             $data['category_list'] = $new_category_list;
             $final_district_wise_array2 = array();
             foreach ($new_category_list as $cat_listv) {
-                $district_wise_catorized = $this->form_results_model->get_custom_reports_new($form_id, "", $filter_attribute[0], $cat_listv, $from_date, $to_date,$new_category);
+                $district_wise_catorized = $this->form_results_model->
+                                        get_custom_reports_new($form_id, "", 
+                                                               $filter_attribute[0], 
+                                                               $cat_listv, 
+                                                               $from_date, 
+                                                               $to_date,
+                                                               $new_category);
 
                 foreach ($district_wise_catorized as $key => $val) {
                     if (!array_key_exists($val[$new_category], $final_district_wise_array2)) {
                         $final_district_wise_array2[$val[$new_category]] = array();
                         foreach ($new_category_list as $cat_listvv) {
-                            $final_district_wise_array2[$val[$new_category]] = array_merge($final_district_wise_array2[$val[$new_category]], array('district' => $val[$new_category], $cat_listvv => '0', 'total' => '0'));
+                            $final_district_wise_array2[$val[$new_category]] = array_merge(
+                                                                                          $final_district_wise_array2[$val[$new_category]], 
+                                                                                           array('district' => $val[$new_category], $cat_listvv => '0', 
+                                                                                                 'total' => '0'));
                         }
                     }
                     if (array_key_exists($val[$new_category], $final_district_wise_array2)) {
-                        $final_district_wise_array2[$val[$new_category]] = array_merge($final_district_wise_array2[$val[$new_category]], array($cat_listv => $val['total'], 'total' => $final_district_wise_array2[$val[$new_category]]['total'] + $val['total']));
+                        $final_district_wise_array2[$val[$new_category]] = array_merge(
+                                                                                        $final_district_wise_array2[$val[$new_category]], 
+                                                                                        array($cat_listv => $val['total'], 
+                                                                                              'total' => $final_district_wise_array2[$val[$new_category]]['total'] + $val['total']));
                     } else {
-                        $final_district_wise_array2[$val[$new_category]] = array('district' => $val[$new_category], $cat_listv => $val['total'], 'total' => $val['total']);
+                        $final_district_wise_array2[$val[$new_category]] = array(
+                                                                                 'district' => $val[$new_category], 
+                                                                                 $cat_listv => $val['total'], 
+                                                                                 'total' => $val['total']);
                     }
                 }
             }
@@ -326,7 +366,8 @@ class Customreports extends CI_Controller {
 
         $filename = str_replace(" ", "-", $filename);
         header('Content-type: application/csv');
-        header('Content-Disposition: attachment; filename=' . $filename);
+        header('Content-Disposition: attachment; 
+                filename=' . $filename);
         echo chr(239) . chr(187) . chr(191) . $data_form;
         exit;
     }
@@ -357,7 +398,9 @@ class Customreports extends CI_Controller {
             $all_forms = $this->form_model
             ->get_form_by_app($slug);
             foreach ($all_forms as $forms) {
-                $forms_list[] = array('form_id' => $forms['form_id'], 'table_name' => 'zform_' . $forms['form_id'], 'form_name' => $forms['form_name']);
+                $forms_list[] = array('form_id' => $forms['form_id'], 
+                                      'table_name' => 'zform_' . $forms['form_id'], 
+                                      'form_name' => $forms['form_name']);
             }
             $data['form_lists'] = $forms_list;
 
@@ -375,9 +418,12 @@ class Customreports extends CI_Controller {
 
             $form_id = $forms_list[0]['form_id'];
             $form_single_to_query = array();
-            $form_single_to_query[] = array('form_id' => $form_id, 'table_name' => 'zform_' . $form_id, 'form_name' => $forms_list[0]['form_name']);
+            $form_single_to_query[] = array('form_id' => $form_id, 
+                                            'table_name' => 'zform_' . $form_id, 
+                                            'form_name' => $forms_list[0]['form_name']);
             /** Get filters from  multiple forms * */
-            $multiple_filters = $this->form_model->get_form_filters($form_single_to_query);
+            $multiple_filters = $this->form_model->
+                                        get_form_filters($form_single_to_query);
             $filter_attribute = array();
             $form_html_multiple = array();
             foreach ($multiple_filters as $key => $value) {
@@ -439,19 +485,26 @@ class Customreports extends CI_Controller {
             get_graph_view_settings($selected_form['app_id']);
             if (isset($filter_result->district_wise_report) && $filter_result->district_wise_report == 1) {
                 foreach ($new_category_list as $cat_listv) {
-                    $district_wise_catorized = $this->form_results_model->get_school_categorized_count_new($form_id, $_REQUEST['district'], $filter_attribute[0], $cat_listv, $from_date, $to_date);
+                    $district_wise_catorized = $this->form_results_model->
+                                                    get_school_categorized_count_new($form_id, $_REQUEST['district'], 
+                                                                                     $filter_attribute[0], 
+                                                                                     $cat_listv, $from_date, $to_date);
 
                     foreach ($district_wise_catorized as $key => $val) {
                         if (!array_key_exists($_REQUEST['district'], $final_district_wise_array2)) {
                             $final_district_wise_array2[$_REQUEST['district']] = array();
                             foreach ($new_category_list as $cat_listvv) {
+
                                 $final_district_wise_array2[$_REQUEST['district']] =
                                 array_merge($final_district_wise_array2[$_REQUEST['district']],
                                 array($cat_listvv => $cat_listvv, 'total' => $val['total']));
                             }
                         }
                         if (array_key_exists($_REQUEST['district'], $final_district_wise_array2)) {
-                            $final_district_wise_array2[$_REQUEST['district']] = array_merge($final_district_wise_array2[$_REQUEST['district']], array($cat_listv => $cat_listv, 'total' => $final_district_wise_array2[$_REQUEST['district']]['total'] + $val['total']));
+                            $final_district_wise_array2[$_REQUEST['district']] = array_merge(
+                                                                                            $final_district_wise_array2[$_REQUEST['district']], 
+                                                                                             array($cat_listv => $cat_listv, 
+                                                                                                   'total' => $final_district_wise_array2[$_REQUEST['district']]['total'] + $val['total']));
                         } else {
                             $final_district_wise_array2[$_REQUEST['district']] = array($cat_listv => $cat_listv, 'total' => $val['total']);
                         }

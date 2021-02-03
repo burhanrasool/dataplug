@@ -258,19 +258,24 @@ class Complaint extends CI_Controller {
                     elseif($complaint=='Ownership Change'){
                         $description = "New User Name : ".$this->input->post('ownership_user_name');
                         $description .= "<br> New User CNIC : ".$this->input->post('ownership_cnic');
-                        $description .= "<br> User Designation : ".$this->input->post('ownership_designation');
+                        $description .= "<br> User Designation : ".$this->input->
+                                                                    post('ownership_designation');
                         $description .= "<br> User Place :".$this->input->post('ownership_place');
 
-                        $complaint_array['ownership_user_name']=$this->input->post('ownership_user_name');
+                        $complaint_array['ownership_user_name']=$this->input->
+                                                                    post('ownership_user_name');
                         $complaint_array['ownership_cnic']=$this->input->post('ownership_cnic');
-                        $complaint_array['ownership_designation']=$this->input->post('ownership_designation');
+                        $complaint_array['ownership_designation']=$this->input->
+                                                                    post('ownership_designation');
                         $complaint_array['ownership_place']=$this->input->post('ownership_place');
                         $resolution_time = "2 Hours";
                         
                     }
                     elseif($complaint=='User Status Change'){
-                        $description = "User status change as : ".$this->input->post('user_status_change');
-                        $complaint_array['user_status_change']=$this->input->post('user_status_change');
+                        $description = "User status change as : ".$this->input->
+                                                                        post('user_status_change');
+                        $complaint_array['user_status_change']=$this->input->
+                                                                        post('user_status_change');
                         $resolution_time = "2 Hours";
                     }
                     elseif($complaint=='IMEI Update'){
@@ -295,7 +300,8 @@ class Complaint extends CI_Controller {
                             $this->load->library('upload', $config);
                             if (!$this->upload->do_upload('leave_approved_doc')) {
                                 $this->data['error'] = $this->upload->display_errors();
-                                $this->session->set_flashdata('validate', array('message' => $this->upload->display_errors(), 'type' => 'warning'));
+                                $this->session->set_flashdata('validate',
+                                                              array('message' => $this->upload->display_errors(), 'type' => 'warning'));
                             } else {
                                 $imageData = $this->upload->data();
                                 $fileName = $imageData['file_name'];
@@ -308,31 +314,39 @@ class Complaint extends CI_Controller {
                         $description = "User Name : ".$this->input->post('login_user_name');
                         $description .= "<br>Old Password : ".$this->input->post('login_old_password');
                         $description .= "<br>New Password : ".$this->input->post('login_new_password');
-                        $description .= "<br>Login credentials issue reason : ".$this->input->post('login_issue_reason');
+                        $description .= "<br>Login credentials issue reason : ".$this->input->
+                                                                  post('login_issue_reason');
                         $complaint_array['login_user_name']=$this->input->post('login_user_name');
-                        $complaint_array['login_old_password']=$this->input->post('login_old_password');
-                        $complaint_array['login_new_password']=$this->input->post('login_new_password');
-                        $complaint_array['login_issue_reason']=$this->input->post('login_issue_reason');
+                        $complaint_array['login_old_password']=$this->input->
+                                                                  post('login_old_password');
+                        $complaint_array['login_new_password']=$this->input->
+                                                                 post('login_new_password');
+                        $complaint_array['login_issue_reason']=$this->input->
+                                                                 post('login_issue_reason');
                         $resolution_time = "1 Working Day";
                     }
                     elseif($complaint=='User Transferred'){
-                        $description = "Transfered to following area :<br>District : ".$this->input->post('transfered_district');
+                        $description = "Transfered to following area :<br>District : ".$this->
+                                                                     input->post('transfered_district');
                         $description .= "<br>Tehsil : ".$this->input->post('transfered_tehsil');
                         $description .= "<br>Markaz : ".$this->input->post('transfered_markaz');
                         $description .= "<br>UC : ".$this->input->post('transfered_uc');
                         $description .= "<br>Village : ".$this->input->post('transfered_village');
                         
-                        $complaint_array['transfered_district']=$this->input->post('transfered_district');
+                        $complaint_array['transfered_district']=$this->input->
+                                                                 post('transfered_district');
                         $complaint_array['transfered_tehsil']=$this->input->post('transfered_tehsil');
                         $complaint_array['transfered_markaz']=$this->input->post('transfered_markaz');
                         $complaint_array['transfered_uc']=$this->input->post('transfered_uc');
-                        $complaint_array['transfered_village']=$this->input->post('transfered_village');
+                        $complaint_array['transfered_village']=$this->input->
+                                                                 post('transfered_village');
                         $resolution_time = "2 Hours";
                     }
                     elseif($complaint=='Dashboard Not Working'){
                         //upload image
                         $description = $this->input->post('dashboard_not_working_comments');
-                        $complaint_array['dashboard_not_working_comments']=$this->input->post('dashboard_not_working_comments');
+                        $complaint_array['dashboard_not_working_comments']=$this->
+                                                        input->post('dashboard_not_working_comments');
                         $resolution_time = "2 Hours";
 
 
@@ -344,7 +358,8 @@ class Complaint extends CI_Controller {
                             $this->load->library('upload', $config);
                             if (!$this->upload->do_upload('dashboard_not_working_screenshot')) {
                                 $this->data['error'] = $this->upload->display_errors();
-                                $this->session->set_flashdata('validate', array('message' => $this->upload->display_errors(), 'type' => 'warning'));
+                                $this->session->set_flashdata('validate', 
+                                              array('message' => $this->upload->display_errors(), 'type' => 'warning'));
                             } else {
                                 $imageData = $this->upload->data();
                                 $fileName = $imageData['file_name'];
@@ -356,7 +371,8 @@ class Complaint extends CI_Controller {
                     elseif($complaint=='User Showing Absent on dashboard'){
                         //upload image
                         $description = $this->input->post('showing_absent_dashboard_comments');
-                        $complaint_array['showing_absent_dashboard_comments']=$this->input->post('showing_absent_dashboard_comments');
+                        $complaint_array['showing_absent_dashboard_comments']=$this->
+                                                            input->post('showing_absent_dashboard_comments');
                         $resolution_time = "2 Hours";
 
 
@@ -368,7 +384,8 @@ class Complaint extends CI_Controller {
                             $this->load->library('upload', $config);
                             if (!$this->upload->do_upload('showing_absent_dashboard_screenshot')) {
                                 $this->data['error'] = $this->upload->display_errors();
-                                $this->session->set_flashdata('validate', array('message' => $this->upload->display_errors(), 'type' => 'warning'));
+                                $this->session->set_flashdata('validate', 
+                                                   array('message' => $this->upload->display_errors(), 'type' => 'warning'));
                             } else {
                                 $imageData = $this->upload->data();
                                 $fileName = $imageData['file_name'];                                
@@ -380,7 +397,8 @@ class Complaint extends CI_Controller {
                     elseif($complaint=='Activities Missing'){
                         //upload image
                         $description = $this->input->post('activities_missing_comments');
-                        $complaint_array['activities_missing_comments']=$this->input->post('activities_missing_comments');
+                        $complaint_array['activities_missing_comments']=$this->input->
+                                                            post('activities_missing_comments');
                         $resolution_time = "2 Hours";
 
 
@@ -392,7 +410,8 @@ class Complaint extends CI_Controller {
                             $this->load->library('upload', $config);
                             if (!$this->upload->do_upload('activities_missing_screenshot')) {
                                 $this->data['error'] = $this->upload->display_errors();
-                                $this->session->set_flashdata('validate', array('message' => $this->upload->display_errors(), 'type' => 'warning'));
+                                $this->session->set_flashdata('validate', 
+                                                  array('message' => $this->upload->display_errors(), 'type' => 'warning'));
                             } else {
                                 $imageData = $this->upload->data();
                                 $fileName = $imageData['file_name'];                                
@@ -404,13 +423,17 @@ class Complaint extends CI_Controller {
 
                     }
                     elseif($complaint=='Data Not Showing'){
-                        $description = "Data not showing from ".$this->input->post('data_missing_from_date');
+                        $description = "Data not showing from ".$this->input->
+                                                        post('data_missing_from_date');
                         $description .= " to ".$this->input->post('data_missing_to_date');
                         $description .= "<br>Comments : ".$this->input->post('data_missing_comments');
                         //upload image
-                        $complaint_array['data_missing_from_date']=$this->input->post('data_missing_from_date');
-                        $complaint_array['data_missing_to_date']=$this->input->post('data_missing_to_date');
-                        $complaint_array['data_missing_comments']=$this->input->post('data_missing_comments');
+                        $complaint_array['data_missing_from_date']=$this->
+                                                                input->post('data_missing_from_date');
+                        $complaint_array['data_missing_to_date']=$this->
+                                                                input->post('data_missing_to_date');
+                        $complaint_array['data_missing_comments']=$this->
+                                                                input->post('data_missing_comments');
                         $resolution_time = "2 Hours";
 
 
@@ -422,7 +445,8 @@ class Complaint extends CI_Controller {
                             $this->load->library('upload', $config);
                             if (!$this->upload->do_upload('data_not_showing_screenshot')) {
                                 $this->data['error'] = $this->upload->display_errors();
-                                $this->session->set_flashdata('validate', array('message' => $this->upload->display_errors(), 'type' => 'warning'));
+                                $this->session->set_flashdata('validate', 
+                                                               array('message' => $this->upload->display_errors(), 'type' => 'warning'));
                             } else {
                                 $imageData = $this->upload->data();
                                 $fileName = $imageData['file_name'];                                
@@ -434,7 +458,8 @@ class Complaint extends CI_Controller {
                     }
                     elseif($complaint=='App not Working'){
                         $description = $this->input->post('app_not_working_error');
-                        $complaint_array['app_not_working_error']=$this->input->post('app_not_working_error');
+                        $complaint_array['app_not_working_error']=$this->
+                                                           input->post('app_not_working_error');
                         $resolution_time = "1 Working Day";
                     }
                     elseif($complaint=='App Crash/Foreced Stopped'){
@@ -444,12 +469,14 @@ class Complaint extends CI_Controller {
                     }
                     elseif($complaint=='APK Required'){
                         $description = $this->input->post('apk_required_email');
-                        $complaint_array['apk_required_email']=$this->input->post('apk_required_email');
+                        $complaint_array['apk_required_email']=$this->
+                                                            input->post('apk_required_email');
                         $resolution_time = "2 Hours";
                     }
                     elseif($complaint=='Unautherized User'){
                         $description = "Add IMEI : ".$this->input->post('unautherized_user_imei');
-                        $complaint_array['unautherized_user_imei']=$this->input->post('unautherized_user_imei');
+                        $complaint_array['unautherized_user_imei']=$this->
+                                                    input->post('unautherized_user_imei');
                         $resolution_time = "2 Hours";
                     }
                     elseif($complaint=='Other'){
@@ -458,7 +485,8 @@ class Complaint extends CI_Controller {
                     }
 
                     // if($send_email == true){
-                    //     //$this->send_telco_email($complaint,$description.$app_user_info,$app_user_detail['mobile_network']);
+                    //     //$this->send_telco_email($complaint,$description.$app_user_info,
+                    //                                      $app_user_detail['mobile_network']);
                     //     $send_email = false;
                     // }
 
@@ -506,7 +534,8 @@ class Complaint extends CI_Controller {
 
             $complaint_info = $this->complaint_model->get_complaint_by_id($complaint_id);
 
-            $complaint_history = $this->complaint_model->get_complaint_history($complaint_id);
+            $complaint_history = $this->
+                complaint_model->get_complaint_history($complaint_id);
 
             $data['complaint_info']=$complaint_info[0];
             $data['complaint_history']=$complaint_history;
@@ -557,11 +586,16 @@ class Complaint extends CI_Controller {
         $complaint_id=$app['c_id'];
         $result='';
         //if ($this->acl->hasPermission('form', 'edit')) {
-            $result .= "<a style='padding:2px;' href='".base_url()."view-complaint/".$complaint_id." '><img src='".base_url()."assets/images/tableLink1.png' alt='Edit' title=''Edit'/></a>";
+            $result .= "<a style='padding:2px;' 
+                    href='".base_url()."view-complaint/".$complaint_id." '>
+                    <img src='".base_url()."assets/images/tableLink1.png' 
+                    alt='Edit' title=''Edit'/></a>";
         //}
 
 //        if ($this->acl->hasPermission('app', 'delete')) {
-//            $result .= "<a style='padding:2px;' href='javascript:void(0)'><img src='".base_url()."assets/images/tableLink3.png' alt='delete' id ='delete_app' title='Delete' app_id ='".$appId."' /></a>";
+//            $result .= "<a style='padding:2px;' href='javascript:void(0)'>
+//                <img src='".base_url()."assets/images/tableLink3.png' 
+//                 alt='delete' id ='delete_app' title='Delete' app_id ='".$appId."' /></a>";
 //        }
 
         return $result;
@@ -596,10 +630,12 @@ class Complaint extends CI_Controller {
 
             $this->email->subject($subject);
             $message = "<b>Dear ".$telco_value['support_user']."</b>,<br />";
-            $message .= "Please find below the complaint & related details. Please look into the issue & resolve.";
+            $message .= "Please find below the complaint & related details.
+                Please look into the issue & resolve.";
             $message .= "<br />$custom_message";
             $message .= "<br /><b>Regards,<br />Help Desk Team </b>";
-            $message .= "<br /><br />DO NOT REPLY TO THIS EMAIL”. For further information, please contact aun.muhammad@pitb.gov.pk & rahat.ali@pitb.gov.pk";
+            $message .= "<br /><br />DO NOT REPLY TO THIS EMAIL”. For further information,
+                please contact aun.muhammad@pitb.gov.pk & rahat.ali@pitb.gov.pk";
 
             $this->email->message($message);
             $this->email->set_mailtype('html');
