@@ -16,7 +16,7 @@ class Tracking extends CI_Controller {
      * @return json
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function savetracking() {
+    public function Save_Tracking() {
 
         $app_id = $_REQUEST ['appId'];
         $imei_no = $_REQUEST ['imei_no'];
@@ -27,8 +27,8 @@ class Tracking extends CI_Controller {
         $altitude = $_REQUEST ['altitude'];
         $speed = $_REQUEST ['speed'];
         $route_id = $_REQUEST ['routeId'];
-        $gpsTime = date('Y-m-d H:i:s', strtotime($_REQUEST ['gpsTime']));
-        $deviceTS = date('Y-m-d H:i:s', strtotime($_REQUEST ['deviceTS']));
+        $gps_time = date('Y-m-d H:i:s', strtotime($_REQUEST ['gpsTime']));
+        $device_tS = date('Y-m-d H:i:s', strtotime($_REQUEST ['deviceTS']));
         $created_datetime = date('Y-m-d H:i:s');
         $dataresultnew = array(
             'app_id' => $app_id,
@@ -76,7 +76,7 @@ class Tracking extends CI_Controller {
         sleep(1);
 
 
-        add_tracking_table($app_id);
+        addTrackingTable($app_id);
 
         $ret_ins = $this->db->insert('ztracking_' . $app_id, $dataresultnew);
 
@@ -98,7 +98,7 @@ class Tracking extends CI_Controller {
      * @return json
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function savetrackingbulk() {
+    public function Save_tracking_Bulk() {
         
         ini_set ( 'memory_limit', '-1' );
         $params = json_decode(file_get_contents('php://input'),true);       
@@ -125,7 +125,7 @@ exit;*/
                 if (!$this->upload->do_upload('trackingFile')) {
 
                 }else{
-                  $fileData = $this->upload->data();
+                  $file_data = $this->upload->data();
                   $tracking_records = file_get_contents($abs_path.'/'.$fileData['file_name']);
 
                   $tracking_temp = array(
@@ -169,7 +169,7 @@ exit;*/
           $route_id = $result[0]['routeId'];
         }
 
-        add_tracking_table($app_id);
+        addTrackingTable($app_id);
         
         //if this routid already received then not saved
         $this->db->select('*');
@@ -188,10 +188,10 @@ exit;*/
             exit;
         }
         //exit;
-        $newDistanceGeo=0;
-        $lastDistanceGeo=0; 
-        $newDistance=0;
-        $lastDistance=0;  
+        $new_distance_geo=0;
+        $last_distance_geo=0; 
+        $new_distance=0;
+        $last_distance=0;  
         foreach($result as $r)  
         {   
           //print_r($r);
@@ -213,8 +213,8 @@ exit;*/
        
         $gps_time = $params ['gpsTime'];
         $records = $tracking_records;
-        $distanceCovered = $newDistance;
-        $distanceCoveredGeo = $newDistanceGeo;
+        $distance_covered = $newDistance;
+        $distance_covered_geo = $newDistanceGeo;
 
         
         $gps_time = date('Y-m-d H:i:s', strtotime($gps_time));
@@ -276,7 +276,7 @@ try {
 
 
 
-        public function testtrackingbulk1() {
+        public function Test_Tracking_Bulk1() {
         
         // ini_set ( 'memory_limit', '-1' );
         // $params = json_decode(file_get_contents('php://input'),true);       
@@ -319,10 +319,10 @@ exit;*/
         $result=$tracking_result[0]['records'];
         $result=json_decode($result,true);
         //exit;
-        $newDistanceGeo=0;
-        $lastDistanceGeo=0; 
-        $newDistance=0;
-        $lastDistance=0;  
+        $new_distance_geo=0;
+        $lasta_distance_geo=0; 
+        $new_distance=0;
+        $last_distance=0;  
         foreach($result as $r)  
         {   
           //print_r($r);
@@ -483,7 +483,7 @@ exit;*/
       exit();
       }
      */
-    public function testbulktracking($slug) {
+    public function Test_Bulk_Tracking($slug) {
 
         $this->db->select();
         $this->db->from('mobile_tracking_log');
@@ -498,10 +498,10 @@ exit;*/
 //            exit;
             unset($records['imei_no']);
             foreach ($records as $r_key => $r_value) {
-                $gpsTime = date('Y-m-d H:i:s', strtotime($r_value['gpsTime']));
-                $deviceTS = date('Y-m-d H:i:s', strtotime($r_value['deviceTS']));
+                $gps_time = date('Y-m-d H:i:s', strtotime($r_value['gpsTime']));
+                $device_ts = date('Y-m-d H:i:s', strtotime($r_value['deviceTS']));
                 $created_datetime = date('Y-m-d H:i:s');
-                $dataresultnew = array(
+                $data_result_new = array(
                     'app_id' => $lval['app_id'],
                     'imei_no' => $r_value['imei_no'],
                     'location' => $r_value['location'],
@@ -522,7 +522,7 @@ exit;*/
         exit();
     }
 
-    public function gettrackingrec($app_id) {
+    public function getTrackingRec($app_id) {
         ini_set ( 'memory_limit', '-1' );
         header('Access-Control-Allow-Origin: *');
         header('Access-Control-Allow-Methods: GET, POST');

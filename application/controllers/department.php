@@ -40,7 +40,7 @@ class Department extends CI_Controller {
      * map to /index.php/welcome/<method_name>
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
-    public function index() {
+    public function getIndex() {
         if ($this->session->userdata('logged_in')) {
             if (!$this->acl->hasPermission('department', 'view')) {
                 $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
@@ -209,7 +209,7 @@ class Department extends CI_Controller {
      * @param integer $department_id
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    function dep_already_exist() {
+    function Dep_Already_Exist() {
         $dep_name = trim($this->input->post('dep_name'));
         if ($this->department_model->department_already_exist($dep_name)) {
             echo true;

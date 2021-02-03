@@ -39,7 +39,7 @@ class Apimaker extends CI_Controller {
      * map to /index.php/welcome/<method_name>
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
-    public function index() {
+    public function getindex() {
 //         this method was calling again and again by list so applied logic here
         if ($this->session->userdata('logged_in')) {
             $this->session->unset_userdata('view');
@@ -71,7 +71,7 @@ class Apimaker extends CI_Controller {
         }
     }
 
-    public function createurl($slug) {
+    public function CreateUrl($slug) {
 //         this method was calling again and again by list so applied logic here
         if ($this->session->userdata('logged_in')) {
             $this->session->unset_userdata('view');
@@ -108,7 +108,7 @@ class Apimaker extends CI_Controller {
             redirect(base_url() . 'guest');
         }
     }
-    public function apiappurl($slug) {
+    public function ApiAppurl($slug) {
 //         this method was calling again and again by list so applied logic here
         //exit;
         if ($this->session->userdata('logged_in')) {
@@ -140,7 +140,7 @@ class Apimaker extends CI_Controller {
      * @param integer $user_id
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function add() {
+    public function addFunction() {
         $this->load->library('form_validation');
         if ($this->session->userdata('logged_in')) {
 

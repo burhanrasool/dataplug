@@ -34,7 +34,7 @@ class Log extends CI_Controller {
      * map to /index.php/welcome/<method_name>
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
-    public function index() {
+    public function getIndex() {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             session_to_page($session_data, $data);
@@ -78,7 +78,7 @@ class Log extends CI_Controller {
     }
 
 // Load record via ajax in datatable...
-    public function ajax_logs() {
+    public function Ajax_Logs() {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             session_to_page($session_data, $data);
@@ -107,7 +107,7 @@ class Log extends CI_Controller {
                         'before_record'=> (strlen($val['before_record']) < 20) ? $val['before_record'] : substr($val['before_record'], 0, 20) . '..',
                         'after_record'=> (strlen($val['after_record']) < 20) ? $val['after_record'] : substr($val['after_record'], 0, 20) . '..',
                         'app_name'=> $val['app_name'],
-                        'form_name'=> $val['form_name'],
+                        'form_name'=> $val['form_name'],w
                         'controller'=> $val['controller'],
                         'method'=> $val['method'],
                         'created_datetime'=> $val['created_datetime'],
@@ -130,7 +130,7 @@ class Log extends CI_Controller {
     }
 
     //get actions for log view...
-    public function get_actions(){
+    public function getActions(){
         $query=$this->db->query("select DISTINCT action_type from log");
         $result=$query->result_array();
         $string='';

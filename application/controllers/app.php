@@ -106,7 +106,8 @@ class App extends CI_Controller {
             $data2= array("sEcho" => intval($_GET['sEcho']),
                 "iTotalRecords" => $total_apps,
                 "iTotalDisplayRecords" => $total_apps,);
-            foreach ($apps as $app) {
+            foreach ($apps as $apps)
+            {
                 $formbyapp = $this->form_model->get_form_by_app($app['id']);
 
                 // $form_id = '';
@@ -148,7 +149,8 @@ class App extends CI_Controller {
                 $forms_list = array();
                 //$all_forms = $this->form_model->get_form_by_app($app['id']);
                 $results_count=0;
-                foreach ($formbyapp as $forms) {
+                foreach ($formbyapp as $forms)
+                {
                     //$forms_list[] = array('form_id' => $forms['form_id'], 'form_name' => $forms['form_name']);
                     //$table_exist_bit = $this->form_results_model->check_table_exits('zform_' . $forms['form_id']);
                     //if($table_exist_bit['count(*)']==1){
@@ -219,7 +221,7 @@ class App extends CI_Controller {
      * Action for application users
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function appassignusers($slug) {
+    public function AppAssignUsers($slug) {
         $app_id = $slug;
         $this->load->library('form_validation');
         $session_data = $this->session->userdata('logged_in');
@@ -295,7 +297,7 @@ class App extends CI_Controller {
      * Action for application users
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function appusers() {
+    public function Appusers() {
         if (!$this->acl->hasPermission('app_users', 'view')) {
             $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
             redirect('/');
@@ -369,7 +371,8 @@ class App extends CI_Controller {
         $departments = $this->department_model->get_department();
 
         $dep[''] = 'Select';
-        foreach ($departments as $row) {
+        foreach ($departments as $row)
+        {
             $dep[$row['id']] = $row['name'];
         }
         if ($this->acl->hasSuperAdmin()) {
@@ -392,7 +395,7 @@ class App extends CI_Controller {
      * Action for ajax application users
      * @author  Irfan Javed<irfanjvd@gamil.com>
      */
-    public function ajaxappusers() {
+    public function AjaxAppUsers() {
 
         if (!$this->acl->hasPermission('app_users', 'view')) {
             $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
@@ -414,7 +417,8 @@ class App extends CI_Controller {
         $batch = array();
         $departments = $this->department_model->get_department();
         $dep[''] = 'Select';
-        foreach ($departments as $row) {
+        foreach ($departments as $row)
+        {
             $dep[$row['id']] = $row['name'];
         }
 
@@ -458,7 +462,7 @@ class App extends CI_Controller {
 
 
     }
-    public function appusersimportcsv(){
+    public function AppUsersImportSsv(){
 
              if (!$this->acl->hasPermission('app_users', 'add')) {
                 $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
@@ -557,7 +561,7 @@ class App extends CI_Controller {
      * Action for application users
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function import_app_user_csv() {
+    public function Import_App_User_Csv() {
        
 
         $session_data = $this->session->userdata('logged_in');
@@ -740,7 +744,8 @@ class App extends CI_Controller {
                 $new_imei_no = $this->input->post('imei_no');
                 $imei_update_array = array('imei_no'=>$new_imei_no);
                 $all_forms = $this->form_model->get_form_by_app($app_id);
-                foreach ($all_forms as $forms) {
+                foreach ($all_forms as $forms)
+                {
                     $form_id = $forms['form_id'];
                     $this->db->where('imei_no', $old_imei_no);
                     $this->db->update('zform_'.$form_id, $imei_update_array);
@@ -757,7 +762,8 @@ class App extends CI_Controller {
 
         $departments = $this->department_model->get_department();
         $dep[''] = 'Select';
-        foreach ($departments as $row) {
+        foreach ($departments as $row)
+        {
             $dep[$row['id']] = $row['name'];
         }
 
@@ -775,7 +781,7 @@ class App extends CI_Controller {
      * @param integer $user_id
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function appusersview() {
+    public function AppUsersView() {
 
         if (!$this->acl->hasPermission('users', 'add')) {
             $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
@@ -820,7 +826,8 @@ class App extends CI_Controller {
 
         $departments = $this->department_model->get_department();
         $dep[''] = 'Select';
-        foreach ($departments as $row) {
+        foreach ($departments as $row) 
+        {
             $dep[$row['id']] = $row['name'];
         }
 
@@ -843,7 +850,7 @@ class App extends CI_Controller {
      * @param integer $app_id
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    function appuser_imei_already_exist($imei_no, $app_id) {
+    function AppUser_Imei_Already_Exist($imei_no, $app_id) {
         if ($this->app_model->appuser_imei_already_exist($imei_no, $app_id)) {
             $this->form_validation->set_message('appuser_imei_already_exist', 'The %s already registered for this app.');
             return false;
@@ -857,7 +864,7 @@ class App extends CI_Controller {
      * @param integer $app_id
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    function appuser_login_name_already_exist($login_user, $app_id) {
+    function Appuser_Login_Name_Already_Exist($login_user, $app_id) {
         if ($this->app_model->appuser_login_name_already_exist($login_user, $app_id)) {
             $this->form_validation->set_message('appuser_login_name_already_exist', 'The %s not available.');
             return false;
@@ -885,7 +892,8 @@ class App extends CI_Controller {
             $departments = $this->department_model->get_department();
             if ($this->acl->hasSuperAdmin()) {
                 $dep[''] = 'Select';
-                foreach ($departments as $row) {
+                foreach ($departments as $row) 
+                {
                     $dep[$row['id']] = $row['name'];
                 }
                 $data['departments'] = $dep;
@@ -1233,7 +1241,7 @@ class App extends CI_Controller {
      * @param integer $app_id
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function editpopup($slug) {
+    public function EditPopUp($slug) {
 
         $app_id = $slug;
         $this->load->library('form_validation');
@@ -1375,7 +1383,7 @@ $this->session->set_flashdata('validate', array('message' =>
      * @param integer $app_id
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function appbuilder($slug) {
+    public function AppBuilder($slug) {
 
         $this->load->library('form_validation');
         if ($this->session->userdata('logged_in')) {
@@ -1433,7 +1441,8 @@ $this->session->set_flashdata('validate', array('message' =>
                 $allform = $this->form_model->get_form_by_app($app_id);
             }
             $formdata = array();
-            foreach ($allform as $formvalue) {
+            foreach ($allform as $formvalue)
+            {
                 $formdata[] = array(
                     'form_id' => $formvalue['form_id'],
                     'title' => $formvalue['form_name'],
@@ -1532,7 +1541,7 @@ $this->session->set_flashdata('validate', array('message' =>
      * @param integer $app_id
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    function change_installed_app_status($app_id) {
+    function Change_Installed_App_Status($app_id) {
         //change status update
         $all_installed = $this->app_installed_model->get_app_installed_byappid($app_id);
         if ($all_installed) {
@@ -1556,7 +1565,7 @@ $this->session->set_flashdata('validate', array('message' =>
      * @param string $department_name
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    function department_name_exists($key) {
+    function Department_Name_Exists($key) {
         if ($this->department_model->department_already_exist($key)) {
             $this->form_validation->set_message('department_name_exists',
              'The %s already exists');
@@ -1571,7 +1580,7 @@ $this->session->set_flashdata('validate', array('message' =>
      * @param string $department_name
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    function app_already_exist($app_name, $department_id) {
+    function App_Already_Exist($app_name, $department_id) {
         if ($this->app_model->app_already_exist($app_name, $department_id)) {
             $this->form_validation->set_message('app_already_exist',
              'The %s already exists');
@@ -1586,7 +1595,7 @@ $this->session->set_flashdata('validate', array('message' =>
      * @param string $department_name
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    function check_app_name_availability() {
+    function Check_App_Name_availability() {
         $app_name = $this->input->post('app_name');
         $department_id = $this->input->post('department_id');
 
@@ -1656,7 +1665,7 @@ $this->session->set_flashdata('validate', array('message' =>
      * @param string $app_id
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function releasedapk($slug) {
+    public function ReleasedApk($slug) {
         if ($this->session->userdata('logged_in')) {
             $app_id = $slug;
             $app = $this->app_model->get_app($app_id);
@@ -1688,7 +1697,7 @@ $this->session->set_flashdata('validate', array('message' =>
      * @param string $app_id
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function createapk($slug) {
+    public function CreateApk($slug) {
         if ($this->session->userdata('logged_in')) {
             //for live
             //change directory path
@@ -1848,7 +1857,8 @@ $this->session->set_flashdata('validate', array('message' =>
                     fwrite($Handleapp, $appFullDescription);
                     fclose($Handleapp);
                 }
-                foreach ($forms as $form) {
+                foreach ($forms as $form)
+                {
                     $formId = $form['form_id'];
                     $formName = $form['form_name'];
                     $formDescription = $form['full_description'];
@@ -1955,7 +1965,7 @@ $this->session->set_flashdata('validate', array('message' =>
      * @param string $det destination path
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    function recurse_copy($src, $dst) {
+    function Recurse_Copy($src, $dst) {
         $dir = opendir($src);
         $old = umask(0);
         @mkdir($dst, 0777);
@@ -1978,7 +1988,7 @@ $this->session->set_flashdata('validate', array('message' =>
      * @param string $deleteRootToo destination path
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    function recurse_delete($dir, $deleteRootToo) {
+    function Recurse_Delete($dir, $deleteRootToo) {
         if (!$dh = @opendir($dir)) {
             return;
         }
@@ -2004,7 +2014,7 @@ $this->session->set_flashdata('validate', array('message' =>
      * @param integer $app_name
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    function change_string_file($parray) {
+    function Change_String_File($parray) {
         $app_name = preg_replace("/[^A-Za-z0-9]/", " ", $parray['app_name']);
         $base_url = base_url();
         $version_update_url = $base_url . "api/syncdevice";
@@ -2062,7 +2072,7 @@ $this->session->set_flashdata('validate', array('message' =>
      * @param integer $version_code
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    function change_manifest_file($path, $package, $version, $version_code) {
+    function Change_Manifest_File($path, $package, $version, $version_code) {
 
         $data = simplexml_load_file($path);
         $data['package'] = $package;
@@ -2076,7 +2086,7 @@ $this->session->set_flashdata('validate', array('message' =>
      * @param integer $app_id
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function appsettings($slug) {
+    public function AppSettings($slug) {
         $app_id = $slug;
         $settings_exist = $this->app_model->get_app_settings($app_id);
         if ($settings_exist) {
@@ -2217,7 +2227,7 @@ $this->session->set_flashdata('validate', array('message' =>
 
     //function is for applicagtion settings list view, map view, graph view etc...
 
-    public function newappsettings($slug,$iframe=''){
+    public function NewAppSettings($slug,$iframe=''){
         ini_set ( 'memory_limit', '-1' );
         $app_id = $slug;
 //        get app all users
@@ -2241,7 +2251,8 @@ $this->session->set_flashdata('validate', array('message' =>
         $graph_view_settings_filter='';
         $sms_settings_filter='';
         $all_forms_columns=array();
-        foreach($app_forms as $key=>$val){
+        foreach($app_forms as $key=>$val)
+        {
 //            get table columns name...
             $possible_filter_selected=$val['possible_filters'];
             $default_filter_selected=$val['filter'];
@@ -2325,7 +2336,8 @@ $this->session->set_flashdata('validate', array('message' =>
                     $this->db->where('setting_type', $setting_type);
                 }
 //                Send message
-                foreach($users as $val){
+                foreach($users as $val)
+                {
                     $result=explode("_",$val);
                     $mobile_number=$result[0];
                     $name=$result[1];
@@ -2545,7 +2557,7 @@ $this->session->set_flashdata('validate', array('message' =>
 
 
 
-    public function newformsettings($slug,$iframe=''){
+    public function NewFormSettings($slug,$iframe=''){
         ini_set ( 'memory_limit', '-1' );
         $app_id = $slug;
 //        get app all users
@@ -2712,7 +2724,7 @@ $this->session->set_flashdata('validate', array('message' =>
     }
 
     //get categories for reporting filters...
-    public function get_field_values(){
+    public function Get_Field_Values(){
         $form_id=$_POST['form_id'];
         $column=$_POST['column'];
         $value=$_POST['value'];
@@ -2720,7 +2732,8 @@ $this->session->set_flashdata('validate', array('message' =>
         $result=$this->db->query("select distinct $column from $table_name where $column LIKE '%$value%'")->result_array();
         $i=0;
         $options=array();
-        foreach($result as $key=>$val){
+        foreach($result as $key=>$val)
+        {
             $field_value = str_replace(" ", "_", $val[$column]);
             $options[$i]['value']=$field_value;
             $options[$i]['label']=$val[$column];
@@ -2762,7 +2775,8 @@ $this->session->set_flashdata('validate', array('message' =>
             $directory = $site_settings['directory_path'] . DIRECTORY_SEPARATOR . "assets" . DIRECTORY_SEPARATOR . "images" . DIRECTORY_SEPARATOR . "map_pins" . DIRECTORY_SEPARATOR;
             $images = glob($directory . "*.png");
 
-            foreach ($images as $key => $val) {
+            foreach ($images as $key => $val)
+            {
                 $image_result = explode(DIRECTORY_SEPARATOR, $val);
                 $image_name = end($image_result);
 
@@ -2805,10 +2819,12 @@ $this->session->set_flashdata('validate', array('message' =>
         if(!empty($result)) {
             $pins_data=json_decode($result[0]['pins'], true);
             $table="<div class='row'><table>";
-            foreach($pins_data as $key=>$val){
+            foreach($pins_data as $key=>$val)
+            {
                 $key_new=strtoupper(str_replace("_"," ",$key));
                 $table.="<tr><th colspan='2'>$key_new</th></tr>";
-                foreach($val as $field=>$img){
+                foreach($val as $field=>$img)
+                {
                     $field=str_replace("_"," ",$field);
                     $image_url=base_url()."assets/images/map_pins/$img";
                     $table.="
@@ -3094,7 +3110,7 @@ $this->session->set_flashdata('validate', array('message' =>
 
     /**
      *
-     * @param type $slug
+     * @param type $slug 
      * Delete app users
      * @author:ubaidullah.balti
      */

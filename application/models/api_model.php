@@ -12,7 +12,7 @@ class Api_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_api($slug = FALSE,$department_id='') {
+    public function getApi($slug = FALSE,$department_id='') {
         if ($slug === FALSE && $department_id==0) {
 //            $this->db->select('api.*,department.name as name');
 //            $this->db->from('api,department');
@@ -57,7 +57,7 @@ class Api_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_app_by_department($department_id) {
+    public function getAppByDepartment($department_id) {
 
         $query = $this->db->get_where('app', array('department_id' => $department_id, 'is_deleted' => '0'));
         return $query->result_array();
@@ -68,7 +68,7 @@ class Api_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_app_by_user($user_id) {
+    public function getAppByUser($user_id) {
 
         
         $this->db->select('a.*');
@@ -85,7 +85,7 @@ class Api_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_app_by_department_for_super() {
+    public function getAppByDepartment_for_super() {
 
         $query = $this->db->get_where('app', array('is_deleted' => '0'));
         $this->db->select("a.id id, d.id department_id,a.icon, a.name name, d.name department_name, CONCAT_WS(' ',u.first_name ,u.last_name) as user_name",FALSE);
@@ -106,7 +106,7 @@ class Api_model extends CI_Model {
      * @return boolean
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function app_already_exist($app_name, $department_id, $app_id = null) {
+    public function appAlreadyExist($app_name, $department_id, $app_id = null) {
 
         if($app_name=='')
         {
@@ -132,7 +132,7 @@ class Api_model extends CI_Model {
      * @return boolean
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function appuser_imei_already_exist($imei_no, $app_id) {
+    public function AppUser_Imei_Already_Exist($imei_no, $app_id) {
 
         $query = $this->db->get_where('app_users', array('imei_no' => $imei_no, 'app_id' => $app_id ,'is_deleted' => 0));
 
@@ -151,7 +151,7 @@ class Api_model extends CI_Model {
      * @return boolean
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    function get_apps($department_id) {
+    function get_Apps($department_id) {
 //working on this 
         //$session_data = $this->session->userdata('logged_in');
         //$group_id = $session_data['login_group_id'];
@@ -175,7 +175,7 @@ class Api_model extends CI_Model {
      * @return boolean
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    function get_app_users($department_id) {
+    function getAppUsers($department_id) {
 //working on this 
         //$session_data = $this->session->userdata('logged_in');
         //$group_id = $session_data['login_group_id'];
@@ -192,7 +192,7 @@ class Api_model extends CI_Model {
             return FALSE;
         }
     }
-    function get_app_settings($app_id) {
+    function getAppSettings($app_id) {
         $query = $this->db->get_where('app_settings', array('app_id' => $app_id));
         return $query->row_array();
     }
@@ -203,7 +203,7 @@ class Api_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_assigned_app_to_user($app_id) {
+    public function getAssignedAppToUser($app_id) {
 
         $this->db->select('ua.id assigned_id,a.name app_name,d.name department_name,u.id user_id,u.first_name, u.last_name, u.parent_id, u.group_id, u.default_url, u.district');
         $this->db->from('users_app ua');

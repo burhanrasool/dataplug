@@ -36,7 +36,7 @@ $session_data = $this->session->userdata('logged_in');
                     <strong>*Users </strong>
                 </label>
             </td>
-            <td style='width: 50px;'>
+            <td style='width: 50px;'> 
                 <div class="assign_error">
 
                     <div>

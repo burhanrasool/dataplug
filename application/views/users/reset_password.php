@@ -33,8 +33,8 @@
                     </label>
                     <p>
 
-                        <input class="" type="password" name="conf_password" id="conf_password" value="<?php echo set_value('conf_password'); ?>" />
-                        <?php echo $this->form_validation->error('conf_password'); ?>
+                        <input class="" type="password" name="conf_password" id="conf_password" value="<?php echo set_value('configure_password'); ?>" />
+                        <?php echo $this->form_validation->error('configure_password'); ?>
                     </p>
                 </li>
             </div>

@@ -12,7 +12,7 @@ class Department_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_department($slug = FALSE) {
+    public function getDepartment($slug = FALSE) {
         if ($slug === FALSE) {
             $query = $this->db->order_by('name', 'ASC')->get_where('department', array('is_deleted' => '0'));
             return $query->result_array();
@@ -29,7 +29,7 @@ class Department_model extends CI_Model {
      * GET public department whose value 
      * is_public is yes
      */
-    public function get_public_department($slug = FALSE) {
+    public function getPublicDepartment($slug = FALSE) {
         if ($slug === FALSE) {
             $query = $this->db->order_by('name', 'ASC')->get_where('department', array('is_deleted' => '0', 'is_public' => 'yes'));
             return $query->result_array();
@@ -46,7 +46,7 @@ class Department_model extends CI_Model {
      * @return boolean
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function department_already_exist($department_name, $department_id = null) {
+    public function Department_Already_Exist($department_name, $department_id = null) {
 
         if ($department_id) {
             $query = $this->db->get_where('department', array('name' => $department_name, 'is_deleted' => '0', 'id !=' => $department_id));

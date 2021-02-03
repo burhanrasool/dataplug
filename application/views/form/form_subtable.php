@@ -18,7 +18,7 @@
         padding: 8px;
         /*width:200px;*/
     }
-    .customers tr:nth-child(even) {
+    .customers tr:nth-child(even) { 
         background-color: #f2f2f2;
     }
 

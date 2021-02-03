@@ -307,7 +307,7 @@ class Api extends CI_Controller {
      * @return json
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function syncdevice() {
+    public function syncDevice() {
         $version_code = $_REQUEST ['version_code'];
         $app_id = $_REQUEST ['app_id'];
         $imei_no = $_REQUEST ['imei_no'];
@@ -435,7 +435,7 @@ class Api extends CI_Controller {
      * @return json
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function saverecords() {
+    public function saveRecords() {
 
         $form_data = json_decode($_REQUEST ['form_data']);
         $imei_no = $_REQUEST ['imei_no'];
@@ -1176,7 +1176,7 @@ class Api extends CI_Controller {
         echo json_encode($jsone_array);
         exit();
     }
-    public function saverecordscron() {
+    public function saveRecordsCron() {
         //ob_get_level();
         //ob_start();
         ini_set ( 'memory_limit', '-1' );
@@ -1450,7 +1450,7 @@ class Api extends CI_Controller {
         
     }
 
-    public function saverecordsharzindagi() {
+    public function saveRecordSharZindagi() {
         $form_data = json_decode($_REQUEST['form_data'],true);
         $form_id=$form_data['form_id'];
         $imei_no=$form_data['imei_no'];
@@ -1684,7 +1684,7 @@ class Api extends CI_Controller {
      * @return json
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function saverecordsweb() {
+    public function saveRecordsWeb() {
         $form_data = json_decode($_REQUEST ['form_data']);
 
         $session_data = $this->session->userdata('web_logged_in');
@@ -2234,7 +2234,7 @@ class Api extends CI_Controller {
      */
     // http://www.dataplug.itu.edu.pk/api/getoptionapi?api=1&secret=fdkj378jk3g
     // http://www.dataplug.itu.edu.pk/api/getoptionapi?api=2&secret=k4743mn7hjr
-    public function getoptionapi() {
+    public function GetOptionApi() {
         $api = $this->input->get('api');
         $secret = $this->input->get('secret');
         $query = $this->db->query("SELECT * FROM api WHERE id = 
@@ -2449,7 +2449,7 @@ class Api extends CI_Controller {
     }
 
     //for hospital watch app
-    public function hospitalwatchapi() {
+    public function HospitalWatChapi() {
         //if (isset($_REQUEST['app_id']) && isset($_REQUEST['last_date_stamp']) && isset($_REQUEST['security_token'])) {
         if (isset($_REQUEST['app_id'])) {
             $app_id = $_REQUEST['app_id'];

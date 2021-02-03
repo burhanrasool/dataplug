@@ -12,7 +12,7 @@ class Site_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_settings($site_id) {
+    public function getSettings($site_id) {
         $query = $this->db->get_where('site_settings', array('id' => $site_id));
         return $query->row_array();
     }
@@ -23,7 +23,7 @@ class Site_model extends CI_Model {
      * @return type
      * @author: ubaidullah balti <ubaidcskiu@gmail.com>
      */
-    public function get_all_log($limit, $start) {
+    public function getAllLog($limit, $start) {
         $this->db->select('*');
         $this->db->from('log');
         $this->db->limit($limit, $start);
@@ -33,7 +33,7 @@ class Site_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function get_all_log_ajax($limit=null,$length=null,$search0=null,$search1=null,$search2=null,$search3=null,$search6=null,$search7=null,$search10=null,$sort_column=null,$sort_order=null) {
+    public function getAllLogAjax($limit=null,$length=null,$search0=null,$search1=null,$search2=null,$search3=null,$search6=null,$search7=null,$search10=null,$sort_column=null,$sort_order=null) {
         $allColumns=array("changed_by_name",
                         "department_name",
                         "action_type",
@@ -107,7 +107,7 @@ class Site_model extends CI_Model {
      * @return type
      * @author: ubaidullah balti <ubaidcskiu@gmail.com>
      */
-    public function get_all_log_count($search0=null,$search1=null,$search2=null,$search3=null,$search6=null,$search7=null,$search10=null) {
+    public function getAllLogCount($search0=null,$search1=null,$search2=null,$search3=null,$search6=null,$search7=null,$search10=null) {
         if($search0!=null) {
             $this->db->like('changed_by_name', "$search0");
         }

@@ -12,7 +12,7 @@ class Form_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_form($slug = FALSE, $view_id = null) {
+    public function getForm($slug = FALSE, $view_id = null) {
 
 
         if ($slug === FALSE) {
@@ -47,7 +47,7 @@ class Form_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_form_by_app($app_id, $user_id = null) {
+    public function getFormByApp($app_id, $user_id = null) {
         $this->db->select('app.id as app_id, app.name as app_name,app.type,app.module_name, form.id as form_id, form.name as form_name,form.icon as form_icon, form.description,form.full_description,form.next,form.icon');
         $this->db->from('form');
         $this->db->join('app', 'app.id = form.app_id');
@@ -64,7 +64,7 @@ class Form_model extends CI_Model {
         return $result;
     }
 
-    public function get_form_by_app_for_app_settings($app_id, $user_id = null) {
+    public function getFormByApPForAppSettings($app_id, $user_id = null) {
         $this->db->select('app.id as app_id, app.name as app_name, form.*');
         $this->db->from('form');
         $this->db->join('app', 'app.id = form.app_id');
@@ -84,7 +84,7 @@ class Form_model extends CI_Model {
     /**
       New Instance for multiple forms
      */
-    public function get_form_list($app_id) {
+    public function getFormList($app_id) {
         $this->db->select('id,app_id');
         $this->db->from('form');
         $this->db->where('is_deleted', '0');
@@ -102,7 +102,7 @@ class Form_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_form_by_app_view($app_id, $view_id) {
+    public function getFormByAppView($app_id, $view_id) {
         $this->db->select('app.id as app_id, app.name as app_name, form.id as form_id, form.name as form_name,form.icon as form_icon, fv.description,fv.full_description,form.next,form.icon,fv.id as fvid');
         $this->db->from('form');
         $this->db->join('app', 'app.id = form.app_id');
@@ -121,7 +121,7 @@ class Form_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_empty_app_form($app_id) {
+    public function getEmptyAppForm($app_id) {
         $this->db->select('app.id as app_id, app.name as app_name, form.id as form_id, form.name as form_name, form.description,form.full_description,form.next');
         $this->db->from('form');
         $this->db->join('app', 'app.id = form.app_id', 'left outer');
@@ -139,7 +139,7 @@ class Form_model extends CI_Model {
      * @return boolean
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function form_already_exist($form_name, $app_id, $form_id = null) {
+    public function Form_Already_Exist($form_name, $app_id, $form_id = null) {
 
         if ($form_id) {
             $query = $this->db->get_where('form', array('name' => $form_name, 'app_id' => $app_id, 'id !=' => $form_id, 'is_deleted' => '0'));
@@ -158,7 +158,7 @@ class Form_model extends CI_Model {
      * Get form filters for multiple
      * with for list 
      */
-    public function get_form_filters($form_list = array()) {
+    public function getFormFilters($form_list = array()) {
         $lists = array();
         foreach ($form_list as $form_entity) {
             array_push($lists, $form_entity['form_id']);
@@ -178,7 +178,7 @@ class Form_model extends CI_Model {
      * Get form filters for multiple
      * with for list etc for ajax call
      */
-    public function get_form_filters_only($form_id) {
+    public function getFormFiltersOnly($form_id) {
 
         $this->db->select('filter,possible_filters');
         $this->db->from('form');
@@ -195,7 +195,7 @@ class Form_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_comments($app_id) {
+    public function getComments($app_id) {
         $this->db->select("ac.*, u.first_name  , u.last_name");
         $this->db->from('app_comments ac');
         $this->db->join('users u', 'ac.user_id = u.id');
@@ -205,7 +205,7 @@ class Form_model extends CI_Model {
         return $query->result_array();
     }
 
-    public function get_form_history($form_id,$view_id ,$history_id = null) {
+    public function getFormHistory($form_id,$view_id ,$history_id = null) {
     	$this->db->select('*');
     	$this->db->from('form_history');
     	$this->db->where('form_id', $form_id);

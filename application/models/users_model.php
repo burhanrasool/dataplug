@@ -9,7 +9,7 @@ Class Users_model extends CI_Model {
      * @return boolean
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    function login($username, $password) {
+    function getLogin($username, $password) {
         $this->db->select('u.id id, u.email, u.username,u.first_name,u.last_name, u.password,d.id department_id,d.name department_name, u.parent_id, u.group_id, u.is_deleted, u.status,u.verification_code,u.default_url, u.district');
         $this->db->from('users u');
         $this->db->join('users_group ug', 'u.group_id = ug.id', 'left');
@@ -35,7 +35,7 @@ Class Users_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    function get_users($parent_id) {
+    function getUsers($parent_id) {
 
         $this->db->select('u.id id, u.username,u.email,u.first_name,u.last_name,d.id department_id,d.name department_name, u.parent_id, u.group_id,ug.type group_name,u.status');
         $this->db->from('users u');
@@ -57,7 +57,7 @@ Class Users_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    function get_all_users() {
+    function getAllUsers() {
 
         $this->db->select('u.id id, u.username,u.email,u.first_name,u.last_name,u.department_id, u.parent_id, u.group_id,u.status');
         $this->db->from('users u');
@@ -72,7 +72,7 @@ Class Users_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    function get_super_admin() {
+    function getSuperAdmin() {
 
         $this->db->select('u.id id, u.username,u.email,u.first_name,u.last_name,u.parent_id, u.group_id');
         $this->db->from('users u');
@@ -88,7 +88,7 @@ Class Users_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    function get_user_by_id($user_id) {
+    function getUserById($user_id) {
 
         $this->db->select('u.id id, u.username, u.email,u.first_name,u.last_name,d.id department_id,d.name department_name, u.parent_id, u.group_id,ug.type group_name, u.default_url, u.district');
         $this->db->from('users u');
@@ -108,7 +108,7 @@ Class Users_model extends CI_Model {
      * @return boolean
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function username_already_exist($user_name) {
+    public function Username_Already_Exist($user_name) {
 
         $query = $this->db->get_where('users', array('username' => $user_name, 'is_deleted' => '0'));
         $exist = $query->result_array();
@@ -125,7 +125,7 @@ Class Users_model extends CI_Model {
      * @return boolean
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function email_already_exist($email) {
+    public function Email_Already_Exist($email) {
 
         $query = "SELECT *
                     FROM `users`
@@ -149,7 +149,7 @@ Class Users_model extends CI_Model {
      * @return boolean
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_user_by_username($user_name) {
+    public function getUserByUsername($user_name) {
 
         $query = $this->db->get_where('users', array('username' => $user_name, 'is_deleted' => '0'));
         $exist = $query->row_array();
@@ -166,7 +166,7 @@ Class Users_model extends CI_Model {
      * @return boolean
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_user_by_email($email) {
+    public function getUserByEmail($email) {
 
         $query = $this->db->get_where('users', array('email' => $email, 'is_deleted' => '0'));
         $exist = $query->row_array();
@@ -184,7 +184,7 @@ Class Users_model extends CI_Model {
      * @return boolean
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function user_name_already_exist($user_name, $user_id) {
+    public function User_Name_Already_Exist($user_name, $user_id) {
 
         $query = $this->db->get_where('users', array('username' => $user_name, 'is_deleted' => '0', 'id !=' => $user_id));
         $exist = $query->result_array();
@@ -202,7 +202,7 @@ Class Users_model extends CI_Model {
      * @return boolean
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function email_already_exist_edit($email, $user_id) {
+    public function Email_Already_Exist_Edit($email, $user_id) {
 
         $query = $this->db->get_where('users', array('email' => $email, 'is_deleted' => '0', 'id !=' => $user_id));
         $exist = $query->result_array();
@@ -220,7 +220,7 @@ Class Users_model extends CI_Model {
      * @return boolean
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function current_password_check($password, $user_id) {
+    public function Current_Password_Check($password, $user_id) {
 
         $query = $this->db->get_where('users', array('password' => md5($password), 'is_deleted' => '0', 'id' => $user_id));
         $exist = $query->result_array();
@@ -237,12 +237,12 @@ Class Users_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function add_user($data) {
+    public function addUser($data) {
         $this->db->insert('users', $data);
         return $this->db->insert_id();
     }
 
-    public function edit_user($user_id, $data) {
+    public function Edit_User($user_id, $data) {
         $this->db->where('id', $user_id);
         $this->db->update('users', $data);
     }
@@ -284,7 +284,7 @@ Class Users_model extends CI_Model {
      * @param type $group_id
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    function remove_user_permissions_by_group($group_id) {
+    function Remove_User_Permissions_By_Group($group_id) {
 
         $this->db->select('*');
         $this->db->from('users');
@@ -303,7 +303,7 @@ Class Users_model extends CI_Model {
      * @param type $group_id
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    function add_user_permissions_by_group($group_id) {
+    function addUserPermissionsByGroup($group_id) {
 
         $all_permissions = $this->get_group_permissions($group_id);
 

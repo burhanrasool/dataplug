@@ -12,7 +12,7 @@ class Form_Settings_model extends CI_Model {
      * @return value
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_field_for_reports($form_id) {
+    public function getFieldForReports($form_id) {
         $this->db->select('*');
         $this->db->from('form_field_settings');
         $this->db->where('field_on_result', '1');
@@ -38,7 +38,7 @@ class Form_Settings_model extends CI_Model {
      * @return value
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_filter_for_reports($form_id) {
+    public function getFilterForReports($form_id) {
         $this->db->select('*');
         $this->db->from('form_field_settings');
         $this->db->where('filter_on_result', '1');
@@ -64,7 +64,7 @@ class Form_Settings_model extends CI_Model {
      * @return value
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function add_new_field($form_id,$field_name) {
+    public function addNewField($form_id,$field_name) {
         $data=array(
             "form_id"=>$form_id,
             "field_name"=>$field_name,

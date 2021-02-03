@@ -6,7 +6,7 @@ class Complaint_model extends CI_Model {
         $this->load->database();
     }
 
-    function add_complaint($record_array){
+    function addComplaint($record_array){
         $this->db->insert('complaint', $record_array);
         $complaint_id = $this->db->insert_id();
         return $complaint_id;
@@ -17,7 +17,7 @@ class Complaint_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_complaint(
+    public function getComplaint(
         $complaint_by_id=null,
         $limit=null,
         $length=null,
@@ -123,7 +123,7 @@ class Complaint_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_complaint_by_id($slug=null) {
+    public function getComplaintById($slug=null) {
 
         $this->db->select("c.* ,CONCAT_WS(' ',u.first_name ,u.last_name) as user_name,a.name app_name,d.name department_name,c.c_app_user_id",false);
         $this->db->from('complaint c');
@@ -145,7 +145,7 @@ class Complaint_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_complaint_by_all() {
+    public function getComplaintByAll() {
 
         $this->db->select("u.id,CONCAT_WS(' ',u.first_name ,u.last_name) as user_name",false);
         $this->db->distinct();
@@ -163,7 +163,7 @@ class Complaint_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_applications_all() {
+    public function getApplicationsAll() {
 
         $this->db->select("a.id,a.name as app_name",false);
         $this->db->distinct();
@@ -182,7 +182,7 @@ class Complaint_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_complaint_history($slug=null) {
+    public function getComplaintHistory($slug=null) {
 
         $this->db->select("ch.* ,CONCAT_WS(' ',u.first_name ,u.last_name) as user_name",false);
         $this->db->from('complaint_history ch');
@@ -200,7 +200,7 @@ class Complaint_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_app_by_department($department_id) {
+    public function getAppByDepartment($department_id) {
 
         $query = $this->db->get_where('app', array('department_id' => $department_id, 'is_deleted' => '0'));
         return $query->result_array();
@@ -244,7 +244,7 @@ class Complaint_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_app_by_department_for_super($limit=null,$length=null,$search0=null,$search2=null,$search3=null,$sort_column=null,$sort_order=null) {
+    public function getAppByDepartmentForSuper($limit=null,$length=null,$search0=null,$search2=null,$search3=null,$sort_column=null,$sort_order=null) {
         $allColumns=array(
             "name",
             "",
@@ -295,7 +295,7 @@ class Complaint_model extends CI_Model {
      * @return boolean
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function app_already_exist($app_name, $department_id, $app_id = null) {
+    public function appAlreadyExist($app_name, $department_id, $app_id = null) {
 
         if($app_name=='')
         {
@@ -321,7 +321,7 @@ class Complaint_model extends CI_Model {
      * @return boolean
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function appuser_imei_already_exist($imei_no, $app_id) {
+    public function AppUser_Imei_Already_Exist($imei_no, $app_id) {
 
         $query = $this->db->get_where('app_users', array('imei_no' => $imei_no, 'app_id' => $app_id ,'is_deleted' => 0));
 
@@ -340,7 +340,7 @@ class Complaint_model extends CI_Model {
      * @return boolean
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function appuser_login_name_already_exist($login_user) {
+    public function AppUser_Login_Name_Already_Exist($login_user) {
 
         $query = $this->db->get_where('app_users', array('login_user' => $login_user ,'is_deleted' => 0));
 
@@ -359,7 +359,7 @@ class Complaint_model extends CI_Model {
      * @return boolean
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    function get_apps($department_id) {
+    function getApps($department_id) {
 //working on this 
         //$session_data = $this->session->userdata('logged_in');
         //$group_id = $session_data['login_group_id'];
@@ -383,7 +383,7 @@ class Complaint_model extends CI_Model {
      * @return boolean
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    function get_app_users($department_id) {
+    function getAppUsers($department_id) {
 //working on this 
         //$session_data = $this->session->userdata('logged_in');
         //$group_id = $session_data['login_group_id'];
@@ -400,12 +400,12 @@ class Complaint_model extends CI_Model {
             return FALSE;
         }
     }
-    function get_app_settings($app_id) {
+    function getAppSettings($app_id) {
         $query = $this->db->get_where('app_settings', array('app_id' => $app_id));
         return $query->row_array();
     }
 
-    function get_app_settings_filters($app_id,$setting_type=null){
+    function getAppSettings_filters($app_id,$setting_type=null){
         if($setting_type==null){
             $query = $this->db->get_where('app_settings', array('app_id' => $app_id));
         }else {
@@ -414,7 +414,7 @@ class Complaint_model extends CI_Model {
         return $query->result_array();
     }
 
-    function get_form_column_settings($app_id){
+    function getFormColumn_settings($app_id){
         $query = $this->db->get_where('form_column_settings', array('app_id' => $app_id));
         return $query->row_array();
     }
@@ -427,7 +427,7 @@ class Complaint_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_assigned_app_to_user($app_id) {
+    public function geAssignedAppToUser($app_id) {
 
         $this->db->select('ua.id assigned_id,a.name app_name,d.name department_name,u.id user_id,u.first_name, u.last_name, u.parent_id, u.group_id, u.default_url, u.district');
         $this->db->from('users_app ua');
@@ -447,7 +447,7 @@ class Complaint_model extends CI_Model {
      * @return type
      * @author Ubiadullah Balti <uabidcskiu@gmail.com>
      */
-    public function get_user_assigned_apps($user_id) {
+    public function getUserAssignedApps($user_id) {
     
     
     	$this->db->select('ua.user_id user_id,a.id app_id,a.name app_name,a.module_name');

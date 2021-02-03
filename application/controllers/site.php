@@ -30,7 +30,7 @@ class Site extends CI_Controller {
      * map to /index.php/welcome/<method_name>
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
-    public function index() {
+    public function getIndex() {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             session_to_page($session_data, $data);
@@ -49,7 +49,7 @@ class Site extends CI_Controller {
         $this->load->view('templates/footer_home');
     }
 
-    public function team() {
+    public function getTeam() {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             session_to_page($session_data, $data);
@@ -66,7 +66,7 @@ class Site extends CI_Controller {
         $this->load->view('templates/footer_home');
     }
     
-    public function about() {
+    public function getAbout() {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             session_to_page($session_data, $data);
@@ -82,7 +82,7 @@ class Site extends CI_Controller {
         $this->load->view('site/about', $data);
         $this->load->view('templates/footer_home');
     }
-    public function howtouse() {
+    public function How_To_Use() {
         if ($this->session->userdata('logged_in')) {
             $session_data = $this->session->userdata('logged_in');
             session_to_page($session_data, $data);
@@ -98,7 +98,7 @@ class Site extends CI_Controller {
         $this->load->view('templates/footer_home');
     }
 
-    public function login_popup() {
+    public function Login_Popup() {
 
         $this->load->helper(array('form'));
         if ($this->session->userdata('logged_in')) {
@@ -106,7 +106,7 @@ class Site extends CI_Controller {
         }
         $this->load->view('site/login_popup');
     }
-    public function login() {
+    public function login_Check() {
 
         //$this->load->helper(array('form'));
         if ($this->session->userdata('logged_in')) {
@@ -119,7 +119,7 @@ class Site extends CI_Controller {
      * @param integer $app_id
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function sitesettings($slug) {
+    public function Site_Settings($slug) {
         $site_id = $slug;
         $site_settings = $this->site_model->get_settings($site_id);
         $data = $site_settings;
@@ -159,7 +159,7 @@ class Site extends CI_Controller {
      * @param integer $user_id
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function register() {
+    public function get_Register() {
             $this->load->library('form_validation');
             if ($this->input->post()) {
                 $register_array = array(
@@ -194,7 +194,7 @@ class Site extends CI_Controller {
      * @param integer $user_id
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function contact() {
+    public function getContact() {
             $this->load->library('form_validation');
             if ($this->input->post()) {
                 $name = $this->input->post('name');
