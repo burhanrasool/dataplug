@@ -83,13 +83,29 @@ class Log extends CI_Controller {
             $session_data = $this->session->userdata('logged_in');
             session_to_page($session_data, $data);
             if ($this->acl->hasSuperAdmin()) {
-                $result_set_total = $this->site_model->get_all_log_count($_GET['sSearch_0'],$_GET['sSearch_1'],$_GET['sSearch_2'],$_GET['sSearch_3'],$_GET['sSearch_6'],$_GET['sSearch_7'],$_GET['sSearch_10']);
+                $result_set_total = $this->site_model->
+                    get_all_log_count($_GET['sSearch_0'],$_GET['sSearch_1'],
+                                      $_GET['sSearch_2'],$_GET['sSearch_3'],
+                                      $_GET['sSearch_6'],$_GET['sSearch_7'],
+                                      $_GET['sSearch_10']);
                 $data= array("sEcho" => intval($_GET['sEcho']),
                     "iTotalRecords" => $result_set_total,
                     "iTotalDisplayRecords" => $result_set_total,);
-                $log = $this->site_model->get_all_log_ajax($_GET['iDisplayStart'],$_GET['iDisplayLength'],$_GET['sSearch_0'],$_GET['sSearch_1'],$_GET['sSearch_2'],$_GET['sSearch_3'],$_GET['sSearch_6'],$_GET['sSearch_7'],$_GET['sSearch_10'],$_GET['iSortCol_0'],$_GET['sSortDir_0']);
+                $log = $this->site_model->
+                    get_all_log_ajax($_GET['iDisplayStart'],
+                                     $_GET['iDisplayLength'],
+                                     $_GET['sSearch_0'],
+                                     $_GET['sSearch_1'],
+                                     $_GET['sSearch_2'],
+                                     $_GET['sSearch_3'],
+                                     $_GET['sSearch_6'],
+                                     $_GET['sSearch_7'],
+                                     $_GET['sSearch_10'],
+                                     $_GET['iSortCol_0'],
+                                     $_GET['sSortDir_0']);
                 foreach($log as $val){
-                    if(is_object(json_decode($val['before_record'])) || is_array(json_decode($val['before_record']))) {
+                    if(is_object(json_decode($val['before_record'])) 
+                       || is_array(json_decode($val['before_record']))) {
                         $before_title = print_r(json_decode($val['before_record']), true);
                     }else{
                         $before_title=$val['before_record'];
@@ -104,8 +120,10 @@ class Log extends CI_Controller {
                         'department_name'=> $val['department_name'],
                         'action_type'=> $val['action_type'],
                         'action_description'=> $val['action_description'],
-                        'before_record'=> (strlen($val['before_record']) < 20) ? $val['before_record'] : substr($val['before_record'], 0, 20) . '..',
-                        'after_record'=> (strlen($val['after_record']) < 20) ? $val['after_record'] : substr($val['after_record'], 0, 20) . '..',
+                        'before_record'=> (strlen($val['before_record']) < 20) ? 
+                            $val['before_record'] : substr($val['before_record'], 0, 20) . '..',
+                        'after_record'=> (strlen($val['after_record']) < 20) ? 
+                            $val['after_record'] : substr($val['after_record'], 0, 20) . '..',
                         'app_name'=> $val['app_name'],
                         'form_name'=> $val['form_name'],
                         'controller'=> $val['controller'],
