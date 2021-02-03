@@ -4,7 +4,7 @@ class App_model extends CI_Model {
 
     public function __construct() {
         $this->load->database();
-    }
+}   
 
     /**
      * 
@@ -20,11 +20,13 @@ class App_model extends CI_Model {
             return $result;
         }
 
-        $this->db->select('app.*,av.description as av_description, av.full_description as av_full_description, av.id as avid');
+        $this->db->select(`app.*,av.description as av_description, av.full_description 
+        as av_full_description, av.id as avid`);
         $this->db->from('app');
         if($view_id)
         {
-            $this->db->join('app_views av', 'av.app_id = app.id AND av.view_id="'.$view_id.'"', 'left');
+            $this->db->join('app_views av',
+             'av.app_id = app.id AND av.view_id="'.$view_id.'"', 'left');
         }
         else
         {
@@ -48,7 +50,9 @@ class App_model extends CI_Model {
      */
     public function get_app_by_department($department_id) {
 
-        $query = $this->db->get_where('app', array('department_id' => $department_id, 'is_deleted' => '0'));
+        $query = $this->db->get_where('app',
+         array('department_id' => $department_id,
+         'is_deleted' => '0'));
         return $query->result_array();
     }
     /**
@@ -57,7 +61,8 @@ class App_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_app_by_user($user_id,$limit=null,$lenght=null,$search0=null,$sort_column=null,$sort_order=null) {
+    public function get_app_by_user($user_id,$limit=null,
+    $lenght=null,$search0=null,$sort_column=null,$sort_order=null) {
         $allColumns=array(
             "name",
             "",
@@ -66,7 +71,8 @@ class App_model extends CI_Model {
         
         $this->db->select('a.*');
         $this->db->from('app a');
-        $this->db->join('users_app ua', 'ua.app_id = a.id AND ua.user_id="'.$user_id.'"');
+        $this->db->join('users_app ua',
+        'ua.app_id = a.id AND ua.user_id="'.$user_id.'"');
         $this->db->where('a.is_deleted', '0');
         if($search0!=null){
             $this->db->like('a.name', "$search0");
@@ -91,7 +97,8 @@ class App_model extends CI_Model {
     }
 
 
-    public function total_apps($user_id=null,$search0=null,$search2=null,$search3=null){
+    public function total_apps($user_id=null,
+        $search0=null,$search2=null,$search3=null){
         $this->db->where ('app.is_deleted','0');
 //                echo $search;die;
         if($search0!=null) {
@@ -117,12 +124,14 @@ class App_model extends CI_Model {
             }
 
         if($user_id!=null){
-            $this->db->join('users_app ua', 'ua.app_id = app.id AND ua.user_id="'.$user_id.'"');
+            $this->db->join('users_app ua',
+            'ua.app_id = app.id AND ua.user_id="'.$user_id.'"');
         }
 
         $result =   $this->db->count_all_results('app');
         // $str = $this->db->last_query();
-        // file_put_contents('./assets/data/query_executed.txt', $str.PHP_EOL , FILE_APPEND | LOCK_EX);
+        // file_put_contents('./assets/data/query_executed.txt',
+        // $str.PHP_EOL , FILE_APPEND | LOCK_EX);
         return $result;
 
     }
@@ -132,7 +141,9 @@ class App_model extends CI_Model {
      * @return type
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
-    public function get_app_by_department_for_super($limit=null,$length=null,$search0=null,$search2=null,$search3=null,$sort_column=null,$sort_order=null) {
+    public function get_app_by_department_for_super($limit=null,
+    $length=null,$search0=null,$search2=null,$search3=null,
+    $sort_column=null,$sort_order=null) {
         $allColumns=array(
             "name",
             "",
@@ -141,7 +152,11 @@ class App_model extends CI_Model {
             "created_datetime"
         );
 //        $query = $this->db->get_where('app', array('is_deleted' => '0'));
-        $this->db->select("a.id id,a.type,a.module_name, d.id department_id,a.icon, a.name name, a.created_datetime created_datetime, d.name department_name, CONCAT_WS(' ',u.first_name ,u.last_name) as user_name",FALSE);
+        $this->db->select(`a.id id,a.type,a.module_name, 
+        d.id department_id,a.icon, a.name name, a.created_datetime
+        created_datetime, d.name department_name,
+        CONCAT_WS(' ',u.first_name ,u.last_name) as user_name",
+        FALSE`);
         $this->db->from('app a');
         $this->db->join('department d', 'a.department_id = d.id');
         $this->db->join('users u', 'a.user_id = u.id','left');
@@ -194,9 +209,11 @@ class App_model extends CI_Model {
             return false;
         }
         if ($app_id)
-            $query = $this->db->get_where('app', array('name' => $app_name, 'id !=' => $app_id, 'is_deleted' => '0'));
+            $query = $this->db->get_where('app',
+            array('name' => $app_name, 'id !=' => $app_id, 'is_deleted' => '0'));
         else
-            $query = $this->db->get_where('app', array('name' => $app_name, 'is_deleted' => '0'));
+            $query = $this->db->get_where('app',
+            array('name' => $app_name, 'is_deleted' => '0'));
         $exist = $query->result_array();
 
         if ($exist) {
@@ -215,7 +232,8 @@ class App_model extends CI_Model {
      */
     public function appuser_imei_already_exist($imei_no, $app_id) {
 
-        $query = $this->db->get_where('app_users', array('imei_no' => $imei_no, 'app_id' => $app_id ,'is_deleted' => 0));
+        $query = $this->db->get_where('app_users',
+         array('imei_no' => $imei_no, 'app_id' => $app_id ,'is_deleted' => 0));
 
         $exist = $query->result_array();
 
@@ -234,7 +252,8 @@ class App_model extends CI_Model {
      */
     public function appuser_login_name_already_exist($login_user) {
 
-        $query = $this->db->get_where('app_users', array('login_user' => $login_user ,'is_deleted' => 0));
+        $query = $this->db->get_where('app_users',
+         array('login_user' => $login_user ,'is_deleted' => 0));
 
         $exist = $query->result_array();
 
@@ -255,7 +274,8 @@ class App_model extends CI_Model {
 //working on this 
         //$session_data = $this->session->userdata('logged_in');
         //$group_id = $session_data['login_group_id'];
-        $query = $this->db->get_where('app', array('department_id' => $department_id, 'is_deleted' => '0'));
+        $query = $this->db->get_where('app', array('department_id' =>
+         $department_id, 'is_deleted' => '0'));
 
         $apps = array();
 
@@ -279,7 +299,9 @@ class App_model extends CI_Model {
 //working on this 
         //$session_data = $this->session->userdata('logged_in');
         //$group_id = $session_data['login_group_id'];
-        $query = $this->db->get_where('app_users', array('department_id' => $department_id, 'is_deleted' => '0'));
+        $query = $this->db->get_where('app_users',
+         array('department_id' => $department_id,
+        'is_deleted' => '0'));
 
         $apps = array();
 
@@ -301,13 +323,15 @@ class App_model extends CI_Model {
         if($setting_type==null){
             $query = $this->db->get_where('app_settings', array('app_id' => $app_id));
         }else {
-            $query = $this->db->get_where('app_settings', array('app_id' => $app_id,'setting_type'=>$setting_type));
+            $query = $this->db->get_where('app_settings',
+            array('app_id' => $app_id,'setting_type'=>$setting_type));
         }
         return $query->result_array();
     }
 
     function get_form_column_settings($app_id){
-        $query = $this->db->get_where('form_column_settings', array('app_id' => $app_id));
+        $query = $this->db->get_where('form_column_settings',
+        array('app_id' => $app_id));
         return $query->row_array();
     }
 
@@ -321,7 +345,9 @@ class App_model extends CI_Model {
      */
     public function get_assigned_app_to_user($app_id) {
 
-        $this->db->select('ua.id assigned_id,a.name app_name,d.name department_name,u.id user_id,u.first_name, u.last_name, u.parent_id, u.group_id, u.default_url, u.district');
+        $this->db->select(`ua.id assigned_id,a.name app_name,d.name department_name,
+        u.id user_id,u.first_name, u.last_name, u.parent_id,
+        u.group_id, u.default_url, u.district`);
         $this->db->from('users_app ua');
         $this->db->join('users u', 'u.id = ua.user_id', 'left');
         $this->db->join('app a', 'a.id = ua.app_id', 'left');
@@ -342,7 +368,8 @@ class App_model extends CI_Model {
     public function get_user_assigned_apps($user_id) {
     
     
-    	$this->db->select('ua.user_id user_id,a.id app_id,a.name app_name,a.module_name');
+        $this->db->select(`ua.user_id user_id,a.id app_id,
+        a.name app_name,a.module_name`);
     	$this->db->from('users_app ua');
     	$this->db->join('app a','ua.app_id = a.id','left');
     	$this->db->where('ua.user_id', $user_id);
