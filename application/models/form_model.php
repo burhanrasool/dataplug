@@ -23,10 +23,17 @@ class Form_model extends CI_Model {
 
 
 
-        $this->db->select('form.*,fv.description as fv_description, fv.full_description as fv_full_description, fv.id as fvid, fv.post_url as fv_post_url');
+        $this->db->select('form.*,
+                           fv.description as fv_description, 
+                           fv.full_description as fv_full_description, 
+                           fv.id as fvid, 
+                           fv.post_url as fv_post_url');
         $this->db->from('form');
         if ($view_id) {
-            $this->db->join('form_views fv', 'fv.form_id = form.id AND fv.view_id="' . $view_id . '"', 'left');
+            $this->db->join('form_views fv', 
+                            'fv.form_id = form.id AND fv.view_id="'
+                            . $view_id . 
+                            '"', 'left');
         } else {
             $this->db->join('form_views fv', 'fv.form_id = form.id', 'left');
         }
@@ -48,7 +55,17 @@ class Form_model extends CI_Model {
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
     public function get_form_by_app($app_id, $user_id = null) {
-        $this->db->select('app.id as app_id, app.name as app_name,app.type,app.module_name, form.id as form_id, form.name as form_name,form.icon as form_icon, form.description,form.full_description,form.next,form.icon');
+        $this->db->select('app.id as app_id, 
+                           app.name as app_name,
+                           app.type,
+                           app.module_name, 
+                           form.id as form_id, 
+                           form.name as form_name,
+                           form.icon as form_icon, 
+                           form.description,
+                           form.full_description,
+                           form.next,
+                           form.icon');
         $this->db->from('form');
         $this->db->join('app', 'app.id = form.app_id');
 
@@ -103,7 +120,15 @@ class Form_model extends CI_Model {
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
     public function get_form_by_app_view($app_id, $view_id) {
-        $this->db->select('app.id as app_id, app.name as app_name, form.id as form_id, form.name as form_name,form.icon as form_icon, fv.description,fv.full_description,form.next,form.icon,fv.id as fvid');
+        $this->db->select('app.id as app_id, 
+                           app.name as app_name, 
+                           form.id as form_id, 
+                           form.name as form_name,
+                           form.icon as form_icon, 
+                           fv.description,
+                           fv.full_description,
+                           form.next,form.icon,
+                           fv.id as fvid');
         $this->db->from('form');
         $this->db->join('app', 'app.id = form.app_id');
         $this->db->where('form.is_deleted', '0');
@@ -122,7 +147,12 @@ class Form_model extends CI_Model {
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
      */
     public function get_empty_app_form($app_id) {
-        $this->db->select('app.id as app_id, app.name as app_name, form.id as form_id, form.name as form_name, form.description,form.full_description,form.next');
+        $this->db->select('app.id as app_id, 
+                           app.name as app_name, 
+                           form.id as form_id, 
+                           form.name as form_name, 
+                           form.description,
+                           form.full_description,form.next');
         $this->db->from('form');
         $this->db->join('app', 'app.id = form.app_id', 'left outer');
         $this->db->where('form.app_id', $app_id);
@@ -142,9 +172,16 @@ class Form_model extends CI_Model {
     public function form_already_exist($form_name, $app_id, $form_id = null) {
 
         if ($form_id) {
-            $query = $this->db->get_where('form', array('name' => $form_name, 'app_id' => $app_id, 'id !=' => $form_id, 'is_deleted' => '0'));
+            $query = $this->db->get_where('form', 
+                     array('name' => $form_name, 
+                           'app_id' => $app_id, 
+                           'id !=' => $form_id, 
+                           'is_deleted' => '0'));
         } else {
-            $query = $this->db->get_where('form', array('name' => $form_name, 'app_id' => $app_id, 'is_deleted' => '0'));
+            $query = $this->db->get_where('form', 
+                     array('name' => $form_name, 
+                           'app_id' => $app_id, 
+                           'is_deleted' => '0'));
         }
         $exist = $query->result_array();
         if ($exist) {
