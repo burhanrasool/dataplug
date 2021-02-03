@@ -308,16 +308,21 @@ if ($view_list) {
         </div>
 
         <div class="val-settings-section">
-            <div id="val-email"><input type="checkbox" name="val-type"/><span class="option-title"> Email</span>
+            <div id="val-email"><input type="checkbox" 
+                                       name="val-type"/><span class="option-title"> Email</span>
             </div>
-            <div id="val-number"><input type="checkbox" name="val-type"/><span class="option-title"> Number</span>
+            <div id="val-number"><input type="checkbox" 
+                                        name="val-type"/><span class="option-title"> Number</span>
             </div>
         </div>
 
         <div class="val-settings-section">
-            <div id="val-min" class="clearfix">Min: <input class="option setting" type="text"/></div>
-            <div id="val-max" class="clearfix">Max: <input class="option setting" type="text"/></div>
-            <div id="val-pattern" class="clearfix">Pattern: <input type="text" class="option setting"/></div>
+            <div id="val-min" class="clearfix">
+                Min: <input class="option setting" type="text"/></div>
+            <div id="val-max" class="clearfix">
+                Max: <input class="option setting" type="text"/></div>
+            <div id="val-pattern" class="clearfix">
+                Pattern: <input type="text" class="option setting"/></div>
         </div>
     </div>
 
