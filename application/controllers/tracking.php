@@ -191,24 +191,24 @@ exit;*/
         $newDistanceGeo=0;
         $lastDistanceGeo=0; 
         $newDistance=0;
-        $lastDistance=0;  
+        $last_distance=0;  
         foreach($result as $r)  
         {   
           //print_r($r);
           $distance=(float)$r['distance'];   
-          $d=$distance-$lastDistance;   
+          $d=$distance-$last_distance;   
           if($d>0)   {
-            $newDistance+=$distance-$lastDistance;   
+            $newDistance+=$distance-$last_distance;   
           }
-          $lastDistance=$distance;    
+          $last_distance=$distance;    
 
           //print_r($r);
-          $distanceGeo=(float)$r['distanceGeo'];   
-          $dGeo=$distanceGeo-$lastDistanceGeo;   
+          $distance_geo=(float)$r['distance_geo'];   
+          $dGeo=$distance_geo-$lastDistanceGeo;   
           if($dGeo>0)   {
-            $newDistanceGeo+=$distanceGeo-$lastDistanceGeo;   
+            $newDistanceGeo+=$distance_geo-$lastDistanceGeo;   
           }
-          $lastDistanceGeo=$distanceGeo;     
+          $lastDistanceGeo=$distance_geo;     
         }
        
         $gps_time = $params ['gpsTime'];
@@ -322,26 +322,26 @@ exit;*/
         $newDistanceGeo=0;
         $lastDistanceGeo=0; 
         $newDistance=0;
-        $lastDistance=0;  
+        $last_distance=0;  
         foreach($result as $r)  
         {   
           //print_r($r);
           $distance=(float)$r['distance'];   
-          $d=$distance-$lastDistance;   
+          $d=$distance-$last_distance;   
           if($d>0)   {
-            $newDistance+=$distance-$lastDistance;   
+            $newDistance+=$distance-$last_distance;   
           }
-          echo $r['gpsTime']." =>> ".$newDistance." = ".$distance." - ".$lastDistance."<br />";
-          echo $r['id']." -> ".$r['gpsTime']." : D:".$distance." LD:".$lastDistance." ND:".$newDistance."<br />";
-          $lastDistance=$distance;    
+          echo $r['gpsTime']." =>> ".$newDistance." = ".$distance." - ".$last_distance."<br />";
+          echo $r['id']." -> ".$r['gpsTime']." : D:".$distance." LD:".$last_distance." ND:".$newDistance."<br />";
+          $last_distance=$distance;    
 
           //print_r($r);
-          $distanceGeo=(float)$r['distanceGeo'];   
-          $dGeo=$distanceGeo-$lastDistanceGeo;   
+          $distance_geo=(float)$r['distance_geo'];   
+          $dGeo=$distance_geo-$lastDistanceGeo;   
           if($dGeo>0)   {
-            $newDistanceGeo+=$distanceGeo-$lastDistanceGeo;   
+            $newDistanceGeo+=$distance_geo-$lastDistanceGeo;   
           }
-          $lastDistanceGeo=$distanceGeo;     
+          $lastDistanceGeo=$distance_geo;     
         }
        
         // $gps_time = $params ['gpsTime'];
