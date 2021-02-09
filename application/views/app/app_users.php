@@ -20,7 +20,7 @@
 <?php //echo form_open(base_url()."applicatioin-users");
 if (filter_input(INPUT_SERVER, 'HTTP_X_REQUESTED_WITH') != 'xmlhttprequest') {
     ?>
-    <?php if ($this->acl->hasPermission('app_users', 'add')) { ?>
+    <?php if ($this->acl-                               >hasPermission('app_users', 'add')) { ?>
         <form style='margin: auto;width: 100%;' action="<?= base_url() ?>applicatioin-users" method="POST"
               class="full validate add_task_form" enctype="multipart/form-data" id='form_edit'/>
         <input type="hidden" name="htmldesc" id="htmldesc"/>
@@ -258,7 +258,8 @@ if (filter_input(INPUT_SERVER, 'HTTP_X_REQUESTED_WITH') != 'xmlhttprequest') {
                     <div class="row">
 
                         <div>
-                            <input class="textBoxLogin" type="text" name="login_user" id="login_user" value="<?php echo set_value('login_user');?>" />
+                            <input class="textBoxLogin" type="text" name="login_user" id="login_user"
+                             value="<?php echo set_value('login_user');?>" />
                         </div>
                     </div>
                     <?php echo $this->form_validation->error('login_user'); ?>
@@ -273,7 +274,9 @@ if (filter_input(INPUT_SERVER, 'HTTP_X_REQUESTED_WITH') != 'xmlhttprequest') {
                     <div class="row">
 
                         <div>
-                            <input class="textBoxLogin" type="text" name="login_password" id="login_password" value="<?php echo set_value('login_password');               ?>" />
+                            <input class="textBoxLogin" type="text" name="login_password" 
+                            id="login_password" 
+                            value="<?php echo set_value('login_password');               ?>" />
                         </div>
                     </div>
 
@@ -292,11 +295,15 @@ if (filter_input(INPUT_SERVER, 'HTTP_X_REQUESTED_WITH') != 'xmlhttprequest') {
         </table>
         </form>
 
-        <form style='margin: auto;width: 100%;' action="<?= base_url() ?>applicatioin-users-import" method="POST"
-              class="full validate add_task_form" enctype="multipart/form-data" id='form_edit'/>
+        <form style='margin: auto;width: 100%;' action="<?= base_url() ?>
+        applicatioin-users-import" method="POST"
+              class="full validate add_task_form" enctype="multipart/form-data"
+               id='form_edit'/>
 
-        <table cellpadding="0" cellspacing="0" border="0" class="display addappusertable" id="example"
-               style='width: 100%;box-shadow:0 0 6px rgba(0, 0, 0, 0.25);margin:15px 0 14px 0'>
+        <table cellpadding="0" cellspacing="0" border="0" 
+        class="display addappusertable" id="example"
+               style='width: 100%;box-shadow:0 0 6px rgba(0, 0, 0, 0.25);
+                margin:15px 0 14px 0'>
             <tbody>
 
                 <tr>
@@ -312,7 +319,8 @@ if (filter_input(INPUT_SERVER, 'HTTP_X_REQUESTED_WITH') != 'xmlhttprequest') {
 
                     <div>
 
-                        <?php echo form_dropdown('department_id_import', $departments, $batch, 'id="department_id_import" style="width: 135px;"'); ?>
+                        <?php echo form_dropdown('department_id_import', $departments, $batch, 
+                        'id="department_id_import" style="width: 135px;"'); ?>
                     </div>
                     <?php echo $this->form_validation->error('department_id_import'); ?>
                 </div>
@@ -371,7 +379,9 @@ if (filter_input(INPUT_SERVER, 'HTTP_X_REQUESTED_WITH') != 'xmlhttprequest') {
 
 
 
-            <tr title="Add column in CSV &#13;imei&#13;mobile_number&#13;user_name&#13;district&#13;town&#13;login_user&#13;login_password&#13;cnic&#13;mobile netword">
+            <tr title="Add column in CSV &#13;imei&#13;mobile_number&#13;user_name&#13;
+            district&#13;town&#13;login_user&#13;login_password&#13;
+            cnic&#13;mobile netword">
                 <td style='width: 50px;'>
                     <label for="d1_textfield">
                         <strong>Select File </strong>
@@ -381,7 +391,9 @@ if (filter_input(INPUT_SERVER, 'HTTP_X_REQUESTED_WITH') != 'xmlhttprequest') {
                 <td style='width: 100px;' colspan="2">
                     <div class="row" id="dep_name">
                         <div>
-                            <label style="width:26px;font-size: 22px;color:blue;" title="Add column in CSV &#13;imei&#13;mobile_number&#13;user_name&#13;district&#13;town&#13;login_user&#13;login_password&#13;cnic&#13;mobile netword">?</label>
+                            <label style="width:26px;font-size: 22px;color:blue;" title="Add column in CSV
+                             &#13;imei&#13;mobile_number&#13;user_name&#13;district&#13;town&#13;
+                             login_user&#13;login_password&#13;cnic&#13;mobile netword">?</label>
                             <input type="file" name="user_import" style="width: auto;border:0px" >
 
                         </div>
@@ -403,7 +415,8 @@ if (filter_input(INPUT_SERVER, 'HTTP_X_REQUESTED_WITH') != 'xmlhttprequest') {
 }?>
 <div class="tableContainer">
     <div>
-        <table cellspacing="0" cellpadding="0" id="application-listing34543" class="display appusersajaxtable">
+        <table cellspacing="0" cellpadding="0" id="application-listing34543" 
+        class="display appusersajaxtable">
             <thead>
                 <tr>
                     <th class="Categoryh">Application Name</th>

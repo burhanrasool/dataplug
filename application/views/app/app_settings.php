@@ -7,7 +7,8 @@
                 <tbody>
                     <tr>
                         <td>
-                            <form action="<?= base_url() ?>application-setting/<?= $app_id ?>" method="POST" class="full validate add_task_form"  enctype="multipart/form-data" />
+                            <form action="<?= base_url() ?>application-setting/<?= $app_id ?>" method
+                            ="POST" class="full validate add_task_form"  enctype="multipart/form-data" />
                             <fieldset>
                                 <legend>Map Settings</legend>
                                 <div class="row">

@@ -17,9 +17,10 @@ class Api_model extends CI_Model {
 //            $this->db->select('api.*,department.name as name');
 //            $this->db->from('api,department');
 //            $this->db->where('department.id=api.department_id');
-            $query=$this->db->query("select api.*,department.name as name
+            $query=$this->db->query(`select api.*,department.name as name
                                     from api
-                                    LEFT JOIN department ON (department.id=api.department_id)  order by api.id desc");
+                                    LEFT JOIN department ON 
+                                    (department.id=api.department_id)  order by api.id desc`);
 //            $query = $this->db->get();
             return $query->result_array();
         }
@@ -59,7 +60,8 @@ class Api_model extends CI_Model {
      */
     public function get_app_by_department($department_id) {
 
-        $query = $this->db->get_where('app', array('department_id' => $department_id, 'is_deleted' => '0'));
+        $query = $this->db->get_where('app', array('department_id' 
+        => $department_id, 'is_deleted' => '0'));
         return $query->result_array();
     }
     /**
@@ -73,7 +75,8 @@ class Api_model extends CI_Model {
         
         $this->db->select('a.*');
         $this->db->from('app a');
-        $this->db->join('users_app ua', 'ua.app_id = a.id AND ua.user_id="'.$user_id.'"');
+        $this->db->join('users_app ua',
+        'ua.app_id = a.id AND ua.user_id="'.$user_id.'"');
         $this->db->where('a.is_deleted', '0');
         $query = $this->db->get();
         
@@ -88,7 +91,9 @@ class Api_model extends CI_Model {
     public function get_app_by_department_for_super() {
 
         $query = $this->db->get_where('app', array('is_deleted' => '0'));
-        $this->db->select("a.id id, d.id department_id,a.icon, a.name name, d.name department_name, CONCAT_WS(' ',u.first_name ,u.last_name) as user_name",FALSE);
+        $this->db->select(`a.id id, d.id department_id,a.icon, a.name name,
+         d.name department_name, CONCAT_WS(' ',u.first_name ,u.last_name)
+          as user_name`,FALSE);
         $this->db->from('app a');
         $this->db->join('department d', 'a.department_id = d.id');
         $this->db->join('users u', 'a.user_id = u.id','left');
@@ -113,9 +118,11 @@ class Api_model extends CI_Model {
             return false;
         }
         if ($app_id)
-            $query = $this->db->get_where('app', array('name' => $app_name, 'id !=' => $app_id, 'is_deleted' => '0'));
+            $query = $this->db->get_where('app', 
+            array('name' => $app_name, 'id !=' => $app_id, 'is_deleted' => '0'));
         else
-            $query = $this->db->get_where('app', array('name' => $app_name, 'is_deleted' => '0'));
+            $query = $this->db->get_where('app', 
+            array('name' => $app_name, 'is_deleted' => '0'));
         $exist = $query->result_array();
 
         if ($exist) {
@@ -134,7 +141,8 @@ class Api_model extends CI_Model {
      */
     public function appuser_imei_already_exist($imei_no, $app_id) {
 
-        $query = $this->db->get_where('app_users', array('imei_no' => $imei_no, 'app_id' => $app_id ,'is_deleted' => 0));
+        $query = $this->db->get_where('app_users', 
+        array('imei_no' => $imei_no, 'app_id' => $app_id ,'is_deleted' => 0));
 
         $exist = $query->result_array();
 
@@ -155,7 +163,8 @@ class Api_model extends CI_Model {
 //working on this 
         //$session_data = $this->session->userdata('logged_in');
         //$group_id = $session_data['login_group_id'];
-        $query = $this->db->get_where('app', array('department_id' => $department_id, 'is_deleted' => '0'));
+        $query = $this->db->get_where('app', array('department_id' =>
+         $department_id, 'is_deleted' => '0'));
 
         $apps = array();
 
@@ -179,7 +188,8 @@ class Api_model extends CI_Model {
 //working on this 
         //$session_data = $this->session->userdata('logged_in');
         //$group_id = $session_data['login_group_id'];
-        $query = $this->db->get_where('app_users', array('department_id' => $department_id, 'is_deleted' => '0'));
+        $query = $this->db->get_where('app_users', array('department_id' => 
+        $department_id, 'is_deleted' => '0'));
 
         $apps = array();
 
@@ -205,7 +215,9 @@ class Api_model extends CI_Model {
      */
     public function get_assigned_app_to_user($app_id) {
 
-        $this->db->select('ua.id assigned_id,a.name app_name,d.name department_name,u.id user_id,u.first_name, u.last_name, u.parent_id, u.group_id, u.default_url, u.district');
+        $this->db->select(`ua.id assigned_id,a.name app_name,d.name department_name
+        ,u.id user_id,u.first_name, u.last_name, u.parent_id, u.group_id,
+         u.default_url, u.district`);
         $this->db->from('users_app ua');
         $this->db->join('users u', 'u.id = ua.user_id', 'left');
         $this->db->join('app a', 'a.id = ua.app_id', 'left');

@@ -10,8 +10,10 @@
             <article class="comment-body clearfix" id="comment-21891">
                 <div class="comment-content">
                     <div class="comment-meta">
-                        <cite class="fn"><?php echo $comment['first_name'] . ' ' . $comment['last_name']; ?></cite>					
-                        <time datetime="<?php echo $comment['created_datetime']; ?>">on <?php echo date('F d, Y H:i:s', strtotime($comment['created_datetime'])); ?>
+                        <cite class="fn"><?php echo $comment['first_name']
+                         . ' ' . $comment['last_name']; ?></cite>					
+                        <time datetime="<?php echo $comment['created_datetime']; 
+                        ?>">on <?php echo date('F d, Y H:i:s', strtotime($comment['created_datetime'])); ?>
                         </time>
                     </div>
                     <section class="comment-text clearfix">
@@ -92,7 +94,8 @@
         text-decoration: none;
     }
 
-    .block.loop-single .comment-body time a, .block.loop-single .comment-body time a:hover {
+    .block.loop-single .comment-body time a, .block.loop-single 
+    .comment-body time a:hover {
         color: #D3D3D3;
     }
 

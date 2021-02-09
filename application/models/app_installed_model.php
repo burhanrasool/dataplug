@@ -15,7 +15,8 @@ class App_Installed_model extends CI_Model {
      */
     public function get_app_installed($app_id,$imei_no) {
 
-        $query = $this->db->get_where('app_installed', array('app_id' => $app_id,'imei_no' => $imei_no));
+        $query = $this->db->get_where('app_installed', 
+        array('app_id' => $app_id,'imei_no' => $imei_no));
        
         return $query->row_array();
        
