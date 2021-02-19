@@ -407,11 +407,16 @@ class Map extends CI_Controller {
         $exclude_array = array('id', 'remote_id', 'imei_no', 'district_name', 'uc_name', 'town_name', 'location', 'form_id', 'img1', 'img2', 'img3', 'img4', 'img5', 'img1_title', 'img2_title', 'img3_title', 'img4_title', 'img5_title', 'is_deleted');
         foreach ($forms_list as $form_entity) {
             $table_name = $form_entity['table_name'];
-            $results = $this->form_results_model->get_result_paginated_posted($table_name, $to_date, $from_date, $category_name, $filter_attribute_search, $town_filter, $posted_filters, $search_text, $district, $this->perPage, $selected_dc);
-//            $results = $this->form_results_model->get_form_results_category($forms_list, $to_date, $from_date, $category_name, $filter_attribute_search, $town_filter, $posted_filters, $search_text, $login_district, $this->perPage);
+            $results = $this->form_results_model->get_result_paginated_posted($table_name,
+             $to_date, $from_date, $category_name, $filter_attribute_search, $town_filter,
+             $posted_filters, $search_text, $district, $this->perPage, $selected_dc);
+//            $results = $this->form_results_model->get_form_results_category($forms_list, 
+//            $to_date, $from_date, $category_name, $filter_attribute_search, $town_filter, 
+//             $posted_filters, $search_text, $login_district, $this->perPage);
             foreach ($results as $k => $v) {
                 $record_array = array();
-                $imagess = $this->form_results_model->getResultsImages($v['id'], $v['form_id']);
+                $imagess = $this->form_results_model->getResultsImages($v['id'],
+                $v['form_id']);
                 if ($imagess) {
                     if (!in_array('image', $table_headers_array)) {
                         $table_headers_array = array_merge($table_headers_array, array('image'));
@@ -426,10 +431,12 @@ class Map extends CI_Controller {
                     }
                 }
                 $record_array = array_merge($record_array, array('form_id' => $v['form_id']));
-                $record_array = array_merge($record_array, array('created_datetime' => $v['created_datetime'], 'actions' => $v['id']));
+                $record_array = array_merge($record_array, array('created_datetime' => 
+                $v['created_datetime'], 'actions' => $v['id']));
                 $record_array_final[] = $record_array;
             }
-            $schema_list = $this->form_results_model->getTableHeadingsFromSchema($table_name);
+            $schema_list = $this->form_results_model->
+            getTableHeadingsFromSchema($table_name);
             $heading_query = array_merge($heading_query, $schema_list);
         }
         $send = array();
@@ -452,7 +459,8 @@ class Map extends CI_Controller {
                 }
             }
         }
-        $table_headers_array = array_merge($table_headers_array, array('created_datetime'));
+        $table_headers_array = array_merge($table_headers_array, 
+        array('created_datetime'));
         $table_headers_array = array_merge($table_headers_array, array('actions'));
         $data['headings'] = $table_headers_array;
         $data['form'] = $record_array_final;
@@ -471,15 +479,20 @@ class Map extends CI_Controller {
         $record_array_final = array();
         $table_headers_array = array();
         $heading_query = array();
-        $exclude_array = array('id', 'remote_id', 'imei_no', 'district_name', 'uc_name', 'town_name', 'location', 'form_id', 'img1', 'img2', 'img3', 'img4', 'img5', 'img1_title', 'img2_title', 'img3_title', 'img4_title', 'img5_title', 'is_deleted');
+        $exclude_array = array('id', 'remote_id', 'imei_no', 'district_name', 
+        'uc_name', 'town_name', 'location', 'form_id', 'img1', 'img2', 'img3', 
+        'img4', 'img5', 'img1_title', 'img2_title', 'img3_title', 'img4_title', 
+        'img5_title', 'is_deleted');
         foreach ($forms_list as $form_entity) {
             $table_name = $form_entity['table_name'];
             //$table_exist_bit = $this->form_results_model->check_table_exits($table_name);
             if (!is_table_exist($table_name)) {
-                $this->session->set_flashdata('validate', array('message' => 'No table schema has been built againts this application', 'type' => 'warning'));
+                $this->session->set_flashdata('validate', array('message' => 'No table 
+                schema has been built againts this application', 'type' => 'warning'));
                 redirect(base_url() . 'app');
             }
-            $results = $this->form_results_model->get_results_paginated($table_name, $this->perPage, $all_data);
+            $results = $this->form_results_model->get_results_paginated($table_name,
+            $this->perPage, $all_data);
             foreach ($results as $k => $v) {
                 $record_array = array();
                 foreach ($v as $key => $value) {
@@ -487,7 +500,8 @@ class Map extends CI_Controller {
                         $record_array = array_merge($record_array, array($key => $value));
                     }
                 }
-                $imagess = $this->form_results_model->getResultsImages($v['id'], $form_entity['form_id']);
+                $imagess = $this->form_results_model->getResultsImages($v['id'], 
+                $form_entity['form_id']);
                 if ($imagess) {
                     if (!in_array('image', $table_headers_array)) {
                         $table_headers_array = array_merge($table_headers_array, array('image'));
@@ -600,7 +614,8 @@ class Map extends CI_Controller {
         $app_filters_array = array();
         $heading_array = array();
         $record_array_final = array();
-        $results = $this->form_results_model->get_form_results_multiple_all_data($form_lists, $login_district);
+        $results = $this->form_results_model->
+        get_form_results_multiple_all_data($form_lists, $login_district);
         foreach ($results as $k => $v) {
             $record_array = array();
             $result_json = $v['record'];
@@ -630,10 +645,12 @@ class Map extends CI_Controller {
                 }
                 $record_array = array_merge($record_array, array($key => $value));
             }
-            $record_array = array_merge($record_array, array('created_datetime' => $v['created_datetime'], 'actions' => $v['id']));
+            $record_array = array_merge($record_array, array('created_datetime' => 
+            $v['created_datetime'], 'actions' => $v['id']));
             $record_array_final[] = $record_array;
         }
-        $heading_array = array_merge($heading_array, array('created_datetime', 'actions'));
+        $heading_array = array_merge($heading_array, 
+        array('created_datetime', 'actions'));
         $data['headings'] = $heading_array;
         $data['form'] = $record_array_final;
         $data['active_tab'] = 'app';
@@ -642,19 +659,22 @@ class Map extends CI_Controller {
     }
 
     /**
-     * method to get heading data of multiple form for all data based on filter array when posted
+     * method to get heading data of multiple form for all 
+     * data based on filter array when posted
      * @param  $form_list list of form in a single applicatoin
      * @param  $app_filter_list array of all filter set on which search is based
      * @return  array An array of form heading and its data
      * @author UbaidUllah Balti <ubaidcskiu@gmail.com>
      */
-    public function get_heading_data_multiple_all_for_posted($form_lists, $app_filter_list) {
+    public function get_heading_data_multiple_all_for_posted($form_lists, 
+    $app_filter_list) {
         $form_id = $form_lists[0]['form_id'];
         $data['form_id'] = $form_id;
         $selected_form = $this->form_model->get_form($form_id);
         $filter_attribute = array();
         if ($selected_form['filter'] != '') {
-            $filter_rec = array_filter(array_map('trim', explode(',', $selected_form['filter'])));
+            $filter_rec = array_filter(array_map('trim', 
+            explode(',', $selected_form['filter'])));
             foreach ($filter_rec as $key => $value) {
                 array_push($filter_attribute, $value);
             }
@@ -668,7 +688,8 @@ class Map extends CI_Controller {
         $heading_array = array();
         $record_array_final = array();
         $app_filters_array = array();
-        $results = $this->form_results_model->get_form_results_multiple_all_data($form_lists, $login_district);
+        $results = $this->form_results_model->
+        get_form_results_multiple_all_data($form_lists, $login_district);
         foreach ($results as $k => $v) {
             $record_array = array();
             $result_json = $v['record'];
@@ -725,7 +746,8 @@ class Map extends CI_Controller {
                 }
                 $record_array = array_merge($record_array, array($key => $value));
             }
-            $record_array = array_merge($record_array, array('created_datetime' => $v['created_datetime'], 'actions' => $v['id']));
+            $record_array = array_merge($record_array, array('created_datetime' => 
+            $v['created_datetime'], 'actions' => $v['id']));
             $record_array_final[] = $record_array;
         }
         $final_filter_sorted = array();
@@ -734,7 +756,8 @@ class Map extends CI_Controller {
             $final_filter_sorted[$key_sorter] = $app_filters_array[$key_sorter];
         }
         $data['app_filters_array'] = $final_filter_sorted;
-        $heading_array = array_merge($heading_array, array('created_datetime', 'actions'));
+        $heading_array = array_merge($heading_array, 
+        array('created_datetime', 'actions'));
         $data['headings'] = $heading_array;
         $data['form'] = $record_array_final;
         $data['active_tab'] = 'app';
@@ -754,7 +777,9 @@ class Map extends CI_Controller {
         $slug = $slug_id;
         if ($this->session->userdata('logged_in')) {
             if (!$this->acl->hasPermission('form', 'view')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $this->session->set_flashdata('validate', array('message' => 
+                "You don't have enough permissions to do this task.", 
+                'type' => 'warning'));
                 redirect(base_url() . 'application-map/' . $slug);
             }
             /** multiple form handling system statrs * */
@@ -986,8 +1011,13 @@ class Map extends CI_Controller {
                 $record_array_final = array();
                 foreach ($form_list_filter as $form_entity) {
                     $table_name = $form_entity['table_name'];
-                    $results = $this->form_results_model->get_map_data_paginated_posted($table_name, $to_date, $from_date, $town_filter = null, $posted_filters, $search_text, $login_district);
-                    //$results = $this->form_results_model->get_form_results_for_map($forms_list, $to_date, $from_date, $town_filter = null, $posted_filters, $search_text, $login_district);
+                    $results = $this->form_results_model->
+                    get_map_data_paginated_posted($table_name, $to_date, 
+                    $from_date, $town_filter = null, $posted_filters, 
+                    $search_text, $login_district);
+                    //$results = $this->form_results_model->
+                    //get_form_results_for_map($forms_list, $to_date, $from_date, 
+                    //$town_filter = null, $posted_filters, $search_text, $login_district);
                     $results_comined_posted = array_merge($results_comined_posted, $results);
                 }
                 $filter_exist_array = array();
@@ -1025,7 +1055,8 @@ class Map extends CI_Controller {
                                     $exist_alpha[$first_char] = '1';
                                     $pin_name = $first_char . '1';
                                 }
-                                $pin_exist_for_cat = array_merge($pin_exist_for_cat, array($valueforarray => $pin_name));
+                                $pin_exist_for_cat = array_merge($pin_exist_for_cat, 
+                                array($valueforarray => $pin_name));
                             } else {
                                 if (array_key_exists($valueforarray, $pin_exist_for_cat)) {
                                     $pin_name = $pin_exist_for_cat[$valueforarray];
@@ -1051,7 +1082,8 @@ class Map extends CI_Controller {
                     }
                 }
                 $all_visits_hidden = $this->input->post('all_visits_hidden');
-                $data['locations'] = $this->getMapHtmlInfo($record_array_final, $heading_array, $filter_attribute);
+                $data['locations'] = $this->getMapHtmlInfo($record_array_final, 
+                $heading_array, $filter_attribute);
                 $data['all_visits_hidden'] = $all_visits_hidden;
                 $data['headings'] = $heading_array;
                 $data['form'] = $record_array_final;
@@ -1061,7 +1093,8 @@ class Map extends CI_Controller {
                  * its call back function call
                  */
                 foreach ($filter_attribute as $filter_attribute_value) {
-                    uasort($record_array_final_filter, array(new SortAssociativeArray($filter_attribute_value), "call"));
+                    uasort($record_array_final_filter, 
+                    array(new SortAssociativeArray($filter_attribute_value), "call"));
                 }
                 $data['filter'] = $changed_category;
                 $data['app_id'] = $selected_form['app_id'];
@@ -1069,10 +1102,14 @@ class Map extends CI_Controller {
                 $app_settings = $this->app_model->get_app_settings($selected_form['app_id']);
                 $data['district_filter'] = $app_settings['district_filter'];
                 $data['uc_filter'] = $app_settings['uc_filter'];
-                $data['map_type_filter'] = !empty($app_settings['map_type_filter']) ? $app_settings['map_type_filter'] : '';
-                $data['zoom_level'] = !empty($app_settings['zoom_level']) ? $app_settings['zoom_level'] : '7';
-                $data['latitude'] = !empty($app_settings['latitude']) ? $app_settings['latitude'] : '31.58219141239757';
-                $data['longitude'] = !empty($app_settings['longitude']) ? $app_settings['longitude'] : '73.7677001953125';
+                $data['map_type_filter'] = !empty($app_settings['map_type_filter']) ? 
+                $app_settings['map_type_filter'] : '';
+                $data['zoom_level'] = !empty($app_settings['zoom_level']) ? 
+                $app_settings['zoom_level'] : '7';
+                $data['latitude'] = !empty($app_settings['latitude']) ? 
+                $app_settings['latitude'] : '31.58219141239757';
+                $data['longitude'] = !empty($app_settings['longitude']) ? 
+                $app_settings['longitude'] : '73.7677001953125';
                 $data['app_name'] = $selected_app['name'];
                 $data['form_for_filter'] = $record_array_final_filter;
                 $data['active_tab'] = 'app';
@@ -1086,7 +1123,8 @@ class Map extends CI_Controller {
             } else {
                 $view_list = array();
                 foreach ($forms_list as $final_view) {
-                    $view_list = array_merge($view_list, array($final_view['form_name'] => $final_view['form_id']));
+                    $view_list = array_merge($view_list, 
+                    array($final_view['form_name'] => $final_view['form_id']));
                 }
                 $form_single_to_query = array();
                 $form_single_to_query[] = array('form_id' => $forms_list[0]['form_id'], 'table_name' => 'zform_' . $forms_list[0]['form_id'], 'form_name' => $forms_list[0]['form_name']);
@@ -1409,17 +1447,29 @@ class Map extends CI_Controller {
                                     if ($headings[$i] == 'is_take_picture') {
                                     } else if ($headings[$i] == 'image') {
                                         $path = $form_item[$headings[$i]][0]['image'];
-                                        $image_row = "<tr align='center'><td colspan='2'><a href=" . $path . " class='image_colorbox' title='All Rights Reserved © 2013-".date('Y')." - DataPlug <br>By ITU Government of Punjab - Pakistan'><img src=" . $path . " alt='' width='200' height='200'/></a></td></tr>";
+                                        $image_row = "<tr align='center'><td colspan='2'><a href="
+                                         . $path . " class='image_colorbox' title='All Rights Reserved © 2013-"
+                                         .date('Y')." - DataPlug <br>By ITU Government of Punjab - Pakistan'><img src=" 
+                                         . $path . " alt='' width='200' height='200'/></a></td></tr>";
                                     } else if ($headings[$i] == 'created_datetime') {
-                                        $datetime_row .='<tr><td><b>DATE : </b></td><td>' . date('Y-m-d', strtotime($form_item[$headings[$i]])) . '</td></tr><tr><td><b>TIME : </b></td><td>' . date('H:i:s', strtotime($form_item[$headings[$i]])) . '</td></tr>';
+                                        $datetime_row .='<tr><td><b>DATE : </b></td><td>' 
+                                        . date('Y-m-d', strtotime($form_item[$headings[$i]])) 
+                                        . '</td></tr><tr><td><b>TIME : </b></td><td>' 
+                                        . date('H:i:s', strtotime($form_item[$headings[$i]])) . '</td></tr>';
                                     } else {
-                                        $map_data .= preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', $headings[$i]) . ' : ' . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', $form_item[$headings[$i]]) . '<br>\n';
-                                        $data_row .= "<tr><td><b>" . preg_replace("/[^A-Za-z0-9\-]/", " ", strtoupper(urldecode($headings[$i]))) . " : </b></td><td>" . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', strtoupper($form_item[$headings[$i]])) . "</td></tr>";
+                                        $map_data .= preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', $headings[$i]) 
+                                        . ' : ' . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', 
+                                        $form_item[$headings[$i]]) . '<br>\n';
+                                        $data_row .= "<tr><td><b>" . preg_replace("/[^A-Za-z0-9\-]/", " ", 
+                                        strtoupper(urldecode($headings[$i]))) . " : </b></td><td>" 
+                                        . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', 
+                                        strtoupper($form_item[$headings[$i]])) . "</td></tr>";
                                         $id = $form_item['id'];
                                     }
                                 }
                             }
-                            $final .='["' . $location[0] . '","' . $location[1] . '","' . $form_id . '","' . $icon_filename . '","' . $id . '","' . $category_name . '"] ,';
+                            $final .='["' . $location[0] . '","' . $location[1] . '","' . $form_id 
+                            . '","' . $icon_filename . '","' . $id . '","' . $category_name . '"] ,';
                         }
                     }
                     $searched_filter_attribute[] = $filter_attribute_value;
@@ -1435,19 +1485,24 @@ class Map extends CI_Controller {
     /**
      *  Get html information for single marker reocrd on mapview
      * @param  $locations array of  all data having info about each single record
-     * @param  $filter_attribute list of attributed based on data is parsed icons assigned
+     * @param  $filter_attribute list of attributed based on data is
+     *  parsed icons assigned
      * @param  $headings Heading list fetched from all results
      * @return  string A string concatinated with commas
      * @access Inline
      * @author UbaidUllah Balti <ubaidcskiu@gmail.com>
      */
-    private function getMapHtmlInfoSingle($locations = array(), $headings = array(), $filter_attribute) {
+    private function getMapHtmlInfoSingle($locations = array(), 
+    $headings = array(), $filter_attribute) {
         $final = '';
         if (count($locations)) {
             foreach ($filter_attribute as $filter_attribute_value) {
                 foreach ($locations as $form_item) {
-                    $category_name = (!empty($form_item[$filter_attribute_value])) ? $form_item[$filter_attribute_value] : str_replace('_', " ", ucfirst($filter_attribute_value));
-                    $pin_name = (!empty($form_item[$filter_attribute_value])) ? substr($form_item[$filter_attribute_value], 0, 1) . '1' : "all_visit";
+                    $category_name = (!empty($form_item[$filter_attribute_value])) 
+                    ? $form_item[$filter_attribute_value] : 
+                    str_replace('_', " ", ucfirst($filter_attribute_value));
+                    $pin_name = (!empty($form_item[$filter_attribute_value])) 
+                    ? substr($form_item[$filter_attribute_value], 0, 1) . '1' : "all_visit";
                     if (!file_exists(FCPATH . "assets/images/map_pins/" . $pin_name . ".png")) {
                         $icon_filename = base_url() . "assets/images/map_pins/default_pin.png";
                     } else {
@@ -1467,19 +1522,31 @@ class Map extends CI_Controller {
                             if ($headings[$i] == 'is_take_picture') {
                             } else if ($headings[$i] == 'image') {
                                 $path = $form_item[$headings[$i]][0]['image'];
-                                $image_row = "<tr align='center'><td colspan='2'><a href=" . $path . " class='image_colorbox' title='All Rights Reserved © 2013-".date('Y')." - DataPlug <br>By ITU Government of Punjab - Pakistan'><img src=" . $path . " alt='' width='200' height='200'/></a></td></tr>";
+                                $image_row = "<tr align='center'><td colspan='2'><a href=" . $path 
+                                . " class='image_colorbox' title='All Rights Reserved © 2013-".date('Y')
+                                ." - DataPlug <br>By ITU Government of Punjab - Pakistan'><img src=" . $path 
+                                . " alt='' width='200' height='200'/></a></td></tr>";
                             } else if ($headings[$i] == 'created_datetime') {
-                                $datetime_row .='<tr><td><b>DATE : </b></td><td>' . date('Y-m-d', strtotime($form_item[$headings[$i]])) . '</td></tr><tr><td><b>TIME : </b></td><td>' . date('H:i:s', strtotime($form_item[$headings[$i]])) . '</td></tr>';
+                                $datetime_row .='<tr><td><b>DATE : </b></td><td>' 
+                                . date('Y-m-d', strtotime($form_item[$headings[$i]])) 
+                                . '</td></tr><tr><td><b>TIME : </b></td><td>' 
+                                . date('H:i:s', strtotime($form_item[$headings[$i]])) . '</td></tr>';
                             } else {
-                                $map_data .= preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', $headings[$i]) . ' : ' . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', $form_item[$headings[$i]]) . '<br>\n';
-                                $data_row .= "<tr><td><b>" . preg_replace("/[^A-Za-z0-9\-]/", " ", strtoupper(urldecode($headings[$i]))) . " : </b></td><td>" . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', strtoupper($form_item[$headings[$i]])) . "</td></tr>";
+                                $map_data .= preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', $headings[$i]) 
+                                . ' : ' . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', 
+                                $form_item[$headings[$i]]) . '<br>\n';
+                                $data_row .= "<tr><td><b>" . preg_replace("/[^A-Za-z0-9\-]/", " ", 
+                                strtoupper(urldecode($headings[$i]))) . " : </b></td><td>" 
+                                . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', 
+                                strtoupper($form_item[$headings[$i]])) . "</td></tr>";
                                 $id = $form_item['id'];
                             }
                         }
                     }
                     $html_layout = $html_layout . $image_row . $data_row . $datetime_row;
                     $html_layout .= "</table>";
-                    $final .='["' . $location[0] . '","' . $location[1] . '","' . $html_layout . '","' . $icon_filename . '","' . $id . '","' . $category_name . '"] ,';
+                    $final .='["' . $location[0] . '","' . $location[1] . '","' . $html_layout 
+                    . '","' . $icon_filename . '","' . $id . '","' . $category_name . '"] ,';
                 }
             }
             $final = substr($final, 0, -1);
@@ -1505,10 +1572,12 @@ class Map extends CI_Controller {
             $record = array();
             foreach ($filter_attributes as $filters) {
                 echo $filters;
-                $this->form_validation->set_rules($filters, $filters, 'trim|required|min_length[1]|xss_clean');
+                $this->form_validation->set_rules($filters, $filters,
+                 'trim|required|min_length[1]|xss_clean');
             }
             if ($this->form_validation->run() == FALSE) {
-                $this->session->set_flashdata('validate', array('message' => 'Filter attributes cannot be empty', 'type' => 'warning'));
+                $this->session->set_flashdata('validate', array('message' => 
+                'Filter attributes cannot be empty', 'type' => 'warning'));
                 redirect(base_url() . 'map/mapview/' . $form_id);
             } else {
                 $lat = $this->input->post('Lat');
@@ -1550,7 +1619,8 @@ class Map extends CI_Controller {
                 $this->load->library('upload', $config);
                 if (!$this->upload->do_upload('image')) {
                     $this->data['error'] = $this->upload->display_errors();
-                    $this->session->set_flashdata('validate', array('message' => $this->upload->display_errors(), 'type' => 'warning'));
+                    $this->session->set_flashdata('validate', array('message' => 
+                    $this->upload->display_errors(), 'type' => 'warning'));
                 } else {
                     //success
                     $imei_number = (!empty($imei_number)) ? $imei_number : "";
@@ -1562,7 +1632,8 @@ class Map extends CI_Controller {
                         'location' => $location
                     );
                     $this->db->insert('form_results', $data);
-                    $this->session->set_flashdata('validate', array('message' => 'You have added a marker on map successfully', 'type' => 'success'));
+                    $this->session->set_flashdata('validate', array('message' => 
+                    'You have added a marker on map successfully', 'type' => 'success'));
                 }
                 redirect(base_url() . 'map/mapview/' . $form_id);
             }
@@ -1586,7 +1657,8 @@ class Map extends CI_Controller {
             $town_list_array = array();
             foreach ($town_lists as $towns) {
                 if (!in_array($towns['town'], $town_list_array)) {
-                    $town_list_array = array_merge($town_list_array, array($towns['town'] => $towns['town']));
+                    $town_list_array = array_merge($town_list_array, 
+                    array($towns['town'] => $towns['town']));
                 }
             }
             $data['town_list_array'] = $town_list_array;

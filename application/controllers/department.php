@@ -3,7 +3,8 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Department extends CI_Controller {
+class Department extends CI_Controller 
+{
 
     public function __construct() {
         parent::__construct();
