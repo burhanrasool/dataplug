@@ -1048,8 +1048,11 @@ class Graph extends CI_Controller {
             foreach ($category_list as $category) {
                 $categorieslist = explode(',', $category);
                 foreach ($categorieslist as $catu) {
-                    $category_count = $this->form_results_model->getCountCatgoryBase($form_id, $catu, $filter_attribute, $to_date, $from_date, $selected_district, $selected_sent_by);
-                    $category_list_count = array_merge($category_list_count, array($catu => $category_count));
+                    $category_count = $this->form_results_model->
+                    getCountCatgoryBase($form_id, $catu, $filter_attribute, 
+                    $to_date, $from_date, $selected_district, $selected_sent_by);
+                    $category_list_count = array_merge($category_list_count, 
+                    array($catu => $category_count));
                     $totalRecords += $category_count;
                 }
             }
@@ -1067,7 +1070,8 @@ class Graph extends CI_Controller {
             $data['category_list'] = $category_list;
             $data['total_records'] = $total_record;
             $data['category_list_count'] = $category_list_count;
-            $data['graph_text'] = 'Graph By Category <b> ' . str_replace('_', ' ', $filter_attribute[0]) . '</b>';
+            $data['graph_text'] = 'Graph By Category <b> ' . str_replace('_', 
+            ' ', $filter_attribute[0]) . '</b>';
             $data['pageTitle'] = " Graph-View";
             $data['graph_type'] = 'Category';
             $data['app_id'] = $selected_form['app_id'];
@@ -1081,7 +1085,9 @@ class Graph extends CI_Controller {
 
             $form_id = $forms_list[0]['form_id'];
             $form_single_to_query = array();
-            $form_single_to_query[] = array('form_id' => $form_id, 'table_name' => 'zform_' . $form_id, 'form_name' => $forms_list[0]['form_name']);
+            $form_single_to_query[] = array('form_id' => 
+            $form_id, 'table_name' => 'zform_' . $form_id, 'form_name' => 
+            $forms_list[0]['form_name']);
             /** Get filters from  multiple forms * */
             $multiple_filters = $this->form_model->get_form_filters($form_single_to_query);
             $filter_attribute = array();
@@ -1106,7 +1112,8 @@ class Graph extends CI_Controller {
             //add part for disbursment app - Start
             $formid = '1654';
             $date_search = '';
-            $disbursment_rec = $this->form_results_model->get_disbursment_record($formid, $date_search);
+            $disbursment_rec = $this->form_results_model->
+            get_disbursment_record($formid, $date_search);
             $final_disb_array = array();
             $tehsil_disb_array = array();
             foreach ($disbursment_rec as $myrep) {
@@ -1118,17 +1125,29 @@ class Graph extends CI_Controller {
                     $final_disb_array[$myrep['District']][$myrep['Tehsil']] = array();
                 }
 
-                if (!key_exists($myrep['Disbursement_Center'], $final_disb_array[$myrep['District']][$myrep['Tehsil']])) {
-                    $final_disb_array[$myrep['District']][$myrep['Tehsil']][$myrep['Disbursement_Center']] = array();
+                if (!key_exists($myrep['Disbursement_Center'], 
+                $final_disb_array[$myrep['District']][$myrep['Tehsil']])) {
+                    $final_disb_array[$myrep['District']]
+                    [$myrep['Tehsil']]
+                    [$myrep['Disbursement_Center']] = array();
                 }
 
                 $available_fac = explode(',', $myrep['Facilities_Available']);
                 foreach ($available_fac as $avail_value) {
-                    if (!key_exists('facilities', $final_disb_array[$myrep['District']][$myrep['Tehsil']][$myrep['Disbursement_Center']])) {
-                        $final_disb_array[$myrep['District']][$myrep['Tehsil']][$myrep['Disbursement_Center']]['facilities'] = array();
+                    if (!key_exists('facilities', 
+                    $final_disb_array[$myrep['District']]
+                    [$myrep['Tehsil']][$myrep['Disbursement_Center']])) {
+                        $final_disb_array[$myrep['District']]
+                        [$myrep['Tehsil']][$myrep['Disbursement_Center']]
+                        ['facilities'] = array();
                     }
-                    if (!in_array($avail_value, $final_disb_array[$myrep['District']][$myrep['Tehsil']][$myrep['Disbursement_Center']]['facilities'])) {
-                        array_push($final_disb_array[$myrep['District']][$myrep['Tehsil']][$myrep['Disbursement_Center']]['facilities'], $avail_value);
+                    if (!in_array($avail_value, 
+                    $final_disb_array[$myrep['District']]
+                    [$myrep['Tehsil']][$myrep['Disbursement_Center']]
+                    ['facilities'])) {
+                        array_push($final_disb_array[$myrep['District']]
+                        [$myrep['Tehsil']][$myrep['Disbursement_Center']]
+                        ['facilities'], $avail_value);
                     }
                 }
             }
@@ -1232,7 +1251,8 @@ class Graph extends CI_Controller {
             $totalRecords = 0;
             foreach ($users_lists_array as $users) {
                 $users_count = $this->form_results_model->getCountUserBased($slug, $users['imei_no']);
-                $users_wise_counter = array_merge($users_wise_counter, array($users['user_name'] => $users_count));
+                $users_wise_counter = array_merge($users_wise_counter, 
+                array($users['user_name'] => $users_count));
                 $totalRecords += $users_count;
             }
             $users_wise_counter[] = arsort($users_wise_counter);
@@ -1252,8 +1272,10 @@ class Graph extends CI_Controller {
             $totalRecords = 0;
             $category_list_count = array();
             foreach ($category_list as $category) {
-                $category_count = $this->form_results_model->getCountCatgoryBased($slug, $category, $filter_attribute);
-                $category_list_count = array_merge($category_list_count, array($category => $category_count));
+                $category_count = $this->form_results_model->
+                getCountCatgoryBased($slug, $category, $filter_attribute);
+                $category_list_count = array_merge($category_list_count, 
+                array($category => $category_count));
                 $totalRecords += $category_count;
             }
             $category_list_count[] = arsort($category_list_count);
@@ -1294,7 +1316,8 @@ class Graph extends CI_Controller {
          */
         $heading_array = array();
         $record_array_final = array();
-        $user_wise_result = $this->form_results_model->getResultUserImeiBased($slug, $imei_number);
+        $user_wise_result = $this->form_results_model->
+        getResultUserImeiBased($slug, $imei_number);
         foreach ($user_wise_result as $k => $v) {
             $record_array = array();
             $result_json = $v['record'];
@@ -1313,11 +1336,14 @@ class Graph extends CI_Controller {
                 $record_array = array_merge($record_array, array($key => $value));
             }
             $record_array = array_merge($record_array, array('uc_name' => $v['uc_name']));
-            $record_array = array_merge($record_array, array('created_datetime' => $v['created_datetime'], 'actions' => $v['id']));
+            $record_array = array_merge($record_array, 
+            array('created_datetime' => $v['created_datetime'], 
+            'actions' => $v['id']));
 
             $record_array_final[] = $record_array;
         }
-        $heading_array = array_merge($heading_array, array('created_datetime', 'actions'));
+        $heading_array = array_merge($heading_array, 
+        array('created_datetime', 'actions'));
         $data['headings'] = $heading_array;
         $data['form'] = $record_array_final;
 
@@ -1330,7 +1356,8 @@ class Graph extends CI_Controller {
         foreach ($record_array_final as $record) {
             $uc_name = $record['uc_name'];
             if (!empty($uc_name) & !in_array($uc_name, $uc_counted)) {
-                $users_count = $this->form_results_model->getCountUserUcBased($slug, $imei_number, $uc_name);
+                $users_count = $this->form_results_model->
+                getCountUserUcBased($slug, $imei_number, $uc_name);
                 if ($users_count > 0) {
                     $users_uc_set = array_merge($users_uc_set, array($uc_name => $users_count));
                 }
@@ -1369,7 +1396,9 @@ class Graph extends CI_Controller {
          */
         $heading_array = array();
         $record_array_final = array();
-        $user_wise_result = $this->form_results_model->getResultSingleCatgory($slug, $category_name, $filter_attribute);
+        $user_wise_result = $this->form_results_model->
+        getResultSingleCatgory($slug, $category_name, 
+        $filter_attribute);
         foreach ($user_wise_result as $k => $v) {
             $record_array = array();
             $result_json = $v['record'];
@@ -1390,11 +1419,14 @@ class Graph extends CI_Controller {
                 $record_array = array_merge($record_array, array($key => $value));
             }
             $record_array = array_merge($record_array, array('uc_name' => $v['uc_name']));
-            $record_array = array_merge($record_array, array('created_datetime' => $v['created_datetime'], 'actions' => $v['id']));
+            $record_array = array_merge($record_array, 
+            array('created_datetime' => $v['created_datetime'], 
+            'actions' => $v['id']));
 
             $record_array_final[] = $record_array;
         }
-        $heading_array = array_merge($heading_array, array('created_datetime', 'actions'));
+        $heading_array = array_merge($heading_array, 
+        array('created_datetime', 'actions'));
         $data['headings'] = $heading_array;
         $data['form'] = $record_array_final;
 
@@ -1408,9 +1440,12 @@ class Graph extends CI_Controller {
         foreach ($record_array_final as $record) {
             $uc_name = $record['uc_name'];
             if (!empty($uc_name) & !in_array($uc_name, $uc_counted)) {
-                $category_count = $this->form_results_model->getCountCategoryUcBased($slug, $category_name, $filter_attribute, $uc_name);
+                $category_count = $this->form_results_model->
+                getCountCategoryUcBased($slug, $category_name, 
+                $filter_attribute, $uc_name);
                 if ($category_count > 0) {
-                    $category_uc_set = array_merge($category_uc_set, array($uc_name => $category_count));
+                    $category_uc_set = array_merge($category_uc_set, 
+                    array($uc_name => $category_count));
                 }
                 $totalRecords += $category_count;
                 $uc_counted [] = $uc_name;
@@ -1427,7 +1462,9 @@ class Graph extends CI_Controller {
     }
 
     /**
-     * function to  get heading and form data of  form results table return data array having two values  forms and headings
+     * function to  get heading and form data of  
+     * form results table return data array having 
+     * two values  forms and headings
      * @param  $slug form id
      * @return  void
      * @author UbaidUllah Balti <ubaidcskiu@gmail.com>
@@ -1440,7 +1477,8 @@ class Graph extends CI_Controller {
         $filter_attribute = array();
 
         if ($selected_form['filter'] != '') {
-            $filter_rec = array_filter(array_map('trim', explode(',', $selected_form['filter'])));
+            $filter_rec = array_filter(array_map('trim', 
+            explode(',', $selected_form['filter'])));
             foreach ($filter_rec as $key => $value) {
                 array_push($filter_attribute, $value);
             }
@@ -1461,33 +1499,42 @@ class Graph extends CI_Controller {
         $table_headers_array = array();
         $record_array_final = array();
 
-        $results = $this->form_results_model->return_total_record_for_graph($form_id, $filter_attribute[0]);
+        $results = $this->form_results_model->
+        return_total_record_for_graph($form_id, 
+        $filter_attribute[0]);
 //        echo "<pre>";
 //        print_r($results);die;
 //        foreach ($results as $k => $v) {
 //            $record_array = array();
 //            foreach ($v as $key => $value) {
 ////                    if (!in_array($key, $exclude_array)) {
-//                $record_array = array_merge($record_array, array($key => $value));
+//                $record_array = array_merge($record_array, 
+//                array($key => $value));
 ////                    }
 //            }
 //
 //
-////                $imagess = $this->form_results_model->getResultsImages($v['id'],$form_id);
+////                $imagess = $this->form_results_model->
+////                getResultsImages($v['id'],$form_id);
 ////                if ($imagess) {
 ////                    if (!in_array('image', $table_headers_array)) {
-////                        $table_headers_array = array_merge($table_headers_array, array('image'));
+////                        $table_headers_array = array_merge($table_headers_array, 
+////                        array('image'));
 ////                    }
-////                    $record_array = array_merge($record_array, array('image' => $imagess));
+////                    $record_array = array_merge($record_array, 
+////                    array('image' => $imagess));
 ////                }
 //
-////            $record_array = array_merge($record_array, array('created_datetime' => $v['created_datetime'], 'actions' => $v['id']));
+////            $record_array = array_merge($record_array, 
+////            array('created_datetime' => $v['created_datetime'], 
+////            'actions' => $v['id']));
 //            $record_array_final[] = $record_array;
 //        }
         $record_array_final = $results;
 
 
-        $heading_query = $this->form_results_model->getTableHeadingsFromSchema('zform_' . $form_id);
+        $heading_query = $this->form_results_model->
+        getTableHeadingsFromSchema('zform_' . $form_id);
         foreach ($heading_query as $key => $value) {
             $header_value = $value['COLUMN_NAME'];
             if (!in_array($header_value, $table_headers_array)) {
@@ -1504,7 +1551,8 @@ class Graph extends CI_Controller {
                 $filter_data = array();
 
                 if (in_array($filter_attribute_value, $table_headers_array)) {
-//                    if ($selected_form['app_id'] == 1293 || $selected_form['app_id'] == 1567) {
+//                    if ($selected_form['app_id'] == 1293 || 
+//                    $selected_form['app_id'] == 1567) {
 //                        foreach ($record_array_final as $key => $form_item) {
 //
 //                            if (!empty($form_item[$filter_attribute_value])) {
@@ -1513,7 +1561,8 @@ class Graph extends CI_Controller {
 //                                    $key = explode(',', $key);
 //                                    $value = ($form_item[$filter_attribute_value]);
 //                                    $value = explode(',', $value);
-//                                    $filter_data = array_merge($filter_data, array($key[0] => $value[0]));
+//                                    $filter_data = array_merge($filter_data, 
+//                                    array($key[0] => $value[0]));
 //                                }
 //                            }
 //                        }
@@ -1547,7 +1596,9 @@ class Graph extends CI_Controller {
         $selected_form = $this->form_model->get_form($slug);
         //print_r($selected_form);
         $form_single_to_query = array();
-        $form_single_to_query[] = array('form_id' => $form_id, 'table_name' => 'zform_' . $form_id, 'form_name' => $selected_form['name']);
+        $form_single_to_query[] = array('form_id' => $form_id, 
+        'table_name' => 'zform_' . $form_id, 'form_name' => 
+        $selected_form['name']);
 
         /** Get filters from  multiple forms * */
         $multiple_filters = $this->form_model->get_form_filters($form_single_to_query);
@@ -1573,7 +1624,8 @@ class Graph extends CI_Controller {
 
         $filter_result = get_graph_view_settings($selected_form['app_id']);
 
-        if (isset($filter_result->district_wise_report) && $filter_result->district_wise_report == 1) {
+        if (isset($filter_result->district_wise_report) && 
+        $filter_result->district_wise_report == 1) {
 
             $new_category_list = array();
             foreach ($category_list as $cl_key => $cl_value) {
@@ -1592,7 +1644,9 @@ class Graph extends CI_Controller {
             $data['category_list'] = $new_category_list;
             $final_district_wise_array2 = array();
             foreach ($new_category_list as $cat_listv) {
-                $district_wise_catorized = $this->form_results_model->get_district_categorized_count_new($form_id, "", $filter_attribute[0], $cat_listv, $from_date, $to_date);
+                $district_wise_catorized = $this->form_results_model->
+                get_district_categorized_count_new($form_id, "", 
+                $filter_attribute[0], $cat_listv, $from_date, $to_date);
 
                 foreach ($district_wise_catorized as $key => $val) {
                     if (!array_key_exists($val['district_name'], $final_district_wise_array2)) {
