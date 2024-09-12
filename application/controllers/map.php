@@ -3541,14 +3541,17 @@ class Map extends CI_Controller {
         $data['app_id'] = $selected_form['app_id'];
         $filter_attribute = array();
         if ($selected_form['filter'] != '') {
-            $filter_rec = array_filter(array_map('trim', explode(',', $selected_form['filter'])));
+            $filter_rec = array_filter(array_map('trim', 
+                                                 explode(',',
+                                                         $selected_form['filter'])));
             foreach ($filter_rec as $key => $value) {
                 array_push($filter_attribute, $value);
             }
         }
         $data['filter_attribute'] = $filter_attribute;
         $record_array_final = array();
-        $results = $this->form_results_model->get_results_single($result_id, $table_name);
+        $results = $this->form_results_model->get_results_single($result_id, 
+                                                                 $table_name);
         $filter_exist_array = array();
         $pin_exist_for_cat = array();
         $col_pin = 0;
@@ -3575,7 +3578,8 @@ class Map extends CI_Controller {
                             $exist_alpha[$first_char] = '1';
                             $pin_name = $first_char . '1';
                         }
-                        $pin_exist_for_cat = array_merge($pin_exist_for_cat, array($valueforarray => $pin_name));
+                        $pin_exist_for_cat = array_merge($pin_exist_for_cat, 
+                                                         array($valueforarray => $pin_name));
                     } else {
                         if (array_key_exists($valueforarray, $pin_exist_for_cat)) {
                             $pin_name = $pin_exist_for_cat[$valueforarray];
@@ -3602,7 +3606,10 @@ class Map extends CI_Controller {
                 $record_array_final[] = $record_array;
             }
         }
-        $data['locations'] = $this->getMapHtmlInfoSingle($record_array_final, $heading_array, $filter_attribute);
+        $data['locations'] = $this->
+            getMapHtmlInfoSingle($record_array_final, 
+                                 $heading_array, 
+                                 $filter_attribute);
         $data['headings'] = $heading_array;
         $data['form'] = $record_array_final;
         $data['form_for_filter'] = $record_array_final;
@@ -3628,7 +3635,10 @@ class Map extends CI_Controller {
         );
         $this->db->where('id', $form_id);
         $this->db->update('form', $dataform);
-        $this->session->set_flashdata('validate', array('message' => 'Form filter updated successfully.', 'type' => 'success'));
+        $this->session->set_flashdata('validate', 
+                                      array('message' => 
+                                            'Form filter updated successfully.', 
+                                            'type' => 'success'));
         if ($this->input->post('redirect_to') == 'form_result') {
             redirect(base_url() . 'application-results/' . $app_id);
         } else if ($this->input->post('redirect_to') == 'mapview') {
@@ -3650,7 +3660,8 @@ class Map extends CI_Controller {
         foreach ($all_forms as $forms) {
             $form_id = $forms['id'];
             $table_name = 'zform_' . $form_id;
-            $schema_list = $this->form_results_model->getTableHeadingsFromSchema($table_name);
+            $schema_list = $this->form_results_model->
+                getTableHeadingsFromSchema($table_name);
             foreach ($schema_list as $key => $value) {
                 $header_value = $value['COLUMN_NAME'];
                 if ($header_value == $filter) {
@@ -3735,7 +3746,8 @@ class Map extends CI_Controller {
     public function get_district_wise_d_center() {
         $app_id = $this->input->post('app_id');
         $district = $this->input->post('district');
-        $dc_list = $this->form_results_model->get_d_center_district_wise($app_id, $district);
+        $dc_list = $this->form_results_model->
+            get_d_center_district_wise($app_id, $district);
         header('Content-Type: application/x-json; charset=utf-8');
         echo json_encode($dc_list);
         exit();
@@ -3753,18 +3765,25 @@ class Map extends CI_Controller {
         $possible_filters = explode(',', $filter_attribute['possible_filters']);
         if ($possible_filters) {
             foreach ($possible_filters as $category) {
-                $category_final = array_merge($category_final, array($category => str_replace('_', ' ', $category)));
+                $category_final = array_merge($category_final,
+                                              array($category => 
+                                                    str_replace('_', ' ', $category)));
             }
         }
         $filter = $filter_attribute['filter'];
-        $sub_cat_list = $this->form_results_model->get_category_values('zform_' . $form_id, $filter);
+        $sub_cat_list = $this->
+            form_results_model->
+            get_category_values('zform_' . $form_id, $filter);
         if ($sub_cat_list) {
             foreach ($sub_cat_list as $cat) {
-                $sub_final = array_merge($sub_final, array($cat[$filter] => $cat[$filter]));
+                $sub_final = array_merge($sub_final, 
+                                         array($cat[$filter] => $cat[$filter]));
             }
         }
         if ($category_final || $sub_final) {
-            $final_json = array('category' => $category_final, 'sub_category' => $sub_final, 'selected_cat' => $filter);
+            $final_json = array('category' => $category_final, 
+                                'sub_category' => $sub_final, 
+                                'selected_cat' => $filter);
             header('Content-Type: application/x-json; charset=utf-8');
             echo json_encode($final_json);
         } else {
