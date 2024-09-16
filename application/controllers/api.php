@@ -1340,7 +1340,8 @@ class Api extends CI_Controller {
                         $fields_count = $this->db->list_fields('zform_' . $form_id);
                         $fields_count = array_map('strtolower', $fields_count);
                         if (count($fields_count) < 90) {
-                            $field = array($element => array('type' => 'VARCHAR', 'constraint' => 200, 'NULL' => TRUE));
+                            $field = array($element => array('type' => 'VARCHAR',
+                            'constraint' => 200, 'NULL' => TRUE));
                             $this->dbforge->add_column('zform_' . $form_id, $field, $after_field);
                         } else {
                             $field = array($element => array('type' => 'TEXT', 'NULL' => TRUE));
@@ -1352,12 +1353,15 @@ class Api extends CI_Controller {
             }
 
 
-            $this->form_results_model->update_mobile_activity($activity_inserted_id, array('form_data_decoded' => json_encode($dataresultnew1)));
+            $this->form_results_model->update_mobile_activity($activity_inserted_id,
+            array('form_data_decoded' => json_encode($dataresultnew1)));
             $ret_ins = $this->db->insert('zform_' . $form_id, $dataresultnew1);
             $form_result_id_new = $this->db->insert_id();
             if (!$ret_ins) {
-                $err_msg .= 'Record Not Submitted. ' . $this->db->_error_message() . '.                         "Please Refresh your application"';
-                $this->form_results_model->update_mobile_activity($activity_inserted_id, array('error' => $err_msg));
+                $err_msg .= 'Record Not Submitted. ' . $this->db->_error_message()
+                 . '.                         "Please Refresh your application"';
+                $this->form_results_model->update_mobile_activity($activity_inserted_id, 
+                array('error' => $err_msg));
 
                 continue;
             }
@@ -1393,7 +1397,8 @@ class Api extends CI_Controller {
                         'image' => $image_path['image']
                     );
                     if(strpos($image_path ['title'], $form_info['security_key']) !== FALSE){
-                        $add_images ['title'] = urldecode(base64_decode(str_replace($form_info ['security_key'], '', $image_path ['title'])));
+                        $add_images ['title'] = urldecode(base64_decode(str_replace
+                        ($form_info ['security_key'], '', $image_path ['title'])));
                     } else {
                         $add_images ['title'] = urldecode($image_path ['title']);
                     }
@@ -1502,7 +1507,9 @@ class Api extends CI_Controller {
         }
 
         //Stop activity saving if already saved
-        $activity_aready_exist = $this->db->get_where('zform_'.$form_id, array('form_id' => $form_id, 'imei_no' => $imei_no,'activity_datetime' => $activity_datetime))->row_array();
+        $activity_aready_exist = $this->db->get_where('zform_'.$form_id, 
+        array('form_id' => $form_id, 'imei_no' => $imei_no,'activity_datetime' 
+        => $activity_datetime))->row_array();
         if ($activity_aready_exist) {
             $jsone_array = array(
                 'success' => 'This activity already submitted.'
@@ -1523,8 +1530,10 @@ class Api extends CI_Controller {
         $app_id = $form_info ['app_id'];
         // Temprary block the record sending
         $app_general_setting = get_app_general_settings($app_id);
-        if (isset($app_general_setting->record_stop_sending) && $app_general_setting->record_stop_sending == 1) {
-            $error_message = "Record receiving service currently not available. Please Try later";
+        if (isset($app_general_setting->record_stop_sending) && 
+        $app_general_setting->record_stop_sending == 1) {
+            $error_message = "Record receiving service currently"
+            $error_message .= "not available. Please Try later";
             if ($app_general_setting->message_stop_sending_record != '') {
                 $error_message = $app_general_setting->message_stop_sending_record;
             }
@@ -1576,7 +1585,8 @@ class Api extends CI_Controller {
                     
                     
                     // move the file
-                    if ($s3->putObjectFile($fileTempName, $bucket_name, $imgName, S3::ACL_PUBLIC_READ)) {
+                    if ($s3->putObjectFile($fileTempName, $bucket_name,
+                     $imgName, S3::ACL_PUBLIC_READ)) {
                         $imgName = 'http://' . $bucket_name . '.s3.amazonaws.com/' . $imgName;
                         $temp_array = array(
                             'image' => $imgName,
@@ -1607,7 +1617,8 @@ class Api extends CI_Controller {
                                 $error_before = array(
                                     'file' => $data ['upload_data'] ['file_name']
                                 );
-                                $imgName = base_url() . 'assets/images/data/form-data/' . $data ['upload_data'] ['file_name'];
+                                $imgName = base_url() . 'assets/images/data/form-data/' 
+                                . $data ['upload_data'] ['file_name'];
                                 $temp_array = array(
                                     'image' => $imgName,
                                     'title' => $image_title
@@ -1643,7 +1654,8 @@ class Api extends CI_Controller {
                         $error_before = array(
                             'file' => $data ['upload_data'] ['file_name']
                         );
-                        $imgName = base_url() . 'assets/images/data/form-data/' . $data ['upload_data'] ['file_name'];
+                        $imgName = base_url() . 'assets/images/data/form-data/' 
+                        . $data ['upload_data'] ['file_name'];
                         $temp_array = array(
                             'image' => $imgName,
                             'title' => $image_title

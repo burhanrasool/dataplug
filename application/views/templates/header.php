@@ -61,12 +61,12 @@
                                             <ul class="dropdown">
                                                 <?php
                                                 if (isset($app_id)) {
-                                                    $formbyapp = $this->form_model->get_form_by_app($app_id);
+                                                    $form_by_app = $this->form_model->get_form_by_app($app_id);
                                                     $form_id = '';
-                                                    if (isset($formbyapp[0]['form_id'])) {
-                                                        $form_id = $formbyapp[0]['form_id'];
+                                                    if (isset($form_by_app[0]['form_id'])) {
+                                                        $form_id = $form_by_app[0]['form_id'];
                                                         $app_name = str_replace(' ', '-', $app_name);
-                                                        $slug = $app_name . '-' . $formbyapp[0]['app_id'];
+                                                        $slug = $app_name . '-' . $form_by_app[0]['app_id'];
                                                         ?>
                                                         <li>
                                                             <a id='list_view' href="<?= base_url() ?>application-results/<?php echo $slug; ?>">
@@ -85,9 +85,9 @@
                                                         </li>
                                                         <?php if (strpos($_SERVER['SERVER_NAME'],'dataplug.itu') == false) { ?>
                                                         <li><?php
-                                                            if ($formbyapp[0]['module_name'] != '') {
+                                                            if ($form_by_app[0]['module_name'] != '') {
                                                                 ?>
-                                                                <a id='graph_view'  href="<?= base_url() . $formbyapp[0]['module_name']; ?>">
+                                                                <a id='graph_view'  href="<?= base_url() . $form_by_app[0]['module_name']; ?>">
                                                                     Dashboard
                                                                 </a>
                                                             <?php } else {
@@ -112,13 +112,13 @@
                                                     }
 
                                                     foreach ($apps as $app) {
-                                                        $formbyapp = $this->form_model->get_form_by_app($app['id']);
+                                                        $form_by_app = $this->form_model->get_form_by_app($app['id']);
                                                         +
                                                                 $form_id = '';
-                                                        if (isset($formbyapp[0]['form_id'])) {
-                                                            $form_id = $formbyapp[0]['form_id'];
+                                                        if (isset($form_by_app[0]['form_id'])) {
+                                                            $form_id = $form_by_app[0]['form_id'];
                                                         }
-                                                        if ($formbyapp) {
+                                                        if ($form_by_app) {
                                                             $empty_form = 'no';
                                                         }
                                                         $forms = $this->form_model->get_empty_app_form($app['id']);

@@ -3536,7 +3536,8 @@ class Form extends CI_Controller
             $data['upgrade_from_google_play'] = $upgrade_from_google_play;
             
             $location_required = 1;
-            if (isset($app_general_setting->location_required) && $app_general_setting->location_required == 0) {
+            if (isset($app_general_setting->location_required) &&
+             $app_general_setting->location_required == 0) {
                 $location_required = 0;
             }
             $data['location_required'] = $location_required;
@@ -3545,7 +3546,9 @@ class Form extends CI_Controller
             if (!$this->acl->hasSuperAdmin()) {
                 $login_data = $this->session->userdata('logged_in');
                 if ($request_app['department_id'] != $login_data['login_department_id']) {
-                    $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                    $this->session->set_flashdata('validate', array('message' 
+                    => "You don't have enough permissions to do this task."
+                    , 'type' => 'warning'));
                     redirect(base_url() . 'apps');
                 }
                 if ($request_app['user_id'] == $login_data['login_user_id']) {
@@ -3554,7 +3557,8 @@ class Form extends CI_Controller
             } else {
                 $data['super_app_user'] = 'yes';
             }
-            $settings_exist = get_app_general_settings($app_id); //$this->app_model->get_app_settings($app_id);
+            $settings_exist = get_app_general_settings($app_id); 
+            //$this->app_model->get_app_settings($app_id);
             //print_r($app_general_setting);
             $data['app_settings'] = $settings_exist;
             $data['filter'] = $selected_form['filter'];
@@ -3611,7 +3615,8 @@ class Form extends CI_Controller
                 $data['post_url'] = $selected_form['post_url'];
             }
             if ($history_id) {
-                $history_rec = $this->form_model->get_form_history($form_id, $view_id, $history_id);
+                $history_rec = $this->form_model->get_form_history
+                ($form_id, $view_id, $history_id);
                 $data['description'] = $history_rec['description'];
             }
             $app = $this->app_model->get_app($app_id);
@@ -3624,13 +3629,16 @@ class Form extends CI_Controller
             $data['view_id'] = $view_id;
             $app_id = $selected_form['app_id'];
             if (!$this->acl->hasPermission('form', 'edit')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $this->session->set_flashdata('validate', array('message' 
+                => "You don't have enough permissions to do this task."
+                , 'type' => 'warning'));
                 redirect(base_url() . 'apps');
             }
             $session_data = $this->session->userdata('logged_in');
             session_to_page($session_data, $data);
             $data['active_tab'] = 'form_update';
-            $data['pageTitle'] = $app['name'] . '-' . $selected_form['name'] . ' Edit-' . PLATFORM_NAME;
+            $data['pageTitle'] = $app['name'] . '-'
+            . $selected_form['name'] . ' Edit-' . PLATFORM_NAME;
             $this->load->view('templates/form_builder_header', $data);
             $this->load->view('form/update', $data);
             $this->load->view('templates/footer', $data);
@@ -3650,7 +3658,8 @@ class Form extends CI_Controller
         }
         $this->load->library('form_validation');
         if ($this->input->post()) {
-            $this->form_validation->set_rules('app_name', 'App Name', 'trim|required|xss_clean');
+            $this->form_validation->set_rules('app_name', 'App Name', 
+            'trim|required|xss_clean');
             if ($this->form_validation->run() == FALSE) {
                 echo json_encode(array('status' => '2'));
                 exit;
@@ -3736,7 +3745,8 @@ class Form extends CI_Controller
             $data['app_id'] = $app_id;
             $data['app_name'] = $app['name'];
             if (!$this->acl->hasPermission('form', 'add')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $this->session->set_flashdata('validate', array('message' => 
+                "You don't have enough permissions to do this task.", 'type' => 'warning'));
                 redirect(base_url() . 'apps');
             }
             $session_data = $this->session->userdata('logged_in');
@@ -3760,8 +3770,10 @@ class Form extends CI_Controller
                 $this->db->insert('form', $data);
                 $form_id = $this->db->insert_id();
                 updateDataBase($form_id, "");
-                //array parameters : action, description, before, after, app_id, app_name, form_id, form_name
-                $logary = array('action' => 'insert', 'description' => 'add new form', 'after' => json_encode($data));
+                //array parameters : action, description, before, 
+                //after, app_id, app_name, form_id, form_name
+                $logary = array('action' => 'insert', 'description' 
+                => 'add new form', 'after' => json_encode($data));
                 addlog($logary);
                 //Get last inserted form id
                 $forms_by_app = $this->form_model->get_form_by_app($app_id);
@@ -3785,7 +3797,10 @@ class Form extends CI_Controller
                     if (!$this->upload->do_upload('userfile_addform')) {
 
                         $this->data['error'] = $this->upload->display_errors();
-                        $this->session->set_flashdata('validate', array('message' => $this->upload->display_errors() . ', Default icon has been embeded with your application.', 'type' => 'warning'));
+                        $this->session->set_flashdata('validate', array('message' => 
+                        $this->upload->display_errors() 
+                        . ', Default icon has been embeded with your application.',
+                         'type' => 'warning'));
                     } else {
                         //success
                         $imageData = $this->upload->data();
@@ -3803,7 +3818,8 @@ class Form extends CI_Controller
                         }
                     }
                 } else {
-                    $from_path = FORM_IMG_DISPLAY_PATH . '../form_icons/default_' . $total_forms . '.png';
+                    $from_path = FORM_IMG_DISPLAY_PATH . '../form_icons/default_' 
+                    . $total_forms . '.png';
                     
                     @copy($from_path,$abs_path.$iconName);
                    // file_put_contents($abs_path . $iconName, file_get_contents($from_path));
@@ -3816,7 +3832,8 @@ class Form extends CI_Controller
                 );
                 $this->db->where('id', $form_id);
                 $this->db->update('form', $change_next);
-                $this->session->set_flashdata('validate', array('message' => 'New form added successfully.', 'type' => 'success'));
+                $this->session->set_flashdata('validate', array('message' =>
+                'New form added successfully.', 'type' => 'success'));
                 redirect(base_url() . 'app-form/' . $form_id);
             }
 
@@ -3855,7 +3872,8 @@ class Form extends CI_Controller
             if($this->input->post()){
                 $form_id = $slug;//form_id which want to move to view
                 
-                $view_id = $this->input->post('view_id');//view_id where want to move the selected form
+                $view_id = $this->input->post('view_id');
+                //view_id where want to move the selected form
                 $selected_form = $this->form_model->get_form($form_id,$view_id);
                 $app_id = $selected_form['app_id'];
                 $view_id_session = 0;
@@ -3880,7 +3898,8 @@ class Form extends CI_Controller
                         'post_url' => $selected_form['post_url']
                     );
                     //file_write()
-                    file_write($abs_path.'/'.$view_id.'_'.$file_name_html,$selected_form['full_description']);
+                    file_write($abs_path.'/'.$view_id.'_'.$file_name_html,
+                    $selected_form['full_description']);
                     
                 }
                 else{
@@ -3893,7 +3912,8 @@ class Form extends CI_Controller
                         'full_description' => $selected_view_form['fv_full_description'],
                         'post_url' => $selected_view_form['fv_post_url']
                     );
-                    file_write($abs_path.'/'.$view_id.'_'.$file_name_html,$selected_view_form['fv_full_description']);
+                    file_write($abs_path.'/'.$view_id.'_'.$file_name_html,
+                    $selected_view_form['fv_full_description']);
                 }
                 
                 
@@ -3905,7 +3925,8 @@ class Form extends CI_Controller
                     $this->db->insert('form_views', $form_move_data);
                 }
                 
-                $this->session->set_flashdata('validate', array('message' => 'Active form copied to your required view successfully', 'type' => 'success'));
+                $this->session->set_flashdata('validate', array('message' => 
+                'Active form copied to your required view successfully', 'type' => 'success'));
                 redirect(base_url() . 'app-form/' . $form_id);
             }
         } else {
@@ -3922,7 +3943,8 @@ class Form extends CI_Controller
         if ($this->session->userdata('logged_in')) {
             if($this->input->post()){
                 $form_id = $slug;//form_id which want to copy
-                $app_id = $this->input->post('app_id_popup');//app_id where want to copy the selected form
+                $app_id = $this->input->post('app_id_popup');
+                //app_id where want to copy the selected form
                 
                 
                 
@@ -3951,7 +3973,8 @@ class Form extends CI_Controller
                 );
                 $this->db->insert('form', $data);
                 $form_id_new = $this->db->insert_id();
-                $old_file = './assets/images/data/form_icons/' . $selected_form['app_id'] . '/formicon_' . $slug . '.png';
+                $old_file = './assets/images/data/form_icons/' 
+                $old_file .= $selected_form['app_id'] . '/formicon_' . $slug . '.png';
                 $new_file = './assets/images/data/form_icons/' . $app_id . '/formicon_' . $form_id_new . '.png';
                 $old = umask(0);
                 @mkdir('./assets/images/data/form_icons/' . $app_id, 0777);
