@@ -1581,17 +1581,22 @@ class Form extends CI_Controller
             $data['app_filters_array'] = array();
             $data['selected_filters'] = array();
             $data['category_values'] = $category_values;
-            $data['body_content'] = $this->parser->parse('form/form_results_data_frame', $subdata, TRUE);
-            $data['pageTitle'] = $selected_app['name'] . ' Records - List View-' . PLATFORM_NAME;
+            $data['body_content'] = $this->parser->
+			parse('form/form_results_data_frame', $subdata, TRUE);
+            $data['pageTitle'] =
+			$selected_app['name'] . ' Records - List View-' . PLATFORM_NAME;
             $town_lists = $this->app_users_model->get_towns($selected_form['app_id']);
             $town_list_array = array();
             foreach ($town_lists as $towns) {
                 if (!in_array($towns['town'], $town_list_array)) {
-                    $town_list_array = array_merge($town_list_array, array($towns['town'] => $towns['town']));
+                    $town_list_array =
+					array_merge($town_list_array,
+					array($towns['town'] => $towns['town']));
                 }
             }
             $data['app_id'] = $selected_form['app_id'];
-            $data['app_comments'] = $this->form_model->get_comments($selected_form['app_id']);
+            $data['app_comments'] = $this->form_model->
+			get_comments($selected_form['app_id']);
             $data['town_filter'] = $town_list_array;
             $data['active_tab'] = 'form_results_frame';
             $this->load->view('templates/header_iframe', $data);
@@ -1601,13 +1606,18 @@ class Form extends CI_Controller
     }
 
     //new instance
-    public function get_heading_n_data_posted($forms_list, $to_date, $from_date, $category_name, $filter_attribute_search, $town_filter, $posted_filters, $search_text = null, $district, $sent_by, $export = null, $selected_dc, $selected_uc, $selected_pp, $selected_na, $dynamic_filters) {
+    public function get_heading_n_data_posted($forms_list,
+	$to_date, $from_date, $category_name, $filter_attribute_search,
+	$town_filter, $posted_filters, $search_text = null, $district,
+	$sent_by, $export = null, $selected_dc, $selected_uc,
+	$selected_pp, $selected_na, $dynamic_filters) {
         $form_id = $forms_list[0]['form_id'];
         $data['form_id'] = $form_id;
         $selected_form = $this->form_model->get_form($form_id);
         $filter_attribute = array();
         if ($selected_form['filter'] != '') {
-            $filter_rec = array_filter(array_map('trim', explode(',', $selected_form['filter'])));
+            $filter_rec = array_filter(array_map('trim',
+			explode(',', $selected_form['filter'])));
             foreach ($filter_rec as $key => $value) {
                 array_push($filter_attribute, $value);
             }
@@ -1620,17 +1630,30 @@ class Form extends CI_Controller
         $record_array_final = array();
         $heading_query = array();
         $category_name = $value = str_replace('_', '/', $category_name);
-//        $exclude_array = array('id', 'remote_id', 'district_name', 'uc_name', 'town_name', 'location', 'form_id', 'img1', 'img2', 'img3', 'img4', 'img5', 'img1_title', 'img2_title', 'img3_title', 'img4_title', 'img5_title', 'is_deleted', 'version_name', 'location_source', 'time_source', 'post_status');
+//        $exclude_array = array('id', 'remote_id', 'district_name',
+// 'uc_name', 'town_name', 'location', 'form_id', 'img1', 'img2',
+// 'img3', 'img4', 'img5', 'img1_title', 'img2_title', 'img3_title',
+// 'img4_title', 'img5_title', 'is_deleted', 'version_name',
+// 'location_source', 'time_source', 'post_status');
         $exclude_array = array('id', 'remote_id', 'form_id', 'is_deleted');
         foreach ($forms_list as $form_entity) {
             $table_name = $form_entity['table_name'];
-            $results = $this->form_results_model->get_result_paginated_posted($table_name, $to_date, $from_date, $category_name, $filter_attribute_search, $town_filter, $posted_filters, $search_text, $district, $sent_by, $this->perPage, $selected_dc, $selected_uc, $selected_pp, $selected_na, $dynamic_filters);
-//            $results = $this->form_results_model->get_form_results_category($forms_list, $to_date, $from_date, $category_name, $filter_attribute_search, $town_filter, $posted_filters, $search_text, $login_district, $this->perPage);
+            $results = $this->form_results_model->
+			get_result_paginated_posted($table_name, $to_date, $from_date,
+			$category_name, $filter_attribute_search, $town_filter,
+			$posted_filters, $search_text, $district, $sent_by, $this->
+			perPage, $selected_dc, $selected_uc, $selected_pp,
+			$selected_na, $dynamic_filters);
+//            $results = $this->form_results_model->
+//get_form_results_category($forms_list, $to_date, $from_date,
+// $category_name, $filter_attribute_search, $town_filter,
+// $posted_filters, $search_text, $login_district, $this->perPage);
 //           dump($results);
             $imagess = array();
             foreach ($results as $k => $v) {
                 $record_array = array();
-                $imagess = $this->form_results_model->getResultsImages($v['id'], $v['form_id']);
+                $imagess = $this->form_results_model->
+				getResultsImages($v['id'], $v['form_id']);
                 if ($imagess) {
                     if (!in_array('image', $table_headers_array)) {
                         $table_headers_array = array_merge($table_headers_array, array('image'));
@@ -1645,11 +1668,13 @@ class Form extends CI_Controller
                     }
                 }
                 $record_array = array_merge($record_array, array('form_id' => $v['form_id']));
-                $record_array = array_merge($record_array, array('created_datetime' => $v['created_datetime'], 'actions' => $v['id']));
+                $record_array = array_merge($record_array,
+				array('created_datetime' => $v['created_datetime'], 'actions' => $v['id']));
                 $record_array_final[] = $record_array;
             }
             //below parameter 1 for telling function its for reporting...
-            $schema_list = $this->form_results_model->getTableHeadingsFromSchema($table_name, 1);
+            $schema_list = $this->form_results_model->
+			getTableHeadingsFromSchema($table_name, 1);
             $heading_query = array_merge($heading_query, $schema_list);
         }
         $send = array();
@@ -1662,7 +1687,8 @@ class Form extends CI_Controller
                 $send[] = $final;
             }
         }
-//        $table_headers_array = array_merge($table_headers_array, array('sent_by'));
+//        $table_headers_array = array_merge($table_headers_array,
+//        array('sent_by'));
         foreach ($heading_query as $key => $value) {
             $header_value = $value['COLUMN_NAME'];
             if ($header_value != 'created_datetime') {
@@ -1674,7 +1700,8 @@ class Form extends CI_Controller
             }
         }
 
-        $table_headers_array = array_merge($table_headers_array, array('created_datetime'));
+        $table_headers_array = array_merge($table_headers_array,
+		array('created_datetime'));
         $table_headers_array = array_merge($table_headers_array, array('actions'));
         //get heading lables...
         $table_arr = explode("_", $table_name);
@@ -1722,16 +1749,24 @@ class Form extends CI_Controller
         $table_headers_array = array();
         $heading_query = array();
         $image_ex = false;
-//        $exclude_array = array('id', 'remote_id', 'district_name', 'uc_name', 'town_name', 'location', 'form_id', 'img1', 'img2', 'img3', 'img4', 'img5', 'img1_title', 'img2_title', 'img3_title', 'img4_title', 'img5_title', 'is_deleted', 'version_name', 'location_source', 'time_source', 'post_status');
+//        $exclude_array = array('id', 'remote_id', 'district_name',
+// 'uc_name', 'town_name', 'location', 'form_id', 'img1', 'img2',
+// 'img3', 'img4', 'img5', 'img1_title', 'img2_title', 'img3_title',
+// 'img4_title', 'img5_title', 'is_deleted', 'version_name',
+// 'location_source', 'time_source', 'post_status');
         $exclude_array = array('id', 'remote_id', 'form_id', 'is_deleted');
         foreach ($forms_list as $form_entity) {
             $table_name = $form_entity['table_name'];
             //$table_exist_bit = $this->form_results_model->check_table_exits($table_name);
             if (!is_table_exist($table_name)) {
-                $this->session->set_flashdata('validate', array('message' => 'No table schema has been built againts this application', 'type' => 'warning'));
+                $this->session->set_flashdata('validate',
+				array('message' =>
+				'No table schema has been built againts this application',
+				'type' => 'warning'));
                 redirect(base_url() . 'app');
             }
-            $results = $this->form_results_model->get_results_paginated($table_name, $this->perPage, $all_data);
+            $results = $this->form_results_model->
+			get_results_paginated($table_name, $this->perPage, $all_data);
             foreach ($results as $k => $v) {
                 $record_array = array();
                 foreach ($v as $key => $value) {
@@ -1740,7 +1775,8 @@ class Form extends CI_Controller
                     }
                 }
 
-                $imagess = $this->form_results_model->getResultsImages($v['id'], $form_entity['form_id']);
+                $imagess = $this->form_results_model->
+				getResultsImages($v['id'], $form_entity['form_id']);
                 if ($imagess) {
                     $image_ex = true;
                     if (!in_array('image', $table_headers_array)) {
@@ -1749,16 +1785,21 @@ class Form extends CI_Controller
                     $record_array = array_merge($record_array, array('image' => $imagess));
                 }
 
-                $record_array = array_merge($record_array, array('form_id' => $v['form_id'], 'actions' => $v['id']));
-                $record_array = array_merge($record_array, array('created_datetime' => $v['created_datetime'], 'actions' => $v['id']));
+                $record_array = array_merge($record_array,
+				array('form_id' => $v['form_id'], 'actions' => $v['id']));
+                $record_array = array_merge($record_array,
+				array('created_datetime' => $v['created_datetime'],
+				'actions' => $v['id']));
                 $record_array_final[] = $record_array;
             }
             // 1 in below function for reporting purpose...
-            $schema_list = $this->form_results_model->getTableHeadingsFromSchema($table_name, 1);
+            $schema_list = $this->form_results_model->
+			getTableHeadingsFromSchema($table_name, 1);
             $heading_query = array_merge($heading_query, $schema_list);
         }
 
-//        $table_headers_array = array_merge($table_headers_array, array('sent_by'));
+//        $table_headers_array = array_merge($table_headers_array,
+//        array('sent_by'));
 
         foreach ($heading_query as $key => $value) {
             $header_value = $value['COLUMN_NAME'];
@@ -1772,7 +1813,8 @@ class Form extends CI_Controller
         }
 //        echo "<pre>";
 //        print_r($table_headers_array);die;
-//        $table_headers_array = array_merge($table_headers_array, array('created_datetime'));
+//        $table_headers_array = array_merge($table_headers_array,
+//        array('created_datetime'));
 
         $table_headers_array = array_merge($table_headers_array, array('actions'));
         //get heading lables...
@@ -1820,7 +1862,8 @@ class Form extends CI_Controller
         $selected_form = $this->form_model->get_form($form_id);
         $filter_attribute = array();
         if ($selected_form['filter'] != '') {
-            $filter_rec = array_filter(array_map('trim', explode(',', $selected_form['filter'])));
+            $filter_rec = array_filter(array_map('trim',
+			explode(',', $selected_form['filter'])));
             foreach ($filter_rec as $key => $value) {
 
                 array_push($filter_attribute, $value);
@@ -1834,7 +1877,9 @@ class Form extends CI_Controller
         $login_district = $session_data['login_district'];
         $heading_array = array();
         $record_array_final = array();
-        $results = $this->form_results_model->get_multiple_form_results_pagination($form_list, $login_district, $this->perPage);
+        $results = $this->form_results_model->
+		get_multiple_form_results_pagination($form_list,
+		$login_district, $this->perPage);
         foreach ($results as $k => $v) {
             $record_array = array();
             $result_json = $v['record'];
@@ -1853,10 +1898,13 @@ class Form extends CI_Controller
                 $record_array = array_merge($record_array, array($key => $value));
             }
 
-            $record_array = array_merge($record_array, array('created_datetime' => $v['created_datetime'], 'actions' => $v['id']));
+            $record_array = array_merge($record_array,
+			array('created_datetime' => $v['created_datetime'],
+			'actions' => $v['id']));
             $record_array_final[] = $record_array;
         }
-        $heading_array = array_merge($heading_array, array('created_datetime', 'actions'));
+        $heading_array = array_merge($heading_array,
+		array('created_datetime', 'actions'));
         $data['headings'] = $heading_array;
         $data['form'] = $record_array_final;
         $data['active_tab'] = 'app';
@@ -1864,7 +1912,8 @@ class Form extends CI_Controller
     }
 
     /**
-     * method to get heading data of multiple form for all data based on filter array
+     * method to get heading data of multiple
+	 form for all data based on filter array
      * @param  $form_list list of form in a single applicatoin
      * @param  $app_filter_list array of all filter set on which search is based
      * @return  array An array of form heading and its data
@@ -1876,7 +1925,8 @@ class Form extends CI_Controller
         $selected_form = $this->form_model->get_form($form_id);
         $filter_attribute = array();
         if ($selected_form['filter'] != '') {
-            $filter_rec = array_filter(array_map('trim', explode(',', $selected_form['filter'])));
+            $filter_rec = array_filter(array_map('trim',
+			explode(',', $selected_form['filter'])));
             foreach ($filter_rec as $key => $value) {
                 array_push($filter_attribute, $value);
             }
@@ -1890,7 +1940,8 @@ class Form extends CI_Controller
         $app_filters_array = array();
         $heading_array = array();
         $record_array_final = array();
-        $results = $this->form_results_model->get_form_results_multiple_all_data($form_lists, $login_district);
+        $results = $this->form_results_model->
+		get_form_results_multiple_all_data($form_lists, $login_district);
         foreach ($results as $k => $v) {
             $record_array = array();
             $result_json = $v['record'];
@@ -1921,12 +1972,15 @@ class Form extends CI_Controller
                 $record_array = array_merge($record_array, array($key => $value));
             }
 
-            $record_array = array_merge($record_array, array('created_datetime' => $v['created_datetime'], 'actions' => $v['id']));
+            $record_array = array_merge($record_array,
+			array('created_datetime' => $v['created_datetime'],
+			'actions' => $v['id']));
 
             $record_array_final[] = $record_array;
         }
 
-        $heading_array = array_merge($heading_array, array('created_datetime', 'actions'));
+        $heading_array = array_merge($heading_array,
+		array('created_datetime', 'actions'));
         $data['headings'] = $heading_array;
         $data['form'] = $record_array_final;
         $data['active_tab'] = 'app';
@@ -1935,19 +1989,22 @@ class Form extends CI_Controller
     }
 
     /**
-     * method to get heading data of multiple form for all data based on filter array when posted
+     * method to get heading data of multiple form
+	 for all data based on filter array when posted
      * @param  $form_list list of form in a single applicatoin
      * @param  $app_filter_list array of all filter set on which search is based
      * @return  array An array of form heading and its data
      * @author UbaidUllah Balti <ubaidcskiu@gmail.com>
      */
-    public function get_heading_data_multiple_all_for_posted($form_lists, $app_filter_list) {
+    public function get_heading_data_multiple_all_for_posted($form_lists,
+	$app_filter_list) {
         $form_id = $form_lists[0]['form_id'];
         $data['form_id'] = $form_id;
         $selected_form = $this->form_model->get_form($form_id);
         $filter_attribute = array();
         if ($selected_form['filter'] != '') {
-            $filter_rec = array_filter(array_map('trim', explode(',', $selected_form['filter'])));
+            $filter_rec = array_filter(array_map('trim',
+			explode(',', $selected_form['filter'])));
             foreach ($filter_rec as $key => $value) {
                 array_push($filter_attribute, $value);
             }
@@ -1961,7 +2018,8 @@ class Form extends CI_Controller
         $heading_array = array();
         $record_array_final = array();
         $app_filters_array = array();
-        $results = $this->form_results_model->get_form_results_multiple_all_data($form_lists, $login_district);
+        $results = $this->form_results_model->
+		get_form_results_multiple_all_data($form_lists, $login_district);
         foreach ($results as $k => $v) {
             $record_array = array();
             $result_json = $v['record'];
@@ -2017,7 +2075,9 @@ class Form extends CI_Controller
                 }
                 $record_array = array_merge($record_array, array($key => $value));
             }
-            $record_array = array_merge($record_array, array('created_datetime' => $v['created_datetime'], 'actions' => $v['id']));
+            $record_array = array_merge($record_array,
+			array('created_datetime' => $v['created_datetime'],
+			'actions' => $v['id']));
             $record_array_final[] = $record_array;
         }
 
@@ -2027,7 +2087,8 @@ class Form extends CI_Controller
             $final_filter_sorted[$key_sorter] = $app_filters_array[$key_sorter];
         }
         $data['app_filters_array'] = $final_filter_sorted;
-        $heading_array = array_merge($heading_array, array('created_datetime', 'actions'));
+        $heading_array = array_merge($heading_array,
+		array('created_datetime', 'actions'));
         $data['headings'] = $heading_array;
         $data['form'] = $record_array_final;
         $data['active_tab'] = 'app';
@@ -2047,14 +2108,19 @@ class Form extends CI_Controller
         $slug = $slug_id;
         if ($this->session->userdata('logged_in')) {
             if (!$this->acl->hasPermission('form', 'view')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $this->session->set_flashdata('validate',
+				array('message' =>
+				"You don't have enough permissions to do this task.",
+				'type' => 'warning'));
                 redirect(base_url() . 'application-map/' . $slug);
             }
             /** multiple form handling system statrs * */
             $forms_list = array();
             $all_forms = $this->form_model->get_form_by_app($slug);
             foreach ($all_forms as $forms) {
-                $forms_list[] = array('form_id' => $forms['form_id'], 'table_name' => 'zform_' . $forms['form_id'], 'form_name' => $forms['form_name']);
+                $forms_list[] = array('form_id' => $forms['form_id'],
+				'table_name' => 'zform_' . $forms['form_id'],
+				'form_name' => $forms['form_name']);
             }
             /** multi form ends herer.....* */
             $heading_array = array();
@@ -2071,7 +2137,9 @@ class Form extends CI_Controller
                 $data_per_filter = array();
                 $posted_filters = array();
                 $app_settings = $this->app_model->get_app_settings($app_id);
-                $app_filter_list = explode(',', (isset($app_settings['map_view_filters'])) ? $app_settings['map_view_filters'] : '');
+                $app_filter_list = explode(',',
+				(isset($app_settings['map_view_filters']))
+				? $app_settings['map_view_filters'] : '');
                 if (!empty($app_settings['map_view_filters'])) {
                     foreach ($app_filter_list as $filters) {
                         $data_per_filter[] = $this->input->post($filters);
@@ -2094,7 +2162,9 @@ class Form extends CI_Controller
                 $data['search_text'] = $search_text;
                 if ($search_text) {
                     $search_text = mysql_real_escape_string($search_text);
-                    $search_text = str_replace(array('~', '<', '>', '$', '%', '|', '^', '*'), array(' '), $search_text);
+                    $search_text =
+					str_replace(array('~', '<', '>', '$', '%', '|', '^', '*'),
+					array(' '), $search_text);
                     $search_text = str_replace('/', '\\\\/', $search_text);
                     $search_text = trim($search_text);
                 }
@@ -2105,9 +2175,13 @@ class Form extends CI_Controller
                 $final_send = array();
                 foreach ($forms_list as $final_view) {
                     if (in_array($final_view['form_id'], $form_list_posted)) {
-                        $final_send = array_merge($final_send, array($final_view['form_name'] => $final_view['form_id']));
+                        $final_send = array_merge($final_send,
+						array($final_view['form_name'] =>
+						$final_view['form_id']));
                     }
-                    $view_list = array_merge($view_list, array($final_view['form_name'] => $final_view['form_id']));
+                    $view_list = array_merge($view_list,
+					array($final_view['form_name'] =>
+					$final_view['form_id']));
                 }
                 $view_list = array_flip($view_list);
                 $data['form_lists'] = $view_list;
