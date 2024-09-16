@@ -3333,7 +3333,8 @@ class Form extends CI_Controller
      * @access Inline
      * @author UbaidUllah Balti <ubaidcskiu@gmail.com>
      */
-    private function getMapHtmlInfo($locations = array(), $headings = array(), $filter_attribute) {
+    private function getMapHtmlInfo($locations = array(),
+     $headings = array(), $filter_attribute) {
         if (isset($locations[0]['form_id'])) {
             $form_id = $locations[0]['form_id'];
         } else {
@@ -3355,16 +3356,21 @@ class Form extends CI_Controller
 
                     foreach ($locations as $form_item) {
                         if (isset($form_item[$filter_attribute_value])) {
-                            $category_name = (!empty($form_item[$filter_attribute_value])) ? $form_item[$filter_attribute_value] : "No " . ucfirst($filter_attribute_value);
-                            $category_name = preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', $category_name);
-                            if (isset($form_item[$filter_attribute_value]) && !empty($form_item[$filter_attribute_value])) {
+                            $category_name = 
+                            (!empty($form_item[$filter_attribute_value])) ? 
+                            $form_item[$filter_attribute_value] : "No " . ucfirst($filter_attribute_value);
+                            $category_name = preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s',
+                             '', $category_name);
+                            if (isset($form_item[$filter_attribute_value]) 
+                                && !empty($form_item[$filter_attribute_value])) {
                                 if (!in_array($form_item[$filter_attribute_value], $only_once_category)) {
                                     $column_number++;
                                     $only_once_category[] = $form_item[$filter_attribute_value];
                                 }
                                 $valueforarray = $form_item[$filter_attribute_value];
                                 $valueforarray1 = str_replace(' ', '_', $valueforarray);
-                                if (isset($map_saved_pins[$filter_attribute_value][$valueforarray1]) && $map_saved_pins[$filter_attribute_value][$valueforarray1] != '') {
+                                if (isset($map_saved_pins[$filter_attribute_value][$valueforarray1])
+                                 && $map_saved_pins[$filter_attribute_value][$valueforarray1] != '') {
                                     $pin_name = $map_saved_pins[$filter_attribute_value][$valueforarray1];
                                 } else
                                 if (!in_array($valueforarray, $filter_exist_array)) {
@@ -3380,7 +3386,8 @@ class Form extends CI_Controller
                                         $exist_alpha[$first_char] = '1';
                                         $pin_name = $first_char . '1.png';
                                     }
-                                    $pin_exist_for_cat = array_merge($pin_exist_for_cat, array($valueforarray => $pin_name));
+                                    $pin_exist_for_cat = array_merge($pin_exist_for_cat, 
+                                        array($valueforarray => $pin_name));
                                 } else {
 
                                     if (array_key_exists($valueforarray, $pin_exist_for_cat)) {
@@ -3410,24 +3417,44 @@ class Form extends CI_Controller
                                     //$info_window .= $headings[$i]."=>";
                                     if ($headings[$i] == 'is_take_picture') {}
                                     else if ($headings[$i] == 'id') {
-                                        $query_img = "select image from zform_images where form_id='".$form_id."' AND zform_result_id ='".$form_item[$headings[$i]]."'";
+                                        $query_img = 
+                                        "select image from zform_images where form_id='".$form_id.
+                                        "' AND zform_result_id ='".$form_item[$headings[$i]]."'";
                                         $image_info = $this->db->query($query_img)->result_array();
                                         if(!empty($image_info)){
                                             $path = get_image_path($image_info[0]['image']);
-                                            $image_row .= "<tr align='center'><td colspan='2'><a href=" . $path . " class='image_colorbox' title='All Rights Reserved © 2013-" . date('Y') . " - " . PLATFORM_NAME . " <br>By ITU Government of Punjab - Pakistan'><img src=" . $path . " alt='' width='200' height='200'/></a></td></tr>";
+                                            $image_row .= "<tr align='center'><td colspan='2'><a href=" . $path .
+                                             " class='image_colorbox' title='All Rights Reserved © 2013-" . date('Y') .
+                                              " - " . PLATFORM_NAME . 
+                                              " <br>By ITU Government of Punjab - Pakistan'><img src=" .
+                                               $path . " alt='' width='200' height='200'/></a></td></tr>";
                                         }
                                     }
                                     else if ($headings[$i] == 'image') {
                                         $path = get_image_path($form_item[$headings[$i]][0]['image']);
-                                        $image_row .= "<tr align='center'><td colspan='2'><a href=" . $path . " class='image_colorbox' title='All Rights Reserved © 2013-" . date('Y') . " - " . PLATFORM_NAME . " <br>By ITU Government of Punjab - Pakistan'><img src=" . $path . " alt='' width='200' height='200'/></a></td></tr>";
+                                        $image_row .= "<tr align='center'><td colspan='2'><a href=" . $path .
+                                         " class='image_colorbox' title='All Rights Reserved © 2013-" .
+                                          date('Y') . " - " . PLATFORM_NAME .
+                                           " <br>By ITU Government of Punjab - Pakistan'><img src=" .
+                                            $path . " alt='' width='200' height='200'/></a></td></tr>";
                                     } else if ($headings[$i] == 'created_datetime') {
-                                        $datetime_row .='<tr><td><b>DATE : </b></td><td>' . date('Y-m-d', strtotime($form_item[$headings[$i]])) . '</td></tr><tr><td><b>TIME : </b></td><td>' . date('H:i:s', strtotime($form_item[$headings[$i]])) . '</td></tr>';
+                                        $datetime_row .='<tr><td><b>DATE : </b></td><td>' . 
+                                        date('Y-m-d', strtotime($form_item[$headings[$i]])) . 
+                                        '</td></tr><tr><td><b>TIME : </b></td><td>' . 
+                                        date('H:i:s', strtotime($form_item[$headings[$i]])) . '</td></tr>';
                                     } else {
-                                        $map_data .= preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', $headings[$i]) . ' : ' . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', $form_item[$headings[$i]]) . '<br>\n';
+                                        $map_data .= preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '',
+                                         $headings[$i]) . ' : ' . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s',
+                                          '', $form_item[$headings[$i]]) . '<br>\n';
                                         if($form_id == 551){
-                                            $array_col = array('BUILDING NAME','NAME OF DIVISION','NAME OF MCS','BUILDING TYPE','ACTIVITY DATETIME');
-                                            if(in_array(preg_replace("/[^A-Za-z0-9\-]/", " ", strtoupper(urldecode($headings[$i]))),$array_col))
-                                                $data_row .= "<tr><td><b>" . preg_replace("/[^A-Za-z0-9\-]/", " ", strtoupper(urldecode($headings[$i]))) . " : </b></td><td>" . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', strtoupper($form_item[$headings[$i]])) . "</td></tr>";
+                                            $array_col = array('BUILDING NAME','NAME OF DIVISION',
+                                                'NAME OF MCS','BUILDING TYPE','ACTIVITY DATETIME');
+                                            if(in_array(preg_replace("/[^A-Za-z0-9\-]/", " ",
+                                             strtoupper(urldecode($headings[$i]))),$array_col))
+                                                $data_row .= "<tr><td><b>" . preg_replace("/[^A-Za-z0-9\-]/",
+                                                 " ", strtoupper(urldecode($headings[$i]))) .
+                                                  " : </b></td><td>" . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s',
+                                                   '', strtoupper($form_item[$headings[$i]])) . "</td></tr>";
                                         }
                                         $id = $form_item['id'];
                                     }
@@ -3435,7 +3462,9 @@ class Form extends CI_Controller
                             }
                             $info_window = "<table>".$image_row.$data_row."</table>";
                             $marker_date = $form_item['created_datetime'];
-                            $final .='["' . $location[0] . '","' . $location[1] . '","' . $form_id . '","' . $icon_filename . '","' . $id . '","' . $category_name . '","' . $marker_date . '","'.$info_window.'"] ,';
+                            $final .='["' . $location[0] . '","' . $location[1] . 
+                            '","' . $form_id . '","' . $icon_filename . '","' . $id . 
+                            '","' . $category_name . '","' . $marker_date . '","'.$info_window.'"] ,';
                         }
                     }
 
@@ -3458,13 +3487,18 @@ class Form extends CI_Controller
      * @access Inline
      * @author UbaidUllah Balti <ubaidcskiu@gmail.com>
      */
-    private function getMapHtmlInfoSingle($locations = array(), $headings = array(), $filter_attribute) {
+    private function getMapHtmlInfoSingle($locations = array(),
+     $headings = array(), $filter_attribute) {
         $final = '';
         if (count($locations)) {
             foreach ($filter_attribute as $filter_attribute_value) {
                 foreach ($locations as $form_item) {
-                    $category_name = (!empty($form_item[$filter_attribute_value])) ? $form_item[$filter_attribute_value] : str_replace('_', " ", ucfirst($filter_attribute_value));
-                    $pin_name = (!empty($form_item[$filter_attribute_value])) ? substr($form_item[$filter_attribute_value], 0, 1) . '1' : "all_visit";
+                    $category_name = 
+                    (!empty($form_item[$filter_attribute_value])) ? 
+                    $form_item[$filter_attribute_value] :
+                     str_replace('_', " ", ucfirst($filter_attribute_value));
+                    $pin_name = (!empty($form_item[$filter_attribute_value])) ?
+                     substr($form_item[$filter_attribute_value], 0, 1) . '1' : "all_visit";
                     if (!file_exists(FCPATH . "assets/images/map_pins/" . $pin_name)) {
                         $icon_filename = base_url() . "assets/images/map_pins/default_pin.png";
                     } else {
@@ -3485,19 +3519,32 @@ class Form extends CI_Controller
                                 
                             } else if ($headings[$i] == 'image') {
                                 $path = $form_item[$headings[$i]][0]['image'];
-                                $image_row = "<tr align='center'><td colspan='2'><a href=" . $path . " class='image_colorbox' title='All Rights Reserved © 2013-" . date('Y') . " - " . PLATFORM_NAME . " <br>By ITU Government of Punjab - Pakistan'><img src=" . $path . " alt='' width='200' height='200'/></a></td></tr>";
+                                $image_row = "<tr align='center'><td colspan='2'><a href=" .
+                                 $path . " class='image_colorbox' title='All Rights Reserved © 2013-" . 
+                                 date('Y') .
+                                  " - " . PLATFORM_NAME . " <br>By ITU Government of Punjab - Pakistan'><img src=" . 
+                                  $path . " alt='' width='200' height='200'/></a></td></tr>";
                             } else if ($headings[$i] == 'created_datetime') {
-                                $datetime_row .='<tr><td><b>DATE : </b></td><td>' . date('Y-m-d', strtotime($form_item[$headings[$i]])) . '</td></tr><tr><td><b>TIME : </b></td><td>' . date('H:i:s', strtotime($form_item[$headings[$i]])) . '</td></tr>';
+                                $datetime_row .='<tr><td><b>DATE : </b></td><td>' . 
+                                date('Y-m-d', strtotime($form_item[$headings[$i]])) . 
+                                '</td></tr><tr><td><b>TIME : </b></td><td>' . 
+                                date('H:i:s', strtotime($form_item[$headings[$i]])) . '</td></tr>';
                             } else {
-                                $map_data .= preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', $headings[$i]) . ' : ' . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', $form_item[$headings[$i]]) . '<br>\n';
-                                $data_row .= "<tr><td><b>" . preg_replace("/[^A-Za-z0-9\-]/", " ", strtoupper(urldecode($headings[$i]))) . " : </b></td><td>" . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', strtoupper($form_item[$headings[$i]])) . "</td></tr>";
+                                $map_data .= preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '', 
+                                    $headings[$i]) . ' : ' . preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', 
+                                    '', $form_item[$headings[$i]]) . '<br>\n';
+                                $data_row .= "<tr><td><b>" . preg_replace("/[^A-Za-z0-9\-]/",
+                                 " ", strtoupper(urldecode($headings[$i]))) . " : </b></td><td>" .
+                                  preg_replace('/[^a-zA-Z0-9_ \[\]\.\-]/s', '',
+                                   strtoupper($form_item[$headings[$i]])) . "</td></tr>";
                                 $id = $form_item['id'];
                             }
                         }
                     }
                     $html_layout = $html_layout . $image_row . $data_row . $datetime_row;
                     $html_layout .= "</table>";
-                    $final .='["' . $location[0] . '","' . $location[1] . '","' . $html_layout . '","' . $icon_filename . '","' . $id . '","' . $category_name . '"] ,';
+                    $final .='["' . $location[0] . '","' . $location[1] . '","' . $html_layout .
+                     '","' . $icon_filename . '","' . $id . '","' . $category_name . '"] ,';
                 }
             }
             $final = substr($final, 0, -1);
@@ -3530,13 +3577,15 @@ class Form extends CI_Controller
             $request_app = $this->app_model->get_app($app_id);
             $app_general_setting = get_app_general_settings($app_id);
             $upgrade_from_google_play = 0;
-            if (isset($app_general_setting->upgrade_from_google_play) && $app_general_setting->upgrade_from_google_play == 1) {
+            if (isset($app_general_setting->upgrade_from_google_play) 
+                && $app_general_setting->upgrade_from_google_play == 1) {
                 $upgrade_from_google_play = 1;
             }
             $data['upgrade_from_google_play'] = $upgrade_from_google_play;
             
             $location_required = 1;
-            if (isset($app_general_setting->location_required) && $app_general_setting->location_required == 0) {
+            if (isset($app_general_setting->location_required) 
+                && $app_general_setting->location_required == 0) {
                 $location_required = 0;
             }
             $data['location_required'] = $location_required;
@@ -3545,7 +3594,9 @@ class Form extends CI_Controller
             if (!$this->acl->hasSuperAdmin()) {
                 $login_data = $this->session->userdata('logged_in');
                 if ($request_app['department_id'] != $login_data['login_department_id']) {
-                    $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                    $this->session->set_flashdata('validate',
+                     array('message' => "You don't have enough permissions to do this task.", 
+                        'type' => 'warning'));
                     redirect(base_url() . 'apps');
                 }
                 if ($request_app['user_id'] == $login_data['login_user_id']) {
@@ -3554,7 +3605,8 @@ class Form extends CI_Controller
             } else {
                 $data['super_app_user'] = 'yes';
             }
-            $settings_exist = get_app_general_settings($app_id); //$this->app_model->get_app_settings($app_id);
+            $settings_exist = get_app_general_settings($app_id); 
+            //$this->app_model->get_app_settings($app_id);
             //print_r($app_general_setting);
             $data['app_settings'] = $settings_exist;
             $data['filter'] = $selected_form['filter'];
@@ -3611,7 +3663,8 @@ class Form extends CI_Controller
                 $data['post_url'] = $selected_form['post_url'];
             }
             if ($history_id) {
-                $history_rec = $this->form_model->get_form_history($form_id, $view_id, $history_id);
+                $history_rec = $this->form_model->get_form_history($form_id,
+                 $view_id, $history_id);
                 $data['description'] = $history_rec['description'];
             }
             $app = $this->app_model->get_app($app_id);
@@ -3624,13 +3677,15 @@ class Form extends CI_Controller
             $data['view_id'] = $view_id;
             $app_id = $selected_form['app_id'];
             if (!$this->acl->hasPermission('form', 'edit')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $this->session->set_flashdata('validate', array('message' 
+                    => "You don't have enough permissions to do this task.", 'type' => 'warning'));
                 redirect(base_url() . 'apps');
             }
             $session_data = $this->session->userdata('logged_in');
             session_to_page($session_data, $data);
             $data['active_tab'] = 'form_update';
-            $data['pageTitle'] = $app['name'] . '-' . $selected_form['name'] . ' Edit-' . PLATFORM_NAME;
+            $data['pageTitle'] = $app['name'] . '-' . $selected_form['name'] .
+             ' Edit-' . PLATFORM_NAME;
             $this->load->view('templates/form_builder_header', $data);
             $this->load->view('form/update', $data);
             $this->load->view('templates/footer', $data);
@@ -3650,7 +3705,8 @@ class Form extends CI_Controller
         }
         $this->load->library('form_validation');
         if ($this->input->post()) {
-            $this->form_validation->set_rules('app_name', 'App Name', 'trim|required|xss_clean');
+            $this->form_validation->set_rules('app_name', 'App Name',
+             'trim|required|xss_clean');
             if ($this->form_validation->run() == FALSE) {
                 echo json_encode(array('status' => '2'));
                 exit;
@@ -3736,7 +3792,8 @@ class Form extends CI_Controller
             $data['app_id'] = $app_id;
             $data['app_name'] = $app['name'];
             if (!$this->acl->hasPermission('form', 'add')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $this->session->set_flashdata('validate', array('message' 
+                    => "You don't have enough permissions to do this task.", 'type' => 'warning'));
                 redirect(base_url() . 'apps');
             }
             $session_data = $this->session->userdata('logged_in');
@@ -3761,7 +3818,8 @@ class Form extends CI_Controller
                 $form_id = $this->db->insert_id();
                 updateDataBase($form_id, "");
                 //array parameters : action, description, before, after, app_id, app_name, form_id, form_name
-                $logary = array('action' => 'insert', 'description' => 'add new form', 'after' => json_encode($data));
+                $logary = array('action' => 'insert', 'description' => 'add new form', 'after'
+                 => json_encode($data));
                 addlog($logary);
                 //Get last inserted form id
                 $forms_by_app = $this->form_model->get_form_by_app($app_id);
@@ -3785,7 +3843,10 @@ class Form extends CI_Controller
                     if (!$this->upload->do_upload('userfile_addform')) {
 
                         $this->data['error'] = $this->upload->display_errors();
-                        $this->session->set_flashdata('validate', array('message' => $this->upload->display_errors() . ', Default icon has been embeded with your application.', 'type' => 'warning'));
+                        $this->session->set_flashdata('validate', array('message'
+                         => $this->upload->display_errors() .
+                         ', Default icon has been embeded with your application.', 
+                         'type' => 'warning'));
                     } else {
                         //success
                         $imageData = $this->upload->data();
@@ -3803,7 +3864,8 @@ class Form extends CI_Controller
                         }
                     }
                 } else {
-                    $from_path = FORM_IMG_DISPLAY_PATH . '../form_icons/default_' . $total_forms . '.png';
+                    $from_path = FORM_IMG_DISPLAY_PATH .
+                     '../form_icons/default_' . $total_forms . '.png';
                     
                     @copy($from_path,$abs_path.$iconName);
                    // file_put_contents($abs_path . $iconName, file_get_contents($from_path));
@@ -3816,7 +3878,8 @@ class Form extends CI_Controller
                 );
                 $this->db->where('id', $form_id);
                 $this->db->update('form', $change_next);
-                $this->session->set_flashdata('validate', array('message' => 'New form added successfully.', 'type' => 'success'));
+                $this->session->set_flashdata('validate', array('message' 
+                    => 'New form added successfully.', 'type' => 'success'));
                 redirect(base_url() . 'app-form/' . $form_id);
             }
 
@@ -3880,12 +3943,14 @@ class Form extends CI_Controller
                         'post_url' => $selected_form['post_url']
                     );
                     //file_write()
-                    file_write($abs_path.'/'.$view_id.'_'.$file_name_html,$selected_form['full_description']);
+                    file_write($abs_path.'/'.$view_id.'_'.$file_name_html,
+                        $selected_form['full_description']);
                     
                 }
                 else{
                     //move view to view
-                    $selected_view_form = $this->form_model->get_form($form_id,$view_id_session);
+                    $selected_view_form = $this->form_model->get_form($form_id,
+                        $view_id_session);
                     $form_move_data = array(
                         'form_id' => $form_id,
                         'view_id' => $view_id,
@@ -3893,7 +3958,8 @@ class Form extends CI_Controller
                         'full_description' => $selected_view_form['fv_full_description'],
                         'post_url' => $selected_view_form['fv_post_url']
                     );
-                    file_write($abs_path.'/'.$view_id.'_'.$file_name_html,$selected_view_form['fv_full_description']);
+                    file_write($abs_path.'/'.$view_id.'_'.
+                        $file_name_html,$selected_view_form['fv_full_description']);
                 }
                 
                 
@@ -3905,7 +3971,9 @@ class Form extends CI_Controller
                     $this->db->insert('form_views', $form_move_data);
                 }
                 
-                $this->session->set_flashdata('validate', array('message' => 'Active form copied to your required view successfully', 'type' => 'success'));
+                $this->session->set_flashdata('validate', array('message'
+                 => 'Active form copied to your required view successfully', 
+                 'type' => 'success'));
                 redirect(base_url() . 'app-form/' . $form_id);
             }
         } else {
@@ -3922,7 +3990,8 @@ class Form extends CI_Controller
         if ($this->session->userdata('logged_in')) {
             if($this->input->post()){
                 $form_id = $slug;//form_id which want to copy
-                $app_id = $this->input->post('app_id_popup');//app_id where want to copy the selected form
+                $app_id = $this->input->post('app_id_popup');
+                //app_id where want to copy the selected form
                 
                 
                 
@@ -3951,14 +4020,18 @@ class Form extends CI_Controller
                 );
                 $this->db->insert('form', $data);
                 $form_id_new = $this->db->insert_id();
-                $old_file = './assets/images/data/form_icons/' . $selected_form['app_id'] . '/formicon_' . $slug . '.png';
-                $new_file = './assets/images/data/form_icons/' . $app_id . '/formicon_' . $form_id_new . '.png';
+                $old_file = './assets/images/data/form_icons/' .
+                 $selected_form['app_id'] . '/formicon_' . $slug . '.png';
+                $new_file = './assets/images/data/form_icons/' . $app_id . '/formicon_' . 
+                $form_id_new . '.png';
                 $old = umask(0);
-                @mkdir('./assets/images/data/form_icons/' . $app_id, 0777);
+                @mkdir('./assets/images/data/form_icons/' . 
+                    $app_id, 0777);
                 umask($old);
                 copy($old_file, $new_file);
                 //array parameters : action, description, before, after, app_id, app_name, form_id, form_name
-                $logary = array('action' => 'insert', 'description' => 'copy and add new form', 'after' => json_encode($data));
+                $logary = array('action' => 'insert', 'description'
+                 => 'copy and add new form', 'after' => json_encode($data));
                 addlog($logary);
                 $file_name_html = "form_$form_id_new.html";
                 $change_next = array(
@@ -3971,7 +4044,9 @@ class Form extends CI_Controller
                 updateDataBase($form_id_new, $selected_form['description']);
                 $abs_path = './assets/images/data/form_icons/' . $app_id;
                 file_write($abs_path.'/'.$file_name_html, $selected_form['full_description']);
-                $this->session->set_flashdata('validate', array('message' => 'Form Copied successfully. Please click on save button for saving configuration', 'type' => 'success'));
+                $this->session->set_flashdata('validate', array('message' 
+                    => 'Form Copied successfully. Please click on save button for saving configuration',
+                     'type' => 'success'));
                 redirect(base_url() . 'app-form/' . $form_id_new);
             }
         } else {
