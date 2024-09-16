@@ -337,7 +337,8 @@ class Cron extends CI_Controller {
                     }
                     else{
                         $form_result_id_new = $this->db->insert_id();
-                        echo $r_value['id'].' => Form Id = '.$form_id.'---App Id='.$app_id.' was Inserted Successfully and cleared cache <br />';
+                        $success_msg=' was Inserted Successfully and cleared cache <br />';
+                        echo $r_value['id'].' => Form Id = '.$form_id.'---App Id='.$app_id.$success_msg;
                         $this->form_results_model->remove_mobile_activity($r_value['id']);
                     }
                     
@@ -350,7 +351,8 @@ class Cron extends CI_Controller {
                             $this->form_results_model->remove_mobile_activity($r_value['id']);
                             continue;
                         }
-                        $this->form_results_model->update_mobile_activity($r_value['id'],array('error'=>$e->message()));
+                        $call_back=array('error'=>$e->message());
+                        $this->form_results_model->update_mobile_activity($r_value['id'],$call_back);
                         continue;
                         
                         
@@ -441,11 +443,13 @@ class Cron extends CI_Controller {
         //unlink('/NFS-Dataplug/images/immmm.jpg');
         //unlink('/NFS-Dataplug/images/1998/27c7a6f7f7aaf0349cadd7386a0b16ef.jpg');
         //unlink('/NFS-Dataplug/images/1998/27c7a6f7f7aaf0349cadd7386a0b16ef.jpg');
-        //unlink('/NFS-Dataplug/images/app_id_1998/27c7a6f7f7aaf0349cadd7386a0b16ef.jpg');
+        //$path='/NFS-Dataplug/images/app_id_1998/27c7a6f7f7aaf0349cadd7386a0b16ef.jpg';
+        //unlink($path);
         //rmdir('/NFS-Dataplug/images/app_id_1998');
         //rmdir('/NFS-Dataplug/live/dev');
-
-        //copy("/var/www/vhosts/dataplug.itu.edu.pk/htdoc/assets/images/data/form-data/73954c617545b2d2336e57d3ccc5ad5e.jpg", "/NFS-Dataplug/images/immmm.jpg");
+        //$path_part1="/var/www/vhosts/dataplug.itu.edu.pk/htdoc/assets/images/data/";
+        //$path_part2="form-data/73954c617545b2d2336e57d3ccc5ad5e.jpg";
+        //copy($path_part1.$path_part2, "/NFS-Dataplug/images/immmm.jpg");
 
         //get image which save on local folder
        // exit;
@@ -482,10 +486,12 @@ class Cron extends CI_Controller {
                     $image_index = count($url_explode)-1;
                     $image_name = $url_explode[$image_index];
                     if (strpos($_SERVER ['SERVER_NAME'], 'monitoring.punjab.gov') !== false) {
-                        $source_path = "/var/www/vhosts/monitoring.punjab.gov.pk/htdoc/assets/images/data/form-data/".$image_name;
+                        $part1="/var/www/vhosts/monitoring.punjab.gov.pk/";
+                        $part2="htdoc/assets/images/data/form-data/";
+                        $source_path = $part1.$part2.$image_name;
                     }else{
-                        $source_path = "/var/www/vhosts/dataplug.itu.edu.pk/htdoc/assets/images/data/form-data/".$image_name;
-                        //$source_path = "/var/www/vhosts/godk.itu.edu.pk/htdoc/assets/images/data/form-data/".$image_name;
+                        $url1="/var/www/vhosts/dataplug.itu.edu.pk/htdoc/assets/images/data/form-data/";
+                        $source_path = $url.$image_name;
                     }
                     $dest_path = NFS_IMAGE_PATH."/app_id_$app_id/".$image_name;
                     if(file_exists($source_path)){
@@ -518,11 +524,13 @@ class Cron extends CI_Controller {
         //unlink('/NFS-Dataplug/images/immmm.jpg');
         //unlink('/NFS-Dataplug/images/1998/27c7a6f7f7aaf0349cadd7386a0b16ef.jpg');
         //unlink('/NFS-Dataplug/images/1998/27c7a6f7f7aaf0349cadd7386a0b16ef.jpg');
-        //unlink('/NFS-Dataplug/images/app_id_1998/27c7a6f7f7aaf0349cadd7386a0b16ef.jpg');
+        //$img_name='27c7a6f7f7aaf0349cadd7386a0b16ef.jpg';
+        //unlink('/NFS-Dataplug/images/app_id_1998/'.$img_name);
         //rmdir('/NFS-Dataplug/images/app_id_1998');
         //rmdir('/NFS-Dataplug/live/dev');
-
-        //copy("/var/www/vhosts/dataplug.itu.edu.pk/htdoc/assets/images/data/form-data/73954c617545b2d2336e57d3ccc5ad5e.jpg", "/NFS-Dataplug/images/immmm.jpg");
+        //$url_part1="/var/www/vhosts/dataplug.itu.edu.pk/htdoc/assets/images/data";
+        //$url_part2="/form-data/73954c617545b2d2336e57d3ccc5ad5e.jpg"
+        //copy($url_part1.$url_part2, "/NFS-Dataplug/images/immmm.jpg");
 
         //get image which save on local folder
        // exit;
@@ -559,7 +567,9 @@ class Cron extends CI_Controller {
                     $url_explode = explode("/", $url);
                     $image_index = count($url_explode)-1;
                     $image_name = $url_explode[$image_index];
-                    //$source_path = "/var/www/vhosts/monitoring.punjab.gov.pk/htdoc/assets/images/data/form-data/".$image_name;
+                    //$url2_part1="/var/www/vhosts/monitoring.punjab.gov.pk/htdoc";
+                    //$url2_part2="/assets/images/data/form-data/";
+                    //$source_path = $url2_part1.$url2_part2.$image_name;
                     if (strpos($_SERVER ['SERVER_NAME'], 'monitoring.punjab.gov') !== false) {
                         $source_path = "/NFS-PPMRP/s3/ppmrp-live/".$image_name;
                     }else{
@@ -575,7 +585,8 @@ class Cron extends CI_Controller {
                         $this->db->update('zform_images',array('image'=>$dest_path));
 
                         //unlink($source_path);
-                        //echo "File deleted because Successfully copied = ".$source_path." ==>".$dest_path;
+                        //$msg1="File deleted because Successfully copied = ";
+                        //echo $msg1.$source_path." ==>".$dest_path;
                     }else{
                         if(file_exists($dest_path)){
 

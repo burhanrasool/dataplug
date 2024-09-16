@@ -24,7 +24,12 @@ class App extends CI_Controller {
         // }
         $sess_ar = $this->session->userdata('logged_in');
         if ($sess_ar['login_verification_code']!= '') {
-           $this->session->set_flashdata('validate', array('message' => 'Limited time access , Your account not verified yet, please check your email and verify otherwise account will delete after 30 days.', 'type' => 'warning'));
+            $msg= 'Limited time access , Your account not verified yet,';
+            $msg.=' please check your email and verify otherwise account';
+            $msg.=' will delete after 30 days.';
+           $this->session->set_flashdata(
+               'validate',
+                array('message' =>$msg, 'type' => 'warning'));
         }
     }
 
@@ -44,7 +49,7 @@ class App extends CI_Controller {
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
     public function index() {
-//         this method was calling again and again by list so applied logic here
+        //this method was calling again and again by list so applied logic here
         
         if (strpos($_SERVER ['SERVER_NAME'], 'monitoring.punjab') !== false) {
             if ($this->uri->segment(1) != 'apps') {
@@ -93,11 +98,27 @@ class App extends CI_Controller {
             }
 
             if ($this->acl->hasSuperAdmin()) {
-                $apps = $this->app_model->get_app_by_department_for_super($_GET['iDisplayStart'],$_GET['iDisplayLength'],$_GET['sSearch_0'],$_GET['sSearch_2'],$_GET['sSearch_3'],$_GET['iSortCol_0'],$_GET['sSortDir_0']);
-                $total_apps = $this->app_model->total_apps(null,$_GET['sSearch_0'], $_GET['sSearch_2'], $_GET['sSearch_3']);
+                $apps = $this->app_model->get_app_by_department_for_super(
+                    $_GET['iDisplayStart'],$_GET['iDisplayLength'],
+                    $_GET['sSearch_0'],$_GET['sSearch_2'],
+                    $_GET['sSearch_3'],$_GET['iSortCol_0'],
+                    $_GET['sSortDir_0']);
+                $arg1=$_GET['sSearch_0'];
+                $arg2=$_GET['sSearch_2'];
+                $arg3=$_GET['sSearch_3'];
+                $total_apps = $this->app_model->total_apps(null,$arg1,$arg2,$arg3);
             } else {
-                $apps = $this->app_model->get_app_by_user($data['login_user_id'],$_GET['iDisplayStart'],$_GET['iDisplayLength'],$_GET['sSearch_0'],$_GET['iSortCol_0'],$_GET['sSortDir_0']);
-                $total_apps = $this->app_model->total_apps($data['login_user_id'], $_GET['sSearch_0'], $_GET['sSearch_2'], $_GET['sSearch_3']);
+                $arg1=$data['login_user_id'];
+                $arg2=$_GET['iDisplayStart'];
+                $arg3=$_GET['iDisplayLength'];
+                $arg4=$_GET['sSearch_0'];
+                $arg5=$_GET['iSortCol_0'];
+                $arg6=$_GET['sSortDir_0'];
+                $apps = $this->app_model->get_app_by_user($arg1,$arg2,$arg3,$arg4,$arg5,$arg6);
+                $argument1=$data['login_user_id'], $_GET['sSearch_0'];
+                $argument2=$_GET['sSearch_2'];
+                $argument3=$_GET['sSearch_3'];
+                $total_apps = $this->app_model->total_apps($argument1,$argument2,$argument3);
             }
 //            $data2=array();
             //GET TOAL APPS...
@@ -149,12 +170,15 @@ class App extends CI_Controller {
                 //$all_forms = $this->form_model->get_form_by_app($app['id']);
                 $results_count=0;
                 foreach ($formbyapp as $forms) {
-                    //$forms_list[] = array('form_id' => $forms['form_id'], 'form_name' => $forms['form_name']);
-                    //$table_exist_bit = $this->form_results_model->check_table_exits('zform_' . $forms['form_id']);
+                    //$argument1='form_id' => $forms['form_id'];
+                    //$forms_list[] = array($argument1, 'form_name' => $forms['form_name']);
+                    //$argument='zform_' . $forms['form_id'];
+                    //$table_exist_bit = $this->form_results_model->check_table_exits($argument);
                     //if($table_exist_bit['count(*)']==1){
                     if(is_table_exist('zform_' . $forms['form_id'])){
                         //get count of records...
-                        $total=$this->form_results_model->find_record_count('zform_' . $forms['form_id']);
+                        $argument='zform_' . $forms['form_id'];
+                        $total=$this->form_results_model->find_record_count($argument);
                         $results_count+=$total;
                     }
                     if(!is_table_exist('zform_' . $forms['form_id'])) {
@@ -162,8 +186,8 @@ class App extends CI_Controller {
                     }
                 }
                 // if ($forms_list) {
-
-                //     $results_count = $this->form_results_model->get_result_is_empty($forms_list);
+                //                              
+                    //$results_count = $this->form_results_model->get_result_is_empty($forms_list);
                 // } else {
                 //     $results_count = 0;
                 // }
@@ -226,10 +250,15 @@ class App extends CI_Controller {
         session_to_page($session_data, $data);
         $department_id = $session_data['login_department_id'];
         $appinf = $this->app_model->get_app($app_id);
-        $usr_list = $this->users_model->get_user_by_department_id($appinf['department_id']);
+        $argument=$appinf['department_id'];
+        $usr_list = $this->users_model->get_user_by_department_id($argument);
         $data['usr_list'] = $usr_list;
         if ($this->input->post()) {
-            $this->form_validation->set_rules('user_id', 'User Name', 'trim|required|xss_clean');
+            $this->form_validation->set_rules(
+                'user_id', 
+                'User Name', 
+                'trim|required|xss_clean'
+            );
             if ($this->form_validation->run() == FALSE) {
             } else {
                 $user_id = $this->input->post('user_id');
@@ -244,14 +273,34 @@ class App extends CI_Controller {
                         'user_id' => $user_id,
                         'app_id' => $app_id
                     );
-                    //array parameters : action, description, before, after, app_id, app_name, form_id, form_name
-                    $logary = array('action' => 'insert', 'description' => 'Assigned application to other user', 'after' => json_encode($appdata), 'app_id' => $app_id,);
+                    //array parameters : 
+                    //action, 
+                    //description, 
+                    //before, 
+                    //after, 
+                    //app_id, 
+                    //app_name, 
+                    //form_id, 
+                    //form_name
+                    $logary = array(
+                        'action' => 'insert', 
+                        'description' => 'Assigned application to other user', 
+                        'after' => json_encode($appdata), 'app_id' => $app_id,
+                    );
                     addlog($logary);
                     $this->db->insert('users_app', $appdata);
-                    $this->session->set_flashdata('validate', array('message' => 'Application Assigned to User successfully', 'type' => 'success'));
+                    $msg='Application Assigned to User successfully';
+                    $this->session->set_flashdata(
+                        'validate', 
+                        array('message' => $msg, 'type' => 'success')
+                    );
                     redirect(base_url() . 'assign-applicatioin-users/' . $app_id);
                 } else {
-                    $this->session->set_flashdata('validate', array('message' => 'Application already assigned to this user', 'type' => 'error'));
+                    $msg='Application already assigned to this user';
+                    $this->session->set_flashdata(
+                        'validate', 
+                        array('message' => $msg, 'type' => 'error')
+                    );
                     redirect(base_url() . 'assign-applicatioin-users/' . $app_id);
                 }
             }
@@ -283,7 +332,10 @@ class App extends CI_Controller {
 
             $this->db->delete('users_app', array('id' => $asigned_id));
 
-            $this->session->set_flashdata('validate', array('message' => 'Asigned user deleted', 'type' => 'success'));
+            $this->session->set_flashdata(
+                'validate', 
+                array('message' => 'Asigned user deleted', 'type' => 'success')
+            );
             redirect(base_url() . 'assign-applicatioin-users/' . $app_id);
         } else {
             //If no session, redirect to login page
@@ -297,7 +349,11 @@ class App extends CI_Controller {
      */
     public function appusers() {
         if (!$this->acl->hasPermission('app_users', 'view')) {
-            $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+            $msg="You don't have enough permissions to do this task.";
+            $this->session->set_flashdata(
+                'validate', 
+                array('message' =>$msg , 'type' => 'warning')
+            );
             redirect('/');
         }
         $this->load->library('form_validation');
@@ -314,23 +370,48 @@ class App extends CI_Controller {
         if ($this->input->post()) {
             $app_id = $this->input->post('app_id');
             if ($this->acl->hasSuperAdmin()) {
-                $this->form_validation->set_rules('department_id', 'Department', 'trim|required|xss_clean');
+                $this->form_validation->set_rules(
+                    'department_id',
+                    'Department',
+                    'trim|required|xss_clean'
+                );
             }
-            $this->form_validation->set_rules('app_id', 'App Id', 'trim|required|xss_clean');
-            $this->form_validation->set_rules('name', 'First Name', 'trim|required|min_length[1]|xss_clean');
-            $this->form_validation->set_rules('town', 'district', 'Last Name', 'trim|required|min_length[1]|xss_clean');
+            $this->form_validation->set_rules(
+                'app_id', 
+                'App Id',
+                'trim|required|xss_clean'
+            );
+            $this->form_validation->set_rules(
+                'name', 
+                'First Name',
+                'trim|required|min_length[1]|xss_clean'
+            );
+            $this->form_validation->set_rules(
+                'town', 
+                'district', 
+                'Last Name',
+                'trim|required|min_length[1]|xss_clean'
+            );
             if($this->input->post('login_user') == '')
             {
-                $this->form_validation->set_rules('imei_no', 'IMEI #', 'trim|required|callback_appuser_imei_already_exist[' . $app_id . ']');
+                $arg3= 'trim|required|callback_appuser_imei_already_exist[' . $app_id . ']';
+                $this->form_validation->set_rules('imei_no', 'IMEI #',$arg3);
             }
             else{
                 
-                $this->form_validation->set_rules('login_user', 'User Name', 'trim|required|callback_appuser_login_name_already_exist');
+                $this->form_validation->set_rules(
+                    'login_user', 
+                    'User Name', 
+                    'trim|required|callback_appuser_login_name_already_exist'
+                );
             }
 
             if ($this->form_validation->run() == FALSE) {
                 $batch = array($this->input->post('department_id'));
-                $this->session->set_flashdata('validate', array('message' => "User must enter required field(s).", 'type' => 'warning'));
+                $this->session->set_flashdata(
+                    'validate', 
+                    array('message'=>"User must enter required field(s).",'type' => 'warning')
+                );
             } else {
                 if ($this->acl->hasSuperAdmin()) {
                     $department_id = $this->input->post('department_id');
@@ -356,12 +437,29 @@ class App extends CI_Controller {
                     'login_password' => $this->input->post('login_password'),
                     'mobile_number' => $this->input->post('mobile_number')
                 );
-                //array parameters : action, description, before, after, app_id, app_name, form_id, form_name
-                $logary = array('action' => 'insert', 'description' => 'app-users', 'after' => json_encode($appdata), 'app_id' => $app_id,);
+                //array parameters : 
+                //action, 
+                //description, 
+                //before, 
+                //after, 
+                //app_id, 
+                //app_name, 
+                //form_id, 
+                //form_name
+                $logary = array(
+                    'action' => 'insert', 
+                    'description' => 'app-users', 
+                    'after' => json_encode($appdata), 
+                    'app_id' => $app_id,
+                );
                 addlog($logary);
 
                 $this->db->insert('app_users', $appdata);
-                $this->session->set_flashdata('validate', array('message' => 'Application User added successfully', 'type' => 'success'));
+                $msg='Application User added successfully';
+                $this->session->set_flashdata(
+                    'validate', 
+                    array('message' => $msg, 'type' => 'success')
+                );
                 redirect(base_url() . 'applicatioin-users');
             }
         }
@@ -373,9 +471,18 @@ class App extends CI_Controller {
             $dep[$row['id']] = $row['name'];
         }
         if ($this->acl->hasSuperAdmin()) {
-            $app_user_list = $this->app_users_model->get_app_user_listing($data['login_department_id']);
+            $arg1=$data['login_department_id'];
+            $app_user_list = $this->app_users_model->get_app_user_listing($arg1);
         }else{
-            $app_user_list = $this->app_users_model->get_app_user_listing($data['login_department_id'],null,null,null,null,null,$app_list);
+            $app_user_list = $this->app_users_model->get_app_user_listing(
+                $data['login_department_id'],
+                null,
+                null,
+                null,
+                null,
+                null,
+                $app_list
+            );
         }
         $data['app_user_list'] = $app_user_list;
         $data['departments'] = $dep;
@@ -395,7 +502,10 @@ class App extends CI_Controller {
     public function ajaxappusers() {
 
         if (!$this->acl->hasPermission('app_users', 'view')) {
-            $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+            $msg="You don't have enough permissions to do this task.";
+            $this->session->set_flashdata(
+                'validate', 
+                array('message' => $msg, 'type' => 'warning'));
             redirect('/');
         }
         $this->load->library('form_validation');
@@ -418,8 +528,17 @@ class App extends CI_Controller {
             $dep[$row['id']] = $row['name'];
         }
 
-        $app_user_list = $this->app_users_model->get_app_user_listing($data['login_department_id'],$_GET['iDisplayStart'],$_GET['iDisplayLength'],$_GET['sSearch'],$_GET['iSortCol_0'],$_GET['sSortDir_0'],$app_list);
-        $total_apps_users = $this->app_users_model->get_app_user_total($data['login_department_id'],$_GET['sSearch']);
+        $app_user_list = $this->app_users_model->get_app_user_listing(
+            $data['login_department_id'],
+            $_GET['iDisplayStart'],
+            $_GET['iDisplayLength'],
+            $_GET['sSearch'],
+            $_GET['iSortCol_0'],
+            $_GET['sSortDir_0'],$app_list
+        );
+        $total_apps_users = $this->app_users_model->get_app_user_total(
+            $data['login_department_id'],$_GET['sSearch']
+        );
 //        making array for ajax datatable...
         $data2= array("sEcho" => intval($_GET['sEcho']),
             "iTotalRecords" => $total_apps_users,
@@ -461,7 +580,10 @@ class App extends CI_Controller {
     public function appusersimportcsv(){
 
              if (!$this->acl->hasPermission('app_users', 'add')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $msg="You don't have enough permissions to do this task.";
+                $this->session->set_flashdata(
+                    'validate', 
+                    array('message' => $msg, 'type' => 'warning'));
                 redirect('/');
             }
             $this->load->library('form_validation');
@@ -474,7 +596,11 @@ class App extends CI_Controller {
             }
             if ($this->input->post()) {
                 if ($this->acl->hasSuperAdmin()) {
-                        $this->form_validation->set_rules('department_id_import', 'Department', 'trim|required|xss_clean');
+                        $this->form_validation->set_rules(
+                            'department_id_import', 
+                            'Department', 
+                            'trim|required|xss_clean'
+                        );
                 }
                 $this->form_validation->set_rules('app_id_import', 'App Id', 'trim|required|xss_clean');
 
