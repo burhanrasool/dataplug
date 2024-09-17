@@ -13,13 +13,15 @@ class Apimaker extends CI_Controller {
         $this->load->model('api_model');
         $this->load->model('department_model');
         // if (!$this->acl->hasSuperAdmin()) {
-        //     if($this->acl->hasPermission('complaint','Access only complaint module')){
+        //     if($this->acl->hasPermission('complaint',
+		//										'Access only complaint module')){
         //         redirect(base_url() . 'complaintSystem');
         //     }
         // }
         $sess_ar = $this->session->userdata('logged_in');
         if ($sess_ar['login_verification_code']!= '') {
-           $this->session->set_flashdata('validate', array('message' => 'Limited time access , Your account not verified yet, please check your email and verify otherwise account will delete after 30 days.', 'type' => 'warning'));
+           $this->session->set_flashdata('validate', 
+											array('message' => 'Limited time access , Your account not verified yet, please check your email and verify otherwise account will delete after 30 days.', 'type' => 'warning'));
         }
         
     }
@@ -40,7 +42,7 @@ class Apimaker extends CI_Controller {
      * @see http://codeigniter.com/user_guide/general/urls.html
      */
     public function index() {
-//         this method was calling again and again by list so applied logic here
+//this method was calling again and again by list so applied logic here
         if ($this->session->userdata('logged_in')) {
             $this->session->unset_userdata('view');
             $session_data = $this->session->userdata('logged_in');
@@ -72,7 +74,7 @@ class Apimaker extends CI_Controller {
     }
 
     public function createurl($slug) {
-//         this method was calling again and again by list so applied logic here
+//this method was calling again and again by list so applied logic here
         if ($this->session->userdata('logged_in')) {
             $this->session->unset_userdata('view');
             $api_id = $slug;
@@ -109,7 +111,7 @@ class Apimaker extends CI_Controller {
         }
     }
     public function apiappurl($slug) {
-//         this method was calling again and again by list so applied logic here
+	//this method was calling again and again by list so applied logic here
         //exit;
         if ($this->session->userdata('logged_in')) {
             //$this->session->unset_userdata('view');
@@ -148,15 +150,18 @@ class Apimaker extends CI_Controller {
             $session_data = $this->session->userdata('logged_in');
 
             if (!$this->acl->hasPermission('app', 'add')) {
-                $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                $this->session->set_flashdata('validate', 
+												array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
                 redirect(base_url() . '');
             }
             session_to_page($session_data, $data);
             $department_id = $session_data['login_department_id'];
             if ($this->input->post()) {
-                $this->form_validation->set_rules('api_title', 'Api', 'trim|required|xss_clean|callback_app_already_exist[' . $department_id . ']');
+                $this->form_validation->set_rules('api_title', 'Api', 
+																'trim|required|xss_clean|callback_app_already_exist[' . $department_id . ']');
                 if ($this->form_validation->run() == FALSE) {
-                    $this->session->set_flashdata('validate', array('message' => 'Please enter the Required Fields', 'type' => 'error'));
+                    $this->session->set_flashdata('validate', 
+													array('message' => 'Please enter the Required Fields', 'type' => 'error'));
                     redirect(base_url());
                 } else {
                     $rand_key = random_string('alnum', 10);
@@ -177,7 +182,8 @@ class Apimaker extends CI_Controller {
                     @mkdir($abs_path, 0777);
                     umask($old);
                     if ($_FILES['userfile_addapi']['name'] != '') {
-                    	$file_name = preg_replace("/[^A-Za-z0-9\.]/", "_",$_FILES['userfile_addapi']['name']);
+                    	$file_name = preg_replace("/[^A-Za-z0-9\.]/",
+														"_",$_FILES['userfile_addapi']['name']);
                         $iconName = $api_id.'_'.$file_name;
                         $config['upload_path'] = $abs_path;
                         $config['file_name'] = $iconName;
@@ -190,7 +196,8 @@ class Apimaker extends CI_Controller {
 
                         if (!$this->upload->do_upload('userfile_addapi')) {
                             $this->data['error'] = $this->upload->display_errors();
-                            $this->session->set_flashdata('validate', array('message' => $this->upload->display_errors() . ', Default icon has been embeded with your app.', 'type' => 'warning'));
+                            $this->session->set_flashdata('validate', 
+															array('message' => $this->upload->display_errors() . ', Default icon has been embeded with your app.', 'type' => 'warning'));
                         } else {
                             //success
                         }
@@ -201,7 +208,8 @@ class Apimaker extends CI_Controller {
                     );
                     $this->db->where('id', $api_id);
                     $this->db->update('api', $change_file);
-                    $this->session->set_flashdata('validate', array('message' => 'API added successfully.', 'type' => 'success'));
+                    $this->session->set_flashdata('validate', 
+													array('message' => 'API added successfully.', 'type' => 'success'));
                     redirect(base_url() . 'apimaker/index');
                     
                 }
@@ -262,7 +270,8 @@ class Apimaker extends CI_Controller {
                         $this->load->library('upload', $config);
                         if (!$this->upload->do_upload('userfile_addapi')) {
                             $this->data['error'] = $this->upload->display_errors();
-                            $this->session->set_flashdata('validate', array('message' => $this->upload->display_errors() . ', Default icon has been embeded with your app.', 'type' => 'warning'));
+                            $this->session->set_flashdata('validate', 
+															array('message' => $this->upload->display_errors() . ', Default icon has been embeded with your app.', 'type' => 'warning'));
                         } else {
                             unlink('./assets/data/'.$api_rec['file_name']);
                             //success
@@ -274,7 +283,8 @@ class Apimaker extends CI_Controller {
                         $this->db->update('api', $change_file);
                     } 
                     
-                    $this->session->set_flashdata('validate', array('message' => 'API Updated successfully.', 'type' => 'success'));
+                    $this->session->set_flashdata('validate', 
+													array('message' => 'API Updated successfully.', 'type' => 'success'));
                     redirect(base_url() . 'apimaker/index');
             }
             if($department_id==0){
@@ -308,7 +318,8 @@ class Apimaker extends CI_Controller {
             $this->db->where('id', $api_id);
             $this->db->delete('api');
             unlink('./assets/data/'.$api_rec['file_name']);
-            $this->session->set_flashdata('validate', array('message' => 'API deleted successfully.', 'type' => 'success'));
+            $this->session->set_flashdata('validate',
+											array('message' => 'API deleted successfully.', 'type' => 'success'));
         } else {
             //If no session, redirect to login page
             redirect(base_url());

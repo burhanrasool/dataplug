@@ -2059,8 +2059,7 @@ class Api extends CI_Controller {
 
         // this code is used for sending record to other domain
         if ($post_url) {
-            if ($form_id == '4575' && 
-                strpos($_SERVER ['SERVER_NAME'], 'dataplug.itu') !== false) {
+            if ($form_id == '4575' && strpos($_SERVER ['SERVER_NAME'], 'dataplug.itu') !== false) {
                 $tempary = array(
                     'imei_no' => $imei_no,
                     'image_url' => $add_images ['image'],
@@ -2138,8 +2137,7 @@ class Api extends CI_Controller {
         $lat = trim($loc [0]);
         $long = trim($loc [1]);
 
-        $url = "http://ucfinder.herokuapp.com/"
-        $url .= "ajax/region_finder.json?lat=$lat&long=$long";
+        $url = "http://ucfinder.herokuapp.com/ajax/region_finder.json?lat=$lat&long=$long";
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -2166,8 +2164,7 @@ class Api extends CI_Controller {
         $loc = explode(',', $location);
         $lat = trim($loc [0]);
         $long = trim($loc [1]);
-        $url = "http://ucfinder.herokuapp.com/"
-        $url .= "ajax/town_finder.json?lat=$lat&long=$long";
+        $url = "http://ucfinder.herokuapp.com/ajax/town_finder.json?lat=$lat&long=$long";
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -2194,8 +2191,7 @@ class Api extends CI_Controller {
         $loc = explode(',', $location);
         $lat = trim($loc [0]);
         $long = trim($loc [1]);
-        $url = "http://ucfinder.herokuapp.com/";
-        $url .= "ajax/distict_finder.json?lat=$lat&long=$long";
+        $url = "http://ucfinder.herokuapp.com/ajax/distict_finder.json?lat=$lat&long=$long";
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -2237,8 +2233,7 @@ class Api extends CI_Controller {
     public function getoptionapi() {
         $api = $this->input->get('api');
         $secret = $this->input->get('secret');
-        $query = $this->db->query("SELECT * FROM api WHERE id = 
-        '$api' AND secret_key='$secret'");
+        $query = $this->db->query("SELECT * FROM api WHERE id = '$api' AND secret_key='$secret'");
         $api_data = $query->row_array();
         if ($api_data) {
             $csv_file_name = $api_data ['file_name'];
@@ -2267,17 +2262,14 @@ class Api extends CI_Controller {
                         if (!isset($existArray [$parent_optional_name])) {
                             $existArray [$parent_optional_name] = array();
                         }
-                        if (!in_array(strtolower(trim($data [$child_index])),
-                            $existArray [$parent_optional_name])) {
-                            array_push($existArray [$parent_optional_name],
-                            strtolower(trim($data [$child_index])));
+                        if (!in_array(strtolower(trim($data [$child_index])), $existArray [$parent_optional_name])) {
+                            array_push($existArray [$parent_optional_name], strtolower(trim($data [$child_index])));
                             $option_parent_value = '';
                             if ($parent_name != '') {
                                 $option_parent_value = trim($data [$parent_index]);
                             }
                             $option_display_value = $option_value = trim($data [$child_index]);
-                            if(isset($heading_row[$child_index+1]) && 
-                            $heading_row[$child_index+1]=='display_value_'.$heading_row[$child_index]){
+                            if(isset($heading_row[$child_index+1]) && $heading_row[$child_index+1]=='display_value_'.$heading_row[$child_index]){
                                 $option_display_value = trim($data[$child_index+1]);
                             }
                             $record = array(
@@ -2316,8 +2308,7 @@ class Api extends CI_Controller {
 
     // URL : http://www.dataplug.itu.edu.pk/api/syncDataRemotely?app_id=1293&security_token=1ae473a61dbe13cb9ec199e9c2361956&last_date_stamp=
     public function syncDataRemotely() {
-        if (isset($_REQUEST ['app_id']) && isset($_REQUEST ['last_date_stamp'])
-            && isset($_REQUEST ['security_token'])) {
+        if (isset($_REQUEST ['app_id']) && isset($_REQUEST ['last_date_stamp']) && isset($_REQUEST ['security_token'])) {
             $app_id = $_REQUEST ['app_id'];
             $last_date_stamp = $_REQUEST ['last_date_stamp'];
             $security_token = $_REQUEST ['security_token']; // 1ae473a61dbe13cb9ec199e9c2361956
@@ -2368,8 +2359,7 @@ class Api extends CI_Controller {
      */
 
     public function importDataFormBased() {
-        if (isset($_REQUEST ['local_form_id'])
-            && isset($_REQUEST ['remote_form_id'])) {
+        if (isset($_REQUEST ['local_form_id']) && isset($_REQUEST ['remote_form_id'])) {
             $local_form_id = $_REQUEST ['local_form_id'];
             $table_name = 'zform_' . $local_form_id;
             $remote_form_id = $_REQUEST ['remote_form_id'];
@@ -2380,8 +2370,7 @@ class Api extends CI_Controller {
                 $last_id = 0;
             }
 
-            $url = "http://godk.itu.edu.pk/api/exportDataFormBased?";
-            $url .= "form_id=$remote_form_id&last_id=$last_id";
+            $url = "http://godk.itu.edu.pk/api/exportDataFormBased?form_id=$remote_form_id&last_id=$last_id";
             $ch = curl_init() or die("Cannot init");
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -2390,8 +2379,8 @@ class Api extends CI_Controller {
             $table_headers_array = array(
                 'created_datetime'
             );
-
-            $schema_list = $this->form_results_model->getTableHeadingsFromSchema($table_name);
+			$temp_tb=$table_name;
+            $schema_list = $this->form_results_model->getTableHeadingsFromSchema($temp_tb);
             foreach ($schema_list as $key => $value) {
                 $header_value = $value ['COLUMN_NAME'];
                 if ($header_value != 'created_datetime') {
@@ -2450,10 +2439,12 @@ class Api extends CI_Controller {
 
     //for hospital watch app
     public function hospitalwatchapi() {
-        //if (isset($_REQUEST['app_id']) && isset($_REQUEST['last_date_stamp']) && isset($_REQUEST['security_token'])) {
+        //if (isset($_REQUEST['app_id']) && isset($_REQUEST['last_date_stamp'])
+		//																&& isset($_REQUEST['security_token'])) {
         if (isset($_REQUEST['app_id'])) {
             $app_id = $_REQUEST['app_id'];
-            $last_date_stamp = isset($_REQUEST['last_date_stamp']) ? $_REQUEST['last_date_stamp'] : '';
+			$temp_date=$_REQUEST['last_date_stamp'];
+            $last_date_stamp = isset($temp_date) ? $temp_date : '';
             $start_date_stamp = isset($_REQUEST['start_date_stamp']) ? $_REQUEST['start_date_stamp'] : '';
 
             $selected_app = $this->app_model->get_app($app_id);
@@ -2467,9 +2458,12 @@ class Api extends CI_Controller {
             $results_count = 0;
             $all_forms = $this->form_model->get_form_by_app($app_id);
             foreach ($all_forms as $forms) {
-                $forms_list[] = array('form_id' => $forms['form_id'], 'form_name' => $forms['form_name']);
+                $forms_list[] = array('form_id' => $forms['form_id'], 
+															'form_name' => $forms['form_name']);
                 /** in case of post of form filters * */
-                $results = $this->form_results_model->syncDataFromRemoteServer($forms['form_id'], $last_date_stamp, $start_date_stamp);
+				$temp_id=$forms['form_id']
+                $results = $this->form_results_model->syncDataFromRemoteServer($temp_id,
+																					$last_date_stamp, $start_date_stamp);
                 $results_count += count($results);
                 $final_result = array_merge($final_result, $results);
             }
@@ -2508,7 +2502,8 @@ class Api extends CI_Controller {
         if (isset($_REQUEST ['app_id']) && isset($_REQUEST ['security_token'])) {
             $app_id = $_REQUEST ['app_id'];
             $from_date_stamp = "";
-            if(isset($_REQUEST ['from_date_stamp']) && !empty($_REQUEST ['from_date_stamp'])){
+			$temp_stamp=$_REQUEST ['from_date_stamp'];
+            if(isset($temp_stamp) && !empty($temp_stamp)){
                 $pos = strpos($_REQUEST ['from_date_stamp'], ':');
                 $from_date_stamp = $_REQUEST ['from_date_stamp'];
                 if ($pos === false) {
@@ -2524,10 +2519,13 @@ class Api extends CI_Controller {
                 }
             }
             
-            // $from_date_stamp = isset($_REQUEST ['from_date_stamp']) ? $_REQUEST ['from_date_stamp'] : '';
-            // $to_date_stamp = isset($_REQUEST ['to_date_stamp']) ? $_REQUEST ['to_date_stamp'] : '';
+            // $from_date_stamp = isset($_REQUEST ['from_date_stamp']) ? 
+			//													$_REQUEST ['from_date_stamp'] : '';
+            // $to_date_stamp = isset($_REQUEST ['to_date_stamp']) ? 
+			//													$_REQUEST ['to_date_stamp'] : '';
             $imei_no = isset($_REQUEST ['imei_no']) ? $_REQUEST ['imei_no'] : null;
-            $security_token = $_REQUEST ['security_token']; // 954223eaaec107c5d7965978c9665e64
+            $security_token = $_REQUEST ['security_token']; 
+			//954223eaaec107c5d7965978c9665e64
 
             $selected_app = $this->app_model->get_app($app_id);
             $app_name = $selected_app ['name'];
@@ -2536,7 +2534,9 @@ class Api extends CI_Controller {
                 $final_result = array();
                 $results_count = 0;
                 if( isset($_REQUEST ['form_id']) && !empty($_REQUEST ['form_id']) ){
-                    $results = $this->form_results_model->syncDataFromRemoteServer($_REQUEST ['form_id'], $from_date_stamp, $to_date_stamp,$imei_no);
+					$temp_req=$_REQUEST ['form_id'];
+                    $results = $this->form_results_model->syncDataFromRemoteServer($temp_req, 
+																					$from_date_stamp, $to_date_stamp,$imei_no);
                     $results_count += count($results);
                     foreach ($results as $rec) {
                         $rec ['images'] = array();
@@ -2589,7 +2589,9 @@ class Api extends CI_Controller {
                             'form_id' => $forms ['form_id'],
                             'form_name' => $forms ['form_name']
                         );
-                        $results = $this->form_results_model->syncDataFromRemoteServer($forms ['form_id'], $from_date_stamp, $to_date_stamp,$imei_no);
+						$temp_form=$forms ['form_id'];
+                        $results = $this->form_results_model->syncDataFromRemoteServer($temp_form,
+																							$from_date_stamp, $to_date_stamp,$imei_no);
                         $results_count += count($results);
                         foreach ($results as $rec) {
                             $rec['images'] = array();
@@ -2654,19 +2656,24 @@ class Api extends CI_Controller {
     }
 
     public function update_application_general_settings() {
-        $query = $this->db->query("select * from app_settings LEFT JOIN app ON (app.id=app_settings.app_id)");
+        $query = $this->db->query("select * from app_settings 
+														LEFT JOIN app ON (app.id=app_settings.app_id)");
         $result = $query->result_array();
 
         foreach ($result as $key => $val) {
             $general_settings = array();
             echo $app_id = $val ["app_id"];
             echo " ";
-            echo $is_secured = (isset($val ['is_secure']) && $val ['is_secure'] == 'yes') ? 1 : 0;
+			$temp_secure=$val ['is_secure'];
+            echo $is_secured = (isset($temp_secure) && $temp_secure == 'yes') ? 1 : 0;
             echo " - ";
-            echo $is_authorized = (isset($val ['is_authorized']) && $val ['is_authorized'] == '1') ? 1 : 0;
+			$temp_auth=$val ['is_authorized']
+            echo $is_authorized = (isset($temp_auth) && $temp_auth == '1') ? 1 : 0;
             echo " -> ";
-            $screen_view = (isset($val ['default_view_builder'])) ? $val ['default_view_builder'] : 4;
-            $app_language = (isset($val ['app_language'])) ? $val ['app_language'] : "english";
+			$temp=$val ['default_view_builder'];
+            $screen_view = (isset($temp)) ? $temp : 4;
+			$temp2=$val ['app_language'];
+            $app_language = (isset($temp2)) ? $temp2 : "english";
 
             $general_settings ['setting_type'] = "general_settings";
             $general_settings ['secured_apk'] = $is_secured;
@@ -2705,7 +2712,8 @@ class Api extends CI_Controller {
                 'setting_type' => 'RESULT_VIEW_SETTINGS',
                 'filters' => $json_string
             );
-            $app_exist = $this->db->query("select * from app_settings where app_id=$app_id AND setting_type='RESULT_VIEW_SETTINGS'");
+            $app_exist = $this->db->query("select * from app_settings where 
+																		app_id=$app_id AND setting_type='RESULT_VIEW_SETTINGS'");
             $app_exist1 = $app_exist->result_array();
             if (!empty($app_exist1)) {
                 $this->db->set("filters", $json_string);
@@ -2744,7 +2752,8 @@ class Api extends CI_Controller {
                 'setting_type' => 'MAP_VIEW_SETTINGS',
                 'filters' => $json_string
             );
-            $app_exist = $this->db->query("select * from app_settings where app_id=$app_id AND setting_type='MAP_VIEW_SETTINGS'");
+            $app_exist = $this->db->query("select * from app_settings where 
+																		app_id=$app_id AND setting_type='MAP_VIEW_SETTINGS'");
             $app_exist1 = $app_exist->result_array();
             if (!empty($app_exist1)) {
                 $this->db->set("filters", $json_string);
@@ -2778,7 +2787,8 @@ class Api extends CI_Controller {
                 'setting_type' => 'GRAPH_VIEW_SETTINGS',
                 'filters' => $json_string
             );
-            $app_exist = $this->db->query("select * from app_settings where app_id=$app_id AND setting_type='GRAPH_VIEW_SETTINGS'");
+            $app_exist = $this->db->query("select * from app_settings where 
+																		app_id=$app_id AND setting_type='GRAPH_VIEW_SETTINGS'");
             $app_exist1 = $app_exist->result_array();
             if (!empty($app_exist1)) {
                 $this->db->set("filters", $json_string);
@@ -2837,7 +2847,8 @@ class Api extends CI_Controller {
             $rec_id = $fv['id'];
             foreach($fv as $key =>$v){
                 if(strpos($v, $form_info['security_key']) !== FALSE){
-                    $vdcode = urldecode(base64_decode(str_replace($form_info['security_key'], '', $v)));
+                    $vdcode = urldecode(base64_decode(str_replace($form_info['security_key'],
+																				'', $v)));
                     $up_array[$key] = $vdcode;
                 }
                 else{
@@ -2855,7 +2866,8 @@ class Api extends CI_Controller {
     }
     
     /**
-     * This function is used for saving the record which sent from android application
+     * This function is used for saving the record which 
+	 * sent from android application
      * 
      * @return json
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
@@ -2896,7 +2908,8 @@ class Api extends CI_Controller {
             'data_type' => 'single'
             
         );
-        $tracking_inserted_id = $this->form_results_model->save_mobile_tracking($tracking_temp);
+        $tracking_inserted_id = $this->form_results_model->save_mobile_tracking(
+																			$tracking_temp);
         
         
 
@@ -2927,17 +2940,20 @@ class Api extends CI_Controller {
                   
         if(!$ret_ins){
             $err_msg = $this->db->_error_message();
-            $this->form_results_model->update_mobile_tracking($tracking_inserted_id,array('error'=>$err_msg));
+            $this->form_results_model->update_mobile_tracking($tracking_inserted_id,
+																				array('error'=>$err_msg));
 
             echo $jsone_array = array (
                     'error' => $err_msg
             );
         }
-        //$this->form_results_model->remove_mobile_tracking($tracking_inserted_id,array('error'=>$err_msg));
+        //$this->form_results_model->remove_mobile_tracking($tracking_inserted_id,
+		//																		array('error'=>$err_msg));
         exit();
     }
     /**
-     * This function is used for saving the record which sent from android application
+     * This function is used for saving the record which 
+	 *	sent from android application
      * 
      * @return json
      * @author Zahid Nadeem <zahidiubb@yahoo.com>
@@ -2957,7 +2973,8 @@ class Api extends CI_Controller {
             'data_type' => 'bulk'
             
         );
-        $tracking_inserted_id = $this->form_results_model->save_mobile_tracking($tracking_temp);
+        $tracking_inserted_id = $this->form_results_model->save_mobile_tracking(
+																				$tracking_temp);
 
         header("Content-Length: 1"); 
         header("HTTP/1.1 200 OK");
@@ -3002,7 +3019,8 @@ class Api extends CI_Controller {
                   
             if(!$ret_ins){
                 $err_msg = $this->db->_error_message();
-                $this->form_results_model->update_mobile_tracking($tracking_inserted_id,array('error'=>$err_msg));
+                $this->form_results_model->update_mobile_tracking($tracking_inserted_id,
+																					array('error'=>$err_msg));
                 
                 echo $jsone_array = array (
                         'error' => $err_msg
@@ -3012,7 +3030,8 @@ class Api extends CI_Controller {
         }
          
                 
-        //$this->form_results_model->remove_mobile_tracking($tracking_inserted_id,array('error'=>$err_msg));
+        //$this->form_results_model->remove_mobile_tracking($tracking_inserted_id,
+		//																		array('error'=>$err_msg));
         exit();
     }
         /**
@@ -3043,7 +3062,8 @@ class Api extends CI_Controller {
             if($type == 'update')
             {
                 $old_imei_no = $this->input->post('old_imei_no');
-                $query = $this->db->query("SELECT * FROM app_users WHERE is_deleted=0 AND app_id = '$app_id' AND imei_no='$old_imei_no'");
+                $query = $this->db->query("SELECT * FROM app_users WHERE 
+											is_deleted=0 AND app_id = '$app_id' AND imei_no='$old_imei_no'");
                 $current_rec = $query->row_array();
                 $app_user_id = $current_rec['id'];
                                 
