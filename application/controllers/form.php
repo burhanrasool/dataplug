@@ -641,12 +641,15 @@ class Form extends CI_Controller
 //            if (isset($list_view_settings->district_filter)
 //            && $list_view_settings->district_filter == 1) {
 //
-//                $district_list = $this->form_results_model->get_distinct_district($slug);
+//                $district_list = $this->form_results_model->
+//                get_distinct_district($slug);
 //                $data['district_list'] = $district_list;
 //            }
 //
-//            if (isset($list_view_settings->sent_by_filter) && $list_view_settings->sent_by_filter == 1) {
-//                $sent_by_list = $this->form_results_model->get_distinct_sent_by($slug);
+//            if (isset($list_view_settings->sent_by_filter) &&
+//            $list_view_settings->sent_by_filter == 1) {
+//                $sent_by_list = $this->form_results_model->
+//                get_distinct_sent_by($slug);
 //                $data['sent_by_list'] = $sent_by_list;
 //            }
 
@@ -669,7 +672,8 @@ class Form extends CI_Controller
                     if (array_key_exists("sent_by", $dynamic_filters)) {
                         $imei_no_string = implode(",", $dynamic_filters['sent_by']);
                         //get users name form imei_nos...
-                        $imei_no_list = $this->form_results_model->get_users_name_from_imei_no($imei_no_string);
+                        $imei_no_list = $this->form_results_model->
+						get_users_name_from_imei_no($imei_no_string);
                         $name_arr = array();
                         foreach ($imei_no_list as $key => $val) {
                             $name_arr[$val['imei_no']] = $val['name'];
@@ -680,16 +684,20 @@ class Form extends CI_Controller
 
                 //print_r($selected_form);die;
                 if (isset($filter_result->filters)) {
-                    $app_filter_list = isset($filter_result->filters->$form_li[0]) ? (array) $filter_result->filters->$form_li[0] : array();
+                    $app_filter_list = isset($filter_result->filters->
+					$form_li[0]) ? (array) $filter_result->filters->
+					$form_li[0] : array();
                 } else {
                     $app_filter_list = array();
                 }
 //                if (!empty($selected_form)) {
-//                    $app_filter_list = explode(',', $selected_form['possible_filters']);
+//                    $app_filter_list = explode(',',
+//                    $selected_form['possible_filters']);
 //                } else {
 //                    $app_filter_list = array('id');
 //                }
-//                $possible_filters_from_settings = $this->form_model->get_form_column_values($app_filter_list, $form_li[0]);
+//                $possible_filters_from_settings = $this->form_model->
+//                get_form_column_values($app_filter_list, $form_li[0]);
                 $possible_filters_from_settings = $app_filter_list;
                 $selected_uc = '';
                 $selected_pp = '';
@@ -705,18 +713,21 @@ class Form extends CI_Controller
 //                $selected_form = $this->form_model->get_form($form_id);
 //
 //                $app_id = $selected_form['app_id'];
-//                $changed_filter_form_id = $this->get_form_filter_based($app_id, $changed_category);
+//                $changed_filter_form_id = $this->
+//                get_form_filter_based($app_id, $changed_category);
 
                 $posted_array_filter = array();
                 $data_per_filter = array();
 
                 $posted_filters = array();
                 $filter_options = '';
-//                $filter_result = get_result_view_settings($selected_form['app_id']);
+//                $filter_result = 
+//                get_result_view_settings($selected_form['app_id']);
 //                if (isset($filter_result->filters->$form_id)) {
 //                    $app_filter_list = $filter_result->filters->$form_id;
 //
-//                    $filter_options .= "<option value=''>Select One</option>";
+//                    $filter_options .=
+//                    "<option value=''>Select One</option>";
 //                    if (!empty($app_filter_list)) {
 //
 //                        foreach ($app_filter_list as $key => $val) {
@@ -726,7 +737,8 @@ class Form extends CI_Controller
 //                            } else {
 //                                $selected = '';
 //                            }
-//                            $filter_options .= "<option $selected value='$val'>$print_val</option>";
+//                            $filter_options .= "<option $selected value=
+//                            '$val'>$print_val</option>";
 //                        }
 //                    }
 //                }
@@ -738,7 +750,8 @@ class Form extends CI_Controller
 //                            $final = array();
 //                            if (!empty($datum)) {
 //                                foreach ($datum as $inside) {
-//                                    $final = array_merge($final, array($inside => $inside));
+//                                    $final = array_merge($final,
+//                                    array($inside => $inside));
 //                                }
 //                            }
 //                        }
@@ -755,7 +768,8 @@ class Form extends CI_Controller
                 $data['search_text'] = $search_text;
                 if ($search_text) {
                     $search_text = mysql_real_escape_string($search_text);
-                    $search_text = str_replace(array('~', '<', '>', '$', '%', '|', '^', '*'), array(' '), $search_text);
+                    $search_text = str_replace(array('~', '<', '>', '$',
+					'%', '|', '^', '*'), array(' '), $search_text);
                     $search_text = str_replace('/', '\\\\/', $search_text);
                     $search_text = trim($search_text);
                 }
@@ -766,16 +780,19 @@ class Form extends CI_Controller
                 $final_send = array();
                 foreach ($forms_list as $final_view) {
                     if (in_array($final_view['form_id'], $form_list_posted)) {
-                        $final_send = array_merge($final_send, array($final_view['form_name'] => $final_view['form_id']));
+                        $final_send = array_merge($final_send,
+						array($final_view['form_name'] => $final_view['form_id']));
                     }
-                    $view_list = array_merge($view_list, array($final_view['form_name'] => $final_view['form_id']));
+                    $view_list = array_merge($view_list,
+					array($final_view['form_name'] => $final_view['form_id']));
                 }
                 $view_list = array_flip($view_list);
                 $data['form_lists'] = $view_list;
                 $data['form_list_selected'] = $final_send;
                 $form_list_filter = array();
                 foreach ($form_list_posted as $list) {
-                    $form_list_filter[] = array('form_id' => $list, 'table_name' => 'zform_' . $list);
+                    $form_list_filter[] = array('form_id' =>
+					$list, 'table_name' => 'zform_' . $list);
                 }
                 if (empty($to_date)) {
                     $to_date = "2013-06-03";
@@ -792,12 +809,16 @@ class Form extends CI_Controller
 //                $sent_by = $this->input->post('sent_by_list');
 //                $data['selected_sent_by'] = $sent_by;
                 if (strtotime($to_date) > strtotime($from_date)) {
-                    $this->session->set_flashdata('validate', array('message' => 'Invalid Date selection. From Date should be greater than To Date.', 'type' => 'warning'));
+                    $this->session->set_flashdata('validate', array('message' =>
+					'Invalid Date selection. From Date should be greater than To Date.',
+					'type' => 'warning'));
                     redirect(base_url() . 'form/results/' . $form_id);
                 }
                 $data['form_id'] = $form_id;
                 if (!$this->acl->hasPermission('form', 'view')) {
-                    $this->session->set_flashdata('validate', array('message' => "You don't have enough permissions to do this task.", 'type' => 'warning'));
+                    $this->session->set_flashdata('validate', array('message' =>
+					"You don't have enough permissions to do this task.",
+					'type' => 'warning'));
                     redirect(base_url() . 'apps');
                 }
                 $data['form_name'] = $selected_form['name'];
@@ -806,23 +827,27 @@ class Form extends CI_Controller
                 $data['app_name'] = $selected_app['name'];
 //                $data['filter'] = $changed_category;
                 /** Get Town based on app id for displaying town filter on list view* */
-//                $town_lists = $this->app_users_model->get_towns($selected_form['app_id']);
+//                $town_lists = $this->app_users_model->
+//                get_towns($selected_form['app_id']);
 //                $town_list_array = array();
 //                foreach ($town_lists as $towns) {
 //                    if (!in_array($towns['town'], $town_list_array)) {
-//                        $town_list_array = array_merge($town_list_array, array($towns['town'] => $towns['town']));
+//                        $town_list_array = array_merge($town_list_array,
+//                        array($towns['town'] => $towns['town']));
 //                    }
 //                }
 //                $data['town_filter'] = $town_list_array;
                 /** Get filters from  multiple forms * */
-//                $multiple_filters = $this->form_model->get_form_filters($form_list_filter);
+//                $multiple_filters = $this->form_model->
+//                get_form_filters($form_list_filter);
 //                $filter_attribute = array();
 //                $form_html_multiple = array();
 //                foreach ($multiple_filters as $key => $value) {
 //                    array_push($filter_attribute, $value['filter']);
 //                    array_push($form_html_multiple, $value['description']);
 //                }
-//                $filter_attribute_search = (!empty($filter_attribute)) ? $filter_attribute : "";
+//                $filter_attribute_search = 
+//                (!empty($filter_attribute)) ? $filter_attribute : "";
 //                $data['filter_attribute'] = $filter_attribute;
 //                $data['form_html'] = $form_html_multiple;
                 $session_data = $this->session->userdata('logged_in');
@@ -830,7 +855,10 @@ class Form extends CI_Controller
                 $login_district = $session_data['login_district'];
                 /* $changed_category = filter attrubte search */
                 $array_final = array();
-                $array_final = $this->get_heading_n_data_posted($form_list_filter, $to_date, $from_date, $cat_filter_value, $changed_category, $town_filter, $posted_filters, $search_text, $district, $sent_by, $export = '', $selected_dc, $selected_uc, $selected_pp, $selected_na, $dynamic_filters);
+                $array_final = $this->get_heading_n_data_posted($form_list_filter,
+				$to_date, $from_date, $cat_filter_value, $changed_category, $town_filter,
+				$posted_filters, $search_text, $district, $sent_by, $export = '',
+				$selected_dc, $selected_uc, $selected_pp, $selected_na, $dynamic_filters);
                 $data['headings'] = $array_final['headings'];
                 $data['form'] = $array_final['form'];
 
@@ -838,10 +866,16 @@ class Form extends CI_Controller
                     'heading' => $array_final['headings'],
                     'form' => $array_final['form']
                 );
-                $this->db->delete('form_result_temp', array('user_id' => $session_data['login_user_id']));
-                $this->db->insert('form_result_temp', array('user_id' => $session_data['login_user_id'], 'query_user' => json_encode($result_sess_array)));
+                $this->db->delete('form_result_temp', array('user_id' => 
+				$session_data['login_user_id']));
+                $this->db->insert('form_result_temp', array('user_id' => 
+				$session_data['login_user_id'], 'query_user' => json_encode($result_sess_array)));
 
-                $total_record_return = $this->form_results_model->return_total_record_posted($form_list_filter, $to_date, $from_date, $cat_filter_value, $filter_attribute_search, $town_filter, $posted_filters, $search_text, $district, $sent_by, $selected_dc, $dynamic_filters);
+                $total_record_return = $this->form_results_model->
+				return_total_record_posted($form_list_filter,
+				$to_date, $from_date, $cat_filter_value, 
+				$filter_attribute_search, $town_filter, $posted_filters,
+				$search_text, $district, $sent_by, $selected_dc, $dynamic_filters);
 
                 $pdata['TotalRec'] = $total_record_return;
                 $pdata['perPage'] = $this->perPage;
@@ -858,7 +892,8 @@ class Form extends CI_Controller
                 $pdata['district'] = $district;
                 $pdata['ajax_function'] = 'paginated_ajax_data_posted';
                 $pdata['slug'] = $form_id;
-                $subdata['paging_category_filter'] = $this->parser->parse('form/paging_category_filter', $pdata, TRUE);
+                $subdata['paging_category_filter'] = $this->parser->
+				parse('form/paging_category_filter', $pdata, TRUE);
                 $subdata['all_form_results'] = $data['form'];
                 $subdata['headings'] = $data['headings'];
                 $subdata['saved_columns'] = $array_final['saved_columns'];
@@ -875,18 +910,22 @@ class Form extends CI_Controller
                 $category_values = array();
                 (isset($changed_filter_form_id[0])) ? $changed_filter_form_id[0] : '';
                 if ($changed_category) {
-                    $category_list = $this->form_results_model->get_category_values('zform_' . $changed_filter_form_id[0], $changed_category);
+                    $category_list = $this->form_results_model->
+					get_category_values('zform_' . $changed_filter_form_id[0], $changed_category);
                     foreach ($category_list as $key => $val) {
                         $category_values[$val[$changed_category]] = $val[$changed_category];
                     }
                 }
 
-                $data['body_content'] = $this->parser->parse('form/form_results_data', $subdata, TRUE);
+                $data['body_content'] = $this->parser->
+				parse('form/form_results_data', $subdata, TRUE);
                 $data['selected_form'] = $form_id;
                 $data['category_values'] = $category_values;
                 $data['app_id'] = $selected_form['app_id'];
-                $data['app_comments'] = $this->form_model->get_comments($selected_form['app_id']);
-                $data['pageTitle'] = $selected_app['name'] . ' Records - List View-' . PLATFORM_NAME;
+                $data['app_comments'] = $this->form_model->
+				get_comments($selected_form['app_id']);
+                $data['pageTitle'] = 
+				$selected_app['name'] . ' Records - List View-' . PLATFORM_NAME;
                 $selected_app = $this->app_model->get_app($data['app_id']);
                 $data['app_name'] = $selected_app['name'];
                 $data['filter_options'] = $filter_options;
@@ -900,9 +939,11 @@ class Form extends CI_Controller
                     $this->load->view('form/results_1293');
                 } else if ($slug == 1567) {
                     $final_dc = array('' => 'Select All');
-                    $disbursement_center_lists = $this->form_results_model->get_distinct_d_center(1567);
+                    $disbursement_center_lists = $this->
+					form_results_model->get_distinct_d_center(1567);
                     foreach ($disbursement_center_lists as $dc) {
-                        $final_dc = array_merge($final_dc, array($dc['Disbursement_Center'] => $dc['Disbursement_Center']));
+                        $final_dc = array_merge($final_dc, array($dc['Disbursement_Center'] =>
+						$dc['Disbursement_Center']));
                     }
                     $data['selected_dc'] = $selected_dc;
 
@@ -915,13 +956,17 @@ class Form extends CI_Controller
                 $this->load->view('templates/footer', $data);
             } else {
                 $form_single_to_query = array();
-                $form_single_to_query[] = array('form_id' => $all_forms[0]['form_id'], 'table_name' => 'zform_' . $all_forms[0]['form_id'], 'form_name' => $all_forms[0]['form_name']);
+                $form_single_to_query[] = array('form_id' =>
+				$all_forms[0]['form_id'], 'table_name' =>
+				'zform_' . $all_forms[0]['form_id'], 'form_name' =>
+				$all_forms[0]['form_name']);
                 $data['selected_district'] = '';
                 $data['selected_sent_by'] = '';
                 $data['all_visits_hidden'] = 0;
                 $view_list = array();
                 foreach ($forms_list as $final_view) {
-                    $view_list = array_merge($view_list, array($final_view['form_name'] => $final_view['form_id']));
+                    $view_list = array_merge($view_list, array($final_view['form_name'] =>
+					$final_view['form_id']));
                 }
                 $view_list = array_flip($view_list);
                 $data['form_lists'] = $view_list;
@@ -935,7 +980,8 @@ class Form extends CI_Controller
                 $data['selected_form'] = $first_form_id;
                 $data['filter'] = $selected_form['filter'];
                 /** Get filters from  multiple forms * */
-//                $multiple_filters = $this->form_model->get_form_filters($form_single_to_query);
+//                $multiple_filters = $this->form_model->
+//                get_form_filters($form_single_to_query);
 //                $filter_attribute = array();
 //                $form_html_multiple = array();
 //                foreach ($multiple_filters as $key => $value) {
@@ -959,13 +1005,16 @@ class Form extends CI_Controller
                     'heading' => $array_final['headings'],
                     'form' => $array_final['form']
                 );
-                $this->db->delete('form_result_temp', array('user_id' => $session_data['login_user_id']));
-                $this->db->insert('form_result_temp', array('user_id' => $session_data['login_user_id'], 'query_user' => json_encode($result_sess_array)));
+                $this->db->delete('form_result_temp', array('user_id' =>
+				$session_data['login_user_id']));
+                $this->db->insert('form_result_temp', array('user_id' => 
+				$session_data['login_user_id'], 'query_user' => json_encode($result_sess_array)));
 
 
 
                 $data['active_tab'] = 'app';
-                $total_record_return = $this->form_results_model->return_total_record($form_single_to_query, $slug);
+                $total_record_return = $this->form_results_model->
+				return_total_record($form_single_to_query, $slug);
                 $pdata['TotalRec'] = $total_record_return;
                 $pdata['perPage'] = $this->perPage;
                 $pdata['form_id'] = $first_form_id;
