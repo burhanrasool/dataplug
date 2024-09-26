@@ -3307,14 +3307,17 @@ class Map extends CI_Controller {
         } else {
             $view_list = array();
             foreach ($forms_list as $final_view) {
-                $view_list = array_merge($view_list, array($final_view['form_name'] => $final_view['form_id']));
+                $view_list = array_merge($view_list, 
+                             array($final_view['form_name'] => $final_view['form_id']));
             }
             $view_list = array_flip($view_list);
             $data['form_lists'] = $view_list;
             $data['form_list_selected'] = array_flip($view_list);
             $first_form_id = $forms_list[0]['form_id'];
             $data['form_id'] = $first_form_id;
-            $total_result = $this->form_results_model->get_form_results_count_for_map_ajax($forms_list, $to_date = '', $from_date = '', $town_filter = '');
+            $total_result = $this->form_results_model
+                ->get_form_results_count_for_map_ajax($forms_list, $to_date = '', 
+                                                      $from_date = '', $town_filter = '');
             $totalPages = ceil($total_result / $this->perMap);
             $data['totalPages'] = $totalPages;
             $selected_form = $this->form_model->get_form($first_form_id);
@@ -3338,7 +3341,8 @@ class Map extends CI_Controller {
              * for categry listing
              */
             $record_array_final_filter = array();
-            $results_filer = $this->form_results_model->get_form_results_filters($forms_list);
+            $results_filer = $this->form_results_model
+                ->get_form_results_filters($forms_list);
             $town_array = array();
             $uc_array = array();
             $filter_exist_array = array();
@@ -3382,7 +3386,8 @@ class Map extends CI_Controller {
                                 $exist_alpha[$first_char] = '1';
                                 $pin_name = $first_char . '1';
                             }
-                            $pin_exist_for_cat = array_merge($pin_exist_for_cat, array($valueforarray => $pin_name));
+                            $pin_exist_for_cat = array_merge($pin_exist_for_cat, 
+                                                             array($valueforarray => $pin_name));
                         } else {
                             if (array_key_exists($valueforarray, $pin_exist_for_cat)) {
                                 $pin_name = $pin_exist_for_cat[$valueforarray];
@@ -3406,7 +3411,8 @@ class Map extends CI_Controller {
                     }
                     $record_array = array_merge($record_array, array('image' => $imagess));
                 }
-                $record_array = array_merge($record_array, array('location' => $v['location']));
+                $record_array = array_merge($record_array, 
+                                            array('location' => $v['location']));
                 $record_array = array_merge($record_array, array('id' => $v['id']));
                 $record_array = array_merge($record_array, array('created_datetime' => $date));
                 if (!empty($v['location'])) {
@@ -3426,7 +3432,9 @@ class Map extends CI_Controller {
              * its call back function call
              */
             foreach ($filter_attribute as $filter_attribute_value) {
-                uasort($record_array_final_filter, array(new SortAssociativeArray($filter_attribute_value), "call"));
+                uasort($record_array_final_filter, 
+                       array(new SortAssociativeArray($filter_attribute_value), 
+                             "call"));
             }
             $record_array_final = array();
             $results = $this->form_results_model->get_form_results_ajax($forms_list);
@@ -3459,7 +3467,9 @@ class Map extends CI_Controller {
                                 $exist_alpha[$first_char] = '1';
                                 $pin_name = $first_char . '1';
                             }
-                            $pin_exist_for_cat = array_merge($pin_exist_for_cat, array($valueforarray => $pin_name));
+                            $pin_exist_for_cat = array_merge($pin_exist_for_cat, 
+                                                             array($valueforarray 
+                                                                   => $pin_name));
                         } else {
                             if (array_key_exists($valueforarray, $pin_exist_for_cat)) {
                                 $pin_name = $pin_exist_for_cat[$valueforarray];
@@ -3492,7 +3502,8 @@ class Map extends CI_Controller {
                 }
             }
             $data['selected_form'] = $first_form_id;
-            $data['locations'] = $this->getMapHtmlInfo($record_array_final, $heading_array, $filter_attribute);
+            $data['locations'] = $this->getMapHtmlInfo($record_array_final, 
+                                                       $heading_array, $filter_attribute);
             $town_lists = $this->app_users_model->get_towns($selected_form['app_id']);
             $town_list_array = array();
             foreach ($town_lists as $towns) {
