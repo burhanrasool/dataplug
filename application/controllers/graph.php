@@ -113,7 +113,7 @@ class Graph extends CI_Controller {
 //                            $final_disb_array[$myrep['District']] = array();
 //                        }
 //
-//                        if (!key_exists($myrep['Tehsil'], $final_disb_array[$myrep['District']])) {
+//                        if (!key_exists($my_rep['Tehsil'], $final_disb_array[$myrep['District']])) {
 //                            $final_disb_array[$myrep['District']][$myrep['Tehsil']] = array();
 //                        }
 //

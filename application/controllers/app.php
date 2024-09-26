@@ -247,7 +247,7 @@ class App extends CI_Controller {
                     //array parameters : action, description, before, after, app_id, app_name, form_id, form_name
                     $logary = array('action' => 'insert', 'description' => 'Assigned application to other user', 'after' => json_encode($appdata), 'app_id' => $app_id,);
                     addlog($logary);
-                    $this->db->insert('users_app', $appdata);
+                    $this->db->insert('users_app', $app_data);
                     $this->session->set_flashdata('validate', array('message' => 'Application Assigned to User successfully', 'type' => 'success'));
                     redirect(base_url() . 'assign-applicatioin-users/' . $app_id);
                 } else {
