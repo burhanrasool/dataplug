@@ -3497,7 +3497,8 @@ class Map extends CI_Controller {
             $town_list_array = array();
             foreach ($town_lists as $towns) {
                 if (!in_array($towns['town'], $town_list_array)) {
-                    $town_list_array = array_merge($town_list_array, array($towns['town'] => $towns['town']));
+                    $town_list_array = array_merge($town_list_array, 
+                                                   array($towns['town'] => $towns['town']));
                 }
             }
             $data['form_html'] = $selected_form['description'];
@@ -3505,12 +3506,18 @@ class Map extends CI_Controller {
             $data['app_id'] = $selected_form['app_id'];
             $selected_app = $this->app_model->get_app($selected_form['app_id']);
             $app_settings = $this->app_model->get_app_settings($selected_form['app_id']);
-            $data['district_filter'] = !empty($app_settings['district_filter']) ? $app_settings['district_filter'] : '';
-            $data['uc_filter'] = !empty($app_settings['uc_filter']) ? $app_settings['uc_filter'] : '';
-            $data['view_type'] = !empty($app_settings['map_type']) ? $app_settings['map_type'] : '';
-            $data['zoom_level'] = !empty($app_settings['zoom_level']) ? $app_settings['zoom_level'] : '';
-            $data['latitude'] = !empty($app_settings['latitude']) ? $app_settings['latitude'] : '31.58219141239757';
-            $data['longitude'] = !empty($app_settings['longitude']) ? $app_settings['longitude'] : '73.7677001953125';
+            $data['district_filter'] = !empty($app_settings['district_filter']) 
+                ? $app_settings['district_filter'] : '';
+            $data['uc_filter'] = !empty($app_settings['uc_filter']) 
+                ? $app_settings['uc_filter'] : '';
+            $data['view_type'] = !empty($app_settings['map_type']) 
+                ? $app_settings['map_type'] : '';
+            $data['zoom_level'] = !empty($app_settings['zoom_level']) 
+                ? $app_settings['zoom_level'] : '';
+            $data['latitude'] = !empty($app_settings['latitude']) 
+                ? $app_settings['latitude'] : '31.58219141239757';
+            $data['longitude'] = !empty($app_settings['longitude']) 
+                ? $app_settings['longitude'] : '73.7677001953125';
             $data['app_name'] = $selected_app['name'];
             $data['town_filter'] = $town_list_array;
             $data['headings'] = $heading_array;
@@ -3541,14 +3548,17 @@ class Map extends CI_Controller {
         $data['app_id'] = $selected_form['app_id'];
         $filter_attribute = array();
         if ($selected_form['filter'] != '') {
-            $filter_rec = array_filter(array_map('trim', explode(',', $selected_form['filter'])));
+            $filter_rec = array_filter(array_map('trim', 
+                                                 explode(',', 
+                                                         $selected_form['filter'])));
             foreach ($filter_rec as $key => $value) {
                 array_push($filter_attribute, $value);
             }
         }
         $data['filter_attribute'] = $filter_attribute;
         $record_array_final = array();
-        $results = $this->form_results_model->get_results_single($result_id, $table_name);
+        $results = $this->form_results_model
+            ->get_results_single($result_id, $table_name);
         $filter_exist_array = array();
         $pin_exist_for_cat = array();
         $col_pin = 0;
@@ -3575,7 +3585,8 @@ class Map extends CI_Controller {
                             $exist_alpha[$first_char] = '1';
                             $pin_name = $first_char . '1';
                         }
-                        $pin_exist_for_cat = array_merge($pin_exist_for_cat, array($valueforarray => $pin_name));
+                        $pin_exist_for_cat = array_merge($pin_exist_for_cat, 
+                                                         array($valueforarray => $pin_name));
                     } else {
                         if (array_key_exists($valueforarray, $pin_exist_for_cat)) {
                             $pin_name = $pin_exist_for_cat[$valueforarray];
@@ -3602,7 +3613,9 @@ class Map extends CI_Controller {
                 $record_array_final[] = $record_array;
             }
         }
-        $data['locations'] = $this->getMapHtmlInfoSingle($record_array_final, $heading_array, $filter_attribute);
+        $data['locations'] = $this->
+            getMapHtmlInfoSingle($record_array_final, 
+                                 $heading_array, $filter_attribute);
         $data['headings'] = $heading_array;
         $data['form'] = $record_array_final;
         $data['form_for_filter'] = $record_array_final;
