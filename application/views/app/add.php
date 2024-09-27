@@ -7,14 +7,17 @@
                 <tbody>
                     <tr>
                         <td>
-                            <?php echo form_open(base_url().'add-new-app/'.$login_department_id,'id="addform" class="full validate add_task_form " enctype="multipart/form-data"'); ?>
+                            <?php echo
+								form_open(base_url().'add-new-app/'.$login_department_id,'id="addform" 
+									class="full validate add_task_form " enctype="multipart/form-data"'); ?>
                             <?php if ($this->acl->hasSuperAdmin()) { ?>
                                 <div class="row">
                                     <label for="d1_textfield">
                                         <strong>Department Name</strong>
                                     </label>
                                     <div>
-                                        <?php echo form_dropdown('department_id', $departments, $batch, 'id="department_id"'); ?>
+                                        <?php echo form_dropdown('department_id', $departments,
+											$batch, 'id="department_id"'); ?>
                                     </div>
                                     <span class="error">
                                         <?php echo $this->form_validation->error('department_id'); ?>
@@ -25,7 +28,8 @@
                                         <strong>Department Name </strong>
                                     </label>
                                     <div>
-                                        <input class="required" type="text" name="department_name" id="department_name" value="<?php echo set_value('department_name'); ?>" />
+                                        <input class="required" type="text" name="department_name"
+											id="department_name" value="<?php echo set_value('department_name'); ?>" />
                                     </div>
                                     <span class="error">
                                         <?php echo $this->form_validation->error('department_name'); ?>
@@ -37,7 +41,9 @@
                                     <strong>Application Name</strong>
                                 </label>
                                 <div>
-                                    <input class="required" type="text" name="app_name" id="app_name" value="<?php echo set_value('app_name'); ?>" onkeyup='check_app_name_availability($(this).val())'/>
+                                    <input class="required" type="text" name="app_name" id="app_name"
+										value="<?php echo set_value('app_name'); ?>"
+											onkeyup='check_app_name_availability($(this).val())'/>
                                     <span id='availability_status'></span>
                                 </div>
                                 <span class="error">
@@ -49,7 +55,8 @@
                                     <strong>Application Icon (.png only)</strong>
                                 </label>
                                 <div>
-                                    <input type="file" name="userfile_addapp" id="userfile_addapp" accept="*.png" onchange="check_file()"/>
+                                    <input type="file" name="userfile_addapp" id="userfile_addapp" 
+										accept="*.png" onchange="check_file()"/>
                                 </div>
                             </div>
                             <div class="actions">

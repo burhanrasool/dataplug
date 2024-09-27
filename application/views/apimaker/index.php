@@ -1,4 +1,7 @@
-<style>.applicationText a{position:relative;}.Category a{text-decoration:underline!important;}#cboxCurrent{display:none!important;}</style>
+<style>
+	.applicationText a{position:relative;}.Category
+		a{text-decoration:underline!important;}#cboxCurrent{display:none!important;}
+		</style>
 <div class="applicationText">
         <a id="add_more_app">Add Dropdown API</a>
     <h2>Dropdown API Maker</h2>
@@ -6,7 +9,8 @@
 </div>
 <div class="tableContainer">
     <div>
-        <table cellspacing="0" cellpadding="0" id="application-listing-app" class="display">
+        <table cellspacing="0" cellpadding="0"
+			id="application-listing-app" class="display">
             <thead>
                 <tr>
                     <th class="Categoryh">API Title</th>
@@ -38,10 +42,18 @@
                                 ?>
                             </td>
                             <td class="Links" style="width: 70px; border-bottom: 1px solid #D5D5D5;">
-                                    <a href="<?php echo base_url(); ?>createapiurl/<?php echo $api['id']; ?>"><img src="<?= base_url() ?>assets/images/settings-ico.png" alt="" title="Create Url" width="28px"/></a>
-                                    <a class="edit_api" api_id="<?= $api['id'] ?>"><img src="<?= base_url() ?>assets/images/tableLink1.png" alt="" title="Edit"/></a>
-                                    <a href="javascript:void(0)"><img src="<?= base_url() ?>assets/images/tableLink3.png" alt="" title="Delete" id ="delete_api" title="Delete Api" api_id ="<?= $api['id'] ?>"/></a>
-                                    <a href="<?php echo base_url(); ?>assets/data/<?php echo $api['file_name']; ?>"><img src="<?= base_url() ?>assets/images/tableLink6.png" alt="" title="Download"/></a>
+                                    <a href="<?php echo base_url(); ?>createapiurl/<?php
+										echo $api['id']; ?>"><img src="<?= base_url()
+											?>assets/images/settings-ico.png" alt="" title="Create Url" width="28px"/></a>
+                                    <a class="edit_api" api_id="<?= $api['id'] ?>"><img src="<?= base_url()
+										?>assets/images/tableLink1.png" alt="" title="Edit"/></a>
+                                    <a href="javascript:void(0)">
+										<img src="<?= base_url() ?>assets/images/tableLink3.png"
+											alt="" title="Delete" id ="delete_api" title="Delete Api"
+												api_id ="<?= $api['id'] ?>"/></a>
+                                    <a href="<?php echo base_url(); ?>assets/data/<?php echo $api['file_name'];
+										?>"><img src="<?= base_url() ?>assets/images/tableLink6.png"
+											alt="" title="Download"/></a>
                                 <br clear="all" />
                             </td>
                         </tr>

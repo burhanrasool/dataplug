@@ -1,14 +1,21 @@
 <div id="container">
     <div class="inner-wrap">
         <div class="table-sec">
-        <form style='margin: auto;width: 100%;' action="<?= base_url() ?>app/import_app_user_csv" method="POST"
-              class="full validate add_task_form" enctype="multipart/form-data" id='form_edit'/>
+        <form style='margin: auto;width: 100%;' action="<?= base_url() ?>
+			app/import_app_user_csv" method="POST"
+              class="full validate add_task_form"
+				enctype="multipart/form-data" id='form_edit'/>
             <h2>Import application user - Attached columns with table fields</h2>
-            <input type="hidden" name="app_id_import" id="app_id_import" value="<?php echo $app_id_import; ?>"/>
-            <input type="hidden" name="department_id_import" id="department_id_import" value="<?php echo $department_id_import; ?>"/>
-            <input type="hidden" name="view_id_import" id="view_id_import" value="<?php echo $view_id_import; ?>"/>
-            <input type="hidden" name="upload_file_path" id="upload_file_path" value="<?php echo $upload_file_path; ?>"/>
-            <table cellpadding="0" cellspacing="0" border="0" class="display" id="example" style="box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);min-height: 230px;">
+            <input type="hidden" name="app_id_import" id="app_id_import"
+				value="<?php echo $app_id_import; ?>"/>
+            <input type="hidden" name="department_id_import" id="department_id_import"
+				value="<?php echo $department_id_import; ?>"/>
+            <input type="hidden" name="view_id_import" id="view_id_import"
+				value="<?php echo $view_id_import; ?>"/>
+            <input type="hidden" name="upload_file_path" 
+				id="upload_file_path" value="<?php echo $upload_file_path; ?>"/>
+            <table cellpadding="0" cellspacing="0" border="0" class="display"
+				id="example" style="box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);min-height: 230px;">
                 <tbody>
                     <tr>
                         <td style="padding-top: 20px;padding-left: 100px">
@@ -137,10 +144,12 @@
                                     <strong> </strong>
                                 </label>
                                 <div>
-                                    <a href="<?php echo base_url().'applicatioin-users'?>"  class="genericBtn" style="">
+                                    <a href="<?php echo base_url().'applicatioin-users'?>
+										"  class="genericBtn" style="">
                                     Back
                                     </a>
-                                    <button class="genericBtn" style="width: 100px; margin: 0px; padding: 7px;">Import CSV</button>
+                                    <button class="genericBtn" style="width: 100px; margin: 0px; padding: 7px;">
+										Import CSV</button>
                                 </div>
                             </div>
                         </td>

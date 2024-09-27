@@ -7,14 +7,16 @@
                 <tbody>
                     <tr>
                         <td>
-                            <?php echo form_open(base_url().'add-new-api','id="addform" class="full validate add_task_form " enctype="multipart/form-data"'); ?>
+                            <?php echo form_open(base_url().'add-new-api','id="addform"
+								class="full validate add_task_form " enctype="multipart/form-data"'); ?>
                             
                             <div class="row">
                                 <label for="d1_textfield">
                                     <strong>API Title</strong>
                                 </label>
                                 <div>
-                                    <input class="required" type="text" name="api_title" id="api_title" value="<?php echo set_value('api_title'); ?>"/>
+                                    <input class="required" type="text" name="api_title" 
+										id="api_title" value="<?php echo set_value('api_title'); ?>"/>
                                     <span id='availability_status'></span>
                                 </div>
                             </div>
@@ -46,7 +48,8 @@
                                     <strong>API File (.csv only)</strong>
                                 </label>
                                 <div>
-                                    <input type="file" name="userfile_addapi" id="userfile_addapi" accept="*.csv" onchange="check_file()"/>
+                                    <input type="file" name="userfile_addapi" id="userfile_addapi"
+										accept="*.csv" onchange="check_file()"/>
                                 </div>
                             </div>
                             <div class="actions">

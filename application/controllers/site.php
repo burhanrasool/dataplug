@@ -174,8 +174,13 @@ class Site extends CI_Controller {
                 $this->email->to($this->input->post('email'));
                 $this->email->subject(PLATFORM_NAME.' Source Code Download link');
                 $message = "<b>Welcome to ".PLATFORM_NAME."</b><br />";
-                $message .= "Please click below link to Download code. <br /><br /><br /><a href='http://dataplug.itu.edu.pk/assets/dp_source_code.zip' style='background:none repeat scroll 0 0 #2DA5DA;border:medium none;color:#FFFFFF;cursor:pointer;outline:medium none;text-decoration:none;padding:5px;'/>Click Here</a>";
-                $message .= "<br /><br /><br />Note: This is system generated e-mail. Please do not reply<br>";
+                $message .= "Please click below link to Download code.
+					<br /><br /><br /><a href='http://dataplug.itu.edu.pk/assets/dp_source_code.zip'
+						style='background:none repeat scroll 0 0 #2DA5DA;border:medium none;
+							color:#FFFFFF;cursor:pointer;outline:medium none;text-decoration:none;
+								padding:5px;'/>Click Here</a>";
+                $message .= "<br /><br /><br />
+					Note: This is system generated e-mail. Please do not reply<br>";
                 $message .= "<br /><b>".PLATFORM_NAME."</b>";
                 $this->email->message($message);
                 $this->email->set_mailtype('html');
@@ -216,7 +221,8 @@ class Site extends CI_Controller {
                 $this->email->set_mailtype('html');
                 $this->email->send();
                 
-                $this->session->set_flashdata('validate', array('message' => "Message sent successfuly", 'type' => 'success'));
+                $this->session->set_flashdata('validate', array('message' => "Message
+						sent successfuly", 'type' => 'success'));
                 redirect(base_url());
             }
             $data['active_tab'] = 'contact';

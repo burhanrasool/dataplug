@@ -7,14 +7,16 @@
                 <tbody>
                     <tr>
                         <td>
-                            <?php echo form_open(base_url().'edit-new-api/'.$api_id,'id="addform" class="full validate add_task_form " enctype="multipart/form-data"'); ?>
+                            <?php echo form_open(base_url().'edit-new-api/'.$api_id,'id="addform"
+								class="full validate add_task_form " enctype="multipart/form-data"'); ?>
                             
                             <div class="row">
                                 <label for="d1_textfield">
                                     <strong>API Title</strong>
                                 </label>
                                 <div>
-                                    <input class="required" type="text" name="api_title" id="api_title" value="<?php echo $api_title; ?>"/>
+                                    <input class="required" type="text" name="api_title"
+										id="api_title" value="<?php echo $api_title; ?>"/>
                                     <span id='availability_status'></span>
                                 </div>
                             </div>
@@ -31,7 +33,9 @@
                                             <?php
                                             foreach($departments as $key=>$val){
                                                 ?>
-                                                <option <?php if($saved_department_id==$val['id']){ echo "selected"; }  ?> value="<?php echo $val['id']; ?>"><?php echo $val['name']; ?></option>
+                                                <option <?php if($saved_department_id==$val['id']){
+													echo "selected"; }  ?> value="<?php echo $val['id']; ?>"><?php
+														echo $val['name']; ?></option>
                                             <?php
                                             }
                                             ?>
@@ -48,7 +52,8 @@
                                     <strong>API File (.csv only)</strong>
                                 </label>
                                 <div>
-                                    <input type="file" name="userfile_addapi" id="userfile_addapi" accept="*.csv" onchange="check_file()"/>
+                                    <input type="file" name="userfile_addapi" id="userfile_addapi"
+										accept="*.csv" onchange="check_file()"/>
                                 </div>
                             </div>
                             <div class="actions">

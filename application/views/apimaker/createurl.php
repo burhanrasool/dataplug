@@ -2,8 +2,10 @@
     <div class="inner-wrap">
         <div class="table-sec">
             <h2>Create Dropdown API URL</h2>
-            <input type="hidden" name="api_secret" id="api_secret" value="<?php echo $api_secret; ?>"/>
-            <table cellpadding="0" cellspacing="0" border="0" class="display" id="example" style="box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);min-height: 230px;">
+            <input type="hidden" name="api_secret" id="api_secret"
+				value="<?php echo $api_secret; ?>"/>
+            <table cellpadding="0" cellspacing="0" border="0" class="display"
+				id="example" style="box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);min-height: 230px;">
                 <tbody>
                     <tr>
                         <td>
@@ -53,7 +55,8 @@
                                 <label for="d1_textfield">
                                     <strong>URL : </strong>
                                 </label>
-                                <div id="urldiv" style="margin-top: 15px; background-color: yellow;" onclick="select_all(this)">
+                                <div id="urldiv" style="margin-top: 15px; background-color: yellow;"
+									onclick="select_all(this)">
                                     
                                 </div>
 
@@ -67,7 +70,8 @@
                                     <a href="<?php echo base_url().'apimaker'?>"  class="genericBtn" style="">
                                     Back
                                     </a>
-                                    <a href="" id="checkurl" target="_new" class="genericBtn" style="display: none;">
+                                    <a href="" id="checkurl" target="_new" 
+										class="genericBtn" style="display: none;">
                                     Click for Check API
                                     </a>
                                 </div>
